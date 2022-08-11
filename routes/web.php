@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::prefix('dashboard')->group(function(){
+    Route::get('/main',[DashboardController::class,'index'])->name('dashboard');
+});
 
 Route::get('/', function () {
     return view('welcome');

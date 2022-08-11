@@ -1,0 +1,47 @@
+.white{
+    background: white;
+}
+
+.menu-state-title-primary .menu-item.show>.menu-link .menu-title {
+    color: #000;
+}
+
+.menu-state-icon-primary .menu-item.show>.menu-link .menu-icon, .menu-state-icon-primary .menu-item.show>.menu-link .menu-icon .svg-icon, .menu-state-icon-primary .menu-item.show>.menu-link .menu-icon i {
+    color: #000;
+}
+
+.menu-state-title-primary .menu-item .menu-link.active .menu-title {
+    color: #5E6278;
+}
+
+.menu-state-title-primary .menu-item .menu-link.active .menu-title:hover, 
+.menu-state-bullet-primary .menu-item .menu-link.active .menu-bullet .bullet:hover,
+.menu-state-primary .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here){
+    color: #000;
+}
+
+.menu-state-bullet-primary .menu-item .menu-link.active .menu-bullet .bullet {
+    background-color: #B5B5C3;
+}
+
+.menu-state-bullet-primary .menu-item .menu-link.active .menu-bullet .bullet:hover {
+    background-color: #000;
+}
+
+.menu-title-gray-800 .menu-item .menu-link .menu-title {
+    color: #5E6278;
+}
+
+.menu-state-title-primary .menu-item.hover:not(.here)>.menu-link:not(.disabled):not(.active):not(.here) .menu-title, .menu-state-title-primary .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here) .menu-title, 
+.menu-state-icon-primary .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here) .menu-icon .svg-icon
+{
+    color: #000;
+}
+
+.menu-item .menu-link .menu-icon .svg-icon:hover {
+    line-height: 1;
+}
+
+.breadcrumb-line .breadcrumb-item:after {
+    content: ">";
+}
