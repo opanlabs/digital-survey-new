@@ -3,73 +3,31 @@
 @section('content')
 <!--begin::Row-->
 <div class="row gy-5 g-xl-8">
-    <!--begin::Col-->
-    <div class="col-xl-4">
-        <!--begin::Mixed Widget 7-->
-        <div class="card mb-5 h-lg-100">
-            <!--begin::Body-->
-            <div class="card-body d-flex flex-column p-0">
-                <!--begin::Stats-->
-                <div class="flex-grow-1 card-p pb-0">
-                    <div class="d-flex flex-stack flex-wrap">
-                        <div class="me-2">
-                            <a href="#" class="text-dark text-hover-primary fw-bolder fs-3">Generate Reports</a>
-                            <div class="text-muted fs-7 fw-bold">Finance and accounting reports</div>
-                        </div>
-                        <div class="fw-bolder fs-3 text-primary">$24,500</div>
-                    </div>
-                </div>
-                <!--end::Stats-->
-                <!--begin::Chart-->
-                <div class="mixed-widget-7-chart card-rounded-bottom" data-kt-chart-color="primary" style="height: 150px"></div>
-                <!--end::Chart-->
-            </div>
-            <!--end::Body-->
-        </div>
-    </div>
-    <!--end::Col-->
-    <!--begin::Col-->
-    <div class="col-lg-6 col-xxl-4">
+     <!--begin::Col-->
+     <div class="col-lg-6 col-xxl-4">
         <!--begin::Card-->										
         <div class="card mb-5 h-lg-100">
             <!--begin::Card body-->
             <div class="card-body card-p">
-                <!--begin::Heading-->
-                <div class="fs-2hx fw-bolder">237</div>
-                <div class="fs-4 fw-bold text-gray-400 mb-7">Current Projects</div>
-                <!--end::Heading-->
+               
                 <!--begin::Wrapper-->
-                <div class="d-flex flex-wrap">
-                    <!--begin::Chart-->
-                    <div class="d-flex flex-center h-100px w-100px me-9 mb-5">
-                        <canvas id="kt_project_list_chart" width="100" height="100" style="display: block; box-sizing: border-box; height: 100px; width: 100px;"></canvas>
+                <div class="d-flex flex-column">
+                    <div class="d-flex justify-content-between ">
+                        <!--begin::Labels-->
+                        <div class="d-flex flex-column justify-content-between">
+                             <!--begin::Heading-->
+                             <div class="fs-4 fw-bold text-gray-400 mb-7 ">All Register</div>
+                            <div class="fs-1 fw-bolder">29 User</div>
+                            <!--end::Heading-->
+                        </div>
+                        <!--end::Labels-->
+                        <!--begin::Chart-->
+                        <div class="d-flex flex-center">
+                            {!! $RegisterChart->container() !!}
+                        </div>
+                        <!--end::Chart-->
                     </div>
-                    <!--end::Chart-->
-                    <!--begin::Labels-->
-                    <div class="d-flex flex-column justify-content-center flex-row-fluid pe-11 mb-5">
-                        <!--begin::Label-->
-                        <div class="d-flex fs-6 fw-bold align-items-center mb-3">
-                            <div class="bullet bg-primary me-3"></div>
-                            <div class="text-gray-400">Active</div>
-                            <div class="ms-auto fw-bolder text-gray-700">30</div>
-                        </div>
-                        <!--end::Label-->
-                        <!--begin::Label-->
-                        <div class="d-flex fs-6 fw-bold align-items-center mb-3">
-                            <div class="bullet bg-success me-3"></div>
-                            <div class="text-gray-400">Completed</div>
-                            <div class="ms-auto fw-bolder text-gray-700">45</div>
-                        </div>
-                        <!--end::Label-->
-                        <!--begin::Label-->
-                        <div class="d-flex fs-6 fw-bold align-items-center">
-                            <div class="bullet bg-gray-300 me-3"></div>
-                            <div class="text-gray-400">Yet to start</div>
-                            <div class="ms-auto fw-bolder text-gray-700">25</div>
-                        </div>
-                        <!--end::Label-->
-                    </div>
-                    <!--end::Labels-->
+                    <div class="text-muted fs-7 fw-bold">Register</div>
                 </div>
                 <!--end::Wrapper-->
             </div>
@@ -78,48 +36,31 @@
         <!--end::Card-->
     </div>
     <!--end::Col-->
-    <!--begin::Col-->
-    <div class="col-lg-6 col-xxl-4">
+     <!--begin::Col-->
+     <div class="col-lg-6 col-xxl-4">
         <!--begin::Card-->										
         <div class="card mb-5 h-lg-100">
             <!--begin::Card body-->
             <div class="card-body card-p">
-                <!--begin::Heading-->
-                <div class="fs-2hx fw-bolder">237</div>
-                <div class="fs-4 fw-bold text-gray-400 mb-7">Current Projects</div>
-                <!--end::Heading-->
+               
                 <!--begin::Wrapper-->
-                <div class="d-flex flex-wrap">
-                    <!--begin::Chart-->
-                    <div class="d-flex flex-center h-100px w-100px me-9 mb-5">
-                        <canvas id="kt_project_list_chart" width="100" height="100" style="display: block; box-sizing: border-box; height: 100px; width: 100px;"></canvas>
+                <div class="d-flex flex-column">
+                    <div class="d-flex justify-content-between ">
+                        <!--begin::Labels-->
+                        <div class="d-flex flex-column justify-content-between">
+                             <!--begin::Heading-->
+                             <div class="fs-4 fw-bold text-gray-400 mb-7 ">All Polish</div>
+                            <div class="fs-1 fw-bolder">229 Polish</div>
+                            <!--end::Heading-->
+                        </div>
+                        <!--end::Labels-->
+                        <!--begin::Chart-->
+                        <div class="d-flex flex-center">
+                            {!! $PolishChart->container() !!}
+                        </div>
+                        <!--end::Chart-->
                     </div>
-                    <!--end::Chart-->
-                    <!--begin::Labels-->
-                    <div class="d-flex flex-column justify-content-center flex-row-fluid pe-11 mb-5">
-                        <!--begin::Label-->
-                        <div class="d-flex fs-6 fw-bold align-items-center mb-3">
-                            <div class="bullet bg-primary me-3"></div>
-                            <div class="text-gray-400">Active</div>
-                            <div class="ms-auto fw-bolder text-gray-700">30</div>
-                        </div>
-                        <!--end::Label-->
-                        <!--begin::Label-->
-                        <div class="d-flex fs-6 fw-bold align-items-center mb-3">
-                            <div class="bullet bg-success me-3"></div>
-                            <div class="text-gray-400">Completed</div>
-                            <div class="ms-auto fw-bolder text-gray-700">45</div>
-                        </div>
-                        <!--end::Label-->
-                        <!--begin::Label-->
-                        <div class="d-flex fs-6 fw-bold align-items-center">
-                            <div class="bullet bg-gray-300 me-3"></div>
-                            <div class="text-gray-400">Yet to start</div>
-                            <div class="ms-auto fw-bolder text-gray-700">25</div>
-                        </div>
-                        <!--end::Label-->
-                    </div>
-                    <!--end::Labels-->
+                    <div class="text-muted fs-7 fw-bold">Polish</div>
                 </div>
                 <!--end::Wrapper-->
             </div>
@@ -128,7 +69,39 @@
         <!--end::Card-->
     </div>
     <!--end::Col-->
-
+     <!--begin::Col-->
+     <div class="col-lg-6 col-xxl-4">
+        <!--begin::Card-->										
+        <div class="card mb-5 h-lg-100">
+            <!--begin::Card body-->
+            <div class="card-body card-p">
+               
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column">
+                    <div class="d-flex justify-content-between ">
+                        <!--begin::Labels-->
+                        <div class="d-flex flex-column justify-content-between">
+                             <!--begin::Heading-->
+                             <div class="fs-4 fw-bold text-gray-400 mb-7 ">All Claim</div>
+                            <div class="fs-1 fw-bolder">133 Claim</div>
+                            <!--end::Heading-->
+                        </div>
+                        <!--end::Labels-->
+                        <!--begin::Chart-->
+                        <div class="d-flex flex-center">
+                            {!! $ClaimChart->container() !!}
+                        </div>
+                        <!--end::Chart-->
+                    </div>
+                    <div class="text-muted fs-7 fw-bold">Claim</div>
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Card-->
+    </div>
+    <!--end::Col-->
 </div>
 <!--end::Row-->
 
@@ -436,4 +409,12 @@
 </div>
 <!--end::Modal - New Product-->
 <!--end::Modals-->  
+
+<script src="{{ $RegisterChart->cdn() }}"></script>
+<script src="{{ $PolishChart->cdn() }}"></script>
+<script src="{{ $ClaimChart->cdn() }}"></script>
+
+{{ $RegisterChart->script() }}
+{{ $PolishChart->script() }}
+{{ $ClaimChart->script() }}
 @endsection

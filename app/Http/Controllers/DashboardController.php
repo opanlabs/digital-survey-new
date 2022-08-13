@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Charts\RegisterChart;
+use App\Charts\PolishChart;
+use App\Charts\ClaimChart;
 
 use Illuminate\Http\Request;
 
@@ -11,9 +14,15 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(RegisterChart $RegisterChart,PolishChart $PolishChart,ClaimChart $ClaimChart)
     {
-        return view('dashboard.index');
+        return view('dashboard.index',[
+        
+                'RegisterChart' => $RegisterChart->build(),
+                'PolishChart' => $PolishChart->build(),
+                'ClaimChart' => $ClaimChart->build(),
+            
+            ]);
     }
 
     /**
