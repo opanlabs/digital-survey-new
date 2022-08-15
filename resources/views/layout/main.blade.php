@@ -33,6 +33,7 @@ License: For each use you must have a valid license purchased only from above li
 
 		<!--begin::Custom CSS-->
 		<link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="https://use.typekit.net/pkh2tzm.css">
 		<!--end::Custom CSS-->
 	</head>
 	<!--end::Head-->

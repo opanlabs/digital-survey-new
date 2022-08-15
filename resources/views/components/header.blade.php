@@ -4,7 +4,7 @@
     <div class="container-fluid d-flex align-items-stretch justify-content-between">
         <!--begin::Aside mobile toggle-->
         <div class="d-flex align-items-center d-lg-none ms-n2 me-2" title="Show aside menu">
-            <div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px" id="kt_aside_mobile_toggle">
+            <div class="btn btn-icon btn-active-light w-30px h-30px w-md-40px h-md-40px" id="kt_aside_mobile_toggle">
                 <!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
                 <span class="svg-icon svg-icon-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -19,7 +19,11 @@
         <!--begin::Mobile logo-->
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
             <a href="#" class="d-lg-none">
-                <img alt="Logo" src="{{ asset('media/logos/logo-2.svg') }}" class="h-30px" />
+                <div class="h-25px logo">
+                    <h2>
+                        <span style="color: #F2951C">Jingga</span> Teknologi<span style="color: #F2951C">.</span>
+                    </h2>
+                </div>
             </a>
         </div>
         <!--end::Mobile logo-->
@@ -43,7 +47,7 @@
                         <div class="symbol symbol-30px symbol-md-40px mx-2">
                             <img class="rounded-circle" src="{{ asset('media/avatars/300-1.jpg') }}" alt="user" />
                         </div>
-                        <div class="d-flex flex-column">
+                        <div class="d-flex flex-column d-none d-md-block ">
                             <div class="fw-bolder d-flex align-items-center fs-5">Tofan Aditnya</div>
                             <a class="fw-bold text-muted fs-7">Super Admin</a>
                         </div>
