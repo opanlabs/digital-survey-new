@@ -103,7 +103,7 @@
             <!--begin::Breadcrumb-->
             <ol class="breadcrumb breadcrumb-line text-muted fs-6 fw-semibold">
                 <li class="breadcrumb-item pe-3 text-muted">Dashboard</li>
-                <li class="breadcrumb-item pe-3 text-dark">Main</li>
+                <li class="breadcrumb-item pe-3 text-dark">{{ ucfirst(Route::currentRouteName())  }}</li>
             </ol>
             <!--end::Breadcrumb-->
         </div>

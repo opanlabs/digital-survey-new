@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterPolisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,8 @@ use App\Http\Controllers\DashboardController;
 
 Route::prefix('dashboard')->group(function(){
     Route::get('/main',[DashboardController::class,'index'])->name('dashboard');
+    Route::get('/profile',[ProfileController::class,'index'])->name('profile');
+    Route::get('/register-polis',[RegisterPolisController::class,'index'])->name('register-polis');
 });
 
 Route::get('/', function () {
