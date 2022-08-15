@@ -1,0 +1,95 @@
+body {
+    --fc-event-border-color: #f2961c;
+    --fc-event-bg-color: #f2961c;
+    --fc-event-text-color: #FFFFFF;
+}
+
+.card-p-chart{
+    padding:2rem 0rem 2rem 2rem !important;
+}
+
+a {
+    color: #000;
+}
+
+a:hover,
+.fc .fc-daygrid-dot-event:hover,
+.btn-check:active+.btn.btn-active-light .svg-icon, .btn-check:active+.btn.btn-active-light i, .btn-check:checked+.btn.btn-active-light .svg-icon, .btn-check:checked+.btn.btn-active-light i, .btn.btn-active-light.active .svg-icon, .btn.btn-active-light.active i, .btn.btn-active-light.show .svg-icon, .btn.btn-active-light.show i, .btn.btn-active-light:active:not(.btn-active) .svg-icon, .btn.btn-active-light:active:not(.btn-active) i, .btn.btn-active-light:focus:not(.btn-active) .svg-icon, .btn.btn-active-light:focus:not(.btn-active) i, .btn.btn-active-light:hover:not(.btn-active) .svg-icon, .btn.btn-active-light:hover:not(.btn-active) i, .show>.btn.btn-active-light .svg-icon, .show>.btn.btn-active-light i
+{
+    color: #df8a1b ;
+}
+
+
+/*This is modifying the btn-primary colors but you could create your own .btn-something class as well*/
+.btn-primary {
+    color: #fff;
+    background-color: #F4A238 !important;
+    border-color: #F4A238 !important; /*set the color you want here*/
+}
+.btn.btn-primary:hover:not(.btn-active) {
+    color: #fff;
+    background-color: #df8a1b !important;
+    border-color: #F4A238 !important; /*set the color you want here*/
+}
+
+.white{
+    background: white;
+}
+
+.menu-state-title-primary .menu-item.show>.menu-link .menu-title {
+    color: #000;
+}
+
+.menu-state-icon-primary .menu-item.show>.menu-link .menu-icon, .menu-state-icon-primary .menu-item.show>.menu-link .menu-icon .svg-icon, .menu-state-icon-primary .menu-item.show>.menu-link .menu-icon i {
+    color: #000;
+}
+
+.menu-state-title-primary .menu-item .menu-link.active .menu-title {
+    color: #5E6278;
+}
+
+.menu-state-title-primary .menu-item .menu-link.active .menu-title:hover, 
+.menu-state-bullet-primary .menu-item .menu-link.active .menu-bullet .bullet:hover, 
+.menu-state-primary .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here),
+.btn-check:active+.btn.btn-active-color-primary .svg-icon, 
+.btn-check:active+.btn.btn-active-color-primary i, 
+.btn-check:checked+.btn.btn-active-color-primary .svg-icon, 
+.btn-check:checked+.btn.btn-active-color-primary i, 
+.btn.btn-active-color-primary.active .svg-icon, .btn.btn-active-color-primary.active i, 
+.btn.btn-active-color-primary.show .svg-icon, .btn.btn-active-color-primary.show i, 
+.btn.btn-active-color-primary:active:not(.btn-active) .svg-icon, 
+.btn.btn-active-color-primary:active:not(.btn-active) i, 
+.btn.btn-active-color-primary:focus:not(.btn-active) .svg-icon, 
+.btn.btn-active-color-primary:focus:not(.btn-active) i, 
+.btn.btn-active-color-primary:hover:not(.btn-active) .svg-icon, 
+.btn.btn-active-color-primary:hover:not(.btn-active) i, 
+.show>.btn.btn-active-color-primary .svg-icon, 
+.show>.btn.btn-active-color-primary i {
+    color: #000;
+}
+
+.menu-state-bullet-primary .menu-item .menu-link.active .menu-bullet .bullet {
+    background-color: #B5B5C3;
+}
+
+.menu-state-bullet-primary .menu-item .menu-link.active .menu-bullet .bullet:hover {
+    background-color: #000;
+}
+
+.menu-title-gray-800 .menu-item .menu-link .menu-title {
+    color: #5E6278;
+}
+
+.menu-state-title-primary .menu-item.hover:not(.here)>.menu-link:not(.disabled):not(.active):not(.here) .menu-title, .menu-state-title-primary .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here) .menu-title, 
+.menu-state-icon-primary .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here) .menu-icon .svg-icon
+{
+    color: #000;
+}
+
+.menu-item .menu-link .menu-icon .svg-icon:hover {
+    line-height: 1;
+}
+
+.breadcrumb-line .breadcrumb-item:after {
+    content: ">";
+}
