@@ -20,4 +20,5 @@ Route::prefix('dashboard')->group(function(){
 
 Route::get('/', function () {
     return view('welcome');
+    
 });
