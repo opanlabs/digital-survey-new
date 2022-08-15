@@ -41,32 +41,41 @@ License: For each use you must have a valid license purchased only from above li
 		<!--begin::Main-->
 		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">
+			
 			<!--begin::Page-->
+			@auth
 			<div class="page d-flex flex-row flex-column-fluid">
-				@include('components.navbar')
+				
+					@include('components.navbar')
 				<!--begin::Wrapper-->
 				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 					@include('components.header')	
+			
 					<!--begin::Content-->
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<!--begin::Post-->
 						<div class="post d-flex flex-column-fluid" id="kt_post">
 							<!--begin::Container-->
 							<div id="kt_content_container" class="app-container container-fluid">
+			@endauth
 								<!--begin::Isi Content-->
 									@yield('content')
 								<!--end::Isi Content-->
+			@auth	
 							</div>
 							<!--end::Container-->
 						</div>
 						<!--end::Post-->
 					</div>
 					<!--end::Content-->
+				
 					@include('components.footer')
 				</div>
+				
 				<!--end::Wrapper-->
 			</div>
 			<!--end::Page-->
+			@endauth
 		</div>
 		<!--end::Root-->
 		<!--begin::Drawers-->

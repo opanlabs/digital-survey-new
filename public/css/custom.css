@@ -4,12 +4,23 @@ body {
     --fc-event-text-color: #FFFFFF;
 }
 
+.login-image{
+    background-image:url('https://images.unsplash.com/flagged/photo-1553505192-acca7d4509be?ixlib=rb-1.2.1');
+    padding-bottom: 58rem;
+    background-size: cover;
+}
+
 a {
     color: #000;
 }
 
+.link-primary {
+    color: #f4a238;
+}
+
 a:hover,
-.fc .fc-daygrid-dot-event:hover  {
+.fc .fc-daygrid-dot-event:hover,
+.link-primary:hover  {
     color: #df8a1b ;
 }
 
