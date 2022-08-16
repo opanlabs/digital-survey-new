@@ -114,6 +114,10 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Page Custom Javascript-->
 		<script type="text/javascript">
 			$(document).ready(function() {
+				
+				/* custom th class on all data table */
+				$('.table th').addClass('fw-bold fs-6 text-gray-800 border-bottom border-gray-200 text-uppercase');
+
 				/* autocomplete branch */
 				$('#branch_AC').select2({
 					placeholder: 'Pilih Branch',

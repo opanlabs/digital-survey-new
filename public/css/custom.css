@@ -31,12 +31,14 @@ a:hover,
 }
 
 .btn-primary,
-.select2-container--bootstrap5 .select2-dropdown .select2-results__option.select2-results__option--selected {
+.select2-container--bootstrap5 .select2-dropdown .select2-results__option.select2-results__option--selected,
+.page-item.active .page-link {
     color: #fff;
     background-color: #F4A238 !important;
     border-color: #F4A238 !important; /*set the color you want here*/
 }
-.btn.btn-primary:hover:not(.btn-active)
+.btn.btn-primary:hover:not(.btn-active),
+.page-item.active:hover .page-link:hover
  {
     color: #fff;
     background-color: #df8a1b !important;

@@ -60,10 +60,9 @@ class UsersDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            'name',
-            'id_branch',
-            'phone_number',
-            'email'
+            Column::make('name'),
+            Column::make('id_branch'),
+            Column::make('email'),
         ];
     }
 
