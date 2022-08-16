@@ -412,7 +412,8 @@
 
 <script src="{{ $RegisterChart->cdn() }}"></script>
 <script src="{{ $PolishChart->cdn() }}"></script>
-<script src="{{ $ClaimChart->cdn() }}"></script>
+<script src="{{ $ClaimChart->cdn() }}">
+</script>
 
 {{ $RegisterChart->script() }}
 {{ $PolishChart->script() }}
