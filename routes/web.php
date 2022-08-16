@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,8 @@ use App\Http\Controllers\DashboardController;
 
 Route::prefix('dashboard')->group(function(){
     Route::get('/main',[DashboardController::class,'index'])->name('dashboard');
+    Route::get('/users',[UsersController::class,'index'])->name('users.index');
+    
 });
 
 Route::get('/', function () {
@@ -24,5 +28,6 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/branch/query/autocomplete',[BranchController::class,'autocomplete'])->name('branch.autocomplete');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

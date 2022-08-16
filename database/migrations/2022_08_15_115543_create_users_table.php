@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id('id_user');
             $table->string('name');
             $table->string('phone_number');
-            $table->string('photo_url');
+            $table->string('photo_url')
+                    ->nullable();
             $table->foreignId('id_branch')
                     ->constrained()
                     ->references('id_branch')
@@ -25,6 +26,7 @@ return new class extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('no action');
             $table->foreignId('id_role')
+                    ->default(1)
                     ->constrained()
                     ->references('id_role')
                     ->on('roles')

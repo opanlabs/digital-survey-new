@@ -109,7 +109,41 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="{{ asset('js/custom/utilities/modals/upgrade-plan.js') }}"></script>
 		<script src="{{ asset('js/custom/utilities/modals/create-app.js') }}"></script>
 		<script src="{{ asset('js/custom/utilities/modals/users-search.js') }}"></script>
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+		@stack('scripts')
 		<!--end::Page Custom Javascript-->
+		<script type="text/javascript">
+			$(document).ready(function() {
+				/* autocomplete branch */
+				$('#branch_AC').select2({
+					placeholder: 'Pilih Branch',
+					"language": {
+						"noResults": function() {
+							return "Branch Tidak Ditemukan";
+						}
+					},
+					escapeMarkup: function(markup) {
+						return markup;
+					},
+					ajax: {
+						url: '{{ route('branch.autocomplete') }}',
+						dataType: 'json',
+						delay: 250,
+						processResults: function(data) {
+							return {
+								results: $.map(data, function(branch) {
+									return {
+										text: branch.provience_name,
+										id: branch.id_branch
+									}
+								})
+							};
+						},
+						cache: true
+					}
+				});
+			})
+		</script>
 		<!--end::Javascript-->
 	</body>
 	<!--end::Body-->

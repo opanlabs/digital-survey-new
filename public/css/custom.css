@@ -6,7 +6,7 @@ body {
 
 .login-image{
     background-image:url('https://images.unsplash.com/flagged/photo-1553505192-acca7d4509be?ixlib=rb-1.2.1');
-    padding-bottom: 58rem;
+    height: 100vh;
     background-size: cover;
 }
 
@@ -20,18 +20,24 @@ a {
 
 a:hover,
 .fc .fc-daygrid-dot-event:hover,
-.link-primary:hover  {
+.link-primary:hover,
+.link-primary:focus, .link-primary:hover  {
     color: #df8a1b ;
 }
 
+.select2-container--bootstrap5 .select2-dropdown .select2-results__option.select2-results__option--highlighted {
+    background-color:#fff8dd;
+    color:#f2961c;
+}
 
-/*This is modifying the btn-primary colors but you could create your own .btn-something class as well*/
-.btn-primary {
+.btn-primary,
+.select2-container--bootstrap5 .select2-dropdown .select2-results__option.select2-results__option--selected {
     color: #fff;
     background-color: #F4A238 !important;
     border-color: #F4A238 !important; /*set the color you want here*/
 }
-.btn.btn-primary:hover:not(.btn-active) {
+.btn.btn-primary:hover:not(.btn-active)
+ {
     color: #fff;
     background-color: #df8a1b !important;
     border-color: #F4A238 !important; /*set the color you want here*/

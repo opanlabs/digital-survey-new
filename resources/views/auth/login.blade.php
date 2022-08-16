@@ -6,7 +6,7 @@
         <div style="width: 60%" class="login-image d-none d-xl-block">
             
         </div>
-        <div class="d-flex flex-start flex-column flex-column-fluid">
+        <div class="d-flex flex-center flex-column flex-column-fluid">
             <!--begin::Logo-->
             <a href="#" class="mb-12 text-center pt-20">
                 <h1 class="hs-1"><span style="color: #F2951C">Jingga</span> Teknologi<span style="color: #F2951C">.</span></h1>
@@ -15,7 +15,8 @@
             <!--begin::Wrapper-->
             <div class="w-lg-500px p-10 p-lg-15 mx-auto">
                 <!--begin::Form-->
-                <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="../../demo1/dist/index.html" action="#">
+                <form class="form w-100" method="POST" action="{{ route('login') }}">
+                    @csrf
                     <!--begin::Heading-->
                     <div class="text-left mb-10">
                         <!--begin::Title-->
@@ -29,7 +30,12 @@
                         <label class="form-label fs-6 fw-bolder text-dark">Email</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input class="form-control form-control-lg" type="text" name="email" autocomplete="off" />
+                        <input class="form-control form-control-lg @error('email') is-invalid @enderror" type="text" name="email" autocomplete="off" placeholder="Phone Number/Email" value="{{ old('email') }}" required autocomplete="email" autofocus/>
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <!--end::Input-->
                     </div>
                     <!--end::Input group-->
@@ -46,7 +52,12 @@
                         </div>
                         <!--end::Wrapper-->
                         <!--begin::Input-->
-                        <input class="form-control form-control-lg" type="password" name="password" autocomplete="off" />
+                        <input class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" type="password" placeholder="Password"/>
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <!--end::Input-->
                     </div>
                     <!--end::Input group-->
@@ -59,7 +70,7 @@
                         <!--end::Submit button-->
                         <!--begin::Link-->
                         <div class="text-gray-400 fw-bold fs-7">Don't Have an Account?
-                            <a href="../../demo1/dist/authentication/layouts/basic/sign-up.html" class="link-primary fw-bolder">Create an Account</a>
+                            <a href="{{ route('register') }}" class="link-primary fw-bolder">Create an Account</a>
                         </div>
                         <!--end::Link-->
                     </div>
@@ -71,5 +82,4 @@
         </div>
         <!--end::Content-->
     </div>
-
 @endsection
