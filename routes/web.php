@@ -25,9 +25,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::get('/users',[UsersController::class,'index'])->name('users');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-    
+
+
+Route::group(['middleware' => ['auth']], function () { 
+    Route::get('/',[DashboardController::class,'index'])->name('dashboard');
 });
 
 Auth::routes();
