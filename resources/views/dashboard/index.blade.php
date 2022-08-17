@@ -8,7 +8,7 @@
         <!--begin::Card-->										
         <div class="card mb-5 h-lg-100">
             <!--begin::Card body-->
-            <div class="card-body card-p">
+            <div class="card-body card-p-chart">
                
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-column">
@@ -41,7 +41,7 @@
         <!--begin::Card-->										
         <div class="card mb-5 h-lg-100">
             <!--begin::Card body-->
-            <div class="card-body card-p">
+            <div class="card-body card-p-chart">
                
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-column">
@@ -74,7 +74,7 @@
         <!--begin::Card-->										
         <div class="card mb-5 h-lg-100">
             <!--begin::Card body-->
-            <div class="card-body card-p">
+            <div class="card-body card-p-chart">
                
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-column">
@@ -412,7 +412,8 @@
 
 <script src="{{ $RegisterChart->cdn() }}"></script>
 <script src="{{ $PolishChart->cdn() }}"></script>
-<script src="{{ $ClaimChart->cdn() }}"></script>
+<script src="{{ $ClaimChart->cdn() }}">
+</script>
 
 {{ $RegisterChart->script() }}
 {{ $PolishChart->script() }}

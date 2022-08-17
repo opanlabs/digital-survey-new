@@ -4,6 +4,10 @@ body {
     --fc-event-text-color: #FFFFFF;
 }
 
+.card-p-chart{
+    padding:2rem 0rem 2rem 2rem !important;
+}
+
 .login-image{
     background-image:url('https://images.unsplash.com/flagged/photo-1553505192-acca7d4509be?ixlib=rb-1.2.1');
     height: 100vh;
@@ -21,7 +25,9 @@ a {
 a:hover,
 .fc .fc-daygrid-dot-event:hover,
 .link-primary:hover,
-.link-primary:focus, .link-primary:hover  {
+.link-primary:focus, .link-primary:hover,
+.btn-check:active+.btn.btn-active-light .svg-icon, .btn-check:active+.btn.btn-active-light i, .btn-check:checked+.btn.btn-active-light .svg-icon, .btn-check:checked+.btn.btn-active-light i, .btn.btn-active-light.active .svg-icon, .btn.btn-active-light.active i, .btn.btn-active-light.show .svg-icon, .btn.btn-active-light.show i, .btn.btn-active-light:active:not(.btn-active) .svg-icon, .btn.btn-active-light:active:not(.btn-active) i, .btn.btn-active-light:focus:not(.btn-active) .svg-icon, .btn.btn-active-light:focus:not(.btn-active) i, .btn.btn-active-light:hover:not(.btn-active) .svg-icon, .btn.btn-active-light:hover:not(.btn-active) i, .show>.btn.btn-active-light .svg-icon, .show>.btn.btn-active-light i
+{
     color: #df8a1b ;
 }
 
