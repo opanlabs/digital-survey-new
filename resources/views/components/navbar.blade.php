@@ -138,7 +138,7 @@
                     </div>
                 </div>
                 <!-- control setting -->
-                <div data-kt-menu-trigger="click" class="menu-item here  menu-accordion">
+                <div data-kt-menu-trigger="click" class="menu-item here {{ Route::is('users') || Route::is('users') ? 'show' : '' }} menu-accordion" >
                     <span class="menu-link">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -153,21 +153,13 @@
                         <span class="menu-title">Control & Settings</span>
                         <span class="menu-arrow"></span>
                     </span>
-                    <div class="menu-sub menu-sub-accordion">
+                    <div class="menu-sub menu-sub-accordion {{ Route::is('users') || Route::is('users') ? 'menu-active-bg' : 'menu-active-bg' }}">
                         <div class="menu-item">
-                            <a class="menu-link" href="#">
+                            <a class="menu-link {{ Route::is('users') ? 'active' : '' }}" href="{{ url('dashboard/users') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Register Polis</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link" href="#">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Register Claim</span>
+                                <span class="menu-title">Users Management</span>
                             </a>
                         </div>
                     </div>

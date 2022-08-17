@@ -18,12 +18,11 @@ use App\Http\Controllers\RegisterPolisController;
 |
 */
 
-Route::prefix('dashboard')->group(function(){
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::get('/main',[DashboardController::class,'index'])->name('dashboard');
     Route::get('/profile',[ProfileController::class,'index'])->name('profile');
     Route::get('/register-polis',[RegisterPolisController::class,'index'])->name('register-polis');
-    Route::get('/users',[UsersController::class,'index'])->name('users.index');
-    
+    Route::get('/users',[UsersController::class,'index'])->name('users');
 });
 
 Route::get('/', function () {
