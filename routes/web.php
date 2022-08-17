@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterPolisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +18,20 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::prefix('dashboard')->group(function(){
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::get('/main',[DashboardController::class,'index'])->name('dashboard');
+    Route::get('/profile',[ProfileController::class,'index'])->name('profile');
+    Route::get('/register-polis',[RegisterPolisController::class,'index'])->name('register-polis');
+    Route::get('/users',[UsersController::class,'index'])->name('users');
 });
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+Route::group(['middleware' => ['auth']], function () { 
+    Route::get('/',[DashboardController::class,'index'])->name('dashboard');
 });
+
+Auth::routes();
+Route::get('/branch/query/autocomplete',[BranchController::class,'autocomplete'])->name('branch.autocomplete');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
