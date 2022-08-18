@@ -2,7 +2,12 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header"></div>
+        
+        <div class="card-header">
+            <h3 class="card-title align-items-start flex-column">
+                <span class="card-label fw-bolder fs-3 mb-1">List User</span>
+            </h3>
+        </div>
         <div class="card-body">
             {{ $dataTable->table(['class' => 'table table-striped gy-7 gs-7']) }}
         </div>
