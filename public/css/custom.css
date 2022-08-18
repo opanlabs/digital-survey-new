@@ -22,6 +22,12 @@ a {
     color: #f4a238;
 }
 
+.btn.btn-light-primary {
+    color: #009ef7;
+    border-color: #f1faff;
+    background-color: #dbe8ff;
+}
+
 a:hover,
 .fc .fc-daygrid-dot-event:hover,
 .link-primary:hover,
@@ -44,7 +50,8 @@ a:hover,
     border-color: #F4A238 !important; /*set the color you want here*/
 }
 .btn.btn-primary:hover:not(.btn-active),
-.page-item.active:hover .page-link:hover
+.page-item.active:hover .page-link:hover,
+.btn-check:active+.btn.btn-primary, .btn-check:checked+.btn.btn-primary, .btn.btn-primary.active, .btn.btn-primary.show, .btn.btn-primary:active:not(.btn-active), .btn.btn-primary:focus:not(.btn-active), .btn.btn-primary:hover:not(.btn-active), .show>.btn.btn-primary
  {
     color: #fff;
     background-color: #df8a1b !important;

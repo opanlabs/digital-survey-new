@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Roles::class,'id_role','id_role');
     }
+
+    public function branch()
+    {
+        return $this->hasOne(branch::class,'id_branch','id_branch');
+    }
 }
