@@ -8,25 +8,51 @@ body {
     padding:2rem 0rem 2rem 2rem !important;
 }
 
+.login-image{
+    background-image:url('https://images.unsplash.com/flagged/photo-1553505192-acca7d4509be?ixlib=rb-1.2.1');
+    height: 100vh;
+    background-size: cover;
+}
+
 a {
     color: #000;
 }
 
+.link-primary {
+    color: #f4a238;
+}
+
+.btn.btn-light-primary {
+    color: #009ef7;
+    border-color: #f1faff;
+    background-color: #dbe8ff;
+}
+
 a:hover,
 .fc .fc-daygrid-dot-event:hover,
+.link-primary:hover,
+.link-primary:focus, .link-primary:hover,
 .btn-check:active+.btn.btn-active-light .svg-icon, .btn-check:active+.btn.btn-active-light i, .btn-check:checked+.btn.btn-active-light .svg-icon, .btn-check:checked+.btn.btn-active-light i, .btn.btn-active-light.active .svg-icon, .btn.btn-active-light.active i, .btn.btn-active-light.show .svg-icon, .btn.btn-active-light.show i, .btn.btn-active-light:active:not(.btn-active) .svg-icon, .btn.btn-active-light:active:not(.btn-active) i, .btn.btn-active-light:focus:not(.btn-active) .svg-icon, .btn.btn-active-light:focus:not(.btn-active) i, .btn.btn-active-light:hover:not(.btn-active) .svg-icon, .btn.btn-active-light:hover:not(.btn-active) i, .show>.btn.btn-active-light .svg-icon, .show>.btn.btn-active-light i
 {
     color: #df8a1b ;
 }
 
+.select2-container--bootstrap5 .select2-dropdown .select2-results__option.select2-results__option--highlighted {
+    background-color:#fff8dd;
+    color:#f2961c;
+}
 
-/*This is modifying the btn-primary colors but you could create your own .btn-something class as well*/
-.btn-primary {
+.btn-primary,
+.select2-container--bootstrap5 .select2-dropdown .select2-results__option.select2-results__option--selected,
+.page-item.active .page-link {
     color: #fff;
     background-color: #F4A238 !important;
     border-color: #F4A238 !important; /*set the color you want here*/
 }
-.btn.btn-primary:hover:not(.btn-active) {
+.btn.btn-primary:hover:not(.btn-active),
+.page-item.active:hover .page-link:hover,
+.btn-check:active+.btn.btn-primary, .btn-check:checked+.btn.btn-primary, .btn.btn-primary.active, .btn.btn-primary.show, .btn.btn-primary:active:not(.btn-active), .btn.btn-primary:focus:not(.btn-active), .btn.btn-primary:hover:not(.btn-active), .show>.btn.btn-primary
+ {
     color: #fff;
     background-color: #df8a1b !important;
     border-color: #F4A238 !important; /*set the color you want here*/

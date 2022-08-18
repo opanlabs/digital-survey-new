@@ -4,7 +4,7 @@
     <div class="container-fluid d-flex align-items-stretch justify-content-between">
         <!--begin::Aside mobile toggle-->
         <div class="d-flex align-items-center d-lg-none ms-n2 me-2" title="Show aside menu">
-            <div class="btn btn-icon btn-active-light w-30px h-30px w-md-40px h-md-40px" id="kt_aside_mobile_toggle">
+            <div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px" id="kt_aside_mobile_toggle">
                 <!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
                 <span class="svg-icon svg-icon-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -19,11 +19,7 @@
         <!--begin::Mobile logo-->
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
             <a href="#" class="d-lg-none">
-                <div class="h-25px logo">
-                    <h2>
-                        <span style="color: #F2951C">Jingga</span> Teknologi<span style="color: #F2951C">.</span>
-                    </h2>
-                </div>
+                <img alt="Logo" src="{{ asset('media/logos/logo-2.svg') }}" class="h-30px" />
             </a>
         </div>
         <!--end::Mobile logo-->
@@ -47,9 +43,9 @@
                         <div class="symbol symbol-30px symbol-md-40px mx-2">
                             <img class="rounded-circle" src="{{ asset('media/avatars/300-1.jpg') }}" alt="user" />
                         </div>
-                        <div class="d-flex flex-column d-none d-md-block ">
-                            <div class="fw-bolder d-flex align-items-center fs-5">Tofan Aditnya</div>
-                            <a class="fw-bold text-muted fs-7">Super Admin</a>
+                        <div class="d-flex flex-column">
+                            <div class="fw-bolder d-flex align-items-center fs-5">{{ Auth::user()->name }}</div>
+                            <a class="fw-bold text-muted fs-7">{{ Auth::user()->roles->role }}</a>
                         </div>
                     </div>
                     <!--end::Username Menu-->
@@ -58,13 +54,13 @@
                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg py-4 fs-6 w-275px" data-kt-menu="true">
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a class="menu-link">
+                            <a class="menu-link" href="#">
                                 <span class="menu-icon"><i class="bi bi-person-circle fs-3"></i></span>
                                 <span class="menu-title">Personal Information</span>
                             </a>
                         </div>
                         <div class="menu-item px-5">
-                            <a class="menu-link">
+                            <a class="menu-link" href="#">
                                 <span class="menu-icon"><i class="bi bi-shield-lock fs-3"></i></span>
                                 <span class="menu-title">Change Password</span>
                             </a>
@@ -75,13 +71,19 @@
                          <!--end::Menu separator-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a class="menu-link">
+                            <a class="menu-link" 
+                                href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
                                 <span class="menu-icon"><i class="bi bi-box-arrow-right fs-3"></i></span>
                                 <span class="menu-title">Logout</span>
                             </a>
                         </div>
                     </div>
                     <!--end::User account menu-->
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                     <!--end::Menu wrapper-->
                 </div>
                 <!--end::User menu-->
