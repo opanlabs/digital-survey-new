@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\branch;
 use Illuminate\Http\Request;
+use App\DataTables\BranchDataTable;
 
 class BranchController extends Controller
 {
@@ -16,4 +17,14 @@ class BranchController extends Controller
                 ->get();
         return response()->json($branch);
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(BranchDataTable $dataTable)
+    {
+        return $dataTable->render('dashboard.branch.index');
+    }
+
 }
