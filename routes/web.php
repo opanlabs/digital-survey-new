@@ -23,6 +23,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::get('/profile',[ProfileController::class,'index'])->name('profile');
     Route::get('/register-polis',[RegisterPolisController::class,'index'])->name('register-polis');
     Route::get('/users',[UsersController::class,'index'])->name('users');
+    Route::get('/branch',[BranchController::class,'index'])->name('branch');
 });
 
 
