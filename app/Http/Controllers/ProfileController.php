@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\models\User;
 
 class ProfileController extends Controller
 {
@@ -45,7 +46,7 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -67,8 +68,25 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {       
+        // dd($request);
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'id_branch' => 'required',
+            'phone_number' => 'required'
+
+        ]);
+
+        $users = User::find($request->id_user)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'id_branch' => $request->id_branch,
+            'phone_number' => $request->phone_number,
+            // 'password' => $request->password,
+        ]);
+
+        return redirect()->back()->with('message','data telah diubah!');
     }
 
     /**

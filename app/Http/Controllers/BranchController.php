@@ -11,8 +11,8 @@ class BranchController extends Controller
     {
         $branch = [];
         $search = $request->input('q');
-        $branch = branch::select("id_branch", "provience_name")
-                ->where('provience_name', 'like', "%$search%")
+        $branch = branch::select("id_branch", "province_name")
+                ->where('province_name', 'like', "%$search%")
                 ->get();
         return response()->json($branch);
     }

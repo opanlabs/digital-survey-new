@@ -138,7 +138,7 @@ License: For each use you must have a valid license purchased only from above li
 							return {
 								results: $.map(data, function(branch) {
 									return {
-										text: branch.provience_name,
+										text: branch.province_name,
 										id: branch.id_branch
 									}
 								})
