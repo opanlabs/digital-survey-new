@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 <!-- control setting -->
-                <div data-kt-menu-trigger="click" class="menu-item here {{ Route::is('users') || Route::is('branch') || Route::is('vehicle') ? 'show' : '' }} menu-accordion" >
+                <div data-kt-menu-trigger="click" class="menu-item here {{ Route::is('users') || Route::is('branch') || Route::is('brand') || Route::is('typepart') || Route::is('part') ? 'show' : '' }} menu-accordion" >
                     <span class="menu-link">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -145,7 +145,7 @@
                         <span class="menu-title">Control & Settings</span>
                         <span class="menu-arrow"></span>
                     </span>
-                    <div class="menu-sub menu-sub-accordion {{ Route::is('users') || Route::is('branch') || Route::is('vehicle') ? 'menu-active-bg' : '' }}">
+                    <div class="menu-sub menu-sub-accordion {{ Route::is('users') || Route::is('branch') || Route::is('brand') || Route::is('typepart') || Route::is('part') ? 'menu-active-bg' : '' }}">
                         <div class="menu-item">
                             <a class="menu-link {{ Route::is('users') ? 'active' : '' }}" href="{{ url('dashboard/users') }}">
                                 <span class="menu-bullet">
@@ -162,13 +162,40 @@
                                 <span class="menu-title">Branch Area</span>
                             </a>
                         </div>
-                        <div class="menu-item">
-                            <a class="menu-link {{ Route::is('vehicle') ? 'active' : '' }}" href="{{ url('dashboard/vehicle') }}">
+                        <div data-kt-menu-trigger="click" class="menu-item here menu-accordion {{ Route::is('brand') || Route::is('typepart') ||Route::is('part')  ? 'show' : '' }}">
+                            <span class="menu-link">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Vehicle</span>
-                            </a>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                <div class="menu-item">
+                                    <a class="menu-link {{ Route::is('brand') ? 'active' : '' }}" href="{{ url('dashboard/vehicle') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Vehicle Brand</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link {{ Route::is('typepart') ? 'active' : '' }}" href="{{ url('dashboard/typepart') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Type Part</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link {{ Route::is('part') ? 'active' : '' }}" href="{{ url('dashboard/part') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Part</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
