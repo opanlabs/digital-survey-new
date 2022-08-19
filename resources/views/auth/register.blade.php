@@ -10,9 +10,7 @@
             <!--begin::Logo-->
             <a href="#" class="text-center pt-10">
                 <h1 class="hs-1"><span style="color: #F2951C">Jingga</span> Teknologi<span style="color: #F2951C">.</span></h1>
-                @foreach ($errors->all() as $error)
-                    {{ $error }}<br/>
-                @endforeach
+                
             </a>
             <!--end::Logo-->
             <!--begin::Wrapper-->
