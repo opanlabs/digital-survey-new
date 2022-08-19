@@ -115,6 +115,30 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Page Custom Javascript-->
 		<script type="text/javascript">
 			$(document).ready(function() {
+
+				/* toast option */
+				toastr.options = {
+					"closeButton": false,
+					"debug": false,
+					"newestOnTop": false,
+					"progressBar": false,
+					"positionClass": "toastr-top-center",
+					"preventDuplicates": false,
+					"onclick": null,
+					"showDuration": "300",
+					"hideDuration": "1000",
+					"timeOut": "5000",
+					"extendedTimeOut": "1000",
+					"showEasing": "swing",
+					"hideEasing": "linear",
+					"showMethod": "fadeIn",
+					"hideMethod": "fadeOut"
+				};
+
+				// show every form error on toaster
+				@if ($message = Session::get('message'))
+                	toastr.success(@json($message));
+        		@endif
 				
 				/* custom th class on all data table */
 				$('.table th').addClass('fw-bold fs-6 text-gray-800 border-bottom border-gray-200 text-uppercase');
