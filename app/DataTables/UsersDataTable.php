@@ -41,7 +41,7 @@ class UsersDataTable extends DataTable
                 </a>
             </div>
             <div class='menu-item menu-state-bg px-3'>
-                <a href='#' class='menu-link px-3'>
+                <a href='#' class='menu-link px-3 text-danger'>
                     <span class='menu-icon'><i class='bi bi-trash'></i></span>
                     <span class='menu-title'>Delete</span>
                 </a>
