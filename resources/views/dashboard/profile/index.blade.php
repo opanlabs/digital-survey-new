@@ -42,7 +42,7 @@
                             <div class="image-input-wrapper w-125px rounded-circle h-125px" style="background-image: url({{ asset('storage/images/'. basename(Auth::user()->photo_url) ) }})"></div>
                             <!--end::Preview existing avatar-->
                             <!--begin::Label-->
-                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow profile-icon" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar" style="position: absolute !important;left: 9rem !important; top: 1rem !important;">
                                 <i class="bi bi-pencil-fill fs-7"></i>
                                 <!--begin::Inputs-->
                                 <input class="photo" type="file" name="photo" accept=".jpg, .jpeg">
@@ -51,12 +51,12 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Cancel-->
-                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="Cancel avatar">
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="Cancel avatar" style="position: absolute !important;left: 9rem !important; top: 8.5rem !important;">
                                 <i class="bi bi-x fs-2"></i>
                             </span>
                             <!--end::Cancel-->
                             <!--begin::Remove-->
-                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove avatar">
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow profile-icon" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove avatar" style="position: absolute !important;left: 9rem !important; top: 8.5rem !important;">
                                 <i class="bi bi-x fs-2"></i>
                             </span>
                             <!--end::Remove-->
@@ -259,7 +259,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>m
         </div>
     </div>
 </form>
