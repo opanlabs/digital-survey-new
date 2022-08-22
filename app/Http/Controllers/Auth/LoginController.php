@@ -33,7 +33,7 @@ class LoginController extends Controller
     // protected $redirectTo = RouteServiceProvider::HOME;
     protected function redirectTo()
     {
-        return route('dashboard',['id' => Auth::user()->id_user]);
+        return route('profile',['id' => Auth::user()->id_user]);
     }
 
     /**

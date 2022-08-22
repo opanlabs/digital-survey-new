@@ -11,7 +11,7 @@
         <!--begin::Menu-->
         <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
             <li class="menu-item">
-                <a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
+                <a href="#" target="_blank" class="menu-link px-2">About</a>
             </li>
         </ul>
         <!--end::Menu-->
