@@ -22,5 +22,7 @@ class Vehicle extends Authenticatable
         'vehicle_type'
     ];
 
+    protected $table = 'vehicle';
+
     protected $primaryKey = 'id_vehicle';
 }

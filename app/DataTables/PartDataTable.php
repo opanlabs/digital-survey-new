@@ -68,7 +68,10 @@ class PartDataTable extends DataTable
     {
         return [
             Column::make('part_nama'),
-            Column::make('id_typepart'),
+            Column::make(['title' => 'TypePart',
+                        'data' => 'typepart.type_nama',
+                        'name' => 'typepart.type_nama',
+                        ]),
         ];
     }
 
