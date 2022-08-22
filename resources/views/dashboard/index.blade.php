@@ -112,18 +112,18 @@
         <!--begin::Card header-->
         <div class="card-header">
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label fw-bolder text-dark">My Calendar</span>
-                <span class="text-muted mt-1 fw-bold fs-7">Preview monthly events</span>
+                <span class="card-label fw-bolder text-dark">Kalender Survey</span>
+                <span class="text-muted mt-1 fw-bold fs-7">Lihat Jadwal Survey Digital</span>
             </h3>
             <div class="card-toolbar">
-                <a href="#" class="btn btn-primary">Manage Calendar</a>
+                <a href="#" class="btn btn-primary">Atur Survey</a>
             </div>
         </div>
         <!--end::Card header-->
         <!--begin::Card body-->
         <div class="card-body">
             <!--begin::Calendar-->
-            <div id="kt_calendar_widget_1"></div>
+            <div id="survey_calender"></div>
             <!--end::Calendar-->
         </div>
         <!--end::Card body-->
@@ -418,4 +418,64 @@
 {{ $RegisterChart->script() }}
 {{ $PolishChart->script() }}
 {{ $ClaimChart->script() }}
+
+@push('scripts')
+<script>
+    const element = document.getElementById("survey_calender");
+
+    var todayDate = moment().startOf("day");
+    var YM = todayDate.format("YYYY-MM");
+    var YESTERDAY = todayDate.clone().subtract(1, "day").format("YYYY-MM-DD");
+    var TODAY = todayDate.format("YYYY-MM-DD");
+    var TOMORROW = todayDate.clone().add(1, "day").format("YYYY-MM-DD");
+
+    var calendarEl = document.getElementById("survey_calender");
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        headerToolbar: {
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth"
+        },
+
+        height: 800,
+        contentHeight: 780,
+        aspectRatio: 3,  // see: https://fullcalendar.io/docs/aspectRatio
+
+        nowIndicator: true,
+        now: TODAY + "T09:25:00", // just for demo
+
+        views: {
+            dayGridMonth: { buttonText: "month" },
+            timeGridWeek: { buttonText: "week" },
+            timeGridDay: { buttonText: "day" }
+        },
+
+        initialView: "dayGridMonth",
+        initialDate: TODAY,
+
+        editable: true,
+        dayMaxEvents: true, // allow "more" link when too many events
+        navLinks: true,
+        events: [
+        {
+          title: 'Agus Susanto',
+          start: '2022-08-10T07:00:00',
+          url: 'http://google.com/',
+        },
+        {
+          title: 'Asep Hendrawan',
+          start: '2022-08-11T07:00:00',
+          url: 'http://google.com/',
+        },
+        {
+          title: 'Jeremi Teti',
+          start: '2022-08-22T09:20:00',
+          url: 'http://google.com/',
+        },
+      ],
+    });
+
+    calendar.render();
+</script>
+@endpush
 @endsection

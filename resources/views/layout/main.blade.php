@@ -37,6 +37,8 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Custom CSS-->
 	</head>
 	<!--end::Head-->
+
+	
 	<!--begin::Body-->
 	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
 		<!--begin::Main-->
@@ -116,24 +118,7 @@ License: For each use you must have a valid license purchased only from above li
 		<script type="text/javascript">
 			$(document).ready(function() {
 
-				/* toast option */
-				toastr.options = {
-					"closeButton": false,
-					"debug": false,
-					"newestOnTop": false,
-					"progressBar": false,
-					"positionClass": "toastr-top-center",
-					"preventDuplicates": false,
-					"onclick": null,
-					"showDuration": "300",
-					"hideDuration": "1000",
-					"timeOut": "5000",
-					"extendedTimeOut": "1000",
-					"showEasing": "swing",
-					"hideEasing": "linear",
-					"showMethod": "fadeIn",
-					"hideMethod": "fadeOut"
-				};
+			
 
 				// show every form error on toaster
 				@if ($message = Session::get('message'))
