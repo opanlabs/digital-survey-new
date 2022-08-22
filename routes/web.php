@@ -6,6 +6,9 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterPolisController;
+use App\Http\Controllers\PartController;
+use App\Http\Controllers\TypePartController;
+use App\Http\Controllers\VehicleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +28,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::get('/register-polis',[RegisterPolisController::class,'index'])->name('register-polis');
     Route::get('/users',[UsersController::class,'index'])->name('users');
     Route::get('/branch',[BranchController::class,'index'])->name('branch');
+    Route::get('/part',[PartController::class,'index'])->name('part');
+    Route::get('/typepart',[TypePartController::class,'index'])->name('typepart');
+    Route::get('/vehicle',[VehicleController::class,'index'])->name('vehicle');
 });
 
 
