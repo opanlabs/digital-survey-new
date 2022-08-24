@@ -10,7 +10,7 @@ ls
 
 setfacl -PRdm u::rwx,g::rwx,o::rwx storage/app/public
 
-setfacl -PRdm u::rwx,g::rwx,o::rwx public/storage/images
+setfacl -PRdm u::rwx,g::rwx,o::rwx public/storage
 
 # chmod -R 777 storage/app/public/images
 
