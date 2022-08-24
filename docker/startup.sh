@@ -8,6 +8,8 @@ php-fpm -D
 
 ls
 
+php artisan storage:link
+
 mkdir -p public/storage/images
 
 # setfacl -PRdm u::rwx,g::rwx,o::rw storage/app/public/images
