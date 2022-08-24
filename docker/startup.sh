@@ -8,15 +8,9 @@ php-fpm -D
 
 ls
 
-sudo -u www-data stat /username/test/static
+chmod -R 777 /storage/app/public
 
-gpasswd -a www-data username
-
-chmod g+x /username && chmod g+x /username/test && chmod g+x /username/test/static
-
-chmod -R 777 /app/storage/app/public
-
-chmod -R 777 /app/public/storage
+chmod -R 777 /public/storage
 
 echo -e "success chmod"
 
