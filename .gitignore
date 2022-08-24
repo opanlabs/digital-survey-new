@@ -5,7 +5,9 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
-storage/*.key
+/public/hot
+/public/storage
+/storage/*.key
 .env
 Homestead.yaml
 Homestead.json
