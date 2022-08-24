@@ -17,5 +17,6 @@ RUN cd /app && \
 
 RUN chown -R www-data: /app
 RUN chmod -R 777 /app/storage/app/public
+RUN chmod -R 777 /app/public/storage
 
 CMD sh /app/docker/startup.sh
