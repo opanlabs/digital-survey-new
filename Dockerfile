@@ -27,6 +27,7 @@
 
 ############# new build ###########
 FROM php:8.1-fpm-alpine
+FROM composer:2.0.8 as build
 
 RUN apk add --no-cache nginx wget
 
