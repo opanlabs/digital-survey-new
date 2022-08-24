@@ -46,4 +46,4 @@ RUN chmod 777 -R /var/www/storage/ && \
   chown -R www-data:www-data /var/www/ && \
   ls
 
-CMD sh /app/docker/startup.sh
+CMD sh /var/www/docker/startup.sh
