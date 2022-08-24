@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\branch;
+use App\Models\Branch;
 use Illuminate\Http\Request;
 use App\DataTables\BranchDataTable;
 
@@ -12,7 +12,7 @@ class BranchController extends Controller
     {
         $branch = [];
         $search = $request->input('q');
-        $branch = branch::select("id_branch", "province_name")
+        $branch = Branch::select("id_branch", "province_name")
                 ->where('province_name', 'like', "%$search%")
                 ->get();
         return response()->json($branch);
