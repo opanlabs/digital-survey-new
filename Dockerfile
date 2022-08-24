@@ -38,6 +38,7 @@ COPY docker/nginx.conf /etc/nginx/nginx.conf
 
 WORKDIR /app
 COPY . /app
+RUN sh -c "wget http://getcomposer.org/composer.phar && chmod a+x composer.phar && mv composer.phar /usr/local/bin/composer"
 RUN composer install && composer dumpautoload
 
 RUN chmod 777 -R /var/www/storage/ && \
