@@ -8,9 +8,13 @@ php-fpm -D
 
 ls
 
-chmod -R 777 storage/app/public/images
+setfacl -PRdm u::rwx,g::rwx,o::rwx storage/app/public
 
-chmod -R 777 public/storage/images
+setfacl -PRdm u::rwx,g::rwx,o::rwx public/storage/images
+
+# chmod -R 777 storage/app/public/images
+
+# chmod -R 777 public/storage/images
 
 echo -e "success chmod bos"
 
