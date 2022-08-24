@@ -6,11 +6,13 @@ php-fpm -D
 
 # while ! nc -w 1 -z 127.0.0.1 9000; do sleep 0.1; done;
 
-cd app/ && ls
+ls
 
-setfacl -PRdm u::rwx,g::rwx,o::rwx storage/app/public
+mkdir -p public/storage/images
 
-setfacl -PRdm u::rwx,g::rwx,o::rwx public/storage
+# setfacl -PRdm u::rwx,g::rwx,o::rw storage/app/public/images
+
+setfacl -PRdm u::rwx,g::rwx,o::rw public/storage/images
 
 # chmod -R 777 storage/app/public/images
 
