@@ -39,7 +39,8 @@ RUN ls
 WORKDIR /app
 COPY . /app /var/www/
 RUN sh -c "wget http://getcomposer.org/composer.phar && chmod a+x composer.phar && mv composer.phar /usr/local/bin/composer"
-RUN composer install && composer dumpautoload
+RUN cd /var/www/ && \
+    /usr/local/bin/composer install --no-dev && php artisan storage:link
 
 RUN chmod 777 -R /var/www/storage/ && \
   chown -R www-data:www-data /var/www/ && \
