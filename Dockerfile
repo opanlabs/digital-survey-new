@@ -43,6 +43,7 @@ RUN cd /var/www/ && \
     /usr/local/bin/composer install --no-dev && php artisan storage:link
 
 RUN chmod 777 -R /var/www/storage/ && \
+  chmod 777 -R /var/www/public/storage && \
   chown -R www-data:www-data /var/www/ && \
   ls
 
