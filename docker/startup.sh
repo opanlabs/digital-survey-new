@@ -8,9 +8,9 @@ php-fpm -D
 
 ls
 
-chmod -R 777 storage/app/public
+chmod -R 777 storage/app/public/images
 
-chmod -R 777 public/storage
+chmod -R 777 public/storage/images
 
 echo -e "success chmod bos"
 
