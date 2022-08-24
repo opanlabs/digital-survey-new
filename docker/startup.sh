@@ -12,15 +12,13 @@ php artisan storage:link
 
 mkdir -p storage/app/public/images
 
-mount -o remount,acl /
-
-setfacl -PRdm u::rwx,g::rwx,o::rw storage/app/public/images
+# setfacl -PRdm u::rwx,g::rwx,o::rw storage/app/public/images
 
 # setfacl -PRdm u::rwx,g::rwx,o::rw public/storage/images
 
-# chmod -R 777 storage/app/public/images
+chmod -R 777 storage/app/public/images
 
-# chmod -R 777 public/storage/images
+chmod -R 777 public/storage/images
 
 echo -e "success chmod bos"
 
