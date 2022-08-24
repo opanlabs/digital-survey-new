@@ -25,4 +25,9 @@ class Vehicle extends Authenticatable
     protected $table = 'vehicle';
 
     protected $primaryKey = 'id_vehicle';
+
+    public function RegisterSurvey()
+    {
+        return $this->hasMany(RegisterSurvey::class,'id_vehicle','id_vehicle');
+    }
 }

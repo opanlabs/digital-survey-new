@@ -68,7 +68,7 @@ class BranchDataTable extends DataTable
     {
         return [
             Column::make('id_branch'),
-            Column::make('provience_name')
+            Column::make('province_name')
         ];
     }
 

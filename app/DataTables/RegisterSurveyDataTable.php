@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\User;
+use App\Models\RegisterSurvey;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class UsersDataTable extends DataTable
+class RegisterSurveyDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -57,18 +57,18 @@ class UsersDataTable extends DataTable
             ->addColumn('action',function ($data){
                 return $this->getActionColumn($data);
                 })
-            ->setRowId('id');
+            ->setRowId('id_register_survey');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\User $model
+     * @param \App\Models\RegisterSurvey $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model): QueryBuilder
+    public function query(RegisterSurvey $model): QueryBuilder
     {
-        return $model->newQuery()->with(['branch']);
+        return $model->newQuery()->with(['vehicle','customer','user']);
     }
 
     /**
@@ -79,10 +79,10 @@ class UsersDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('users-table')
+                    ->setTableId('RegisterSurvey-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->searchPanes(User::make())
+                    ->searchPanes(RegisterSurvey::make())
                     ->dom('frtip')
                     ->parameters([
                         'drawCallback' => 'function() { KTMenu.createInstances(); }',
@@ -99,14 +99,28 @@ class UsersDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            Column::make('name'),
-            Column::make(['title' => 'Branch',
-                           'data' => 'branch.province_name',
-                           'name' => 'branch.province_name',
-                        ]),
-            Column::make('email'),
+            Column::make('id_register_survey'),
+            Column::make('register_no'),
+            Column::make(['title' => 'Name',
+                'data' => 'customer.customer_name',
+                'name' => 'customer.customer_name',
+            ]),
+            Column::make(['title' => 'Vehicle Type',
+                'data' => 'vehicle.nama',
+                'name' => 'vehicle.nama',
+            ]),
+            Column::make('register_date'),
+            Column::make('id_user'),
+            Column::make(['title' => 'Surveyor Name',
+                'data' => 'user.name',
+                'name' => 'user.name',
+            ]),
+            Column::make('survey_date'),
+            Column::make('link_zoom'),
+            Column::make('status'),
             Column::make('action')
         ];
+
     }
 
     /**
@@ -116,6 +130,6 @@ class UsersDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Users_' . date('YmdHis');
+        return 'RegisterSurveys_' . date('YmdHis');
     }
 }
