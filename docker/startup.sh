@@ -12,6 +12,6 @@ chmod -R 777 storage/app/public
 
 chmod -R 777 public/storage
 
-echo -e "success chmod"
+echo -e "success chmod bos"
 
 nginx
