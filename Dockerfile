@@ -16,7 +16,7 @@ RUN cd /app && \
     /usr/local/bin/composer install --no-dev && php artisan storage:link
     
 RUN chown -R www-data:www-data /app
-RUN chmod -R 777 /app/storage/app/public
+# RUN chmod -R 777 /app/storage
 RUN chmod -R 777 /app/public/storage
 
 CMD sh /app/docker/startup.sh
