@@ -10,11 +10,11 @@ ls
 
 php artisan storage:link
 
-mkdir -p public/storage/images
+mkdir -p storage/app/public/images
 
-# setfacl -PRdm u::rwx,g::rwx,o::rw storage/app/public/images
+setfacl -PRdm u::rwx,g::rwx,o::rw storage/app/public/images
 
-setfacl -PRdm u::rwx,g::rwx,o::rw public/storage/images
+# setfacl -PRdm u::rwx,g::rwx,o::rw public/storage/images
 
 # chmod -R 777 storage/app/public/images
 
