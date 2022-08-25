@@ -21,6 +21,9 @@ use App\Http\Controllers\VehicleController;
 |
 */
 
+$disk = Storage::disk('gcs');
+$url = $disk->put('hello.txt',"hello world");
+
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::get('/main',[DashboardController::class,'index'])->name('dashboard');
     Route::get('/profile',[ProfileController::class,'index'])->name('profile');
