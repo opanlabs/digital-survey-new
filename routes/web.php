@@ -5,7 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RegisterPolisController;
+use App\Http\Controllers\RegisterSurveyController;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\TypePartController;
 use App\Http\Controllers\VehicleController;
@@ -25,7 +25,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::get('/main',[DashboardController::class,'index'])->name('dashboard');
     Route::get('/profile',[ProfileController::class,'index'])->name('profile');
     Route::put('/profile/edit/{id}',[ProfileController::class,'update'])->name('profile.edit');
-    Route::get('/register-polis',[RegisterPolisController::class,'index'])->name('register-polis');
+    Route::get('/register-survey',[RegisterSurveyController::class,'index'])->name('register-survey');
     Route::get('/users',[UsersController::class,'index'])->name('users');
     Route::get('/branch',[BranchController::class,'index'])->name('branch');
     Route::get('/part',[PartController::class,'index'])->name('part');

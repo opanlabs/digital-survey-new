@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <!-- register survey -->
-                <div data-kt-menu-trigger="click" class="menu-item here {{ Route::is('register-polis') || Route::is('register-claim') ? 'show' : '' }}  menu-accordion">
+                <div data-kt-menu-trigger="click" class="menu-item here {{ Route::is('register-survey') || Route::is('register-claim') ? 'show' : '' }}  menu-accordion">
                     <span class="menu-link">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -83,13 +83,13 @@
                         <span class="menu-title">Register Survey</span>
                         <span class="menu-arrow"></span>
                     </span>
-                    <div class="menu-sub menu-sub-accordion {{ Route::is('register-polis') || Route::is('register-claim') ? 'menu-active-bg' : 'menu-active-bg' }}">
+                    <div class="menu-sub menu-sub-accordion {{ Route::is('register-survey') || Route::is('register-claim') ? 'menu-active-bg' : 'menu-active-bg' }}">
                         <div class="menu-item">
-                            <a class="menu-link {{ Route::is('register-polis') ? 'active' : '' }}" href="{{ url('dashboard/register-polis') }}">
+                            <a class="menu-link {{ Route::is('register-survey') ? 'active' : '' }}" href="{{ url('dashboard/register-survey') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Register Polis</span>
+                                <span class="menu-title">Register Risk Survey</span>
                             </a>
                         </div>
                         <div class="menu-item">

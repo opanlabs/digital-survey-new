@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Branch extends Model
+class Customer extends Model
 {
     use HasFactory;
-    protected $table = 'branch';
+    protected $table = 'customer';
     protected $fillable = [
-        'province_name',
+        'customer_name',
+        'phone_number',
+        'email',
     ];
 
     public function RegisterSurvey()
     {
-        return $this->hasMany(RegisterSurvey::class,'id_branch','id_branch');
+        return $this->hasMany(RegisterSurvey::class,'id_customer','id_customer');
     }
 }

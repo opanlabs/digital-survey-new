@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\DataTables\RegisterSurveyDataTable;
 
-class RegisterPolisController extends Controller
+class RegisterSurveyController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(RegisterSurveyDataTable $dataTable)
     {
-        return view('dashboard.register-survey.index');
+        return $dataTable->render('dashboard.register-survey.index');
     }
 
     /**
@@ -56,7 +57,7 @@ class RegisterPolisController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**

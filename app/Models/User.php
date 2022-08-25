@@ -57,4 +57,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Branch::class,'id_branch','id_branch');
     }
+
+    public function RegisterSurvey()
+    {
+        return $this->hasMany(RegisterSurvey::class,'id_user','id_user');
+    }
+    
 }
