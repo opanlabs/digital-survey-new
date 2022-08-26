@@ -62,42 +62,42 @@ return [
             'key_file' => [
                 'type' => 'service_account',
                 'project_id' => 'bold-crossbar-358907',
-                'private_key_id' => 'bc90b8cb759ef88c0bf37b4f84113e95331da7b1',
+                'private_key_id' => '53bd26f35ae11dd69c3b0d9535e8d927bd299a8b',
                 'private_key' => '-----BEGIN PRIVATE KEY-----
-              MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCQzu+W9uNTIctR
-              JDDHfj5sbGKfmR2ICmSZYyxsL/trorNeTKwf/LRi+uWMvWLkWJKFaY+a3Gj6JMcb
-              OuquTRNDtf3uYTGwX9JamiyWb5iH7K/2zj+S7mRs2y3YmfLgnwkuwCTypE10H3yK
-              tRsXgvjz1CSn/v83RTP3iBSem3UufGJVcPncFKRChegrDL9z4SdTsBYfbnw4a/qI
-              WsdRdbtYATJEd8qXOaxmjKu86lomlmMXpLIZiZyw/7WHoPK3MjDgmGSAL7WxQU3D
-              1R3oT0pQu1e13TJ6ws/PJtPBECBNkOoB59RHSpkBX9hnWPuYY24FifKPCyY3Q/zC
-              Lmb3LqKJAgMBAAECgf9DB4bf2mhfksUKSjZKIaXDimgceEOzNRxb5AwsCAnZSPa+
-              L799Dvxw1LJs8z1TdaxdFP/kLyJop52CfUMka4j/Tr68GUFm4vP7/GGnQQDZ6jWJ
-              iO7klHTn7ozKNni2gOc/PLHdnzA7EFgV3L8tovKZ6xkMqnx4mQ/1BIiG4m7blQWr
-              b2qlqsldHzdKFKBSTEm5Wr4yk5Y7IwGX/C/aZHaaUkix4xFwEfK/WHJkD9b60leu
-              BstnzBdg+AEUCtvnUEYthem7gbu1uFamD+e4FMqWDQ9ylxduV99QvXG4Vc0JL91p
-              D4MsSIQaYtOkWRq7x1hi2bPwt+EZmUZhouyewcMCgYEAw0b+cMyOphSd2v5dztPI
-              cN/T9+HOVkZZeAY48oy1tBgMuJTzHJNuDeI3BU3s14GGec6rkKEf/e/Bp0cSlZc3
-              3cr5j8U3APPeC60tngJevuE43tq/AbbA4SahdzrZpXGz82LAXfkO0IxppSSxUjTU
-              +aD0TGjuwtioaW+iodEnuf8CgYEAvdZe5/AEhA2y83Esa/nqB2rpJsUJY+5ZSdd7
-              9YXtysVH5JZOGmkIWtxGG6lM8c/rkcnL0a9Niu56zEKdnyHD7qW4jwwoTrxojfvd
-              ZElYN+arM7pjPJoFmPtzhJOmxatIHUwkY3ApAwgThDZlPTIfBvCVdOnKr1+8QDFA
-              k/yW03cCgYEAgOTJabb7qVAOadBgJvbPZQG4rfOT+Ipy37Brwl1ySi9dpjBaz8/Y
-              Yr2gR5YJ8K2ED76Eq/BOZ5Tro/hbofWwYGtrkqRADBbrx5VFePhjhWav3RlR3lW8
-              tmCDT2m+419Lwii6hMyyJKGp0eGIUZShxyugVRcmEeJkN0QCewDNUg0CgYEAtlFU
-              kpJb8+soK09M52J8VaVix/5CF3xIunc+ML3wc2Zmtm14Ezs+b+zPVC+Tm0Uhq8FP
-              g1FGOqDwxI1RzgvinacBCjkV2RBvpbT3miIqnH1nfOWL+x69M4CDIBeh+oOWXbTL
-              2chVSvkNrVOEhXJGhCa4kzEZnLZoGIp0x+u1et8CgYAntZ0u1k2nyyrJDblKHbxm
-              fizr+WM+I1evHS0iyD8iGIG4n9JZHrNCyDil8skQpUOnrAZ9ihDEZFsnuhzjeGDr
-              2eaPzTEkgaG0eEsokZ4ocgHcSo78MlEHIfXIFqTsdpfIX3TIKJyZW55HL+4JimD3
-              2hRhffpB2DKCtLa78PqoXg==
+              MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDidqGw4VnOsC/n
+              nvxsje0mh+Y7ICYrnD3euBWU4wgmbZdmE3sQYFJHB5YJWnlNLu564V/983/i6bEh
+              bWf9VdWnXcfo1g6xwrDEF6BmGFQ7dBQ6xGClg4sAi0tJ3HedGppHJxjYgXl4GHXw
+              5wCMIMEP2RhY7z7Ud1AgGUY+1escRcLhqSn3apGtVegqUGnwjxU34IZ9BSZZsYIA
+              JkZXwn5NshCHwv2tU9wyLvoWbDRyeF0Nqrw4lsprSbYrHaNZEJ1Mor8k93kdW/5B
+              ewtzzzlIyCidqbB1SBYaj9QvRgO+UeNoEvqV2O4tOUr2FVwI/HHg3Pc0EHWfH2pY
+              e5r5qCSVAgMBAAECggEAAbVoW2YJlL8+oUiRVX1WyMDRF/tSXULwxP1yyIWvRpfO
+              J4OvLx77fssy0rRQgp9Rxql/Ac4tsV6yXQnPB6eJmXTY7nTmI2lrqzens/oQqFgI
+              ry6uemt/Z853hqGsPKWaM1ByBe/fSTW25KkEYLf+ZzD1F61BkaK89dh3ixrlJmZD
+              /eguWv0IupYHjoAZ3hT1yzs/Y9gqCmUY4/IrlTrlyVVbQbLwx6WfpuqUbNQsgAxC
+              s8L7FSB63DAgLGrIjpnod/RwD0+ZKp8d0dkOM2BPYMj6MuDFWj3tw+DIHOqjUoqv
+              hDkkkr1qVVY8UzmQJabVWvAPUE7F2P56ZBXPA7aWoQKBgQD9y1zPUJp7KhJ1PWkd
+              XH38RrqxFhwbhbr0bUonXpHVGJjy2d8nPvYAJu1f6n6FCUmBApexNsukhUAf/iPm
+              uVGAw11zG2xdFSVwI9gWyZEzYaV63+k3aKN3bpV3tbNw1rp7Gi+cj7Kli1i8iB8A
+              6+JQcrYTw0+O+ZxlnohbHpXUtQKBgQDkbnasG03lMSlgpDED0PiWhbJor6Rfdw0h
+              SjKyW1Qw5mceDq2BVHACoZyCYn96c09r0DeRfNVhRuESZAZ9dwe5Z/GoP+8w/1IU
+              sGd73YwyyQ1sTfS36QOoLvVa3+Eur5knAZtJOj41msJ2aZUgJb9IlQHertrkXQuq
+              s2ANDRvcYQKBgQC/WIsB1zCReZfvArz0oR5vjNgG2beZXIsm7BtDcX6b3m66cl9X
+              1JVeafsAHOkE3oqnlM/PkZOZ18kQFej1dHUpkqIrPdrGl0HhuXSbQZ+S0KUV7imE
+              WAUe76YLWlgO1CZG1+hbrs+vFk9x3WMaq722j7YNUmzyS+mJiCwgHwAyHQKBgHAr
+              5k6BYfDoAT+ZoRAUr92KbZ+GkJroZSQxwU9gFamlmoFiB8V4Z0CDh81m/N5ufVOd
+              /YuN12JbYe6b+6vkpYBgEITkUFqpJe9O6KIkmtHddJ/4b/FXlRojZQxo37UDOZuz
+              6EM/PIkqI8/t7PLKVnIX6cEl8AsvvajnSIVgKIxBAoGBAK9t3/WcxpMOH0vmvyuV
+              UajaSPkg5aOkLcMhVJntBb6xs7d67Cxy3WWIchp2z4GC4bKqCr4YVEVUerCqEMBO
+              p7UMGkPgXYZW2D+OsfoNjwC9fpTMU0AJ1FVOM3BC3ZzTVVE0bb0CvvOgyUoUtBxB
+              cF5Fom6maKg5evkrgMOZRJo0
               -----END PRIVATE KEY-----
               ',
-                'client_email' => 'allaccess@bold-crossbar-358907.iam.gserviceaccount.com',
-                'client_id' => '118393914458967159932',
+                'client_email' => 'bucket-storage@bold-crossbar-358907.iam.gserviceaccount.com',
+                'client_id' => '100026742826538967212',
                 'auth_uri' => 'https://accounts.google.com/o/oauth2/auth',
                 'token_uri' => 'https://oauth2.googleapis.com/token',
                 'auth_provider_x509_cert_url' => 'https://www.googleapis.com/oauth2/v1/certs',
-                'client_x509_cert_url' => 'https://www.googleapis.com/robot/v1/metadata/x509/allaccess%40bold-crossbar-358907.iam.gserviceaccount.com',
+                'client_x509_cert_url' => 'https://www.googleapis.com/robot/v1/metadata/x509/bucket-storage%40bold-crossbar-358907.iam.gserviceaccount.com',
               ], // optional: Array of data that substitutes the .json file (see below)
             'project_id' => env('GOOGLE_CLOUD_PROJECT_ID', 'your-project-id'), // optional: is included in key file
             'bucket' => env('GOOGLE_CLOUD_STORAGE_BUCKET', 'your-bucket'),
