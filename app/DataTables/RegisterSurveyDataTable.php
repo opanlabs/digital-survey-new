@@ -124,7 +124,10 @@ class RegisterSurveyDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            Column::make('id_register_survey'),
+            Column::make(['title' => 'No',
+                'data' => 'id_register_survey',
+                'name' => 'id_register_survey',
+             ]),
             Column::make('register_no'),
             Column::make(['title' => 'Name',
                 'data' => 'customer.customer_name',
