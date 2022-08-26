@@ -115,9 +115,6 @@
                 <span class="card-label fw-bolder text-dark">Kalender Survey</span>
                 <span class="text-muted mt-1 fw-bold fs-7">Lihat Jadwal Survey Digital</span>
             </h3>
-            <div class="card-toolbar">
-                <a href="#" class="btn btn-primary">Atur Survey</a>
-            </div>
         </div>
         <!--end::Card header-->
         <!--begin::Card body-->
