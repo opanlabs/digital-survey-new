@@ -67,8 +67,7 @@ class VehicleDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            Column::make('nama'),
-            Column::make('vehicle_type')
+            Column::make('nama')
         ];
     }
 

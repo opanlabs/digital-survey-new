@@ -18,8 +18,7 @@ class Vehicle extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'nama',
-        'vehicle_type'
+        'nama'
     ];
 
     protected $table = 'vehicle';

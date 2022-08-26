@@ -156,6 +156,35 @@ License: For each use you must have a valid license purchased only from above li
 						cache: true
 					}
 				});
+
+					/* autocomplete branch */
+					$('#role_AC').select2({
+					placeholder: 'Pilih Role',
+					"language": {
+						"noResults": function() {
+							return "Role Tidak Ditemukan";
+						}
+					},
+					escapeMarkup: function(markup) {
+						return markup;
+					},
+					ajax: {
+						url: '{{ route('role.autocompleteRole') }}',
+						dataType: 'json',
+						delay: 250,
+						processResults: function(data) {
+							return {
+								results: $.map(data, function(role) {
+									return {
+										text: role.role,
+										id: role.id_role
+									}
+								})
+							};
+						},
+						cache: true
+					}
+				});
 			})
 		</script>
 		<!--end::Javascript-->

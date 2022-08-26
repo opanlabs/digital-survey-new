@@ -33,7 +33,7 @@
                         <label class="form-label fs-6 fw-bolder text-dark">Name</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input class="form-control form-control-lg @error('name') is-invalid @enderror" type="text" name="name" autocomplete="off" placeholder="name" value="{{ old('name') }}" required autocomplete="email" autofocus/>
+                        <input class="form-control form-control-lg @error('name') is-invalid @enderror" type="text" name="name" autocomplete="off" placeholder="Name" value="{{ old('name') }}" required autocomplete="email" autofocus/>
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -61,6 +61,30 @@
                             data-allow-clear="true">
                         </select>
                         @error('id_branch')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <!--end::Input-->
+                    </div>
+                    <div class="fv-row mb-10">
+                        <!--begin::Label-->
+                        <label class="form-label fs-6 fw-bolder text-dark">Role</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <select
+                            id="role_AC"
+                            class="form-select form-select form-control-lg @error('id_role') is-invalid @enderror"
+                            name="id_role" 
+                            autocomplete="off" 
+                            placeholder="role" 
+                            value="{{ old('id_role') }}"
+                            required 
+                            autocomplete="id_role" 
+                            autofocus
+                            data-allow-clear="true">
+                        </select>
+                        @error('id_role')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

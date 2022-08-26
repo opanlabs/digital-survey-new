@@ -44,5 +44,6 @@ Auth::routes();
 
 //untuk select2 autocomplete branch
 Route::get('/branch/query/autocomplete',[BranchController::class,'autocomplete'])->name('branch.autocomplete');
+Route::get('/role/query/autocomplete',[BranchController::class,'autocompleteRole'])->name('role.autocompleteRole');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
