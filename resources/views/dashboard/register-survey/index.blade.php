@@ -127,15 +127,16 @@
                                     </div>
                                 </div>
                             </form>
-                            <div class="text-center pt-15">
-                                <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Cancel</button>
-                                <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
-                                    <span data-bs-dismiss="modal" class="indicator-label">Submit</span>
-                                    <span class="indicator-progress">Please wait...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                </button>
-                            </div>
                         </div>
+                        <div class="modal-footer">
+                            <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Cancel</button>
+                            <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+                                <span data-bs-dismiss="modal" class="indicator-label">Submit</span>
+                                <span class="indicator-progress">Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                        </div>
+                        
                     </div>
                 </div>
             </form>
