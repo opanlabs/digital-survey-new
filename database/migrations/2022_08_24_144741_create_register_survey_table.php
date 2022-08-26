@@ -28,7 +28,7 @@ return new class extends Migration
             ->on('vehicle')
             ->onUpdate('cascade')
             ->onDelete('no action');
-            $table->string('register_date');
+            $table->string('year');
             $table->foreignId('id_user')
             ->constrained()
             ->references('id_user')
@@ -38,6 +38,8 @@ return new class extends Migration
             $table->string('survey_date');
             $table->string('link_zoom');
             $table->string('status');
+            $table->string('surveyor');
+            $table->string('plat_no');
             $table->foreignId('id_branch')
             ->constrained()
             ->references('id_branch')

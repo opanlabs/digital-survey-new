@@ -29,13 +29,13 @@ class RegisterSurveyDataTable extends DataTable
         <!--begin::Menu-->
         <div class='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg fw-bold fs-7 w-125px py-4' data-kt-menu='true'>
             <div class='menu-item menu-state-bg px-3'>
-                <a href='#' class='menu-link px-3'>
+                <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_modal_new_card'>
                     <span class='menu-icon'><i class='bi bi-eye'></i></span>
                     <span class='menu-title'>View</span>
                 </a>
             </div>
             <div class='menu-item menu-state-bg px-3'>
-                <a href='#' class='menu-link px-3'>
+                <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_modal_new_card'>
                     <span class='menu-icon'><i class='bi bi-pencil-square'></i></span>
                     <span class='menu-title'>Edit</span>
                 </a>
@@ -109,7 +109,10 @@ class RegisterSurveyDataTable extends DataTable
                 'data' => 'vehicle.nama',
                 'name' => 'vehicle.nama',
             ]),
-            Column::make('register_date'),
+            Column::make(['title' => 'Register Date',
+                'data' => 'created_at',
+                'name' => 'created_at',
+            ]),
             Column::make('id_user'),
             Column::make(['title' => 'Surveyor Name',
                 'data' => 'user.name',
