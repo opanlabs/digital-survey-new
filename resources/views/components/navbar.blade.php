@@ -84,22 +84,26 @@
                         <span class="menu-arrow"></span>
                     </span>
                     <div class="menu-sub menu-sub-accordion {{ Route::is('register-survey') || Route::is('register-claim') ? 'menu-active-bg' : 'menu-active-bg' }}">
-                        <div class="menu-item">
-                            <a class="menu-link {{ Route::is('register-survey') ? 'active' : '' }}" href="{{ url('dashboard/register-survey') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Register Risk Survey</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link {{ Route::is('register-claim') ? 'active' : '' }}" href="{{ url('dashboard/register-claim') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Register Claim</span>
-                            </a>
-                        </div>
+                        @if (Auth::user()->id_role === 2 || Auth::user()->id_role === 1)
+                            <div class="menu-item">
+                                <a class="menu-link {{ Route::is('register-survey') ? 'active' : '' }}" href="{{ url('dashboard/register-survey') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Register Risk Survey</span>
+                                </a>
+                            </div>
+                        @endif
+                        @if (Auth::user()->id_role === 3 || Auth::user()->id_role === 1)
+                            <div class="menu-item">
+                                <a class="menu-link {{ Route::is('register-claim') ? 'active' : '' }}" href="{{ url('dashboard/register-claim') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Register Claim</span>
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <!-- report survey -->
@@ -119,14 +123,26 @@
                         <span class="menu-arrow"></span>
                     </span>
                     <div class="menu-sub menu-sub-accordion {{ Route::is('report') ? 'menu-active-bg' : 'menu-active-bg' }}">
-                        <div class="menu-item">
-                            <a class="menu-link {{ Route::is('report') ? 'active' : '' }}" href="{{ url('dashboard/report') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Polis Report</span>
-                            </a>
-                        </div>
+                        @if (Auth::user()->id_role === 2 || Auth::user()->id_role === 1)
+                            <div class="menu-item">
+                                <a class="menu-link {{ Route::is('report') ? 'active' : '' }}" href="{{ url('dashboard/report') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Risk Survey Report</span>
+                                </a>
+                            </div>
+                        @endif
+                        @if (Auth::user()->id_role === 3 || Auth::user()->id_role === 1)
+                            <div class="menu-item">
+                                <a class="menu-link {{ Route::is('report') ? 'active' : '' }}" href="{{ url('dashboard/report') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Claim Report</span>
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <!-- control setting -->

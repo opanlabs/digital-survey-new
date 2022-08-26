@@ -141,6 +141,81 @@
                 </div>
             </form>
         </div>
+        <!-- modal schedule -->
+        <div class="modal fade" tabindex="-1" id="kt_schedule">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create Schedule Risk Survey</h5>
+                        <!--begin::Close-->
+                        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                            <span class="svg-icon svg-icon-2x"></span>
+                        </div>
+                        <!--end::Close-->
+                    </div>
+                    <div class="modal-body">
+                            <div class="d-flex flex-column mb-7 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                    <span>Select date</span>
+                                </label>
+                                <input class="form-control form-control-solid" placeholder="Pick date" id="kt_datepicker_10"/>
+                            </div>
+                    </div>
+        
+                    <div class="modal-footer">
+                        <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light">Cancel</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- modal delete -->
+        {{-- <div class="modal fade" id="kt_modal_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeLg" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body d-flex justify-content-center">
+                        <div>
+                            <h2 class="modal-title text-center">Are you sure?</h2>
+                            <p class="text-center">
+                            Do you really want to delete this data?
+                            <br />
+                            this process can’t be undone.
+                            </p>
+                        </div>
+                    </div>
+        
+                    <div class="modal-footer">
+                        <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light">Cancel</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
+        <div class="modal fade" id="kt_modal_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeLg" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body d-flex justify-content-center">
+                            <div>
+                                <h2 class="modal-title text-center">Are you sure?</h2>
+                                <p class="text-center">
+                                Do you really want to delete this data?
+                                <br />
+                                this process can’t be undone.
+                                </p>
+                            </div>
+                        </div>
+            
+                        <div class="modal-footer">
+                            <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light btn-sm">Cancel</button>
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
     
 @endsection
@@ -148,5 +223,15 @@
 @push('scripts')
     {{$dataTable->scripts()}}
     <script>
+        var todayDate = new Date().toISOString().slice(0, 10);
+        $("#kt_datepicker_10").flatpickr({
+            dateFormat: "Y-m-d",
+            disable: [
+                {
+                    from: "0001-01-01",
+                    to: todayDate
+                },
+            ]
+        });
     </script>
 @endpush

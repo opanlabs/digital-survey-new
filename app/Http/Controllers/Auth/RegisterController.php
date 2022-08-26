@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use \MacsiDigital\Zoom\Facades\Zoom;
 
 class RegisterController extends Controller
 {
@@ -71,10 +72,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {   
+
+        $user = Zoom::user()->create([
+            'first_name' => $data['name'],
+            'last_name' => '',
+            'email' => $data['email'],
+            'password' => $data['password']
+        ]); 
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'id_branch' => $data['id_branch'],
+            'id_role' => $data['id_role'],
             'phone_number' => $data['phone_number'],
             'password' => Hash::make($data['password']),
         ]);
