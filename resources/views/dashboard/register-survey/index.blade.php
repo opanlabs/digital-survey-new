@@ -1,5 +1,4 @@
 @extends('layout.main')
-<meta name="csrf-token" content="{{ csrf_token() }}">
 @section('content')
     <div class="card">
         
@@ -211,7 +210,7 @@
                 @csrf
                 @method('post')
                 <input type="hidden" name="id">
-                <div class="modal-dialog modal-dialog-centered mw-900px">
+                <div class="modal-dialog modal-dialog-centered mw-1000px">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h2>Realtime survey report</h2>
@@ -321,12 +320,19 @@
                                                                         <td>{{ $sub->part_nama }}</td>
                                                                         <td>
                                                                                 <input type="checkbox" name="isStandard_{{$sub->id_part}}" />
-                                                                            
                                                                         </td>
                                                                         <td>
                                                                             <input type="text" value="{{ $sub->description }}" name="description_{{$sub->id_part}}" />
                                                                         </td>
-                                                                        <td></td>
+                                                                        <td>
+                                                                            <table class="table table-flush fw-bold gy-1">
+                                                                                <tr>
+                                                                                    <td class="text-gray-800">
+                                                                                        <input class="photo" type="file" name="photo_{{ $sub->id_part }}">
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
                                                                     </tr>
                                                                     @endforeach
                                                                  </tbody>
@@ -347,8 +353,7 @@
                                                 <tr>
                                                     <td class="text-muted min-w-125px w-125px">Upload Video Report</td>
                                                     <td class="text-gray-800">
-                                                        <input class="photo" type="file" name="photo">
-                                                        <input class="photo" type="hidden" name="uploadFile">
+                                                        <input class="photo" type="file" name="videoUpload">
                                                     </td>
                                                 </tr>
                                             </table>
@@ -372,6 +377,7 @@
 @endsection
 
 @push('scripts')
+<meta name="csrf-token" content="{{ csrf_token() }}">
     {{$dataTable->scripts()}}
     <script>
         const yesterday = new Date();
