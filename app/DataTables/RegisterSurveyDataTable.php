@@ -25,7 +25,8 @@ class RegisterSurveyDataTable extends DataTable
     {   
         $editUrl = $data;
         $schedule = "";
-        if ($editUrl === 'OPEN') {
+        $surveyReport = "";
+        if ($editUrl->status === 'OPEN') {
            $schedule = "<div class='menu-item menu-state-bg px-3'>
                             <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_schedule' id='kt_schedule_mod' data-id='{$editUrl->id_register_survey}'>
                                 <span class='menu-icon'><i class='bi bi-calendar2-plus'></i></span>
@@ -33,6 +34,15 @@ class RegisterSurveyDataTable extends DataTable
                             </a>
                         </div>";
         }
+
+        if ($editUrl->status === 'SCHEDULE') {
+            $surveyReport = "<div class='menu-item menu-state-bg px-3'>
+                             <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_report' id='kt_report_mod' data-id='{$editUrl->id_register_survey}'>
+                                 <span class='menu-icon'><i class='bi bi-calendar2-plus'></i></span>
+                                 <span class='menu-title'>Report Schedule</span>
+                             </a>
+                         </div>";
+         }
 
         return "
         <a href='#' class='btn btn-light-primary btn-sm' data-kt-menu-trigger='click' data-kt-menu-placement='bottom-end'><i class='bi bi-three-dots'></i></a>
@@ -52,7 +62,7 @@ class RegisterSurveyDataTable extends DataTable
             </div>
         ". 
         $schedule
-        . "
+        . $surveyReport ."
             <div class='menu-item menu-state-bg px-3'>
                 <a href='#' class='menu-link px-3 text-danger' data-bs-toggle='modal' data-bs-target='#kt_modal_delete' id='kt_delete_mod' data-id='{$editUrl->id_register_survey}'>
                     <span class='menu-icon'><i class='bi bi-trash'></i></span>
@@ -88,7 +98,13 @@ class RegisterSurveyDataTable extends DataTable
                 }
                 
             })
-            ->rawColumns(['status','action'])
+            ->addColumn('link_zoom',function ($data){
+                    return $data->link_zoom ? "<a target='_blank' rel='noopener noreferrer' href='{$data->link_zoom}' class='btn btn-outline btn-outline-dark btn-active-light-dark btn-sm'><i class='bi bi-record-btn fs-4 me-2'></i> Zoom</a>" : "-";
+            })
+            ->addColumn('created_at',function ($data){
+                return $data->created_at->format('Y-m-d d:m');
+            })
+            ->rawColumns(['status','action','link_zoom','created_at'])
             ->setRowId('id_register_survey');
     }
 

@@ -10,6 +10,8 @@ use App\models\RegisterSurvey;
 use App\models\Customer;
 use App\models\User;
 use Auth;
+use Mail;
+use App\Mail\JinggaMail;
 
 use Carbon\Carbon;
 use \MacsiDigital\Zoom\Facades\Zoom;
@@ -153,7 +155,6 @@ class RegisterSurveyController extends Controller
         $registerSurvey = RegisterSurvey::find($id);
         $user = User::find($registerSurvey->id_user);
         $customer = Customer::find($registerSurvey->id_customer);
-        
 
         $meetings = Zoom::user()->find($user->email)->meetings()->create([
             'topic' => 'Survey Kendaraan Customer ' . $customer->customer_name,
@@ -169,6 +170,13 @@ class RegisterSurveyController extends Controller
           ]);
       
         Zoom::user()->find('gekikara404@gmail.com')->meetings()->save($meetings);
+
+        $mailData = [
+            'email' => $customer->customer_name,
+            'link' => $meetings->join_url
+        ];
+
+        Mail::to($customer->email)->send(new JinggaMail($mailData));
       
         $registerSurvey->update([
             'survey_date' =>  $request->survey_date,

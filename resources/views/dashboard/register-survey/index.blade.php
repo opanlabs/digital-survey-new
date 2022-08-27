@@ -66,7 +66,7 @@
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span>Vehicle Brands</span>
                                             </label>
-                                            <select id="select_id_vehicle" class="form-select form-select-solid @error('select2') is-invalid @enderror" required data-control="select2" name="id_vehicle" data-placeholder="Select an option" data-hide-search="true">
+                                            <select class="form-select form-select-solid @error('id_vehicle') is-invalid @enderror" required data-control="select2" name="id_vehicle" data-placeholder="Select an option" data-hide-search="true">
                                                 <option></option>
                                                 @foreach($vehicle as $br)
                                                     <option value="{{$br->id_vehicle}}">{{ $br->nama }}</option>
@@ -117,7 +117,7 @@
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span>Branch</span>
                                             </label>
-                                            <select class="form-select form-select-solid" data-control="select2 @error('id_branch') is-invalid @enderror" required name="id_branch" data-placeholder="Select an option" data-hide-search="true">
+                                            <select class="form-select form-select-solid @error('id_branch') is-invalid @enderror" required data-control="select2" name="id_branch" data-placeholder="Select an option" data-hide-search="true">
                                                 <option></option>
                                                 @foreach($branch as $br)
                                                     <option value="{{$br->id_branch}}">{{ $br->province_name }}</option>
@@ -205,6 +205,167 @@
                     </div>
             </form>
         </div>
+        <!-- modal schedule report -->
+        <div class="modal fade" id="kt_report" tabindex="-1" aria-hidden="true">
+            <form action='{{ route('register-survey.create', ['id' => Auth::user()->id_user]) }}' method="post"  enctype="multipart/form-data">
+                @csrf
+                @method('post')
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Realtime survey report</h2>
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <span class="svg-icon svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="modal-body scroll-y">
+                            <form id="kt_modal_new_card_form" class="form" action="#">
+                                <div class="card pt-4 mb-6 mb-xl-9">
+                                    <div id="kt_customer_view_payment_method" class="card-body pt-0">
+                                        <div class="d-flex flex-wrap py-2">
+                                            <div class="flex-equal me-5">
+                                                <table class="table table-flush fw-bold gy-2">
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">No Register</td>
+                                                        <td class="text-gray-800">12321321</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Costumer name</td>
+                                                        <td class="text-gray-800">Agung Satrio</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Vehicle Brand</td>
+                                                        <td class="text-gray-800">Toyota</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Vehicle Type</td>
+                                                        <td class="text-gray-800">Avanza</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Year</td>
+                                                        <td class="text-gray-800">2018</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Plat No</td>
+                                                        <td class="text-gray-800">B 1234 TFN</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="flex-equal">
+                                                <table class="table table-flush fw-bold gy-2">
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Surveyor name</td>
+                                                        <td class="text-gray-800">Agung</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Survey Date</td>
+                                                        <td class="text-gray-800">08/10/2022</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Location</td>
+                                                        <td class="text-gray-800">Jakarta</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Register Date</td>
+                                                        <td class="text-gray-800">08/10/2022</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="separator separator-dashed mt-5 mb-10"></div>
+                                        <!-- list vehicle -->
+                                        <div class="py-0" data-kt-customer-payment-method="row">
+                                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                                <div class="d-flex align-items-center collapsible rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_1" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_1">
+                                                    <div class="me-3 rotate-90">
+                                                        <span class="svg-icon svg-icon-3">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <img class="me-10" />
+                                                    <div class="me-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="text-gray-800 fw-bolder">Body Depan</div>
+                                                        </div>
+                                                        <div class="text-muted">Harap Isi </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="kt_customer_view_payment_method_1" class="collapse show fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
+                                                <div class="d-flex flex-wrap py-5">
+                                                    <div class="d-flex flex-wrap py-5">
+                                                        <!-- content -->
+                                                        tos
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="separator separator-dashed"></div>
+                                        <div class="py-0" data-kt-customer-payment-method="row">
+                                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_2" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_2">
+                                                    <div class="me-3 rotate-90">
+                                                        <span class="svg-icon svg-icon-3">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <img class="me-10" />
+                                                    <div class="me-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="text-gray-800 fw-bolder">Body Belakang</div>
+                                                        </div>
+                                                        <div class="text-muted">Harap Isi </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="kt_customer_view_payment_method_2" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
+                                                <div class="d-flex flex-wrap py-5">
+                                                    <div class="d-flex flex-wrap py-5">
+                                                        <!-- content -->
+                                                        tos
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="separator separator-dashed"></div>
+
+                                        <!-- end list vehicle -->
+
+                                        <div class="flex-equal mt-10">
+                                            <table class="table table-flush fw-bold gy-1">
+                                                <tr>
+                                                    <td class="text-muted min-w-125px w-125px">Upload File</td>
+                                                    <td class="text-gray-800">
+                                                        <input class="photo" type="file" name="photo" accept=".jpg, .jpeg">
+                                                        <input class="photo" type="hidden" name="photo_remove">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Cancel</button>
+                            <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">Save
+                            </button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
         
     </div>
     
@@ -213,22 +374,31 @@
 @push('scripts')
     {{$dataTable->scripts()}}
     <script>
-        var todayDate = new Date().toISOString().slice(0, 10);
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+
+
+        function padTo2Digits(num) {
+            return num.toString().padStart(2, '0');
+        }
+
+        function formatDate(date) {
+        return [
+            date.getFullYear(),
+            padTo2Digits(date.getMonth() + 1),
+            padTo2Digits(date.getDate()),
+        ].join('-');
+        }
+
         $("#kt_datepicker_10").flatpickr({
             dateFormat: "Y-m-d",
             disable: [
                 {
                     from: "0001-01-01",
-                    to: todayDate
+                    to: formatDate(yesterday)
                 },
             ]
         });
-        // $('body').on('click', '#kt_schedule_mod', function(event) {
-        //     const id = $(this).attr('data-id');
-        //     const action = $('#form-update').attr('action');
-            
-        //     const mapAction = $('#form-update').attr('action',`${action}/${id}`);
-        // });
         $(document).on('click','#kt_schedule_mod', function(){
             var id = $(this).data('id');
             $('.editSchedule').find('input[name="id"]').val(id);
