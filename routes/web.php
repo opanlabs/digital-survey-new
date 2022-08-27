@@ -35,6 +35,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::put('/profile/edit/{id}',[ProfileController::class,'update'])->name('profile.edit');
     Route::get('/register-survey',[RegisterSurveyController::class,'index'])->name('register-survey');
     Route::post('/register-survey',[RegisterSurveyController::class,'store'])->name('register-survey.create');
+    Route::post('/register-survey/schedule',[RegisterSurveyController::class,'updateSchedule'])->name('register-survey.schedule');
+    Route::post('/register-survey/delete',[RegisterSurveyController::class,'deleteSurvey'])->name('register-survey.deleteSurvey');
     Route::get('/users',[UsersController::class,'index'])->name('users');
     Route::get('/branch',[BranchController::class,'index'])->name('branch');
     Route::get('/part',[PartController::class,'index'])->name('part');
