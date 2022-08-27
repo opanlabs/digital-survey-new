@@ -24,6 +24,16 @@ class RegisterSurveyDataTable extends DataTable
     protected function getActionColumn($data): string
     {   
         $editUrl = $data;
+        $schedule = "";
+        if ($editUrl === 'OPEN') {
+           $schedule = "<div class='menu-item menu-state-bg px-3'>
+                            <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_schedule' id='kt_schedule_mod' data-id='{$editUrl->id_register_survey}'>
+                                <span class='menu-icon'><i class='bi bi-calendar2-plus'></i></span>
+                                <span class='menu-title'>Schedule</span>
+                            </a>
+                        </div>";
+        }
+
         return "
         <a href='#' class='btn btn-light-primary btn-sm' data-kt-menu-trigger='click' data-kt-menu-placement='bottom-end'><i class='bi bi-three-dots'></i></a>
         <!--begin::Menu-->
@@ -40,14 +50,11 @@ class RegisterSurveyDataTable extends DataTable
                     <span class='menu-title'>Edit</span>
                 </a>
             </div>
+        ". 
+        $schedule
+        . "
             <div class='menu-item menu-state-bg px-3'>
-                <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_schedule'>
-                    <span class='menu-icon'><i class='bi bi-calendar2-plus'></i></span>
-                    <span class='menu-title'>Schedule</span>
-                </a>
-            </div>
-            <div class='menu-item menu-state-bg px-3'>
-                <a href='#' class='menu-link px-3 text-danger' data-bs-toggle='modal' data-bs-target='#kt_modal_delete'>
+                <a href='#' class='menu-link px-3 text-danger' data-bs-toggle='modal' data-bs-target='#kt_modal_delete' id='kt_delete_mod' data-id='{$editUrl->id_register_survey}'>
                     <span class='menu-icon'><i class='bi bi-trash'></i></span>
                     <span class='menu-title'>Delete</span>
                 </a>
@@ -68,10 +75,10 @@ class RegisterSurveyDataTable extends DataTable
                     return '<a class="btn btn-outline btn-outline-warning btn-active-light-warning btn-sm">Open</a>';
                 } elseif($data->status === 'ACTIVE') {
                     return '<a class="btn btn-outline btn-outline-success btn-active-light-success btn-sm">Active</a>';
-                } elseif($data->status === 'IN-PROGRESS') {
-                    return '<a class="btn btn-outline btn-outline-primary btn-active-light-primary btn-sm">In-Progress</a>';
                 } elseif($data->status === 'SCHEDULE') {
                     return '<a class="btn btn-outline btn-outline-info btn-active-light-info btn-sm">Schedule</a>';
+                }elseif($data->status === 'WAITING-DATA') {
+                    return '<a class="btn btn-outline btn-outline-primary btn-active-light-primary btn-sm">Waiting Data</a>';
                 } elseif($data->status === 'DONE') {
                     return '<a class="btn btn-outline btn-outline-dark btn-active-light-dark btn-sm">Done</a>';
                 } elseif($data->status === 'ERROR') {

@@ -40,7 +40,7 @@
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span>Costumer Name</span>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid" placeholder="" name="customer_name" value="" />
+                                            <input type="text" class="form-control form-control-solid @error('customer_name') is-invalid @enderror" required placeholder="" name="customer_name" value="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6 fv-row">
@@ -48,7 +48,7 @@
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span>Phone Number</span>
                                             </label>
-                                            <input type="number" class="form-control form-control-solid" placeholder="" name="phone_number" value="" />
+                                            <input type="number" class="form-control form-control-solid @error('phone_number') is-invalid @enderror" required placeholder="" name="phone_number" value="" />
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span>Email Address</span>
                                             </label>
-                                            <input type="email" class="form-control form-control-solid" placeholder="" name="email" value="" />
+                                            <input type="email" class="form-control form-control-solid @error('email') is-invalid @enderror" required placeholder="" name="email" value="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6 fv-row">
@@ -66,7 +66,7 @@
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span>Vehicle Brands</span>
                                             </label>
-                                            <select id="select_id_vehicle" class="form-select form-select-solid" data-control="select2" name="id_vehicle" data-placeholder="Select an option" data-hide-search="true">
+                                            <select id="select_id_vehicle" class="form-select form-select-solid @error('select2') is-invalid @enderror" required data-control="select2" name="id_vehicle" data-placeholder="Select an option" data-hide-search="true">
                                                 <option></option>
                                                 @foreach($vehicle as $br)
                                                     <option value="{{$br->id_vehicle}}">{{ $br->nama }}</option>
@@ -81,7 +81,7 @@
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span>Vehicle Type</span>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid" placeholder="" name="type" value="" />
+                                            <input type="text" class="form-control form-control-solid @error('type') is-invalid @enderror" required placeholder="" name="type" value="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6 fv-row">
@@ -89,7 +89,7 @@
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span>Year Vehicle</span>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid" placeholder="" name="year" value="" />
+                                            <input type="text" class="form-control form-control-solid @error('year') is-invalid @enderror" required placeholder="" name="year" value="" />
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span>Plat No</span>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid" placeholder="" name="plat_no" value="" />
+                                            <input type="text" class="form-control form-control-solid @error('plat_no') is-invalid @enderror" required placeholder="" name="plat_no" value="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6 fv-row">
@@ -107,7 +107,7 @@
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span>Surveyor Name</span>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid" placeholder="" name="surveyor" value="" />
+                                            <input type="text" class="form-control form-control-solid @error('surveyor') is-invalid @enderror" required placeholder="" name="surveyor" value="" />
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +117,7 @@
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span>Branch</span>
                                             </label>
-                                            <select class="form-select form-select-solid" data-control="select2" name="id_branch" data-placeholder="Select an option" data-hide-search="true">
+                                            <select class="form-select form-select-solid" data-control="select2 @error('id_branch') is-invalid @enderror" required name="id_branch" data-placeholder="Select an option" data-hide-search="true">
                                                 <option></option>
                                                 @foreach($branch as $br)
                                                     <option value="{{$br->id_branch}}">{{ $br->province_name }}</option>
@@ -130,10 +130,7 @@
                         </div>
                         <div class="modal-footer">
                             <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Cancel</button>
-                            <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
-                                <span data-bs-dismiss="modal" class="indicator-label">Submit</span>
-                                <span class="indicator-progress">Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">Submit
                             </button>
                         </div>
                         
@@ -142,78 +139,71 @@
             </form>
         </div>
         <!-- modal schedule -->
-        <div class="modal fade" tabindex="-1" id="kt_schedule">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Create Schedule Risk Survey</h5>
-                        <!--begin::Close-->
-                        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
-                            <span class="svg-icon svg-icon-2x"></span>
-                        </div>
-                        <!--end::Close-->
-                    </div>
-                    <div class="modal-body">
-                            <div class="d-flex flex-column mb-7 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                    <span>Select date</span>
-                                </label>
-                                <input class="form-control form-control-solid" placeholder="Pick date" id="kt_datepicker_10"/>
-                            </div>
-                    </div>
-        
-                    <div class="modal-footer">
-                        <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light">Cancel</button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Create</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- modal delete -->
-        {{-- <div class="modal fade" id="kt_modal_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeLg" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body d-flex justify-content-center">
-                        <div>
-                            <h2 class="modal-title text-center">Are you sure?</h2>
-                            <p class="text-center">
-                            Do you really want to delete this data?
-                            <br />
-                            this process can’t be undone.
-                            </p>
-                        </div>
-                    </div>
-        
-                    <div class="modal-footer">
-                        <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light">Cancel</button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
-        <div class="modal fade" id="kt_modal_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeLg" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-dialog">
+        <div class="modal fade editSchedule" tabindex="-1" id="kt_schedule">
+            <form action='{{ route('register-survey.schedule') }}' method="post" id="form-update" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="id">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <div class="modal-body d-flex justify-content-center">
-                            <div>
-                                <h2 class="modal-title text-center">Are you sure?</h2>
-                                <p class="text-center">
-                                Do you really want to delete this data?
-                                <br />
-                                this process can’t be undone.
-                                </p>
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create Schedule Risk Survey</h5>
+                            <!--begin::Close-->
+                            <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                <span class="svg-icon svg-icon-2x"></span>
                             </div>
+                            <!--end::Close-->
+                        </div>
+                        <div class="modal-body">
+                                <div class="d-flex flex-column mb-7 fv-row">
+                                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                        <span>Select date</span>
+                                    </label>
+                                    <input class="form-control form-control-solid @error('survey_date') is-invalid @enderror" required name="survey_date" placeholder="Pick date" id="kt_datepicker_10"/>
+                                    @error('survey_date')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                         </div>
             
                         <div class="modal-footer">
-                            <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light btn-sm">Cancel</button>
-                            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Delete</button>
+                            <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Cancel</button>
+                            <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+                                Create
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
+        </div>
+        <!-- modal delete -->
+        <div class="modal fade deleteSurvey" id="kt_modal_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeLg" aria-hidden="true">
+            <form action='{{ route('register-survey.deleteSurvey') }}' method="post" id="form-update" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="id">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body d-flex justify-content-center">
+                                    <div>
+                                        <h2 class="modal-title text-center">Are you sure?</h2>
+                                        <p class="text-center">
+                                        Do you really want to delete this data?
+                                        <br />
+                                        this process can’t be undone.
+                                        </p>
+                                    </div>
+                                </div>
+                    
+                                <div class="modal-footer">
+                                    <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light btn-sm">Cancel</button>
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
         </div>
         
     </div>
@@ -233,5 +223,22 @@
                 },
             ]
         });
+        // $('body').on('click', '#kt_schedule_mod', function(event) {
+        //     const id = $(this).attr('data-id');
+        //     const action = $('#form-update').attr('action');
+            
+        //     const mapAction = $('#form-update').attr('action',`${action}/${id}`);
+        // });
+        $(document).on('click','#kt_schedule_mod', function(){
+            var id = $(this).data('id');
+            $('.editSchedule').find('input[name="id"]').val(id);
+        });
+
+        $(document).on('click','#kt_delete_mod', function(){
+            var id = $(this).data('id');
+            $('.deleteSurvey').find('input[name="id"]').val(id);
+        });
+
+
     </script>
 @endpush

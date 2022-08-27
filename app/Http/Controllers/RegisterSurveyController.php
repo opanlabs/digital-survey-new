@@ -8,6 +8,7 @@ use App\models\Branch;
 use App\models\Vehicle;
 use App\models\RegisterSurvey;
 use App\models\Customer;
+use App\models\User;
 use Auth;
 
 use Carbon\Carbon;
@@ -74,6 +75,7 @@ class RegisterSurveyController extends Controller
 
     public function store(Request $request)
     {
+        // return $request;
             $request->validate([
                 'email' => 'unique:customer,email,'.$request->email.',email',
                 'year' => 'required',
@@ -92,9 +94,10 @@ class RegisterSurveyController extends Controller
                 'email' => $request->email
             ]);
 
+
             RegisterSurvey::create([
                 'register_no' => substr(str_shuffle(MD5(microtime())), 0, 10),
-                'id_customer' => $cus->id,
+                'id_customer' => $cus->id_customer,
                 'id_vehicle' => $request->id_vehicle,
                 'year' => $request->year,
                 'plat_no' => $request->plat_no,
@@ -139,17 +142,53 @@ class RegisterSurveyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // return $request;
+
+        // return redirect()->back()->with('message','Data Successfully Added.');
     }
 
+    public function updateSchedule(Request $request){
+        $id = $request->id;
+
+        $registerSurvey = RegisterSurvey::find($id);
+        $user = User::find($registerSurvey->id_user);
+        $customer = Customer::find($registerSurvey->id_customer);
+        
+
+        $meetings = Zoom::user()->find($user->email)->meetings()->create([
+            'topic' => 'Survey Kendaraan Customer ' . $customer->customer_name,
+            'duration' => 15, // In minutes, optional
+            'start_time' => new Carbon($request->survey_date . ' 00:00:00'),
+            'timezone' => 'Asia/Jakarta',
+        ]);
+
+        $meetings->settings()->make([
+            'join_before_host' => false,
+            'enforce_login' => false,
+            'waiting_room' => false,
+          ]);
+      
+        Zoom::user()->find('gekikara404@gmail.com')->meetings()->save($meetings);
+      
+        $registerSurvey->update([
+            'survey_date' =>  $request->survey_date,
+            'status' =>  'SCHEDULE',
+            'link_zoom' => $meetings->join_url
+        ]);
+
+
+        return redirect()->back()->with('message','Added Schedule.');
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteSurvey(Request $request)
     {
-        //
+        RegisterSurvey::destroy($request->id);
+
+        return redirect()->back()->with('message','Delete Survey.');
     }
 }

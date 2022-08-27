@@ -9,6 +9,7 @@ class RegisterSurvey extends Model
 {
     use HasFactory;
     protected $table = 'register_survey';
+    protected $primaryKey = 'id_register_survey';
     protected $fillable = [
         'register_no',
         'id_customer',
