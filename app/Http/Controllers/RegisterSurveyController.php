@@ -9,6 +9,8 @@ use App\models\Vehicle;
 use App\models\RegisterSurvey;
 use App\models\Customer;
 use App\models\User;
+use App\models\Part;
+use App\models\TypePart;
 use Auth;
 use Mail;
 use App\Mail\JinggaMail;
@@ -27,35 +29,18 @@ class RegisterSurveyController extends Controller
     {
         $branch = Branch::all();
         $vehicle = Vehicle::all();
+        $allCategories = TypePart::get();
+
+        foreach ($allCategories as $rootCategory) {
+            $rootCategory->children = Part::where('id_typepart' , $rootCategory->id_typepart)->get();
+
+            foreach ($rootCategory->children as $data) {
+                $data->isStandard = false;
+                $data->description = '';
+            }
+        }
         
-        return $dataTable->render('dashboard.register-survey.index',['branch' => $branch , 'vehicle' => $vehicle]);
-
-        // $meetings = Zoom::user()->find('gakuran404@gmail.com')->meetings()->create([
-        //     'topic' => 'Test Create Meeting',
-        //     'duration' => 15, // In minutes, optional
-        //     'start_time' => new Carbon('2022-01-01 03:00:00'),
-        //     'timezone' => 'Asia/Jakarta',
-        // ]);
-
-        // $meetings->settings()->make([
-        //     'join_before_host' => false,
-        //     'enforce_login' => false,
-        //     'waiting_room' => false,
-        //   ]);
-      
-        // Zoom::user()->find('gekikara404@gmail.com')->meetings()->save($meetings);
-      
-        // return response()->json(['joinURL' => $meetings->join_url, 'data' => $meetings]);
-
-
-        // $user = Zoom::user()->create([
-        //     'first_name' => 'gaku',
-        //     'last_name' => 'ran',
-        //     'email' => 'gakuran404@gmail.com',
-        //     'password' => 'admin123'
-        // ]); 
-
-        // return $user;
+        return $dataTable->render('dashboard.register-survey.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories]);
     }
 
     /**
@@ -66,6 +51,12 @@ class RegisterSurveyController extends Controller
     public function create()
     {
         //
+    }
+
+    public function detailSurvey(Request $request){
+        $id = $request->id;
+        $list = RegisterSurvey::with('customer','vehicle','branch')->find($id);
+        return response()->json(['details'=>$list]);
     }
 
     /**
@@ -187,6 +178,12 @@ class RegisterSurveyController extends Controller
 
         return redirect()->back()->with('message','Added Schedule.');
     }
+
+    public function reportSchedule(Request $request){
+        return $request;
+        return redirect()->back()->with('message','Added Schedule.');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
