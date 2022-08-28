@@ -24,6 +24,102 @@ class RegisterSurveyDataTable extends DataTable
     protected function getActionColumn($data): string
     {   
         $editUrl = $data;
+        
+        if ($data->status === 'OPEN') {
+            $statusLabel = '<a class="btn btn-outline btn-outline-warning btn-active-light-warning btn-sm">Open</a>';
+        } elseif($data->status === 'ACTIVE') {
+            $statusLabel = '<a class="btn btn-outline btn-outline-success btn-active-light-success btn-sm">Active</a>';
+        } elseif($data->status === 'SCHEDULE') {
+            $statusLabel = '<a class="btn btn-outline btn-outline-info btn-active-light-info btn-sm">Schedule</a>';
+        }elseif($data->status === 'WAITING-DATA') {
+            $statusLabel = '<a class="btn btn-outline btn-outline-primary btn-active-light-primary btn-sm">Waiting Data</a>';
+        } elseif($data->status === 'DONE') {
+            $statusLabel = '<a class="btn btn-outline btn-outline-dark btn-active-light-dark btn-sm">Done</a>';
+        } elseif($data->status === 'ERROR') {
+            $statusLabel = '<a class="btn btn-outline btn-outline-danger btn-active-light-danger btn-sm">Error</a>';
+        } elseif($data->status === 'APPROVE') {
+            $statusLabel = '<a class="btn btn-outline btn-outline-success btn-active-light-success btn-sm">Approve</a>';
+        }
+
+        $viewModal = "<!-- modal detail -->
+        <div class='modal fade' id='view_modal".$data->id_register_survey."' tabindex='-1' aria-hidden='true'>
+            <div class='modal-dialog modal-dialog-centered mw-650px'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <h2>Data Register Risk Survey</h2>
+                        <div class='btn btn-sm btn-icon btn-active-color-primary' data-bs-dismiss='modal'>
+                            <span class='svg-icon svg-icon-1'>
+                                <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
+                                    <rect opacity='0.5' x='6' y='17.3137' width='16' height='2' rx='1' transform='rotate(-45 6 17.3137)' fill='currentColor' />
+                                    <rect x='7.41422' y='6' width='16' height='2' rx='1' transform='rotate(45 7.41422 6)' fill='currentColor' />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class='modal-body scroll-y'>
+                    <div class='d-flex flex-wrap py-2'>
+                        <div class='flex-equal me-5'>
+                            <table class='table table-flush fw-bold gy-2'>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>No Register</td>
+                                    <td class='text-gray-800'>".$data->register_no."</td>
+                                </tr>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>Costumer Name</td>
+                                    <td class='text-gray-800'>".$data->customer->customer_name."</td>
+                                </tr>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>Phone Number</td>
+                                    <td class='text-gray-800'>".$data->customer->phone_number."</td>
+                                </tr>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>Email</td>
+                                    <td class='text-gray-800'>".$data->customer->email."</td>
+                                </tr>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>Vehicle Brand</td>
+                                    <td class='text-gray-800'>".$data->vehicle->nama."</td>
+                                </tr>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>Vehicle Type</td>
+                                    <td class='text-gray-800'>".$data->vehicle->vehicle_type."</td>
+                                </tr>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>Year</td>
+                                    <td class='text-gray-800'>".$data->year."</td>
+                                </tr>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>Plat No</td>
+                                    <td class='text-gray-800'>".$data->plat_no."</td>
+                                </tr>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>Surveyor Name</td>
+                                    <td class='text-gray-800'>".$data->user->name."</td>
+                                </tr>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>Branch</td>
+                                    <td class='text-gray-800'>".$data->branch->province_name."</td>
+                                </tr>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>Register Date</td>
+                                    <td class='text-gray-800'>".$data->created_at."</td>
+                                </tr>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>Status</td>
+                                    <td class='text-gray-800'>".$statusLabel."</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    </div>
+                    <div class='modal-footer'>
+                        <button data-bs-dismiss='modal' type='reset' id='kt_modal_new_card_cancel' class='btn btn-light me-3'>close</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- modal schedule -->";
         $schedule = "";
         $surveyReport = "";
         if ($editUrl->status === 'OPEN') {
@@ -49,7 +145,7 @@ class RegisterSurveyDataTable extends DataTable
         <!--begin::Menu-->
         <div class='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg fw-bold fs-7 w-125px py-4' data-kt-menu='true'>
             <div class='menu-item menu-state-bg px-3'>
-                <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_report_view' id='kt_report_view_mod' data-id='{$editUrl->id_register_survey}'>
+                <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#view_modal".$data->id_register_survey."'>
                     <span class='menu-icon'><i class='bi bi-eye'></i></span>
                     <span class='menu-title'>View</span>
                 </a>
@@ -71,7 +167,7 @@ class RegisterSurveyDataTable extends DataTable
             </div>
         </div>
         <!--end::Menu-->
-        ";
+        ". $viewModal;
     }
     
     public function dataTable(QueryBuilder $query): EloquentDataTable
