@@ -12,6 +12,9 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
+use App\Models\Vehicle;
+use App\Models\Branch;
+
 class RegisterSurveyDataTable extends DataTable
 {
     /**
@@ -23,7 +26,12 @@ class RegisterSurveyDataTable extends DataTable
 
     protected function getActionColumn($data): string
     {   
+        $vehicle = Vehicle::all();
+        $branch = Branch::all();
+
         $editUrl = $data;
+
+        
         
         if ($data->status === 'OPEN') {
             $statusLabel = '<a class="btn btn-outline btn-outline-warning btn-active-light-warning btn-sm">Open</a>';
@@ -55,7 +63,26 @@ class RegisterSurveyDataTable extends DataTable
             ";
         }
 
-        $viewModal = "<!-- modal detail -->
+        //edit modal
+        $viewModal_branchSelect = "";
+        $viewModal_vehicleSelect = "";
+        foreach ($branch as $branch) {
+            if ($branch->id_branch == $data->branch->id_branch) {
+                $branch_isSelected = 'selected="selected"';
+            }else{
+                $branch_isSelected = '';
+            }
+            $viewModal_branchSelect .= "<option value='". $branch->id_branch ."'".$branch_isSelected.">$branch->province_name</option>";
+        };
+        foreach ($vehicle as $vehicle) {
+            if ($branch->id_branch == $data->branch->id_branch) {
+                $vehicle_isSelected = 'selected="selected"';
+            }else{
+                $vehicle_isSelected = '';
+            }
+            $viewModal_vehicleSelect .= "<option value='". $vehicle->id_vehicle ."'". $vehicle_isSelected ."> $vehicle->nama </option>";
+        };
+        $viewModal = "
         <div class='modal fade' id='view_modal".$data->id_register_survey."' tabindex='-1' aria-hidden='true'>
             <div class='modal-dialog modal-dialog-centered mw-650px'>
                 <div class='modal-content'>
@@ -137,8 +164,132 @@ class RegisterSurveyDataTable extends DataTable
                     
                 </div>
             </div>
+        </div>";
+        $editModal = "
+        <div class='modal fade' id='edit_modal".$data->id_register_survey."' tabindex='-1' aria-hidden='true'>
+            <form action='".route('register-survey.update', ['id' => $data->id_register_survey ]) ."' method='post'>
+                <input type='hidden' name='_method' value='put'>
+                <input type='hidden' name='_token' value='". csrf_token() ."'>
+                <input type='hidden' name='id_customer' value='".$data->customer->id_customer."'>
+                <div class='modal-dialog modal-dialog-centered mw-650px'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <h2>Add Register Risk Survey</h2>
+                            <div class='btn btn-sm btn-icon btn-active-color-primary' data-bs-dismiss='modal'>
+                                <span class='svg-icon svg-icon-1'>
+                                    <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
+                                        <rect opacity='0.5' x='6' y='17.3137' width='16' height='2' rx='1' transform='rotate(-45 6 17.3137)' fill='currentColor' />
+                                        <rect x='7.41422' y='6' width='16' height='2' rx='1' transform='rotate(45 7.41422 6)' fill='currentColor' />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class='modal-body scroll-y'>
+                            <form id='kt_modal_new_card_form' class='form' action='#'>
+                                <div class='row'>
+                                    <div class='col-md-6 fv-row'>
+                                        <div class='d-flex flex-column mb-7 fv-row'>
+                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                <span>Costumer Name</span>
+                                            </label>
+                                            <input type='text' class='form-control form-control-solid @error('customer_name') is-invalid @enderror' required placeholder='' name='customer_name' value='".$data->customer->customer_name."' />
+                                        </div>
+                                    </div>
+                                    <div class='col-md-6 fv-row'>
+                                        <div class='d-flex flex-column mb-7 fv-row'>
+                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                <span>Phone Number</span>
+                                            </label>
+                                            <input type='number' class='form-control form-control-solid @error('phone_number') is-invalid @enderror' required placeholder='' name='phone_number' value='".$data->customer->phone_number."' />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='col-md-6 fv-row'>
+                                        <div class='d-flex flex-column mb-7 fv-row'>
+                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                <span>Email Address</span>
+                                            </label>
+                                            <input type='email' class='form-control form-control-solid @error('email') is-invalid @enderror' required placeholder='' name='email' value='".$data->customer->email."' />
+                                        </div>
+                                    </div>
+                                    <div class='col-md-6 fv-row'>
+                                        <div class='d-flex flex-column mb-7 fv-row'>
+                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                <span>Vehicle Brands</span>
+                                            </label>
+                                            <select class='form-select form-select-solid @error('id_vehicle') is-invalid @enderror' required data-control='select2' name='id_vehicle' data-placeholder='Select an option' data-hide-search='true'>
+                                            ".
+                                            $viewModal_vehicleSelect
+                                            ."
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='col-md-6 fv-row'>
+                                        <div class='d-flex flex-column mb-7 fv-row'>
+                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                <span>Vehicle Type</span>
+                                            </label>
+                                            <input type='text' class='form-control form-control-solid @error('type') is-invalid @enderror' required placeholder='' name='type' value='".$data->vehicle->vehicle_type."' />
+                                        </div>
+                                    </div>
+                                    <div class='col-md-6 fv-row'>
+                                        <div class='d-flex flex-column mb-7 fv-row'>
+                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                <span>Year Vehicle</span>
+                                            </label>
+                                            <input type='text' class='form-control form-control-solid @error('year') is-invalid @enderror' required placeholder='' name='year' value='".$data->year."' />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='col-md-6 fv-row'>
+                                        <div class='d-flex flex-column mb-7 fv-row'>
+                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                <span>Plat No</span>
+                                            </label>
+                                            <input type='text' class='form-control form-control-solid @error('plat_no') is-invalid @enderror' required placeholder='' name='plat_no' value='".$data->plat_no."' />
+                                        </div>
+                                    </div>
+                                    <div class='col-md-6 fv-row'>
+                                        <div class='d-flex flex-column mb-7 fv-row'>
+                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                <span>Surveyor Name</span>
+                                            </label>
+                                            <input type='text' class='form-control form-control-solid @error('surveyor') is-invalid @enderror' required placeholder='' name='surveyor' value='".$data->surveyor."' />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='col-md-6 fv-row'>
+                                        <div class='d-flex flex-column mb-7 fv-row'>
+                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                <span>Branch</span>
+                                            </label>
+                                            <select class='form-select form-select-solid @error('id_branch') is-invalid @enderror' required data-control='select2' name='id_branch' data-placeholder='Select an option' data-hide-search='true'>
+                                            ".
+                                            $viewModal_branchSelect
+                                            ."
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class='modal-footer'>
+                            <button data-bs-dismiss='modal' type='reset' id='kt_modal_new_card_cancel' class='btn btn-light me-3'>Cancel</button>
+                            <button type='submit' id='kt_modal_new_card_submit' class='btn btn-primary'>Submit
+                            </button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </form>
         </div>
-        <!-- modal schedule -->";
+        ";
+
         $schedule = "";
         $surveyReport = "";
         $viewSurvey = "";
@@ -188,7 +339,7 @@ class RegisterSurveyDataTable extends DataTable
 "
 . $viewSurvey. "
             <div class='menu-item menu-state-bg px-3'>
-                <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_modal_new_card'>
+                <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#edit_modal".$data->id_register_survey."'>
                     <span class='menu-icon'><i class='bi bi-pencil-square'></i></span>
                     <span class='menu-title'>Edit</span>
                 </a>
@@ -204,7 +355,7 @@ class RegisterSurveyDataTable extends DataTable
             </div>
         </div>
         <!--end::Menu-->
-        ". $viewModal;
+        ". $viewModal . $editModal;
     }
     
     public function dataTable(QueryBuilder $query): EloquentDataTable
@@ -221,7 +372,7 @@ class RegisterSurveyDataTable extends DataTable
                 } elseif($data->status === 'SCHEDULE') {
                     return '<a class="btn btn-outline btn-outline-info btn-active-light-info btn-sm">Schedule</a>';
                 }elseif($data->status === 'WAITING-DATA') {
-                    return '<a class="btn btn-outline btn-outline-primary btn-active-light-primary btn-sm">Waiting Data</a>';
+                    return '<a class="btn btn-outline btn-outline-primary btn-active-light-primary">Waiting Data</a>';
                 } elseif($data->status === 'DONE') {
                     return '<a class="btn btn-outline btn-outline-dark btn-active-light-dark btn-sm">Done</a>';
                 } elseif($data->status === 'ERROR') {

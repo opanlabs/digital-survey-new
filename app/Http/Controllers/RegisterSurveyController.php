@@ -135,9 +135,33 @@ class RegisterSurveyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // return $request;
+        $request->validate([
+            'email' => 'unique:customer,email,'.$request->email.',email',
+            'year' => 'required',
+            'customer_name' => 'required',
+            'phone_number' => 'required',
+            'id_vehicle' => 'required',
+            'plat_no' => 'required',
+            'surveyor' => 'required',
+            'id_branch' => 'required',
+        ]);
+        
+        $cus = Customer::find($request->id_customer)->update([
+            'customer_name' => $request->customer_name,
+            'phone_number' => $request->phone_number,
+            'email' => $request->email
+        ]);
 
-        // return redirect()->back()->with('message','Data Successfully Added.');
+        RegisterSurvey::find($id)->update([
+            'id_customer' => $request->id_customer,
+            'id_vehicle' => $request->id_vehicle,
+            'year' => $request->year,
+            'plat_no' => $request->plat_no,
+            'surveyor' => $request->surveyor,
+            'id_branch' => $request->id_branch,
+        ]);
+        
+        return redirect()->back()->with('message','Data Successfully Updated.');
     }
 
     public function updateSchedule(Request $request){

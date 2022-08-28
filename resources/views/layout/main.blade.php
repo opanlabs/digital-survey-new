@@ -119,6 +119,9 @@ License: For each use you must have a valid license purchased only from above li
 			$(document).ready(function() {
 
 			
+				toastr.options = {
+					"positionClass": "toastr-top-center",
+				};
 
 				// show every form error on toaster
 				@if ($message = Session::get('message'))

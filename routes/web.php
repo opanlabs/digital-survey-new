@@ -35,6 +35,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::put('/profile/edit/{id}',[ProfileController::class,'update'])->name('profile.edit');
     Route::get('/register-survey',[RegisterSurveyController::class,'index'])->name('register-risk-survey');
     Route::post('/register-survey',[RegisterSurveyController::class,'store'])->name('register-survey.create');
+    Route::put('/register-survey/edit/{id}',[RegisterSurveyController::class,'update'])->name('register-survey.update');
     Route::post('/register-survey/schedule',[RegisterSurveyController::class,'updateSchedule'])->name('register-survey.schedule');
     Route::post('/register-survey/report',[RegisterSurveyController::class,'reportSchedule'])->name('register-survey.report');
     Route::post('/register-survey/delete',[RegisterSurveyController::class,'deleteSurvey'])->name('register-survey.deleteSurvey');
@@ -54,8 +55,9 @@ Route::group(['middleware' => ['auth']], function () {
 
 Auth::routes();
 
-//untuk select2 autocomplete branch
+//untuk select2 autocomplete branch,role,vehcile
 Route::get('/branch/query/autocomplete',[BranchController::class,'autocomplete'])->name('branch.autocomplete');
 Route::get('/role/query/autocomplete',[BranchController::class,'autocompleteRole'])->name('role.autocompleteRole');
+Route::get('/vehicle/query/autocomplete',[VehicleController::class,'autocomplete'])->name('vehicle.autocomplete');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

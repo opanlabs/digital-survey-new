@@ -7,6 +7,16 @@ use App\DataTables\VehicleDataTable;
 
 class VehicleController extends Controller
 {
+    public function autocomplete(Request $request)
+    {
+        $vehicle = [];
+        $search = $request->input('q');
+        $vehicle = vehicle::select("id_vehicle", "nama")
+                ->where('nama', 'like', "%$search%")
+                ->get();
+        return response()->json($vehicle);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +26,7 @@ class VehicleController extends Controller
     {
         return $dataTable->render('dashboard.vehicle.index');
     }
+
 
     /**
      * Show the form for creating a new resource.
