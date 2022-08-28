@@ -180,8 +180,40 @@ class RegisterSurveyController extends Controller
     }
 
     public function reportSchedule(Request $request){
-        return $request;
-        return redirect()->back()->with('message','Added Schedule.');
+        $obj = $request->photo;
+        $temp = [];
+        foreach($obj as $item){
+            $temp[] = $item;
+        }
+
+        for ($i = 0; $i < count($temp); $i++)  {
+            $temp[$i]['url'] = '';
+            if(isset($temp[$i]['value'])){
+                $file_name = $temp[$i]['value']->getClientOriginalName();
+                $temp[$i]['value']->storeAs('public/images','register-survey-'.$file_name);
+                $temp[$i]['url'] = 'storage/images/'.'register-survey-'. $file_name;
+            }else{
+                $temp[$i]['url'] = '';
+            }
+        }
+        $id = $request->id;
+
+        $registerSurvey = RegisterSurvey::find($id);
+
+        $link_report_zoom = '';
+        $file_name = $request['videoUpload']->getClientOriginalName();
+        $request['videoUpload']->storeAs('public/video','link-survey-report-'.$file_name);
+        $link_report_zoom = 'storage/video/'.'link-survey-report-'. $file_name;
+
+        $registerSurvey->update([
+            'descriptionVehicle' =>  $request->description,
+            'isStandardVehicle' =>  $request->isStandard,
+            'photoVehicle' =>  $temp,
+            'status' =>  'DONE',
+            'link_report_zoom' =>  $link_report_zoom
+        ]);
+
+        return redirect()->back()->with('message','Report Schedule Success.');
     }
 
     /**
