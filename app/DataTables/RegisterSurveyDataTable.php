@@ -40,6 +40,20 @@ class RegisterSurveyDataTable extends DataTable
         } elseif($data->status === 'APPROVE') {
             $statusLabel = '<a class="btn btn-outline btn-outline-success btn-active-light-success btn-sm">Approve</a>';
         }
+        
+        $linkZoom = '';
+
+        if ($data->status === 'SCHEDULE') {
+            $linkZoom = "
+            <td class='text-muted min-w-125px w-200px'>Link Zoom Meeting</td>
+            <td class='text-gray-800'>                                
+                <div class='input-group mb-5'>
+                    <span class='input-group-text' id='basic-addon1'>Link</span>
+                    <input type='text' value='".$data->link_zoom."' class='form-control' placeholder='Link Zoom Meeting' aria-label='Link Zoom Meeting' aria-describedby='basic-addon1'/>
+                </div>
+            </td>
+            ";
+        }
 
         $viewModal = "<!-- modal detail -->
         <div class='modal fade' id='view_modal".$data->id_register_survey."' tabindex='-1' aria-hidden='true'>
@@ -108,6 +122,11 @@ class RegisterSurveyDataTable extends DataTable
                                     <td class='text-muted min-w-125px w-200px'>Status</td>
                                     <td class='text-gray-800'>".$statusLabel."</td>
                                 </tr>
+                                <tr>
+                                ".
+                                    $linkZoom
+                                ."
+                            </tr>
                             </table>
                         </div>
                     </div>
@@ -122,6 +141,7 @@ class RegisterSurveyDataTable extends DataTable
         <!-- modal schedule -->";
         $schedule = "";
         $surveyReport = "";
+        $viewSurvey = "";
         if ($editUrl->status === 'OPEN') {
            $schedule = "<div class='menu-item menu-state-bg px-3'>
                             <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_schedule' id='kt_schedule_mod' data-id='{$editUrl->id_register_survey}'>
@@ -140,16 +160,33 @@ class RegisterSurveyDataTable extends DataTable
                          </div>";
          }
 
+         if ($editUrl->status === 'OPEN' || $editUrl->status === 'SCHEDULE') {
+            $viewSurvey = "
+            <div class='menu-item menu-state-bg px-3'>
+            <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#view_modal".$data->id_register_survey."'>
+                <span class='menu-icon'><i class='bi bi-eye'></i></span>
+                <span class='menu-title'>View</span>
+            </a>
+            </div>
+            ";
+         }else{
+            $viewSurvey = "
+            <div class='menu-item menu-state-bg px-3'>
+            <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_report_view' id='kt_report_view_mod' data-id='{$editUrl->id_register_survey}'>
+                <span class='menu-icon'><i class='bi bi-eye'></i></span>
+                <span class='menu-title'>View</span>
+            </a>
+            </div>
+        ";
+         }
+
+
         return "
         <a href='#' class='btn btn-light-primary btn-sm' data-kt-menu-trigger='click' data-kt-menu-placement='bottom-end'><i class='bi bi-three-dots'></i></a>
         <!--begin::Menu-->
         <div class='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg fw-bold fs-7 w-125px py-4' data-kt-menu='true'>
-            <div class='menu-item menu-state-bg px-3'>
-                <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#view_modal".$data->id_register_survey."'>
-                    <span class='menu-icon'><i class='bi bi-eye'></i></span>
-                    <span class='menu-title'>View</span>
-                </a>
-            </div>
+"
+. $viewSurvey. "
             <div class='menu-item menu-state-bg px-3'>
                 <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_modal_new_card'>
                     <span class='menu-icon'><i class='bi bi-pencil-square'></i></span>
