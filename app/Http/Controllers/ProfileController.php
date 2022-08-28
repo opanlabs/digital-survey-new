@@ -124,9 +124,11 @@ class ProfileController extends Controller
               
             //google storage upload
             $disk = \Storage::disk('gcs');
-            $file = $request->file('photo');
-            $text = $disk->put("photo_profile.jpg",$file);
-            dd($text);
+            // $copy = $disk->copy('login_img.png', 'new/login_img.png');
+            $img = $disk->putFile('img',$request->file('photo'));
+            dd($img);
+
+            // $upload = $request->file('photo')->store('upload/test.jpg');
             
             $users = User::find($request->id_user)->update([
                 'photo_url' =>  $request->file('photo')->storeAs('public/images','photo-profile-'.$request->id.'.'.$extension),
