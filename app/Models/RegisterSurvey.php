@@ -21,7 +21,11 @@ class RegisterSurvey extends Model
         'survey_date',
         'link_zoom',
         'status',
-        'id_branch'
+        'id_branch',
+        'descriptionVehicle',
+        'isStandardVehicle',
+        'photoVehicle',
+        'link_report_zoom',
     ];
 
     public function user()

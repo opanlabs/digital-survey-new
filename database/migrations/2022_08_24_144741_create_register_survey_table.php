@@ -46,6 +46,10 @@ return new class extends Migration
             ->on('branch')
             ->onUpdate('cascade')
             ->onDelete('no action');
+            $table->json('descriptionVehicle');
+            $table->json('isStandardVehicle');
+            $table->json('photoVehicle');
+            $table->string('link_report_zoom');
             $table->timestamps();
         });
     }
