@@ -122,19 +122,9 @@ class ProfileController extends Controller
                 \Storage::delete(Auth::user()->photo_url);
               }
               
-            //google storage upload
-            // $disk = \Storage::disk('gcs');
-            // $file = $request->file('photo');
-            // $text = $disk->put("photo_profile.jpg",$file);
-            // dd($text);
 
-            //aws storage get url
-            // $disk = \Storage::disk('s3');
-            // $url = $disk->url("public/images/photo-profile-3.jpg");
-            // dd($url);
             $storeFile = $request->file('photo')->storeAs('public/images','photo-profile-'.$request->id.'.'.$extension);
-            $urlFile = \Storage::url('public/images/'.'photo-profile-'.$request->id.'.'.$extension);
-            
+            $urlFile = \Storage::url('public/images/'.'photo-profile-'.$request->id.'.'.$extension);            
             $users = User::find($request->id_user)->update([
                 'photo_url' =>  $urlFile,
             ]);
@@ -142,9 +132,7 @@ class ProfileController extends Controller
 
         //hapus photo profile
         if (!empty($request->photo_remove)) {
-            if(\Storage::exists(Auth::user()->photo_url)){
-                \Storage::delete(Auth::user()->photo_url);
-              }
+            \Storage::delete('public/images/'.basename(Auth::user()->photo_url));
             $users = User::find($request->id_user)->update([
             'photo_url' =>  null,
             ]);

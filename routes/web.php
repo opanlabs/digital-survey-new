@@ -21,13 +21,7 @@ use App\Http\Controllers\VehicleController;
 |
 */
 
-// $disk = \Storage::disk('gcs');
-// $text = $disk->put('hello.txt',"hello world");
-// $url = $disk->delete('login_img.png');
-// $copy = $disk->copy('login_img.png', 'new/test.jpg');
-// dd($url);
-
-
+// $delete = \Storage::path("public/images/photo-profile-3.jpeg");
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::get('/main',[DashboardController::class,'index'])->name('dashboard');
