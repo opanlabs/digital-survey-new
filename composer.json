@@ -13,8 +13,9 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.0",
-        "spatie/laravel-google-cloud-storage": "^2.0",
+        "league/flysystem-aws-s3-v3": "^3.2",
         "macsidigital/laravel-zoom": "^5.0",
+        "spatie/laravel-google-cloud-storage": "^2.0",
         "yajra/laravel-datatables-buttons": "^9.0",
         "yajra/laravel-datatables-oracle": "^10.0"
     },

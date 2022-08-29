@@ -127,9 +127,16 @@ class ProfileController extends Controller
             // $file = $request->file('photo');
             // $text = $disk->put("photo_profile.jpg",$file);
             // dd($text);
+
+            //aws storage get url
+            // $disk = \Storage::disk('s3');
+            // $url = $disk->url("public/images/photo-profile-3.jpg");
+            // dd($url);
+            $storeFile = $request->file('photo')->storeAs('public/images','photo-profile-'.$request->id.'.'.$extension);
+            $urlFile = \Storage::url('public/images/'.'photo-profile-'.$request->id.'.'.$extension);
             
             $users = User::find($request->id_user)->update([
-                'photo_url' =>  $request->file('photo')->storeAs('public/images','photo-profile-'.$request->id.'.'.$extension),
+                'photo_url' =>  $urlFile,
             ]);
         };
 

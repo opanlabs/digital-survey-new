@@ -50,7 +50,7 @@
                                 @if(!(Auth::user()->photo_url))
                                     src="{{ asset('media/png/avatar-default.png') }}" 
                                 @else
-                                    src="{{ asset('storage/images/'. basename(Auth::user()->photo_url) ) }}"
+                                    src="{{ Auth::user()->photo_url }}"
                                 @endif
                                 alt="user" 
                             />
