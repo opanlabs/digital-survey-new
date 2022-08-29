@@ -132,12 +132,15 @@
                         </div>
                         <!--end::Wrapper-->
                         <!--begin::Input-->
-                        <input class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" type="password" placeholder="Password"/>
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <div class="fv-row fv-plugins-icon-container">
+                            <input id="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" type="password" placeholder="Password"/>
+                            <i class="bi bi-eye-slash me-4 mt-5 fs-3" style="position: absolute; right: 0; top: 0;cursor: pointer;" id="togglePassword"></i>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <!--end::Input-->
                     </div>
                     <!--end::Input group-->
@@ -151,12 +154,15 @@
                         </div>
                         <!--end::Wrapper-->
                         <!--begin::Input-->
-                        <input class="form-control form-control-lg" name="password_confirmation" required autocomplete="current-password" type="password" placeholder="Confirm Password"/>
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <div class="fv-row fv-plugins-icon-container">
+                            <input id="password_confirm" class="form-control form-control-lg" name="password_confirmation" required autocomplete="current-password" type="password" placeholder="Confirm Password"/>
+                            <i class="bi bi-eye-slash me-4 mt-5 fs-3" style="position: absolute; right: 0; top: 0;cursor: pointer;" id="togglePassword_confirm"></i>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <!--end::Input-->
                     </div>
                     <!--end::Input group-->
@@ -182,3 +188,30 @@
         <!--end::Content-->
     </div>
 @endsection
+
+@push('scripts')
+<script>
+    //function eye pada password field
+    const togglePassword = document
+        .querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+    togglePassword.addEventListener('click', () => {
+        const type = password
+            .getAttribute('type') === 'password' ?
+            'text' : 'password';
+        password.setAttribute('type', type);
+        togglePassword.classList.toggle('bi-eye');
+    });
+
+    const togglePassword_confirm = document
+            .querySelector('#togglePassword_confirm');
+        const password_confirm = document.querySelector('#password_confirm');
+        togglePassword_confirm.addEventListener('click', () => {
+            const type = password_confirm
+                .getAttribute('type') === 'password' ?
+                'text' : 'password';
+                password_confirm.setAttribute('type', type);
+            togglePassword_confirm.classList.toggle('bi-eye');
+        });
+</script>
+@endpush

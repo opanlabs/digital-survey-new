@@ -226,7 +226,8 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                            <input type="password" name="current-password" class="form-control form-control-lg" placeholder="Current Password" value="">
+                            <input id="password" type="password" name="current-password" class="form-control form-control-lg" placeholder="Current Password" value="">
+                            <i class="bi bi-eye-slash me-8 mt-5 fs-3" style="position: absolute; right: 0; top: 0;cursor: pointer;" id="togglePassword"></i>
                             <div class="fv-plugins-message-container invalid-feedback"></div>
                         </div>
                         <!--end::Col-->
@@ -237,7 +238,8 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                            <input type="password" name="new-password" class="form-control form-control-lg" placeholder="New Password" value="">
+                            <input id="password_new" type="password" name="new-password" class="form-control form-control-lg" placeholder="New Password" value="">
+                            <i class="bi bi-eye-slash me-8 mt-5 fs-3" style="position: absolute; right: 0; top: 0;cursor: pointer;" id="togglePassword_new"></i>
                             <div class="fv-plugins-message-container invalid-feedback"></div>
                         </div>
                         <!--end::Col-->
@@ -248,7 +250,8 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                            <input type="password" name="new-password_confirmation" class="form-control form-control-lg" placeholder="Confirm New Password" value="">
+                            <input id="password_new_confirm" type="password" name="new-password_confirmation" class="form-control form-control-lg" placeholder="Confirm New Password" value="">
+                            <i class="bi bi-eye-slash me-8 mt-5 fs-3" style="position: absolute; right: 0; top: 0;cursor: pointer;" id="togglePassword_new_confirm"></i>
                             <div class="fv-plugins-message-container invalid-feedback">
                                 @error('new-password_confirmation')
                                     <span class="invalid-feedback" role="alert">
@@ -273,15 +276,49 @@
 
 @push('scripts')
 <script type="text/javascript">
-//menampilkan tombol update foto jiga gambar diubah
-const btn_photo = document.getElementById("btn-photo")
-$('.photo').on('change', function() {
-    btn_photo.classList.remove("d-none");
-});
+    //menampilkan tombol update foto jiga gambar diubah
+    const btn_photo = document.getElementById("btn-photo")
+    $('.photo').on('change', function() {
+        btn_photo.classList.remove("d-none");
+    });
 
-function removeBtn(){
-    btn_photo.classList.remove("d-none");
-}
+    function removeBtn(){
+        btn_photo.classList.remove("d-none");
+    }
+
+    //function eye pada password field
+    const togglePassword = document
+            .querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+        togglePassword.addEventListener('click', () => {
+            const type = password
+                .getAttribute('type') === 'password' ?
+                'text' : 'password';
+            password.setAttribute('type', type);
+            togglePassword.classList.toggle('bi-eye');
+        });
+
+    const togglePassword_new = document
+            .querySelector('#togglePassword_new');
+        const password_new = document.querySelector('#password_new');
+        togglePassword_new.addEventListener('click', () => {
+            const type = password_new
+                .getAttribute('type') === 'password' ?
+                'text' : 'password';
+            password_new.setAttribute('type', type);
+            togglePassword_new.classList.toggle('bi-eye');
+        });
+    
+    const togglePassword_new_confirm = document
+            .querySelector('#togglePassword_new_confirm');
+        const password_new_confirm = document.querySelector('#password_new_confirm');
+        togglePassword_new_confirm.addEventListener('click', () => {
+            const type = password_new_confirm
+                .getAttribute('type') === 'password' ?
+                'text' : 'password';
+            password_new_confirm.setAttribute('type', type);
+            togglePassword_new_confirm.classList.toggle('bi-eye');
+        });
 
 </script>
 @endpush
