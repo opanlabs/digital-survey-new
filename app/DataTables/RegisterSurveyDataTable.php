@@ -417,6 +417,11 @@ class RegisterSurveyDataTable extends DataTable
                     ->minifiedAjax()
                     ->searchPanes(RegisterSurvey::make())
                     ->dom('frtip')
+                    ->ajax([
+                        'data' => [
+                            '_token' => csrf_token()
+                        ],
+                    ])
                     ->parameters([
                         'drawCallback' => 'function() { KTMenu.createInstances(); }',
                         ['extends' => 'pdf', 'className' => 'hidden']
