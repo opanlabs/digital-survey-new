@@ -159,7 +159,8 @@ class RegisterSurveyDataTable extends DataTable
                     </div>
                     </div>
                     <div class='modal-footer'>
-                        <button data-bs-dismiss='modal' type='reset' id='kt_modal_new_card_cancel' class='btn btn-light me-3'>close</button>
+                        <button type='reset' class='btn btn-success me-3' data-bs-toggle='modal' data-bs-target='#edit_modal".$data->id_register_survey."'>Edit</button>
+                        <button type='reset' class='btn btn-danger me-3' data-bs-toggle='modal' data-bs-target='#kt_modal_delete'>Delete</button>
                     </div>
                     
                 </div>
@@ -280,7 +281,7 @@ class RegisterSurveyDataTable extends DataTable
                         </div>
                         <div class='modal-footer'>
                             <button data-bs-dismiss='modal' type='reset' id='kt_modal_new_card_cancel' class='btn btn-light me-3'>Cancel</button>
-                            <button type='submit' id='kt_modal_new_card_submit' class='btn btn-primary'>Submit
+                            <button type='submit' id='kt_modal_new_card_submit' class='btn btn-primary'>Update
                             </button>
                         </div>
                         

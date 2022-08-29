@@ -184,18 +184,16 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-body d-flex justify-content-center">
-                                    <div>
-                                        <h2 class="modal-title text-center">Are you sure?</h2>
-                                        <p class="text-center">
-                                        Do you really want to delete this data?
-                                        <br />
-                                        this process can’t be undone.
-                                        </p>
-                                    </div>
+                                <div class="flex-column">
+                                    <div class="modal-header border-0 text-center mt-5 justify-content-center">
+                                        <i class="bi bi-x-circle fs-5x text-danger"></i>
+                                    </div>						
+                                    <h4 class="modal-title w-100 text-center">Are you sure?</h4>
                                 </div>
-                    
-                                <div class="modal-footer">
+                                <div class="modal-body text-center">
+                                    <p>Do you really want to delete these records?<br> This process cannot be undone.</p>
+                                </div>
+                                <div class="modal-footer justify-content-center">
                                     <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light btn-sm">Cancel</button>
                                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                 </div>
