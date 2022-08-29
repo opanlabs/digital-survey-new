@@ -215,7 +215,7 @@ class RegisterSurveyController extends Controller
             if(isset($temp[$i]['value'])){
                 $file_name = $temp[$i]['value']->getClientOriginalName();
                 $temp[$i]['value']->storeAs('public/images','register-survey-'.$file_name);
-                $temp[$i]['url'] = 'storage/images/'.'register-survey-'. $file_name;
+                $temp[$i]['url'] = \Storage::url('public/images/'.'register-survey-'.$file_name);       
             }else{
                 $temp[$i]['url'] = '';
             }
@@ -227,7 +227,7 @@ class RegisterSurveyController extends Controller
         $link_report_zoom = '';
         $file_name = $request['videoUpload']->getClientOriginalName();
         $request['videoUpload']->storeAs('public/video','link-survey-report-'.$file_name);
-        $link_report_zoom = 'storage/video/'.'link-survey-report-'. $file_name;
+        $link_report_zoom = \Storage::url('public/video/'.'link-survey-report-'.$file_name);     
 
         $registerSurvey->update([
             'descriptionVehicle' =>  $request->description,

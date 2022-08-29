@@ -614,7 +614,7 @@
 
                 for (let index2 = 0; index2 < objPhoto.length; index2++) {
                     const element = objPhoto[index2];
-                    $(`#photo_view_${element.id_part}`).css("background-image", `url(/${element.url ? element.url : 'media/png/avatar-default.png'})`);
+                    $(`#photo_view_${element.id_part}`).css("background-image", `url(${element.url ? element.url : '/media/png/avatar-default.png'})`);
                 }
 
                 var stats = '';
@@ -626,7 +626,7 @@
                     stats = '<a class="btn btn-outline btn-outline-dark btn-active-light-dark btn-sm">Done</a>';
                 }
                 
-                var url = `${window.location.origin}/${data.details.link_report_zoom}`
+                var url = `${data.details.link_report_zoom}`
                 $('#no_register_view').html(data.details.register_no);
                 $('#customer_name_view').html(data.details.customer.customer_name);
                 $('#surveyor_view').html(data.details.surveyor);
