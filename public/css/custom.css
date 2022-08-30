@@ -129,3 +129,7 @@ a:hover,
 .breadcrumb-line .breadcrumb-item:after {
     content: ">";
 }
+
+th,td {
+    min-width: 125px;
+}

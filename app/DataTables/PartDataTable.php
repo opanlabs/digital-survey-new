@@ -54,7 +54,8 @@ class PartDataTable extends DataTable
                     ->dom('frtip')
                     ->parameters([
                         'drawCallback' => 'function() { KTMenu.createInstances(); }',
-                        ['extends' => 'pdf', 'className' => 'hidden']
+                        ['extends' => 'pdf', 'className' => 'hidden'],
+                        'scrollX' => true
                         ]);
     }
 

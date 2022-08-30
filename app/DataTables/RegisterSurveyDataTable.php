@@ -424,7 +424,8 @@ class RegisterSurveyDataTable extends DataTable
                     ])
                     ->parameters([
                         'drawCallback' => 'function() { KTMenu.createInstances(); }',
-                        ['extends' => 'pdf', 'className' => 'hidden']
+                        ['extends' => 'pdf', 'className' => 'hidden'],
+                        'scrollX' => true
                         ]);
     }
 
