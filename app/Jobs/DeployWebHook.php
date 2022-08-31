@@ -30,21 +30,25 @@ class DeployWebHook implements ShouldQueue
      *
      * @return void
      */
+    public function deploy()
+    {
+        $process = new Process(['git', 'pull']);  
+        $process->run();
+        /* php artisan migrate */
+       \Artisan::call('optimize');
+        // dd($process);
+
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+
+        return response()->json(['status' => $process->getOutput()], 200);
+    }
+
     public function handle()
     {
-    //     $process = new Process(['git', 'pull']);  
-    //     $process->run();
-    //     /* php artisan migrate */
-    //    \Artisan::call('optimize');
-    //     // dd($process);
-
-    //     // executes after the command finishes
-    //     if (!$process->isSuccessful()) {
-    //         throw new ProcessFailedException($process);
-    //     }
-
-    //     return response()->json(['status' => 'success'], 200);
-        ray($this->webhookCall->eventActionName());
+        ray($this->webhookCall->deploy());
         
     }
 }
