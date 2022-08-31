@@ -10,8 +10,10 @@ class AutoDeployController extends Controller
 {
     public function deploy()
     {
-        $process = new Process(['git', 'pull','origin','master']);  
+        $process = new Process(['git', 'pull']);  
         $process->run();
+        /* php artisan migrate */
+       \Artisan::call('optimize');
         // dd($process);
 
         // executes after the command finishes
