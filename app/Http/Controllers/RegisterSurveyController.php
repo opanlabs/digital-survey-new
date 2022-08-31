@@ -174,7 +174,7 @@ class RegisterSurveyController extends Controller
         $meetings = Zoom::user()->find($user->email)->meetings()->create([
             'topic' => 'Survey Kendaraan Customer ' . $customer->customer_name,
             'duration' => 15, // In minutes, optional
-            'start_time' => new Carbon($request->survey_date . ' 00:00:00'),
+            'start_time' => new Carbon($request->survey_date),
             'timezone' => 'Asia/Jakarta',
         ]);
 

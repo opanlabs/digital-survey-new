@@ -385,7 +385,7 @@
                                 <div class="card pt-4 mb-xl-9">
                                     <div id="kt_customer_view_payment_method" class="card-body pt-0">
                                         <div class="d-flex flex-wrap py-2">
-                                            <div class="flex-equal me-5 table-responsive-lg">
+                                            <div class="flex-equal me-5 table-responsive-lg" style="min-width: 290px;">
                                                 <table class="table table-flush fw-bold gy-2">
                                                     <tr>
                                                         <td class="text-muted min-w-125px w-125px">No Register</td>
@@ -549,7 +549,8 @@
         }
 
         $("#kt_datepicker_10").flatpickr({
-            dateFormat: "Y-m-d",
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
             disable: [
                 {
                     from: "0001-01-01",
