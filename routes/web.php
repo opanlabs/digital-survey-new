@@ -60,3 +60,5 @@ Route::get('/meetSchedule/query',[RegisterSurveyController::class,'meetSchedule'
 Route::post('/deploy',[AutoDeployController::class,'deploy'])->name('deploy');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::githubWebhooks('deploy-webhook');

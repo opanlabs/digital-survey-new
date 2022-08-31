@@ -15,6 +15,7 @@
         "laravel/ui": "^4.0",
         "league/flysystem-aws-s3-v3": "^3.2",
         "macsidigital/laravel-zoom": "^5.0",
+        "spatie/laravel-github-webhooks": "^1.2",
         "spatie/laravel-google-cloud-storage": "^2.0",
         "symfony/process": "^6.1",
         "yajra/laravel-datatables-buttons": "^9.0",
