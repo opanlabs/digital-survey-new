@@ -57,7 +57,7 @@ Route::get('/vehicle/query/autocomplete',[VehicleController::class,'autocomplete
 Route::get('/meetSchedule/query',[RegisterSurveyController::class,'meetSchedule'])->name('meetSchedule.json');
 
 //webhook untuk autodeploy
-Route::post('/deploy',[AutoDeployController::class,'deploy'])->name('deploy');
+Route::get('/deploy',[AutoDeployController::class,'deploy'])->name('deploy');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
