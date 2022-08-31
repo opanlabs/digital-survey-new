@@ -55,7 +55,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Analytic & data</span>
+                                <span class="menu-title">Policies & Claim</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <!-- register survey -->
-                <div data-kt-menu-trigger="click" class="menu-item here {{ Route::is('register-survey') || Route::is('register-claim') ? 'show' : '' }}  menu-accordion">
+                <div data-kt-menu-trigger="click" class="menu-item here {{ Route::is('register-risk-survey') || Route::is('register-claim') ? 'show' : '' }}  menu-accordion">
                     <span class="menu-link">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -83,10 +83,10 @@
                         <span class="menu-title">Register Survey</span>
                         <span class="menu-arrow"></span>
                     </span>
-                    <div class="menu-sub menu-sub-accordion {{ Route::is('register-survey') || Route::is('register-claim') ? 'menu-active-bg' : 'menu-active-bg' }}">
+                    <div class="menu-sub menu-sub-accordion {{ Route::is('register-risk-survey') || Route::is('register-claim') ? 'menu-active-bg' : 'menu-active-bg' }}">
                         @if (Auth::user()->id_role === 2 || Auth::user()->id_role === 1)
                             <div class="menu-item">
-                                <a class="menu-link {{ Route::is('register-survey') ? 'active' : '' }}" href="{{ url('dashboard/register-survey') }}">
+                                <a class="menu-link {{ Route::is('register-risk-survey') ? 'active' : '' }}" href="{{ url('dashboard/register-survey') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>

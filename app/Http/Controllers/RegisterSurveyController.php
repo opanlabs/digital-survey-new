@@ -187,7 +187,7 @@ class RegisterSurveyController extends Controller
         $id = $request->id;
 
         $registerSurvey = RegisterSurvey::find($id);
-        $user = User::find($registerSurvey->id_user);
+        $user = User::find(Auth::user()->id_user);
         $customer = Customer::find($registerSurvey->id_customer);
 
         $meetings = Zoom::user()->find($user->email)->meetings()->create([
@@ -215,7 +215,9 @@ class RegisterSurveyController extends Controller
         $registerSurvey->update([
             'survey_date' =>  $request->survey_date,
             'status' =>  'SCHEDULE',
-            'link_zoom' => $meetings->join_url
+            'link_zoom' => $meetings->join_url,
+            'id_user' => Auth::user()->id_user,
+            'surveyor' => $user->name,
         ]);
 
 
