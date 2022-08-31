@@ -43,7 +43,7 @@ class DeployWebHook implements ShouldQueue
             throw new ProcessFailedException($process);
         }
 
-        echo response()->json(['status' => $process->getOutput()], 200);
+        echo $process->getOutput();
     }
 
     public function handle()
