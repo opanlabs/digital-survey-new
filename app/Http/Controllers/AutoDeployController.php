@@ -21,6 +21,6 @@ class AutoDeployController extends Controller
             throw new ProcessFailedException($process);
         }
 
-        echo $process->getOutput();
+        return response()->json(['status' => 'success'], 200);
     }
 }
