@@ -42,6 +42,25 @@ class RegisterSurveyController extends Controller
         
         return $dataTable->render('dashboard.register-survey.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories]);
     }
+    
+    //dipakai untuk return json nama,jadwal,link zoom meeting
+    public function meetSchedule(Request $request)
+    {
+        $meetSchedule = [];
+
+        $meetSchedule = RegisterSurvey::with("customer:id_customer,customer_name")
+                ->where('status', 'like', "%SCHEDULE%")
+                ->get()
+                ->map(function($data){
+                    return [
+                        // 'id_register_survey' => $data->id_register_survey,
+                        'title' => $data->customer->customer_name,
+                        'start' => $data->survey_date,
+                        'url' => $data->link_zoom,
+                    ];
+                });
+        return response()->json($meetSchedule);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -204,6 +223,10 @@ class RegisterSurveyController extends Controller
     }
 
     public function reportSchedule(Request $request){
+        $request->validate([
+            'videoUpload' => 'required',
+        ]);
+
         $obj = $request->photo;
         $temp = [];
         foreach($obj as $item){

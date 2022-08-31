@@ -1,0 +1,6 @@
+deployment:
+tasks:
+- export DEPLOYPATH=/home/dev.jtechsurvey.com
+- /bin/cp -r * $DEPLOYPATH
+- $DEPLOYPATH/composer update
+- $DEPLOYPATH/php artisan optimize

@@ -43,7 +43,7 @@
                                 <div class="image-input-wrapper w-125px rounded-circle h-125px" style="background-image: url({{ asset('/media/png/avatar-default.png') }})"></div>
                            
                             @else
-                                <div class="image-input-wrapper w-125px rounded-circle h-125px" style="background-image: url({{ Auth::user()->photo_url }})"></div>
+                                <div class="image-input-wrapper w-125px rounded-circle h-125px" style="background-image: url({{ asset(Auth::user()->photo_url)}})"></div>
                                 <!--begin::Remove-->
                                 <span onclick="removeBtn()" class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow profile-icon" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove avatar" style="position: absolute !important;left: 9rem !important; top: 8.5rem !important;">
                                     <i class="bi bi-x fs-2"></i>

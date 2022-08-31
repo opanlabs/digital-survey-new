@@ -453,23 +453,7 @@
         editable: true,
         dayMaxEvents: true, // allow "more" link when too many events
         navLinks: true,
-        events: [
-        {
-          title: 'Agus Susanto',
-          start: '2022-08-10T07:00:00',
-          url: 'http://google.com/',
-        },
-        {
-          title: 'Asep Hendrawan',
-          start: '2022-08-11T07:00:00',
-          url: 'http://google.com/',
-        },
-        {
-          title: 'Jeremi Teti',
-          start: '2022-08-22T09:20:00',
-          url: 'http://google.com/',
-        },
-      ],
+        events: '{{ route('meetSchedule.json') }}'
     });
 
     calendar.render();

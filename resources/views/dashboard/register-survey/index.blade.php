@@ -348,7 +348,7 @@
                                                 <tr>
                                                     <td class="text-muted min-w-125px w-125px">Upload Video Report</td>
                                                     <td class="text-gray-800">
-                                                        <input type="file" name="videoUpload" accept=".mp4, .mkv , .mov , .avi">
+                                                        <input type="file" name="videoUpload" accept=".mp4, .mkv , .mov , .avi" required>
                                                     </td>
                                                 </tr>
                                             </table>
