@@ -10,7 +10,7 @@
         <div class="d-flex flex-center flex-column flex-column-fluid">
             <!--begin::Logo-->
             <a href="#" class="mb-12 text-center pt-20">
-                <h1 class="hs-1"><span style="color: #F2951C">Jingga</span> TEKNOLOGI<span style="color: #F2951C">.</span></h1>
+                <h1 class="hs-1"><span style="color: #F2951C">Jingga</span> TECHHH<span style="color: #F2951C">.</span></h1>
             </a>
             <!--end::Logo-->
             <!--begin::Wrapper-->
