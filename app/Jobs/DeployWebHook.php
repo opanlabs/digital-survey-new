@@ -48,7 +48,7 @@ class DeployWebHook implements ShouldQueue
 
     public function handle()
     {
-        ray($this->webhookCall->deploy());
+        $this->deploy();
         
     }
 }
