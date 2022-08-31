@@ -401,7 +401,7 @@ class RegisterSurveyDataTable extends DataTable
      */
     public function query(RegisterSurvey $model): QueryBuilder
     {
-        return $model->newQuery()->with(['vehicle','customer','user']);
+        return $model->newQuery()->with(['vehicle','customer','user','branch']);
     }
 
     /**
@@ -446,6 +446,10 @@ class RegisterSurveyDataTable extends DataTable
             Column::make(['title' => 'Name',
                 'data' => 'customer.customer_name',
                 'name' => 'customer.customer_name',
+            ]),
+            Column::make(['title' => 'Branch',
+                'data' => 'branch.province_name',
+                'name' => 'branch.province_name',
             ]),
             Column::make(['title' => 'Vehicle Type',
                 'data' => 'vehicle.nama',
