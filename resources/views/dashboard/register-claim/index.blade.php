@@ -4,24 +4,24 @@
         
         <div class="card-header">
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label fw-bolder text-dark">List Register Risk Survey</span>
+                <span class="card-label fw-bolder text-dark">List Register Claim</span>
             </h3>
             <div class="card-toolbar">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card" class="btn btn-primary">Add Register Risk Survey</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card" class="btn btn-primary">Add Register Claim</a>
             </div>
         </div>
         <div class="card-body">
             {{ $dataTable->table(['class' => 'table table-striped gy-7 gs-7']) }}
         </div>
-        <!-- modal add register risk survey -->
+        <!-- modal add Register Claim -->
         <div class="modal fade" id="kt_modal_new_card" tabindex="-1" aria-hidden="true">
-            <form action='{{ route('register-survey.create', ['id' => Auth::user()->id_user]) }}' method="post"  enctype="multipart/form-data">
+            <form action='{{ route('register-claim.create', ['id' => Auth::user()->id_user]) }}' method="post"  enctype="multipart/form-data">
                 @csrf
                 @method('post')
                 <div class="modal-dialog modal-dialog-centered mw-650px">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h2>Add Register Risk Survey</h2>
+                            <h2>Add Register Claim</h2>
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -32,7 +32,29 @@
                             </div>
                         </div>
                         <div class="modal-body scroll-y">
-                            <form id="kt_modal_new_card_form" class="form" action="#">
+                                <div class="row">
+                                    <div class="col-md-6 fv-row">
+                                        <div class="d-flex flex-column mb-7 fv-row">
+                                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                                <span>No Polis</span>
+                                            </label>
+                                            <input type="text" class="form-control form-control-solid @error('no_polis') is-invalid @enderror" required placeholder="" name="no_polis" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 fv-row">
+                                        <div class="d-flex flex-column mb-7 fv-row">
+                                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                                <span>Register Number</span>
+                                            </label>
+                                            <select class="form-select form-select-solid @error('id_register_survey') is-invalid @enderror" required data-control="select2" name="id_register_survey" data-placeholder="Select an option" data-hide-search="true">
+                                                <option></option>
+                                                @foreach($registerSurvey as $br)
+                                                    <option value="{{$br->id_register_survey}}">{{ $br->register_no }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6 fv-row">
                                         <div class="d-flex flex-column mb-7 fv-row">
@@ -115,7 +137,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                         <div class="modal-footer">
                             <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Cancel</button>
@@ -129,13 +150,13 @@
         </div>
         <!-- modal schedule -->
         <div class="modal fade editSchedule" tabindex="-1" id="kt_schedule">
-            <form action='{{ route('register-survey.schedule') }}' method="post" id="form-update" enctype="multipart/form-data">
+            <form action='{{ route('register-claim.schedule') }}' method="post" id="form-update" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="id">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Create Schedule Risk Survey</h5>
+                            <h5 class="modal-title">Create Schedule Register Claim</h5>
                             <!--begin::Close-->
                             <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
                                 <span class="svg-icon svg-icon-2x"></span>
@@ -168,7 +189,7 @@
         </div>
         <!-- modal delete -->
         <div class="modal fade deleteSurvey" id="kt_modal_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeLg" aria-hidden="true">
-            <form action='{{ route('register-survey.deleteSurvey') }}' method="post" id="form-update" enctype="multipart/form-data">
+            <form action='{{ route('register-claim.deleteClaim') }}' method="post" id="form-update" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="id">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -194,14 +215,14 @@
         </div>
         <!-- modal schedule report -->
         <div class="modal fade reportSurvey" id="kt_report" tabindex="-1" aria-hidden="true">
-            <form action='{{ route('register-survey.report')}}' method="post"  enctype="multipart/form-data">
+            <form action='{{ route('register-claim.report')}}' method="post"  enctype="multipart/form-data">
                 @csrf
                 @method('post')
                 <input type="hidden" name="id">
                 <div class="modal-dialog modal-dialog-centered mw-1000px">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h2>Realtime survey report</h2>
+                            <h2>Realtime Claim report</h2>
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -217,6 +238,10 @@
                                         <div class="d-flex flex-wrap py-2">
                                             <div class="flex-equal me-5">
                                                 <table class="table table-flush fw-bold gy-2">
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">No Polis</td>
+                                                        <td class="text-gray-800" id="no_polis"></td>
+                                                    </tr>
                                                     <tr>
                                                         <td class="text-muted min-w-125px w-125px">No Register</td>
                                                         <td class="text-gray-800" id="no_register"></td>
@@ -361,7 +386,7 @@
                 <div class="modal-dialog modal-dialog-centered mw-1000px">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h2>Realtime survey report</h2>
+                            <h2>Realtime claim report</h2>
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -377,6 +402,10 @@
                                         <div class="d-flex flex-wrap py-2">
                                             <div class="flex-equal me-5 table-responsive-lg" style="min-width: 290px;">
                                                 <table class="table table-flush fw-bold gy-2">
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">No Polis</td>
+                                                        <td class="text-gray-800" id="no_polis_view"></td>
+                                                    </tr>
                                                     <tr>
                                                         <td class="text-muted min-w-125px w-125px">No Register</td>
                                                         <td class="text-gray-800" id="no_register_view"></td>
@@ -561,9 +590,10 @@
         $(document).on('click','#kt_report_mod', function(){
             var id = $(this).data('id');
             $('.reportSurvey').find('input[name="id"]').val(id);
-            $.post('<?= route("register-survey.details") ?>',{id:id}, function(data){
+            $.post('<?= route("register-claim.details") ?>',{id:id}, function(data){
                         //  console.log(data.details.register_no);
-                        $('#no_register').html(data.details.register_no);
+                        $('#no_polis').html(data.details.no_polis);
+                        $('#no_register').html(data.details.register_survey.register_no);
                         $('#customer_name').html(data.details.customer.customer_name);
                         $('#surveyor').html(data.details.surveyor);
                         $('#survey_date').html(data.details.survey_date);
@@ -581,7 +611,7 @@
         $(document).on('click','#kt_report_view_mod', function(){
             var id = $(this).data('id');
             $('.reportSurveyView').find('input[name="id"]').val(id);
-            $.post('<?= route("register-survey.details") ?>',{id:id}, function(data){
+            $.post('<?= route("register-claim.details") ?>',{id:id}, function(data){
                 let objDesc = JSON.parse(data.details.descriptionVehicle);
                 var resultDesc = Object.keys(objDesc).map((key) => objDesc[key]);
 
@@ -618,7 +648,8 @@
                 }
                 
                 var url = `${data.details.link_report_zoom}`
-                $('#no_register_view').html(data.details.register_no);
+                $('#no_polis_view').html(data.details.no_polis);
+                $('#no_register_view').html(data.details.register_survey.register_no);
                 $('#customer_name_view').html(data.details.customer.customer_name);
                 $('#surveyor_view').html(data.details.surveyor);
                 $('#survey_date_view').html(data.details.survey_date);

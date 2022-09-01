@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\RegisterSurvey;
+use App\Models\RegisterClaim;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -16,7 +17,7 @@ use App\Models\Vehicle;
 use App\Models\Branch;
 use Auth;
 
-class RegisterSurveyDataTable extends DataTable
+class RegisterClaimDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -29,6 +30,7 @@ class RegisterSurveyDataTable extends DataTable
     {   
         $vehicle = Vehicle::all();
         $branch = Branch::all();
+        $register_survey = RegisterSurvey::all();
 
         $editUrl = $data;
 
@@ -67,6 +69,15 @@ class RegisterSurveyDataTable extends DataTable
         //edit modal
         $viewModal_branchSelect = "";
         $viewModal_vehicleSelect = "";
+        $viewModal_registerNoSelect = "";
+        foreach ($register_survey as $survey) {
+            if ($survey->id_register_survey == $data->register_survey->id_register_survey) {
+                $survey_isSelected = 'selected="selected"';
+            }else{
+                $survey_isSelected = '';
+            }
+            $viewModal_registerNoSelect .= "<option value='". $survey->id_register_survey ."'".$survey_isSelected.">$survey->register_no</option>";
+        };
         foreach ($branch as $branch) {
             if ($branch->id_branch == $data->branch->id_branch) {
                 $branch_isSelected = 'selected="selected"';
@@ -76,7 +87,7 @@ class RegisterSurveyDataTable extends DataTable
             $viewModal_branchSelect .= "<option value='". $branch->id_branch ."'".$branch_isSelected.">$branch->province_name</option>";
         };
         foreach ($vehicle as $vehicle) {
-            if ($branch->id_branch == $data->branch->id_branch) {
+            if ($vehicle->id_vehicle == $data->vehicle->id_vehicle) {
                 $vehicle_isSelected = 'selected="selected"';
             }else{
                 $vehicle_isSelected = '';
@@ -84,7 +95,7 @@ class RegisterSurveyDataTable extends DataTable
             $viewModal_vehicleSelect .= "<option value='". $vehicle->id_vehicle ."'". $vehicle_isSelected ."> $vehicle->nama </option>";
         };
         $viewModal = "
-        <div class='modal fade' id='view_modal".$data->id_register_survey."' tabindex='-1' aria-hidden='true'>
+        <div class='modal fade' id='view_modal".$data->id_register_claim."' tabindex='-1' aria-hidden='true'>
             <div class='modal-dialog modal-dialog-centered mw-650px'>
                 <div class='modal-content'>
                     <div class='modal-header'>
@@ -103,8 +114,12 @@ class RegisterSurveyDataTable extends DataTable
                         <div class='flex-equal me-5'>
                             <table class='table table-flush fw-bold gy-2'>
                                 <tr>
+                                    <td class='text-muted min-w-125px w-200px'>No Polis</td>
+                                    <td class='text-gray-800'>".$data->no_polis."</td>
+                                </tr>
+                                <tr>
                                     <td class='text-muted min-w-125px w-200px'>No Register</td>
-                                    <td class='text-gray-800'>".$data->register_no."</td>
+                                    <td class='text-gray-800'>".$data->register_survey->register_no."</td>
                                 </tr>
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px'>Costumer Name</td>
@@ -160,7 +175,7 @@ class RegisterSurveyDataTable extends DataTable
                     </div>
                     </div>
                     <div class='modal-footer'>
-                        <button type='reset' class='btn btn-success me-3' data-bs-toggle='modal' data-bs-target='#edit_modal".$data->id_register_survey."'>Edit</button>
+                        <button type='reset' class='btn btn-success me-3' data-bs-toggle='modal' data-bs-target='#edit_modal".$data->id_register_claim."'>Edit</button>
                         <button type='reset' class='btn btn-danger me-3' data-bs-toggle='modal' data-bs-target='#kt_modal_delete'>Delete</button>
                     </div>
                     
@@ -168,15 +183,15 @@ class RegisterSurveyDataTable extends DataTable
             </div>
         </div>";
         $editModal = "
-        <div class='modal fade' id='edit_modal".$data->id_register_survey."' tabindex='-1' aria-hidden='true'>
-            <form action='".route('register-survey.update', ['id' => $data->id_register_survey ]) ."' method='post'>
+        <div class='modal fade' id='edit_modal".$data->id_register_claim."' tabindex='-1' aria-hidden='true'>
+            <form action='".route('register-claim.update', ['id' => $data->id_register_claim ]) ."' method='post'>
                 <input type='hidden' name='_method' value='put'>
                 <input type='hidden' name='_token' value='". csrf_token() ."'>
                 <input type='hidden' name='id_customer' value='".$data->customer->id_customer."'>
                 <div class='modal-dialog modal-dialog-centered mw-650px'>
                     <div class='modal-content'>
                         <div class='modal-header'>
-                            <h2>Edit Register Risk Survey</h2>
+                            <h2>Edit Register Claim</h2>
                             <div class='btn btn-sm btn-icon btn-active-color-primary' data-bs-dismiss='modal'>
                                 <span class='svg-icon svg-icon-1'>
                                     <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
@@ -189,6 +204,26 @@ class RegisterSurveyDataTable extends DataTable
                         <div class='modal-body scroll-y'>
                             <form id='kt_modal_new_card_form' class='form' action='#'>
                                 <div class='row'>
+                                <div class='col-md-6 fv-row'>
+                                    <div class='d-flex flex-column mb-7 fv-row'>
+                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                <span>No Polis</span>
+                                            </label>
+                                            <input type='text' class='form-control form-control-solid @error('no_polis') is-invalid @enderror' required placeholder='' name='no_polis' value='".$data->no_polis."' />
+                                        </div>
+                                    </div>
+                                    <div class='col-md-6 fv-row'>
+                                        <div class='d-flex flex-column mb-7 fv-row'>
+                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                <span>No Register</span>
+                                            </label>
+                                            <select class='form-select form-select-solid @error('id_register_survey') is-invalid @enderror' required data-control='select2' name='id_register_survey' data-placeholder='Select an option' data-hide-search='true'>
+                                            ".
+                                            $viewModal_registerNoSelect
+                                            ."
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class='col-md-6 fv-row'>
                                         <div class='d-flex flex-column mb-7 fv-row'>
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
@@ -287,7 +322,7 @@ class RegisterSurveyDataTable extends DataTable
         $viewSurvey = "";
         if ($editUrl->status === 'OPEN') {
            $schedule = "<div class='menu-item menu-state-bg px-3'>
-                            <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_schedule' id='kt_schedule_mod' data-id='{$editUrl->id_register_survey}'>
+                            <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_schedule' id='kt_schedule_mod' data-id='{$editUrl->id_register_claim}'>
                                 <span class='menu-icon'><i class='bi bi-calendar2-plus'></i></span>
                                 <span class='menu-title'>Schedule</span>
                             </a>
@@ -296,7 +331,7 @@ class RegisterSurveyDataTable extends DataTable
 
         if ($editUrl->status === 'SCHEDULE') {
             $surveyReport = "<div class='menu-item menu-state-bg px-3'>
-                             <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_report' id='kt_report_mod' data-id='{$editUrl->id_register_survey}'>
+                             <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_report' id='kt_report_mod' data-id='{$editUrl->id_register_claim}'>
                                  <span class='menu-icon'><i class='bi bi-calendar2-plus'></i></span>
                                  <span class='menu-title'>Report Schedule</span>
                              </a>
@@ -306,7 +341,7 @@ class RegisterSurveyDataTable extends DataTable
          if ($editUrl->status === 'OPEN' || $editUrl->status === 'SCHEDULE') {
             $viewSurvey = "
             <div class='menu-item menu-state-bg px-3'>
-            <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#view_modal".$data->id_register_survey."'>
+            <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#view_modal".$data->id_register_claim."'>
                 <span class='menu-icon'><i class='bi bi-eye'></i></span>
                 <span class='menu-title'>View</span>
             </a>
@@ -315,7 +350,7 @@ class RegisterSurveyDataTable extends DataTable
          }else{
             $viewSurvey = "
             <div class='menu-item menu-state-bg px-3'>
-            <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_report_view' id='kt_report_view_mod' data-id='{$editUrl->id_register_survey}'>
+            <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_report_view' id='kt_report_view_mod' data-id='{$editUrl->id_register_claim}'>
                 <span class='menu-icon'><i class='bi bi-eye'></i></span>
                 <span class='menu-title'>View</span>
             </a>
@@ -331,7 +366,7 @@ class RegisterSurveyDataTable extends DataTable
 "
 . $viewSurvey. "
             <div class='menu-item menu-state-bg px-3'>
-                <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#edit_modal".$data->id_register_survey."'>
+                <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#edit_modal".$data->id_register_claim."'>
                     <span class='menu-icon'><i class='bi bi-pencil-square'></i></span>
                     <span class='menu-title'>Edit</span>
                 </a>
@@ -340,7 +375,7 @@ class RegisterSurveyDataTable extends DataTable
         $schedule
         . $surveyReport ."
             <div class='menu-item menu-state-bg px-3'>
-                <a href='#' class='menu-link px-3 text-danger' data-bs-toggle='modal' data-bs-target='#kt_modal_delete' id='kt_delete_mod' data-id='{$editUrl->id_register_survey}'>
+                <a href='#' class='menu-link px-3 text-danger' data-bs-toggle='modal' data-bs-target='#kt_modal_delete' id='kt_delete_mod' data-id='{$editUrl->id_register_claim}'>
                     <span class='menu-icon'><i class='bi bi-trash'></i></span>
                     <span class='menu-title'>Delete</span>
                 </a>
@@ -381,7 +416,7 @@ class RegisterSurveyDataTable extends DataTable
                 return $data->created_at->format('Y-m-d d:m');
             })
             ->rawColumns(['status','action','link_zoom','created_at'])
-            ->setRowId('id_register_survey');
+            ->setRowId('id_register_claim');
     }
 
     /**
@@ -390,10 +425,9 @@ class RegisterSurveyDataTable extends DataTable
      * @param \App\Models\RegisterSurvey $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(RegisterSurvey $model): QueryBuilder
+    public function query(RegisterClaim $model): QueryBuilder
     {
-
-        return $model->newQuery('where', )->where('id_branch', Auth::user()->id_branch)->with(['vehicle','customer','user','branch']);
+        return $model->newQuery()->where('id_branch', Auth::user()->id_branch)->with(['vehicle','customer','user','branch','register_survey']);
     }
 
     /**
@@ -404,10 +438,10 @@ class RegisterSurveyDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('RegisterSurvey-table')
+                    ->setTableId('RegisterClaim-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->searchPanes(RegisterSurvey::make())
+                    ->searchPanes(RegisterClaim::make())
                     ->dom('frtip')
                     ->ajax([
                         'data' => [
@@ -431,10 +465,17 @@ class RegisterSurveyDataTable extends DataTable
     {
         return [
             Column::make(['title' => 'No',
-                'data' => 'id_register_survey',
-                'name' => 'id_register_survey',
-             ]),
-            Column::make('register_no'),
+                'data' => 'id_register_claim',
+                'name' => 'id_register_claim',
+            ]),
+            Column::make(['title' => 'No Polis',
+                'data' => 'no_polis',
+                'name' => 'no_polis',
+            ]),
+            Column::make(['title' => 'Register No',
+                'data' => 'register_survey.register_no',
+                'name' => 'register_survey.register_no',
+            ]),
             Column::make(['title' => 'Name',
                 'data' => 'customer.customer_name',
                 'name' => 'customer.customer_name',
@@ -470,6 +511,6 @@ class RegisterSurveyDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'RegisterSurveys_' . date('YmdHis');
+        return 'RegisterClaims_' . date('YmdHis');
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterSurveyController;
+use App\Http\Controllers\RegisterClaimController;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\TypePartController;
 use App\Http\Controllers\VehicleController;
@@ -28,6 +29,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::get('/main',[DashboardController::class,'index'])->name('dashboard');
     Route::get('/profile',[ProfileController::class,'index'])->name('profile');
     Route::put('/profile/edit/{id}',[ProfileController::class,'update'])->name('profile.edit');
+    // register survey
     Route::get('/register-survey',[RegisterSurveyController::class,'index'])->name('register-risk-survey');
     Route::post('/register-survey',[RegisterSurveyController::class,'store'])->name('register-survey.create');
     Route::put('/register-survey/edit/{id}',[RegisterSurveyController::class,'update'])->name('register-survey.update');
@@ -35,6 +37,16 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::post('/register-survey/report',[RegisterSurveyController::class,'reportSchedule'])->name('register-survey.report');
     Route::post('/register-survey/delete',[RegisterSurveyController::class,'deleteSurvey'])->name('register-survey.deleteSurvey');
     Route::post('/register-survey/detail',[RegisterSurveyController::class, 'detailSurvey'])->name('register-survey.details');
+
+    // register claim
+    Route::get('/register-claim',[RegisterClaimController::class,'index'])->name('register-claim');
+    Route::post('/register-claim',[RegisterClaimController::class,'store'])->name('register-claim.create');
+    Route::put('/register-claim/edit/{id}',[RegisterClaimController::class,'update'])->name('register-claim.update');
+    Route::post('/register-claim/schedule',[RegisterClaimController::class,'updateSchedule'])->name('register-claim.schedule');
+    Route::post('/register-claim/report',[RegisterClaimController::class,'reportSchedule'])->name('register-claim.report');
+    Route::post('/register-claim/delete',[RegisterClaimController::class,'deleteClaim'])->name('register-claim.deleteClaim');
+    Route::post('/register-claim/detail',[RegisterClaimController::class, 'detailClaim'])->name('register-claim.details');
+
     Route::get('/users',[UsersController::class,'index'])->name('users');
     Route::get('/branch',[BranchController::class,'index'])->name('branch');
     Route::get('/part',[PartController::class,'index'])->name('part');

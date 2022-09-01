@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\DataTables\RegisterSurveyDataTable;
+use App\DataTables\RegisterClaimDataTable;
 use App\Models\Branch;
 use App\Models\Vehicle;
+use App\Models\RegisterClaim;
 use App\Models\RegisterSurvey;
 use App\Models\Customer;
 use App\Models\User;
@@ -18,18 +19,19 @@ use App\Mail\JinggaMail;
 use Carbon\Carbon;
 use \MacsiDigital\Zoom\Facades\Zoom;
 
-class RegisterSurveyController extends Controller
+class RegisterClaimController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(RegisterSurveyDataTable $dataTable)
+    public function index(RegisterClaimDataTable $dataTable)
     {
         $branch = Branch::all();
         $vehicle = Vehicle::all();
         $allCategories = TypePart::get();
+        $registerSurvey = RegisterSurvey::all();
 
         foreach ($allCategories as $rootCategory) {
             $rootCategory->children = Part::where('id_typepart' , $rootCategory->id_typepart)->get();
@@ -40,7 +42,7 @@ class RegisterSurveyController extends Controller
             }
         }
         
-        return $dataTable->render('dashboard.register-survey.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories]);
+        return $dataTable->render('dashboard.register-claim.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories ,'registerSurvey' => $registerSurvey ]);
     }
     
     //dipakai untuk return json nama,jadwal,link zoom meeting
@@ -48,7 +50,7 @@ class RegisterSurveyController extends Controller
     {
         $meetSchedule = [];
 
-        $meetSchedule = RegisterSurvey::with("customer:id_customer,customer_name")
+        $meetSchedule = RegisterClaim::with("customer:id_customer,customer_name")
                 ->where('status', 'like', "%SCHEDULE%")
                 ->get()
                 ->map(function($data){
@@ -72,9 +74,9 @@ class RegisterSurveyController extends Controller
         //
     }
 
-    public function detailSurvey(Request $request){
+    public function detailClaim(Request $request){
         $id = $request->id;
-        $list = RegisterSurvey::with('customer','vehicle','branch')->find($id);
+        $list = RegisterClaim::with('customer','vehicle','branch','register_survey')->find($id);
         return response()->json(['details'=>$list]);
     }
 
@@ -87,8 +89,9 @@ class RegisterSurveyController extends Controller
 
     public function store(Request $request)
     {
-        // return $request;
             $request->validate([
+                'no_polis' => 'required',
+                'id_register_survey' => 'required',
                 'email' => 'unique:customer,email,'.$request->email.',email',
                 'year' => 'required',
                 'customer_name' => 'required',
@@ -97,7 +100,6 @@ class RegisterSurveyController extends Controller
                 'plat_no' => 'required',
                 'id_branch' => 'required',
             ]);
-            // dd($request);
 
             $cus = Customer::create([
                 'customer_name' => $request->customer_name,
@@ -106,20 +108,22 @@ class RegisterSurveyController extends Controller
             ]);
 
 
-            RegisterSurvey::create([
+            RegisterClaim::create([
+                'no_polis' => $request->no_polis,
+                'id_register_survey' => $request->id_register_survey,
                 'register_no' => substr(str_shuffle(MD5(microtime())), 0, 10),
                 'id_customer' => $cus->id_customer,
                 'id_vehicle' => $request->id_vehicle,
                 'year' => $request->year,
                 'plat_no' => $request->plat_no,
                 'id_user' => Auth::user()->id_user,
-                'survey_date' => '',
-                'link_zoom' => '',
-                'surveyor' => '',
+                'survey_date' => '-',
+                'link_zoom' => '-',
+                'surveyor' => '-',
                 'descriptionVehicle' => '{}',
                 'isStandardVehicle' => '{}',
                 'photoVehicle' => '{}',
-                'link_report_zoom' => '',
+                'link_report_zoom' => '-',
                 'status' => 'OPEN',
                 'id_branch' => $request->id_branch,
             ]);
@@ -158,6 +162,8 @@ class RegisterSurveyController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'no_polis' => 'required',
+            'id_register_survey' => 'required',
             'email' => 'unique:customer,email,'.$request->email.',email',
             'year' => 'required',
             'customer_name' => 'required',
@@ -173,7 +179,9 @@ class RegisterSurveyController extends Controller
             'email' => $request->email
         ]);
 
-        RegisterSurvey::find($id)->update([
+        RegisterClaim::find($id)->update([
+            'no_polis' => $request->no_polis,
+            'id_register_survey' => $request->id_register_survey,
             'id_customer' => $request->id_customer,
             'id_vehicle' => $request->id_vehicle,
             'year' => $request->year,
@@ -187,12 +195,12 @@ class RegisterSurveyController extends Controller
     public function updateSchedule(Request $request){
         $id = $request->id;
 
-        $registerSurvey = RegisterSurvey::find($id);
+        $registerSurvey = RegisterClaim::find($id);
         $user = User::find(Auth::user()->id_user);
         $customer = Customer::find($registerSurvey->id_customer);
 
         $meetings = Zoom::user()->find($user->email)->meetings()->create([
-            'topic' => 'Survey Kendaraan Customer ' . $customer->customer_name,
+            'topic' => 'Claim Kendaraan Customer ' . $customer->customer_name,
             'duration' => 15, // In minutes, optional
             'start_time' => new Carbon($request->survey_date),
             'timezone' => 'Asia/Jakarta',
@@ -240,20 +248,20 @@ class RegisterSurveyController extends Controller
             $temp[$i]['url'] = '';
             if(isset($temp[$i]['value'])){
                 $file_name = $temp[$i]['value']->getClientOriginalName();
-                $temp[$i]['value']->storeAs('public/images','register-survey-'.$file_name);
-                $temp[$i]['url'] = \Storage::url('public/images/'.'register-survey-'.$file_name);       
+                $temp[$i]['value']->storeAs('public/images','register-claim-'.$file_name);
+                $temp[$i]['url'] = \Storage::url('public/images/'.'register-claim-'.$file_name);       
             }else{
                 $temp[$i]['url'] = '';
             }
         }
         $id = $request->id;
 
-        $registerSurvey = RegisterSurvey::find($id);
+        $registerSurvey = RegisterClaim::find($id);
 
         $link_report_zoom = '';
         $file_name = $request['videoUpload']->getClientOriginalName();
-        $request['videoUpload']->storeAs('public/video','link-survey-report-'.$file_name);
-        $link_report_zoom = \Storage::url('public/video/'.'link-survey-report-'.$file_name);     
+        $request['videoUpload']->storeAs('public/video','link-claim-report-'.$file_name);
+        $link_report_zoom = \Storage::url('public/video/'.'link-claim-report-'.$file_name);     
 
         $registerSurvey->update([
             'descriptionVehicle' =>  $request->description,
@@ -272,9 +280,9 @@ class RegisterSurveyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function deleteSurvey(Request $request)
+    public function deleteClaim(Request $request)
     {
-        RegisterSurvey::destroy($request->id);
+        RegisterClaim::destroy($request->id);
 
         return redirect()->back()->with('message','Delete Survey.');
     }
