@@ -46,7 +46,7 @@ License: For each use you must have a valid license purchased only from above li
 		<div class="d-flex flex-column flex-root">
 			
 			<!--begin::Page-->
-			@auth
+			@if(Auth::check() and !(Route::is('reset.success')))
 			<div class="page d-flex flex-row flex-column-fluid">
 				
 					@include('components.navbar')
@@ -60,11 +60,11 @@ License: For each use you must have a valid license purchased only from above li
 						<div class="post d-flex flex-column-fluid" id="kt_post">
 							<!--begin::Container-->
 							<div id="kt_content_container" class="app-container container-fluid">
-			@endauth
+			@endif
 								<!--begin::Isi Content-->
 									@yield('content')
 								<!--end::Isi Content-->
-			@auth	
+			@if(Auth::check() and !(Route::is('reset.success')))	
 							</div>
 							<!--end::Container-->
 						</div>
@@ -78,7 +78,7 @@ License: For each use you must have a valid license purchased only from above li
 				<!--end::Wrapper-->
 			</div>
 			<!--end::Page-->
-			@endauth
+			@endif
 		</div>
 		<!--end::Root-->
 		<!--begin::Drawers-->
