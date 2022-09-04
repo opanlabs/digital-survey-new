@@ -390,6 +390,7 @@ class RegisterSurveyDataTable extends DataTable
      * @param \App\Models\RegisterSurvey $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
+<<<<<<< HEAD
     public function query(RegisterSurvey $RegisterSurvey): QueryBuilder
     {
 <<<<<<< HEAD
@@ -401,6 +402,14 @@ class RegisterSurveyDataTable extends DataTable
 
         return $model->newQuery('where', )->where('id_branch', Auth::user()->id_branch)->with(['vehicle','customer','branch']);
 >>>>>>> a60db7d (fix)
+=======
+    public function query(RegisterSurvey $model): QueryBuilder
+    {
+        $id_vehicle = $this->request->get('id_vehicle');
+        return $RegisterSurvey->newQuery('where', )->where('id_branch', Auth::user()->id_branch)->with(['vehicle','customer','user','branch'])->when($id_vehicle, function ($query) use($id_vehicle) {
+            return $query->where('id_vehicle', $id_vehicle);
+        });;
+>>>>>>> 6ff5a13 (add filter by vehilce in register risk)
     }
 
     /**
