@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\DataTables\RegisterSurveyDataTable;
+use App\DataTables\RegisterSurveyReportDataTable;
 use App\Models\Branch;
 use App\Models\Vehicle;
 use App\Models\RegisterSurvey;
@@ -44,6 +45,24 @@ class RegisterSurveyController extends Controller
         }
         
         return $dataTable->render('dashboard.register-survey.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories]);
+    }
+
+    public function report(RegisterSurveyReportDataTable $dataTable)
+    {
+        $branch = Branch::all();
+        $vehicle = Vehicle::all();
+        $allCategories = TypePart::get();
+
+        foreach ($allCategories as $rootCategory) {
+            $rootCategory->children = Part::where('id_typepart' , $rootCategory->id_typepart)->get();
+
+            foreach ($rootCategory->children as $data) {
+                $data->isStandard = false;
+                $data->description = '';
+            }
+        }
+        
+        return $dataTable->render('dashboard.risk-report.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories]);
     }
     
     //dipakai untuk return json nama,jadwal,link zoom meeting
@@ -134,7 +153,7 @@ class RegisterSurveyController extends Controller
                 'id_vehicle' => $request->id_vehicle,
                 'year' => $request->year,
                 'plat_no' => $request->plat_no,
-                'id_user' => Auth::user()->id_user,
+                'id_user' => '',
                 'survey_date' => '',
                 'link_zoom' => '',
                 'surveyor' => '',

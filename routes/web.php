@@ -32,6 +32,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::put('/profile/edit/{id}',[ProfileController::class,'update'])->name('profile.edit');
     // register survey
     Route::get('/register-survey',[RegisterSurveyController::class,'index'])->name('register-risk-survey');
+    Route::get('/register-survey/list-report',[RegisterSurveyController::class,'report'])->name('register-risk-survey.report-list');
     Route::post('/register-survey',[RegisterSurveyController::class,'store'])->name('register-survey.create');
     Route::put('/register-survey/edit/{id}',[RegisterSurveyController::class,'update'])->name('register-survey.update');
     Route::post('/register-survey/schedule',[RegisterSurveyController::class,'updateSchedule'])->name('register-survey.schedule');
@@ -41,6 +42,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
 
     // register claim
     Route::get('/register-claim',[RegisterClaimController::class,'index'])->name('register-claim');
+    Route::get('/register-claim/list-report',[RegisterClaimController::class,'report'])->name('register-claim.report-list');
     Route::post('/register-claim',[RegisterClaimController::class,'store'])->name('register-claim.create');
     Route::put('/register-claim/edit/{id}',[RegisterClaimController::class,'update'])->name('register-claim.update');
     Route::post('/register-claim/schedule',[RegisterClaimController::class,'updateSchedule'])->name('register-claim.schedule');

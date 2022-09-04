@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\DataTables\RegisterClaimDataTable;
+use App\DataTables\RegisterClaimReportDataTable;
 use App\Models\Branch;
 use App\Models\Vehicle;
 use App\Models\RegisterClaim;
@@ -43,6 +44,25 @@ class RegisterClaimController extends Controller
         }
         
         return $dataTable->render('dashboard.register-claim.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories ,'registerSurvey' => $registerSurvey ]);
+    }
+
+    public function report(RegisterClaimReportDataTable $dataTable)
+    {
+        $branch = Branch::all();
+        $vehicle = Vehicle::all();
+        $allCategories = TypePart::get();
+        $registerSurvey = RegisterSurvey::all();
+
+        foreach ($allCategories as $rootCategory) {
+            $rootCategory->children = Part::where('id_typepart' , $rootCategory->id_typepart)->get();
+
+            foreach ($rootCategory->children as $data) {
+                $data->isStandard = false;
+                $data->description = '';
+            }
+        }
+        
+        return $dataTable->render('dashboard.claim-report.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories ,'registerSurvey' => $registerSurvey ]);
     }
     
     //dipakai untuk return json nama,jadwal,link zoom meeting
@@ -116,7 +136,7 @@ class RegisterClaimController extends Controller
                 'id_vehicle' => $request->id_vehicle,
                 'year' => $request->year,
                 'plat_no' => $request->plat_no,
-                'id_user' => Auth::user()->id_user,
+                'id_user' => '',
                 'survey_date' => '-',
                 'link_zoom' => '-',
                 'surveyor' => '-',
