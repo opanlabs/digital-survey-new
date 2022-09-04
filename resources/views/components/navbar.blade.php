@@ -107,7 +107,7 @@
                     </div>
                 </div>
                 <!-- report survey -->
-                <div data-kt-menu-trigger="click" class="menu-item here {{ Route::is('report') ? 'show' : '' }} menu-accordion" >
+                <div data-kt-menu-trigger="click" class="menu-item here {{ Route::is('register-risk-survey.report-list') || Route::is('register-claim.report-list') ? 'show' : '' }} menu-accordion" >
                     <span class="menu-link">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -122,10 +122,10 @@
                         <span class="menu-title">Report Survey</span>
                         <span class="menu-arrow"></span>
                     </span>
-                    <div class="menu-sub menu-sub-accordion {{ Route::is('report') ? 'menu-active-bg' : 'menu-active-bg' }}">
+                    <div class="menu-sub menu-sub-accordion {{ Route::is('register-risk-survey.report-list') || Route::is('register-claim.report-list') ? 'menu-active-bg' : 'menu-active-bg' }}">
                         {{-- @if (Auth::user()->id_role === 2 || Auth::user()->id_role === 1) --}}
                             <div class="menu-item">
-                                <a class="menu-link {{ Route::is('report') ? 'active' : '' }}" href="{{ url('dashboard/report') }}">
+                                <a class="menu-link {{ Route::is('register-risk-survey.report-list') ? 'active' : '' }}" href="{{ url('dashboard/register-survey/list-report') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -135,7 +135,7 @@
                         {{-- @endif --}}
                         {{-- @if (Auth::user()->id_role === 3 || Auth::user()->id_role === 1) --}}
                             <div class="menu-item">
-                                <a class="menu-link {{ Route::is('report') ? 'active' : '' }}" href="{{ url('dashboard/report') }}">
+                                <a class="menu-link {{ Route::is('register-claim.report-list') ? 'active' : '' }}" href="{{ url('dashboard/register-claim/list-report') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>

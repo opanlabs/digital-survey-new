@@ -16,7 +16,7 @@ use App\Models\Vehicle;
 use App\Models\Branch;
 use Auth;
 
-class RegisterSurveyDataTable extends DataTable
+class RegisterSurveyReportDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -302,17 +302,6 @@ class RegisterSurveyDataTable extends DataTable
                              </a>
                          </div>";
          }
-
-         if ($editUrl->status === 'OPEN' || $editUrl->status === 'SCHEDULE') {
-            $viewSurvey = "
-            <div class='menu-item menu-state-bg px-3'>
-            <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#view_modal".$data->id_register_survey."'>
-                <span class='menu-icon'><i class='bi bi-eye'></i></span>
-                <span class='menu-title'>View</span>
-            </a>
-            </div>
-            ";
-         }else{
             $viewSurvey = "
             <div class='menu-item menu-state-bg px-3'>
             <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_report_view' id='kt_report_view_mod' data-id='{$editUrl->id_register_survey}'>
@@ -321,7 +310,6 @@ class RegisterSurveyDataTable extends DataTable
             </a>
             </div>
         ";
-         }
 
 
         return "
@@ -329,25 +317,7 @@ class RegisterSurveyDataTable extends DataTable
         <!--begin::Menu-->
         <div class='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg fw-bold fs-7 w-125px py-4' data-kt-menu='true'>
 "
-. $viewSurvey. "
-            <div class='menu-item menu-state-bg px-3'>
-                <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#edit_modal".$data->id_register_survey."'>
-                    <span class='menu-icon'><i class='bi bi-pencil-square'></i></span>
-                    <span class='menu-title'>Edit</span>
-                </a>
-            </div>
-        ". 
-        $schedule
-        . $surveyReport ."
-            <div class='menu-item menu-state-bg px-3'>
-                <a href='#' class='menu-link px-3 text-danger' data-bs-toggle='modal' data-bs-target='#kt_modal_delete' id='kt_delete_mod' data-id='{$editUrl->id_register_survey}'>
-                    <span class='menu-icon'><i class='bi bi-trash'></i></span>
-                    <span class='menu-title'>Delete</span>
-                </a>
-            </div>
-        </div>
-        <!--end::Menu-->
-        ". $viewModal . $editModal;
+. $viewSurvey ;
     }
     
     public function dataTable(QueryBuilder $query): EloquentDataTable
@@ -393,7 +363,7 @@ class RegisterSurveyDataTable extends DataTable
     public function query(RegisterSurvey $model): QueryBuilder
     {
 
-        return $model->newQuery('where', )->where('id_branch', Auth::user()->id_branch)->with(['vehicle','customer','user','branch']);
+        return $model->newQuery('where', )->where([['id_branch', Auth::user()->id_branch],['status', 'DONE']])->with(['vehicle','customer','user','branch']);
     }
 
     /**
