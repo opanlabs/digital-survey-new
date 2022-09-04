@@ -1,7 +1,6 @@
 @extends('layout.main')
 
 @section('content')
-
 <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" >
     <!--begin::Content-->
     <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
@@ -28,7 +27,7 @@
                 <!--begin::Input group-->
                 <div class="fv-row mb-5">
                     <label class="form-label fw-bolder text-gray-900 fs-6">Email</label>
-                    <input class="form-control form-control-solid @error('email') is-invalid @enderror" type="email" placeholder="" name="email" autocomplete="off" value="{{ old('email') }}" />
+                    <input class="form-control form-control-solid @error('email') is-invalid @enderror" type="email" placeholder="email" name="email" autocomplete="off" value="{{ old('email') }}" />
                     @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -44,7 +43,7 @@
                 <!--begin::Actions-->
                 <div class="d-flex flex-wrap justify-content-center pb-lg-0 fv-row mb-5">
                     <button type="submit" id="kt_password_reset_submit" class="btn btn-lg btn-primary fw-bolder" style="width: -webkit-fill-available;">
-                        <span class="indicator-label">Submit</span>
+                        <span class="indicator-label">Reset Password</span>
                         <span class="indicator-progress">Please wait...
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                     </button>

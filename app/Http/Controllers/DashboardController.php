@@ -5,6 +5,14 @@ use App\Charts\RegisterChart;
 use App\Charts\PolishChart;
 use App\Charts\ClaimChart;
 
+use App\Models\Branch;
+use App\Models\Vehicle;
+use App\Models\TypePart;
+use App\Models\RegisterSurvey;
+use App\Models\Part;
+
+use App\DataTables\RegisterClaimDashboardDataTable;
+
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,14 +22,31 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(RegisterChart $RegisterChart,PolishChart $PolishChart,ClaimChart $ClaimChart)
-    {
-        return view('dashboard.index',[
+    public function index(RegisterChart $RegisterChart,PolishChart $PolishChart,ClaimChart $ClaimChart,RegisterClaimDashboardDataTable $dataTable )
+    {   
+        $branch = Branch::all();
+        $vehicle = Vehicle::all();
+        $allCategories = TypePart::get();
+        $registerSurvey = RegisterSurvey::all();
+
+        foreach ($allCategories as $rootCategory) {
+            $rootCategory->children = Part::where('id_typepart' , $rootCategory->id_typepart)->get();
+
+            foreach ($rootCategory->children as $data) {
+                $data->isStandard = false;
+                $data->description = '';
+            }
+        }
+
+        return $dataTable->render('dashboard.index',[
         
                 'RegisterChart' => $RegisterChart->build(),
                 'PolishChart' => $PolishChart->build(),
                 'ClaimChart' => $ClaimChart->build(),
-            
+                'branch' => $branch , 
+                'vehicle' => $vehicle , 
+                'part' => $allCategories ,
+                'registerSurvey' => $registerSurvey 
             ]);
     }
 
