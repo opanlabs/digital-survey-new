@@ -4,7 +4,7 @@
     <div class="d-flex" >
         <!--begin::Content-->
         <div class="d-none d-xl-block" 
-             style="width: 60%; background-image: url({{ asset('/media/png/login.png') }}); height: 100vh; background-size: cover;background-position: center;">
+             style="width: 60%; background-image: url({{ asset('/media/png/login.png') }}); height: 100vh; background-size: cover;">
             
         </div>
         <div class="d-flex flex-center flex-column flex-column-fluid">
