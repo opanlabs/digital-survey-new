@@ -11,6 +11,7 @@ use App\Http\Controllers\PartController;
 use App\Http\Controllers\TypePartController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\AutoDeployController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
 
 Route::group(['middleware' => ['auth']], function () { 
     Route::get('/',[DashboardController::class,'index'])->name('main-dashboard');
+    Route::get('/password/success',[ResetPasswordController::class,'success'])->name('reset.success');
 });
 
 Auth::routes();
@@ -75,4 +77,5 @@ Route::get('/deploy',[AutoDeployController::class,'deploy'])->name('deploy');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//github webhook untuk trigger deployment
 Route::githubWebhooks('deploy-webhook');
