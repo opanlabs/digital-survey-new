@@ -441,13 +441,12 @@ class RegisterClaimDashboardDataTable extends DataTable
                     // ->addIndexColumn()
                     ->setTableId('RegisterClaim-table')
                     ->columns($this->getColumns())
-                    ->minifiedAjax()
                     ->searchPanes(RegisterClaim::make())
                     // ->dom('frtip')
                     ->ajax([
                         'data' => [
                             '_token' => csrf_token()
-                        ],
+                        ]
                     ])
                     ->parameters([
                         'drawCallback' => 'function() { KTMenu.createInstances(); }',
