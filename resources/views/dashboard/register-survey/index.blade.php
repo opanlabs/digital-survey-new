@@ -1,11 +1,22 @@
 @extends('layout.main')
 @section('content')
+
     <div class="card">
-        
         <div class="card-header">
             <h3 class="card-title align-items-start flex-column">
                 <span class="card-label fw-bolder text-dark">List Register Risk Survey</span>
             </h3>
+            <div class="d-flex flex-row mb-7 fv-row align-items-start align-self-center">
+                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2 align-self-center">
+                    <span>Filter by brand:</span>
+                </label>
+                <select id="vehicle_brand" class="form-select form-select-solid @error('id_vehicle') is-invalid @enderror" required data-control="select2" name="id_vehicle" data-placeholder="Select an option" data-hide-search="true">
+                    <option></option>
+                    @foreach($vehicle as $br)
+                        <option value="{{$br->id_vehicle}}">{{ $br->nama }}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="card-toolbar">
                 <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card" class="btn btn-primary">Add Register Risk Survey</a>
             </div>
@@ -516,6 +527,24 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
     {{$dataTable->scripts()}}
     <script>
+        //filtering vehicle datatable
+        $(document).ready(function () {
+            let table = $('#RegisterSurvey-table')
+            $('#vehicle_brand').on('change', function () {
+                tableFilter($('#vehicle_brand').val())
+                table.DataTable().ajax.reload()
+            })
+            $('#reset').on('click', function () {
+                tableFilter(null)
+                table.DataTable().ajax.reload()
+            })
+            function tableFilter(value) {
+                table.on('preXhr.dt', function ( e, settings, data ) {
+                    data.id_vehicle = value;
+                })
+            }
+        })
+
         const yesterday = new Date();
         yesterday.setDate(yesterday.getDate() - 1);
 
@@ -576,7 +605,6 @@
 
             },'json');
         });
-
 
         $(document).on('click','#kt_report_view_mod', function(){
             var id = $(this).data('id');

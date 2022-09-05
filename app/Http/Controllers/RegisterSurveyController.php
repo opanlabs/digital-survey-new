@@ -16,6 +16,9 @@ use Auth;
 use Mail;
 use App\Mail\JinggaMail;
 
+use Datatables;
+use Redirect,Response,DB,Config;
+
 use Carbon\Carbon;
 use \MacsiDigital\Zoom\Facades\Zoom;
 
@@ -79,6 +82,25 @@ class RegisterSurveyController extends Controller
                     ];
                 });
         return response()->json($meetSchedule);
+    }
+
+    public function filterRegisterDate()
+    {
+        $registerQuery = RegisterSurvey::query();
+ 
+        $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
+        $end_date = (!empty($_GET["end_date"])) ? ($_GET["end_date"]) : ('');
+ 
+        if($start_date && $end_date){
+ 
+         $start_date = date('Y-m-d', strtotime($start_date));
+         $end_date = date('Y-m-d', strtotime($end_date));
+ 
+         $registerQuery->whereRaw("date(created_at) >= '" . $start_date . "' AND date(created_at) <= '" . $end_date . "'");
+        }
+        $RegisterSurvey = $registerQuery->select('*');
+        return datatables()->of($RegisterSurvey)
+            ->make(true);
     }
 
     /**

@@ -72,6 +72,8 @@ Route::get('/role/query/autocomplete',[BranchController::class,'autocompleteRole
 Route::get('/vehicle/query/autocomplete',[VehicleController::class,'autocomplete'])->name('vehicle.autocomplete');
 Route::get('/meetSchedule/query',[RegisterSurveyController::class,'meetSchedule'])->name('meetSchedule.json');
 
+Route::get('/filterRegisterDate/query',[RegisterSurveyController::class,'filterRegisterDate'])->name('filterRegisterDate.datatable');
+
 //webhook untuk autodeploy
 Route::get('/deploy',[AutoDeployController::class,'deploy'])->name('deploy');
 
