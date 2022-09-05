@@ -405,12 +405,6 @@ class RegisterSurveyDataTable extends DataTable
 =======
     public function query(RegisterSurvey $model): QueryBuilder
     {
-<<<<<<< HEAD
-        $id_vehicle = $this->request->get('id_vehicle');
-        return $RegisterSurvey->newQuery('where', )->where('id_branch', Auth::user()->id_branch)->with(['vehicle','customer','user','branch'])->when($id_vehicle, function ($query) use($id_vehicle) {
-            return $query->where('id_vehicle', $id_vehicle);
-        });;
-=======
 
         return $model->newQuery('where', )->where('id_branch', Auth::user()->id_branch)->with(['vehicle','customer','branch']);
 >>>>>>> a60db7d (fix)
