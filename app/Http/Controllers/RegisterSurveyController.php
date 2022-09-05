@@ -153,7 +153,7 @@ class RegisterSurveyController extends Controller
                 'id_vehicle' => $request->id_vehicle,
                 'year' => $request->year,
                 'plat_no' => $request->plat_no,
-                'id_user' => null,
+                'id_user' => Auth::user()->id_user,
                 'survey_date' => '',
                 'link_zoom' => '',
                 'surveyor' => '',
