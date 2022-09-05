@@ -136,7 +136,7 @@ class RegisterClaimController extends Controller
                 'id_vehicle' => $request->id_vehicle,
                 'year' => $request->year,
                 'plat_no' => $request->plat_no,
-                'id_user' => '',
+                'id_user' => null,
                 'survey_date' => '-',
                 'link_zoom' => '-',
                 'surveyor' => '-',
