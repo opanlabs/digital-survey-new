@@ -6,19 +6,62 @@
             <h3 class="card-title align-items-start flex-column">
                 <span class="card-label fw-bolder text-dark">List Register Risk Survey</span>
             </h3>
-            <div class="d-flex flex-row mb-7 fv-row align-items-start align-self-center">
-                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2 align-self-center">
-                    <span>Filter by brand:</span>
-                </label>
-                <select id="vehicle_brand" class="form-select form-select-solid @error('id_vehicle') is-invalid @enderror" required data-control="select2" name="id_vehicle" data-placeholder="Select an option" data-hide-search="true">
-                    <option></option>
-                    @foreach($vehicle as $br)
-                        <option value="{{$br->id_vehicle}}">{{ $br->nama }}</option>
-                    @endforeach
-                </select>
-            </div>
             <div class="card-toolbar">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card" class="btn btn-primary">Add Register Risk Survey</a>
+                <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                    <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-static="true" data-kt-menu-permanent="true" data-kt-menu-toggle="true">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->Filter
+                    </button>
+                    <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
+                        <!--begin::Header-->
+                        <div class="px-7 py-5">
+                            <div class="fs-5 text-dark fw-bolder">Filter Options</div>
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Separator-->
+                        <div class="separator border-gray-200"></div>
+                        <!--end::Separator-->
+                        <!--begin::Content-->
+                        <div class="px-7 py-5" data-kt-user-table-filter="form">
+                            <!--begin::Input group-->
+                            <div class="mb-10">
+                                <label class="form-label fs-6 fw-bold">Vehcile Brand:</label>
+                                <select id="vehicle_brand" class="form-select form-select-solid @error('id_vehicle') is-invalid @enderror" required data-control="select2" name="id_vehicle" data-placeholder="Select an option" data-hide-search="true">
+                                    <option></option>
+                                    @foreach($vehicle as $br)
+                                        <option value="{{$br->id_vehicle}}">{{ $br->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="mb-10">
+                                <label class="form-label fs-6 fw-bold">By Survey Date:</label>
+                                <input class="form-control form-control-solid" placeholder="Pick date rage" id="daterangeSurvey"/>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="mb-10">
+                                <label class="form-label fs-6 fw-bold">By Register Date:</label>
+                                <input class="form-control form-control-solid" placeholder="Pick date rage" id="daterangeRegister"/>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Actions-->
+                            <div class="d-flex justify-content-end">
+                                <button id="reset_table" type="reset" class="btn btn-light btn-active-light-primary fw-bold me-2 px-6" data-kt-menu-dismiss="true">Reset</button>
+                                <button id="apply_filter" type="submit" class="btn btn-primary fw-bold px-6" data-kt-menu-dismiss="true">Apply</button>
+                            </div>
+                            <!--end::Actions-->
+                        </div>
+                        <!--end::Content-->
+                    </div>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card" class="btn btn-primary">Add Register Risk Survey</a>
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -527,20 +570,57 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
     {{$dataTable->scripts()}}
     <script>
-        //filtering vehicle datatable
+        window.onclick = function(event) {
+            event.stopPropagation();
+            console.log('stop')
+        }
+
+        //date range filter by survey date
+        $("#daterangeSurvey").flatpickr({
+            dateFormat: "Y-m-d",
+            mode: "range",
+            onChange: () => {
+                document.getElementById('daterangeRegister').value = '';
+            },
+        });
+
+        //date range filter by register date
+        $("#daterangeRegister").flatpickr({
+            dateFormat: "Y-m-d",
+            mode: "range",
+            onChange: () => {
+                document.getElementById('daterangeSurvey').value = '';
+            },
+        });
+
+        //filtering datatable
         $(document).ready(function () {
+
             let table = $('#RegisterSurvey-table')
-            $('#vehicle_brand').on('change', function () {
-                tableFilter($('#vehicle_brand').val())
+            $('#apply_filter').on('click', function () {
+                let dtSurvey = $("#daterangeSurvey").val()
+                daterangeSurvey = dtSurvey.split(' to ')
+
+                let dtRegister = $("#daterangeRegister").val()
+                daterangeRegister= dtRegister.split(' to ')
+
+                let id_vehicle = $('#vehicle_brand').val()
+
+                tableFilter(id_vehicle, daterangeSurvey, daterangeRegister )
+                table.DataTable().ajax.reload()
+                
+            })
+            $('#reset_table').on('click', function () {
+                tableFilter('','','')
                 table.DataTable().ajax.reload()
             })
-            $('#reset').on('click', function () {
-                tableFilter(null)
-                table.DataTable().ajax.reload()
-            })
-            function tableFilter(value) {
+            function tableFilter(id_vehcile, daterangeSurvey, daterangeRegister) {
                 table.on('preXhr.dt', function ( e, settings, data ) {
-                    data.id_vehicle = value;
+                    data.id_vehicle = id_vehcile;
+                    data.startdateSurvey = daterangeSurvey[0];
+                    data.enddateSurvey = daterangeSurvey[1];
+                    data.startdateRegister = daterangeRegister[0];
+                    data.enddateRegister = daterangeRegister[1];
                 })
             }
         })
