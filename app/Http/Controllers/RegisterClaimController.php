@@ -17,11 +17,21 @@ use Auth;
 use Mail;
 use App\Mail\JinggaMail;
 
+use App\Exports\RegisterClaimExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 use Carbon\Carbon;
 use \MacsiDigital\Zoom\Facades\Zoom;
 
 class RegisterClaimController extends Controller
 {
+
+	public function export_excel($id)
+	{   
+        $query = RegisterClaim::where('id_register_claim',$id)->with(['vehicle','customer','user','branch','register_survey'])->get();
+
+		return Excel::download(new RegisterClaimExport($query), 'RegisterClaimExport_'. $query[0]->register_survey->register_no .'_.xlsx');
+	}
     /**
      * Display a listing of the resource.
      *
@@ -138,14 +148,14 @@ class RegisterClaimController extends Controller
                 'plat_no' => $request->plat_no,
                 'id_user' => Auth::user()->id_user,
                 'survey_date' => '-',
-                'link_zoom' => '-',
+                'link_zoom' => '',
                 'surveyor' => '-',
                 'descriptionVehicle' => '{}',
                 'isStandardVehicle' => '{}',
                 'photoVehicle' => '{}',
-                'link_report_zoom' => '-',
+                'link_report_zoom' => '',
                 'status' => 'OPEN',
-                'id_branch' => $request->id_branch,
+                'id_branch' => Auth::user()->id_branch,
             ]);
         return redirect()->back()->with('message','Data Successfully Added.');
     }
@@ -206,7 +216,7 @@ class RegisterClaimController extends Controller
             'id_vehicle' => $request->id_vehicle,
             'year' => $request->year,
             'plat_no' => $request->plat_no,
-            'id_branch' => $request->id_branch,
+            'id_branch' => Auth::user()->id_branch,
         ]);
         
         return redirect()->back()->with('message','Data Successfully Updated.');

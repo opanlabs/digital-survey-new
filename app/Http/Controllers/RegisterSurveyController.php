@@ -19,11 +19,22 @@ use App\Mail\JinggaMail;
 use Datatables;
 use Redirect,Response,DB,Config;
 
+use App\Exports\RegisterSurveyExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 use Carbon\Carbon;
 use \MacsiDigital\Zoom\Facades\Zoom;
 
 class RegisterSurveyController extends Controller
 {
+
+    public function export_excel($id)
+	{   
+        $query = RegisterSurvey::where('id_register_survey',$id)->with(['vehicle','customer','branch'])->get();
+
+		return Excel::download(new RegisterSurveyExport($query), 'RegisterSurveyExport_'. $query[0]->register_survey->register_no .'_.xlsx');
+	}
+
     /**
      * Display a listing of the resource.
      *
@@ -136,7 +147,6 @@ class RegisterSurveyController extends Controller
                 'phone_number' => 'required',
                 'id_vehicle' => 'required',
                 'plat_no' => 'required',
-                'id_branch' => 'required',
             ]);
             // dd($request);
 
@@ -154,15 +164,15 @@ class RegisterSurveyController extends Controller
                 'year' => $request->year,
                 'plat_no' => $request->plat_no,
                 'id_user' => Auth::user()->id_user,
-                'survey_date' => '',
+                'survey_date' => '-',
                 'link_zoom' => '',
-                'surveyor' => '',
+                'surveyor' => '-',
                 'descriptionVehicle' => '{}',
                 'isStandardVehicle' => '{}',
                 'photoVehicle' => '{}',
                 'link_report_zoom' => '',
                 'status' => 'OPEN',
-                'id_branch' => $request->id_branch,
+                'id_branch' => Auth::user()->id_branch,
             ]);
         return redirect()->back()->with('message','Data Successfully Added.');
     }
@@ -219,7 +229,7 @@ class RegisterSurveyController extends Controller
             'id_vehicle' => $request->id_vehicle,
             'year' => $request->year,
             'plat_no' => $request->plat_no,
-            'id_branch' => $request->id_branch,
+            'id_branch' => Auth::user()->id_branch,
         ]);
         
         return redirect()->back()->with('message','Data Successfully Updated.');
