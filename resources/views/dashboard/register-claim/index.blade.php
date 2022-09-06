@@ -110,7 +110,7 @@
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span>Year Vehicle</span>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid @error('year') is-invalid @enderror" required placeholder="" name="year" value="" />
+                                            <input type="number" class="form-control form-control-solid @error('year') is-invalid @enderror" required placeholder="" name="year" value="" />
                                         </div>
                                     </div>
                                 </div>
@@ -121,19 +121,6 @@
                                                 <span>Plat No</span>
                                             </label>
                                             <input type="text" class="form-control form-control-solid @error('plat_no') is-invalid @enderror" required placeholder="" name="plat_no" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 fv-row">
-                                        <div class="d-flex flex-column mb-7 fv-row">
-                                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                                <span>Branch</span>
-                                            </label>
-                                            <select class="form-select form-select-solid @error('id_branch') is-invalid @enderror" required data-control="select2" name="id_branch" data-placeholder="Select an option" data-hide-search="true">
-                                                <option></option>
-                                                @foreach($branch as $br)
-                                                    <option value="{{$br->id_branch}}">{{ $br->province_name }}</option>
-                                                @endforeach
-                                            </select>
                                         </div>
                                     </div>
                                 </div>

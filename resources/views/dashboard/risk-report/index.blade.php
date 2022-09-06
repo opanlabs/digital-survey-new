@@ -55,11 +55,11 @@
                                                         <td class="text-muted min-w-125px w-125px">Plat No</td>
                                                         <td class="text-gray-800" id="plat_no_view"></td>
                                                     </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Link Report Video</td>
+                                                        <td class="text-gray-800" id="link_report_schedule_view"></td>
+                                                    </tr>
                                                 </table>
-                                                <div class="input-group mb-5">
-                                                    <span class="input-group-text" id="basic-addon1">Link</span>
-                                                    <input type="text" id="link_report_schedule_view" class="form-control" placeholder="Link Report Video" aria-label="Link Report Video" aria-describedby="basic-addon1"/>
-                                                </div>
                                             </div>
                                             <div class="flex-equal">
                                                 <table class="table table-flush fw-bold gy-2">
@@ -82,6 +82,14 @@
                                                     <tr>
                                                         <td class="text-muted min-w-125px w-125px">Status</td>
                                                         <td class="text-gray-800" id="status_view"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Link Report Excel</td>
+                                                        <td class="text-gray-800" id="link_report_schedule_excel_view"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Link Report PDF</td>
+                                                        <td class="text-gray-800" id="link_report_schedule_pdf_view"></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -270,6 +278,12 @@
                 } else if(data.details.status === 'DONE') {
                     stats = '<a class="btn btn-outline btn-outline-dark btn-active-light-dark btn-sm">Done</a>';
                 }
+
+                var APP_URL = {!! json_encode(url('/')) !!}
+
+                var link_report_schedule_view = `<a href="${data.details.link_report_zoom}" target="_blank" class="btn btn-outline btn-outline-dark btn-active-light-dark btn-sm">Download Video</a>`;
+                var link_report_schedule_excel_view = `<a href="${APP_URL}/dashboard/register-claim/export_excel/${data.details.id_register_claim}" target="_blank" class="btn btn-outline btn-outline-dark btn-active-light-dark btn-sm">Download Excel</a>`;
+                var link_report_schedule_pdf_view = '<a class="btn btn-outline btn-outline-dark btn-active-light-dark btn-sm">Download PDF</a>';
                 
                 var url = `${data.details.link_report_zoom}`
                 $('#no_register_view').html(data.details.register_no);
@@ -283,7 +297,9 @@
                 $('#year_reporting_survey_view').html(data.details.year);
                 $('#plat_no_view').html(data.details.plat_no);
                 $('#status_view').html(stats);
-                $('#link_report_schedule_view').val(url);
+                $('#link_report_schedule_view').html(link_report_schedule_view);
+                $('#link_report_schedule_excel_view').html(link_report_schedule_excel_view);
+                $('#link_report_schedule_pdf_view').html(link_report_schedule_pdf_view);
 
             },'json');
         });

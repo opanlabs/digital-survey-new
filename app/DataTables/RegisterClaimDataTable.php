@@ -277,7 +277,7 @@ class RegisterClaimDataTable extends DataTable
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
                                                 <span>Year Vehicle</span>
                                             </label>
-                                            <input type='text' class='form-control form-control-solid @error('year') is-invalid @enderror' required placeholder='' name='year' value='".$data->year."' />
+                                            <input type='number' class='form-control form-control-solid @error('year') is-invalid @enderror' required placeholder='' name='year' value='".$data->year."' />
                                         </div>
                                     </div>
                                 </div>
@@ -288,18 +288,6 @@ class RegisterClaimDataTable extends DataTable
                                                 <span>Plat No</span>
                                             </label>
                                             <input type='text' class='form-control form-control-solid @error('plat_no') is-invalid @enderror' required placeholder='' name='plat_no' value='".$data->plat_no."' />
-                                        </div>
-                                    </div>
-                                    <div class='col-md-6 fv-row'>
-                                        <div class='d-flex flex-column mb-7 fv-row'>
-                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                                <span>Branch</span>
-                                            </label>
-                                            <select class='form-select form-select-solid @error('id_branch') is-invalid @enderror' required data-control='select2' name='id_branch' data-placeholder='Select an option' data-hide-search='true'>
-                                            ".
-                                            $viewModal_branchSelect
-                                            ."
-                                            </select>
                                         </div>
                                     </div>
                                 </div>
