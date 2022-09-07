@@ -557,11 +557,6 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
     {{$dataTable->scripts()}}
     <script>
-        window.onclick = function(event) {
-            event.stopPropagation();
-            console.log('stop')
-        }
-
         //date range filter by survey date
         $("#daterangeSurvey").flatpickr({
             dateFormat: "Y-m-d",

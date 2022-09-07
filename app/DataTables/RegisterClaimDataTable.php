@@ -415,7 +415,29 @@ class RegisterClaimDataTable extends DataTable
      */
     public function query(RegisterClaim $model): QueryBuilder
     {
-        return $model->newQuery()->where('id_branch', Auth::user()->id_branch)->with(['vehicle','customer','user','branch','register_survey']);
+        // return $model->newQuery()->where('id_branch', Auth::user()->id_branch)->with(['vehicle','customer','user','branch','register_survey']);
+
+        $id_vehicle = $this->request->get('id_vehicle');
+        $startdateSurvey = $this->request->get('startdateSurvey');
+        $enddateSurvey = $this->request->get('enddateSurvey');
+        $startdateRegister = $this->request->get('startdateRegister');
+        $enddateRegister = $this->request->get('enddateRegister');
+
+        return $model
+        ->with(['vehicle','customer','user','branch','register_survey'])
+        ->when($id_vehicle or $startdateSurvey or $startdateRegister, function ($query) use($id_vehicle, $startdateSurvey, $enddateSurvey, $startdateRegister, $enddateRegister) {
+            return $query
+                        ->when($id_vehicle, function ($query) use ($id_vehicle){
+                            return  $query->Where('id_vehicle', $id_vehicle);
+                        })
+                        ->when($startdateSurvey, function ($query) use ($startdateSurvey,$enddateSurvey){
+                            return  $query->WhereBetween('survey_date', [$startdateSurvey,$enddateSurvey]);
+                        })
+                        ->when($startdateRegister, function ($query) use ($startdateRegister,$enddateRegister){
+                            return  $query->WhereBetween('created_at', [$startdateRegister,$enddateRegister]);
+                        });     
+        })
+        ->where('id_branch', Auth::user()->id_branch);
     }
 
     /**
