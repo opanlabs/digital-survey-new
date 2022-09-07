@@ -53,6 +53,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::get('/register-claim/export_excel/{id}', [RegisterClaimController::class, 'export_excel']);
 
     Route::get('/users',[UsersController::class,'index'])->name('users');
+    Route::put('/users/edit/{id}',[UsersController::class,'update'])->name('users.update');
+    Route::put('/users/reset/{id}',[UsersController::class,'resetPassword'])->name('users.reset');
+    Route::post('/users/delete/{id}',[UsersController::class,'destroy'])->name('users.delete');
+    Route::post('/users/create',[UsersController::class,'store'])->name('users.create');
+
     Route::get('/branch',[BranchController::class,'index'])->name('branch');
     Route::get('/part',[PartController::class,'index'])->name('part');
     Route::get('/typepart',[TypePartController::class,'index'])->name('typepart');
