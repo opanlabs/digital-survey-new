@@ -8,16 +8,16 @@
 @endforeach
 
 @if($count_approval_request > 0)
-<div class="alert alert-success px-9">
-    <div class="d-flex justify-content-between">
-        <div class="align-self-center">
-            <strong>{{ $count_approval_request }} Users</strong> registration request
-        </div>
-        <div class="">
-            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#confirm_modal">View</button>
+    <div class="alert alert-success px-9">
+        <div class="d-flex justify-content-between">
+            <div class="align-self-center">
+                <strong>{{ $count_approval_request }} Users</strong> registration request
+            </div>
+            <div class="">
+                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#confirm_modal">View</button>
+            </div>
         </div>
     </div>
-</div>
 @endif
 
     <div class="card">  
@@ -182,11 +182,6 @@
                                 
                             </div>
                             @endforeach
-                    </div>
-                    <div class='modal-footer'>
-                        <button data-bs-dismiss='modal' type='reset' id='kt_modal_new_card_cancel' class='btn btn-light me-3'>Cancel</button>
-                        <button type='submit' id='kt_modal_new_card_submit' class='btn btn-primary'>Add User
-                        </button>
                     </div>
                 </div>
             </div>
