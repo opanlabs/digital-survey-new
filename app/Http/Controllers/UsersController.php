@@ -21,7 +21,25 @@ class UsersController extends Controller
     {
         $roles = Roles::all();
 
-        return $dataTable->render('dashboard.users.index',['roles' => $roles]);
+        $approval_request = User::where('approved', '=', 0)->get();
+        $count_approval_request = count($approval_request);
+        // dd($total_approval_request);
+        return $dataTable->render('dashboard.users.index',['roles' => $roles , 'approval_request' => $approval_request, 'count_approval_request' => $count_approval_request]);
+    }
+
+
+    public function approve(Request $request, $id)
+    {   
+
+        if ($request->type == 'confirm') {
+            $users = User::find($id)->update([
+                'approved' => 1,
+            ]);
+            return redirect()->back()->with('message', User::find($id)->name . ' Successfully Approved.');
+        } else {
+            User::destroy($id);
+            return redirect()->back()->with('message','User declined and Deleted.');
+        }
     }
 
     /**

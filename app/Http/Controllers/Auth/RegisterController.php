@@ -10,6 +10,9 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use \MacsiDigital\Zoom\Facades\Zoom;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+
 
 class RegisterController extends Controller
 {
@@ -24,6 +27,11 @@ class RegisterController extends Controller
     |
     */
 
+    public function success()
+    {
+        return view('auth.register_success');
+    }
+
     use RegistersUsers;
 
     /**
@@ -31,10 +39,10 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected function redirectTo()
-    {
-        return route('dashboard',['id' => Auth::user()->id_user]);
-    }
+    // protected function redirectTo()
+    // {
+    //     return route('register.success');
+    // }
 
     /**
      * Create a new controller instance.
@@ -89,5 +97,14 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        event(new Registered($user = $this->create($request->all())));
+        return $this->registered($request, $user)
+           // ?: redirect($this->redirectPath());
+          ?: redirect()->route('register.success');
     }
 }
