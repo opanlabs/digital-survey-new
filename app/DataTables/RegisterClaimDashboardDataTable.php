@@ -468,15 +468,14 @@ class RegisterClaimDashboardDataTable extends DataTable
                 'data' => 'id_register_claim',
                 'name' => 'id_register_claim',
             ]),
-            Column::make(['title' => 'Submission Polis',
-                'data' => 'no_polis',
-                'name' => 'no_polis',
-            ]),
             Column::make(['title' => 'Branch',
                 'data' => 'branch.province_name',
                 'name' => 'branch.province_name',
             ]),
-       
+            Column::make(['title' => 'Submission Polis',
+                'data' => 'no_polis',
+                'name' => 'no_polis',
+            ]),
             Column::make('status'),
             Column::make('action')
         ];

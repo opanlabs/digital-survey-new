@@ -25,6 +25,7 @@ class User extends Authenticatable
         'photo_url',
         'id_role',
         'password',
+        'approved',
     ];
 
     protected $primaryKey = 'id_user';
