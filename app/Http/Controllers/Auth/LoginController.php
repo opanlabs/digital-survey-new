@@ -25,6 +25,11 @@ class LoginController extends Controller
         logout as performLogout;
     }
 
+    protected function attemptLogin(Request $request)
+    {
+        return Auth::attempt(['email' => $request->email, 'password' => $request->password, 'approved' => 1 ]);
+    }
+
     /**
      * Where to redirect users after login.
      *

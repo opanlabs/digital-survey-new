@@ -4,10 +4,23 @@
 @foreach ($errors->all() as $error)
 <div class="alert alert-danger">
     {{ $error }}<br/>
-</div>    
+</div> 
 @endforeach
+
+@if($count_approval_request > 0)
+<div class="alert alert-success px-9">
+    <div class="d-flex justify-content-between">
+        <div class="align-self-center">
+            <strong>{{ $count_approval_request }} Users</strong> registration request
+        </div>
+        <div class="">
+            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#confirm_modal">View</button>
+        </div>
+    </div>
+</div>
+@endif
+
     <div class="card">  
-        
         <div class="card-header">
             <h3 class="card-title align-items-start flex-column">
                 <span class="card-label fw-bolder fs-3 mb-1">List User</span>
@@ -127,6 +140,58 @@
         </form>
     </div>
     <!-- end:modal add user -->
+
+    <!-- begin:modal confirm user -->
+    <div class='modal fade' id='confirm_modal' tabindex='-1' aria-hidden='true'>
+            <div class='modal-dialog modal-dialog-centered mw-650px'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <h2>List new User Register</h2>
+                        <div class='btn btn-sm btn-icon btn-active-color-primary' data-bs-dismiss='modal'>
+                            <span class='svg-icon svg-icon-1'>
+                                <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
+                                    <rect opacity='0.5' x='6' y='17.3137' width='16' height='2' rx='1' transform='rotate(-45 6 17.3137)' fill='currentColor' />
+                                    <rect x='7.41422' y='6' width='16' height='2' rx='1' transform='rotate(45 7.41422 6)' fill='currentColor' />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class='modal-body scroll-y'>
+                            @foreach($approval_request as $data)
+                            <div class='row mb-3'>
+                                <div class='col-md-8 fv-row align-self-center'>
+                                    <span class="">{{ $data->name }}</span>
+                                </div>
+                                <div class='col-md-2 px-1'>
+                                    <form action="{{ route('users.approve', ['id' => $data->id_user ]) }}" method="post">
+                                        @method('put')
+                                        @csrf
+                                        <input type="hidden" value="cancel" name="type">
+                                        <button href="{{ route('users.approve', ['id' => $data->id_user ]) }}" class='btn btn-light btn-sm' style="width: -webkit-fill-available;">Cancel</button>
+                                    </form>
+                                </div>
+
+                                <div class='col-md-2 px-1'>
+                                    <form action="{{ route('users.approve', ['id' => $data->id_user ]) }}" method="post" >
+                                        @method('put')
+                                        @csrf
+                                        <input type="hidden" value="confirm" name="type">
+                                        <button type="submit" class='btn btn-success btn-sm' style="width: -webkit-fill-available;">Confirm</button>
+                                    </form>
+                                </div>    
+                                
+                            </div>
+                            @endforeach
+                    </div>
+                    <div class='modal-footer'>
+                        <button data-bs-dismiss='modal' type='reset' id='kt_modal_new_card_cancel' class='btn btn-light me-3'>Cancel</button>
+                        <button type='submit' id='kt_modal_new_card_submit' class='btn btn-primary'>Add User
+                        </button>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <!-- end:modal confirm user -->
     
 @endsection
 

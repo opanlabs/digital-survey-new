@@ -12,6 +12,7 @@ use App\Http\Controllers\TypePartController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\AutoDeployController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::get('/users',[UsersController::class,'index'])->name('users');
     Route::put('/users/edit/{id}',[UsersController::class,'update'])->name('users.update');
     Route::put('/users/reset/{id}',[UsersController::class,'resetPassword'])->name('users.reset');
+    Route::put('/users/approve/{id}',[UsersController::class,'approve'])->name('users.approve');
     Route::post('/users/delete/{id}',[UsersController::class,'destroy'])->name('users.delete');
     Route::post('/users/create',[UsersController::class,'store'])->name('users.create');
 
@@ -68,7 +70,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
 
 Route::group(['middleware' => ['auth']], function () { 
     Route::get('/',[DashboardController::class,'index'])->name('main-dashboard');
-    Route::get('/password/success',[ResetPasswordController::class,'success'])->name('reset.success');
 });
 
 Auth::routes();
@@ -80,6 +81,9 @@ Route::get('/vehicle/query/autocomplete',[VehicleController::class,'autocomplete
 Route::get('/meetSchedule/query',[RegisterSurveyController::class,'meetSchedule'])->name('meetSchedule.json');
 
 Route::get('/filterRegisterDate/query',[RegisterSurveyController::class,'filterRegisterDate'])->name('filterRegisterDate.datatable');
+
+Route::get('/password/success',[ResetPasswordController::class,'success'])->name('reset.success');
+Route::get('/register/success',[RegisterController::class,'success'])->name('register.success');
 
 //webhook untuk autodeploy
 Route::get('/deploy',[AutoDeployController::class,'deploy'])->name('deploy');

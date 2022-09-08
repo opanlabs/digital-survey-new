@@ -315,7 +315,7 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model->newQuery()->with(['branch','roles']);
+        return $model->newQuery()->with(['branch','roles'])->where('approved', '=', 1);
     }
 
     /**
