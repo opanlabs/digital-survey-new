@@ -35,7 +35,7 @@
             <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true" data-kt-menu-expand="false">
                 <!-- list menu -->
                 <!-- home -->
-                <div data-kt-menu-trigger="click" class="menu-item here {{ Route::is('dashboard') || Route::is('profile') ? 'show' : '' }} menu-accordion" >
+                <div data-kt-menu-trigger="click" class="menu-item here {{ Route::is('dashboard')  || Route::is('main-dashboard') || Route::is('profile') ? 'show' : '' }} menu-accordion" >
                     <span class="menu-link">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -51,7 +51,7 @@
                     </span>
                     <div class="menu-sub menu-sub-accordion {{ Route::is('dashboard') || Route::is('profile') ? 'menu-active-bg' : 'menu-active-bg' }}">
                         <div class="menu-item">
-                            <a class="menu-link {{ Route::is('dashboard') ? 'active' : '' }}" href="{{ url('dashboard/main') }}">
+                            <a class="menu-link {{ Route::is('dashboard') || Route::is('main-dashboard') ? 'active' : '' }}" href="{{ url('dashboard/main') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>

@@ -32,7 +32,7 @@ class RegisterSurveyController extends Controller
 	{   
         $query = RegisterSurvey::where('id_register_survey',$id)->with(['vehicle','customer','branch'])->get();
 
-		return Excel::download(new RegisterSurveyExport($query), 'RegisterSurveyExport_'. $query[0]->register_survey->register_no .'_.xlsx');
+		return Excel::download(new RegisterSurveyExport($query), 'RegisterSurveyExport_'. $query[0]->register_no .'_.xlsx');
 	}
 
     /**

@@ -40,7 +40,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::post('/register-survey/report',[RegisterSurveyController::class,'reportSchedule'])->name('register-survey.report');
     Route::post('/register-survey/delete',[RegisterSurveyController::class,'deleteSurvey'])->name('register-survey.deleteSurvey');
     Route::post('/register-survey/detail',[RegisterSurveyController::class, 'detailSurvey'])->name('register-survey.details');
-    Route::get('/register-survey/export_excel/{id}', [RegisterClaimController::class, 'export_excel']);
+    Route::get('/register-survey/export_excel/{id}', [RegisterSurveyController::class, 'export_excel']);
 
     // register claim
     Route::get('/register-claim',[RegisterClaimController::class,'index'])->name('register-claim');

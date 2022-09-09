@@ -282,7 +282,7 @@
                 var APP_URL = {!! json_encode(url('/')) !!}
 
                 var link_report_schedule_view = `<a href="${data.details.link_report_zoom}" target="_blank" class="btn btn-outline btn-outline-dark btn-active-light-dark btn-sm">Download Video</a>`;
-                var link_report_schedule_excel_view = `<a href="${APP_URL}/dashboard/register-claim/export_excel/${data.details.id_register_claim}" target="_blank" class="btn btn-outline btn-outline-dark btn-active-light-dark btn-sm">Download Excel</a>`;
+                var link_report_schedule_excel_view = `<a href="${APP_URL}/dashboard/register-survey/export_excel/${data.details.id_register_survey}" target="_blank" class="btn btn-outline btn-outline-dark btn-active-light-dark btn-sm">Download Excel</a>`;
                 var link_report_schedule_pdf_view = '<a class="btn btn-outline btn-outline-dark btn-active-light-dark btn-sm">Download PDF</a>';
                 
                 var url = `${data.details.link_report_zoom}`
