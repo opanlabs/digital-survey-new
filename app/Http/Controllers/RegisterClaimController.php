@@ -23,6 +23,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 use \MacsiDigital\Zoom\Facades\Zoom;
 
+use PDF;
+
 class RegisterClaimController extends Controller
 {
 
@@ -32,6 +34,13 @@ class RegisterClaimController extends Controller
 
 		return Excel::download(new RegisterClaimExport($query), 'RegisterClaimExport_'. $query[0]->register_survey->register_no .'_.xlsx');
 	}
+
+    public function export_pdf($id){
+        $query = RegisterClaim::where('id_register_claim',$id)->with(['vehicle','customer','user','branch','register_survey'])->get();
+        $pdf = PDF::loadView('exports.claim_export_pdf', compact('query'));
+        return $pdf->download('RegisterClaimExport_'.$query[0]->register_survey->register_no.'_.pdf');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -127,8 +136,7 @@ class RegisterClaimController extends Controller
                 'customer_name' => 'required',
                 'phone_number' => 'required',
                 'id_vehicle' => 'required',
-                'plat_no' => 'required',
-                'id_branch' => 'required',
+                'plat_no' => 'required'
             ]);
 
             $cus = Customer::create([
