@@ -146,7 +146,7 @@
                     </div>
                 </div>
                 <!-- control setting -->
-                <div data-kt-menu-trigger="click" class="menu-item here {{ Route::is('users') || Route::is('branch') || Route::is('vehicle') || Route::is('typepart') || Route::is('part') ? 'show' : '' }} menu-accordion" >
+                <div data-kt-menu-trigger="click" class="menu-item here {{ Route::is('users') || Route::is('branch') || Route::is('vehicle') || Route::is('typepart') || Route::is('part') || Route::is('team') ? 'show' : '' }} menu-accordion" >
                     <span class="menu-link">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -161,7 +161,7 @@
                         <span class="menu-title">Control & Settings</span>
                         <span class="menu-arrow"></span>
                     </span>
-                    <div class="menu-sub menu-sub-accordion {{ Route::is('users') || Route::is('branch') || Route::is('vehicle') || Route::is('typepart') || Route::is('part') ? 'menu-active-bg' : '' }}">
+                    <div class="menu-sub menu-sub-accordion {{ Route::is('users') || Route::is('branch') || Route::is('vehicle') || Route::is('typepart') || Route::is('part') || Route::is('team') ? 'menu-active-bg' : '' }}">
                         <div class="menu-item">
                             <a class="menu-link {{ Route::is('users') ? 'active' : '' }}" href="{{ url('dashboard/users') }}">
                                 <span class="menu-bullet">
@@ -176,6 +176,14 @@
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Branch Area</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{ Route::is('team') ? 'active' : '' }}" href="{{ url('dashboard/team') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Team</span>
                             </a>
                         </div>
                         <div data-kt-menu-trigger="click" class="menu-item here menu-accordion {{ Route::is('vehicle') || Route::is('typepart') ||Route::is('part')  ? 'show' : '' }}">
