@@ -18,7 +18,7 @@ class RegisterSurveyExport implements FromView,ShouldAutoSize
 
     public function view(): View
     {
-        return view('exports.survey_export_sheet.blade', [
+        return view('exports.survey_export_sheet', [
             'query' => $this->query,
         ]);
     }

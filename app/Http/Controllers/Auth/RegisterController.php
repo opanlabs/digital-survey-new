@@ -80,13 +80,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {   
-
-        $user = Zoom::user()->create([
-            'first_name' => $data['name'],
-            'last_name' => '',
-            'email' => $data['email'],
-            'password' => $data['password']
-        ]); 
+        $checker = Zoom::user()->find($data['email']);
+        if (!$checker) {
+            $user = Zoom::user()->create([
+                'first_name' => $data['name'],
+                'last_name' => '',
+                'email' => $data['email'],
+                'password' => $data['password']
+            ]); 
+        }
 
         return User::create([
             'name' => $data['name'],
