@@ -25,6 +25,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 use \MacsiDigital\Zoom\Facades\Zoom;
 
+use PDF;
+
 class RegisterSurveyController extends Controller
 {
 
@@ -34,6 +36,12 @@ class RegisterSurveyController extends Controller
 
 		return Excel::download(new RegisterSurveyExport($query), 'RegisterSurveyExport_'. $query[0]->register_no .'_.xlsx');
 	}
+
+    public function export_pdf($id){
+        $query = RegisterSurvey::where('id_register_survey',$id)->with(['vehicle','customer','branch'])->get();
+        $pdf = PDF::loadView('exports.survey_export_pdf', compact('query'));
+        return $pdf->download('RegisterSurveyExport_'.$query[0]->register_no.'_.pdf');
+    }
 
     /**
      * Display a listing of the resource.
