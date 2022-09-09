@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\TypePart;
+
 use Illuminate\Http\Request;
 use App\DataTables\TypePartDataTable;
 
@@ -35,7 +38,15 @@ class TypePartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'type_nama' => 'required',
+        ]);
+
+        $typepart = TypePart::create([
+            'type_nama' => $request->type_nama
+        ]);
+
+        return redirect()->back()->with('message','Data Successfully Added.');
     }
 
     /**
@@ -69,7 +80,17 @@ class TypePartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request);
+        $request->validate([
+            'type_nama' => 'required',
+
+        ]);
+
+        $typepart = TypePart::find($id)->update([
+            'type_nama' => $request->type_nama,
+        ]);
+
+        return redirect()->back()->with('message','TypePart Successfully Saved.');
     }
 
     /**
@@ -80,6 +101,8 @@ class TypePartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        TypePart::destroy($id);
+
+        return redirect()->back()->with('message','TypePart Deleted.');
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Part;
+use App\Models\TypePart;
 
 use Illuminate\Http\Request;
 use App\DataTables\PartDataTable;
@@ -14,7 +16,9 @@ class PartController extends Controller
      */
     public function index(PartDataTable $dataTable)
     {
-        return $dataTable->render('dashboard.part.index');
+        $TypePart = TypePart::all();
+
+        return $dataTable->render('dashboard.part.index',['typepart' => $TypePart]);
     }
 
     /**
@@ -35,7 +39,17 @@ class PartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_typepart' => 'required',
+            'part_nama' => 'required',
+        ]);
+
+        $part = Part::create([
+            'id_typepart' => $request->id_typepart,
+            'part_nama' => $request->part_nama
+        ]);
+
+        return redirect()->back()->with('message','Data Successfully Added.');
     }
 
     /**
@@ -69,7 +83,18 @@ class PartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request);
+        $request->validate([
+            'id_typepart' => 'required',
+            'part_nama' => 'required',
+        ]);
+
+        $part = Part::find($id)->update([
+            'id_typepart' => $request->id_typepart,
+            'part_nama' => $request->part_nama
+        ]);
+
+        return redirect()->back()->with('message','Part Successfully Saved.');
     }
 
     /**
@@ -80,6 +105,8 @@ class PartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Part::destroy($id);
+
+        return redirect()->back()->with('message','Part Deleted.');
     }
 }
