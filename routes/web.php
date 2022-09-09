@@ -63,8 +63,19 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::post('/users/create',[UsersController::class,'store'])->name('users.create');
 
     Route::get('/branch',[BranchController::class,'index'])->name('branch');
+
+    // part
     Route::get('/part',[PartController::class,'index'])->name('part');
+    Route::post('/part/delete/{id}',[PartController::class,'destroy'])->name('part.delete');
+    Route::put('/part/edit/{id}',[PartController::class,'update'])->name('part.update');
+    Route::post('/part/create',[PartController::class,'store'])->name('part.create');
+
+    // type part
     Route::get('/typepart',[TypePartController::class,'index'])->name('typepart');
+    Route::post('/typepart/delete/{id}',[TypePartController::class,'destroy'])->name('typepart.delete');
+    Route::put('/typepart/edit/{id}',[TypePartController::class,'update'])->name('typepart.update');
+    Route::post('/typepart/create',[TypePartController::class,'store'])->name('typepart.create');
+
     Route::get('/vehicle',[VehicleController::class,'index'])->name('vehicle');
 });
 
