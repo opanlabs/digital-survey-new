@@ -19,7 +19,7 @@
 
     <!-- begin:modal add branch -->
     <div class='modal fade' id='add_modal' tabindex='-1' aria-hidden='true'>
-        <form action='{{ route('branch.create') }}' method='post'>
+        <form action='' method='post'>
             @csrf
             <div class='modal-dialog modal-dialog-centered mw-650px'>
                 <div class='modal-content'>

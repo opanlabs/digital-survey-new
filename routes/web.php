@@ -13,6 +13,7 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\AutoDeployController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\TeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::put('/users/approve/{id}',[UsersController::class,'approve'])->name('users.approve');
     Route::post('/users/delete/{id}',[UsersController::class,'destroy'])->name('users.delete');
     Route::post('/users/create',[UsersController::class,'store'])->name('users.create');
+
+    Route::get('/team',[TeamController::class,'index'])->name('team');
+    Route::post('/team/create',[TeamController::class,'store'])->name('team.create');
 
     Route::get('/branch',[BranchController::class,'index'])->name('branch');
 
