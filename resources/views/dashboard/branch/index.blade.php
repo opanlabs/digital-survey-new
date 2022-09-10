@@ -37,38 +37,27 @@
                     <div class='modal-body scroll-y'>
                         <form id='kt_modal_new_card_form' class='form' action='#'>
                             <div class='row'>
-                                <div class='col-md-12 fv-row'>
-                                    <div class='d-flex flex-column mb-7 fv-row'>
-                                        <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                            <span>Name</span>
-                                        </label>
-                                        <input type='text' class='form-control form-control-solid @error('customer_name') is-invalid @enderror' required placeholder='' name='name' />
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class='row'>
                                 <div class='col-md-6 fv-row'>
                                     <div class='d-flex flex-column mb-7 fv-row'>
                                         <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                            <span>Position</span>
+                                            <span>Area</span>
                                         </label>
-                                        <select class='form-select form-select-solid @error('id_role') is-invalid @enderror' required data-control='select2' name='id_role' data-placeholder='Select an option' data-hide-search='true'>
-                                            @foreach ($roles as $role)
+                                        <input type='text' class='form-control form-control-solid @error('province_name') is-invalid @enderror' required placeholder='Area' name='province_name' />
+                                    </div>
+                                </div>
+                                <div class='col-md-6 fv-row'>
+                                    <div class='d-flex flex-column mb-7 fv-row'>
+                                        <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                            <span>Head</span>
+                                        </label>
+                                        <select class='form-select form-select-solid @error('id_user') is-invalid @enderror' required data-control='select2' name='id_user' data-placeholder='Select an option' data-hide-search='true'>
+                                            @foreach ($user_admin as $admin)
                                                 <option></option>
-                                                <option value="{{ $role->id_role }}">
-                                                    {{ $role->role }}
+                                                <option value="{{ $admin->id_user }}">
+                                                    {{ $admin->name }}
                                                 </option>
                                             @endforeach
                                         </select>
-                                    </div>
-                                </div>
-                                <div class='col-md-6 fv-row'>
-                                    <div class='d-flex flex-column mb-7 fv-row'>
-                                        <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                            <span>Phone Number</span>
-                                        </label>
-                                        <input type='text' class='form-control form-control-solid @error('phone_number') is-invalid @enderror' required placeholder='' name='phone_number' />
                                     </div>
                                 </div>
                             </div>
@@ -83,30 +72,12 @@
                                 </div>
                             </div>
                             <div class='row'>
-                                <div class='col-md-6 fv-row'>
-                                    <div class='d-flex flex-column mb-7 fv-row' style="position: relative">
+                                <div class='col-md-12 fv-row'>
+                                    <div class='d-flex flex-column mb-7 fv-row'>
                                         <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                            <span>Password</span>
+                                            <span>Address</span>
                                         </label>
-                                        <input id="password_new" type="password" name="new-password" class="form-control form-control-solid password" placeholder="New Password" value="" required>
-                                        <i class="bi bi-eye-slash me-3 mt-12 fs-3 togglePassword" style="position: absolute; right: 0;cursor: pointer;"></i>
-                                        <div class="fv-plugins-message-container invalid-feedback"></div>
-                                    </div>
-                                </div>
-                                <div class='col-md-6 fv-row'>
-                                    <div class='d-flex flex-column mb-7 fv-row' style="position: relative">
-                                        <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                            <span>Confirm Password</span>
-                                        </label>
-                                        <input id="password_new_confirm" type="password" name="new-password_confirmation" class="form-control form-control-solid password_confirm" placeholder="Confirm New Password" value="" required>
-                                        <i class="bi bi-eye-slash me-3 mt-12 fs-3 togglePassword_confirm" style="position: absolute; right: 0;cursor: pointer;"></i>
-                                        <div class="fv-plugins-message-container invalid-feedback">
-                                            @error('new-password_confirmation')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
+                                        <input type='email' class='form-control form-control-solid @error('email') is-invalid @enderror' required placeholder='' name='email' />
                                     </div>
                                 </div>
                             </div>

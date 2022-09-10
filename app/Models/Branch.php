@@ -11,6 +11,9 @@ class Branch extends Model
     protected $table = 'branch';
     protected $fillable = [
         'province_name',
+        'id_user',
+        'id_team',
+        'address',
     ];
 
     public function RegisterSurvey()
