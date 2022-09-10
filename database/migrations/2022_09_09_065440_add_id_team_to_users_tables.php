@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('id_team')
                     ->constrained()
                     ->unsigned()
-                    ->nullable()
                     ->references('id_team')
                     ->on('team')
                     ->onUpdate('cascade')
