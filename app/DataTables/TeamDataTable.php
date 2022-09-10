@@ -4,6 +4,8 @@ namespace App\DataTables;
 
 use App\Models\User;
 use App\Models\Roles;
+use App\Models\Team;
+
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -26,6 +28,7 @@ class TeamDataTable extends DataTable
     protected function getActionColumn($data): string
     {   
         $roles = Roles::all();
+        $team = Team::all();
 
         //delete modal
         $deleteModal = "
@@ -130,6 +133,24 @@ class TeamDataTable extends DataTable
             }
             $editModal_roleSelect .= "<option value='". $roles->id_role ."'".$role_isSelected.">$roles->role</option>";
         };
+        
+        $editModal_teamSelect = "";
+            foreach ($team as $teams) {
+                if ($data->id_team) {
+                    if ($teams->id_team == $data->team->id_team) {
+                        $team_isSelected = 'selected="selected"';
+                    }else{
+                        $team_isSelected = '';
+                    }
+                    $editModal_teamSelect .= "<option value='". $teams->id_team ."'". $team_isSelected .">". $teams->name_team ."</option>";
+                } else {
+                    $editModal_teamSelect .= "
+                    <option></option>
+                    <option value='". $teams->id_team ."'>". $teams->name_team ."</option>
+                    ";
+                }
+            };
+        
         $editModal = "
         <div class='modal fade' id='edit_modal".$data->id_user."' tabindex='-1' aria-hidden='true'>
             <form action='".route('users.update', ['id' => $data->id_user ]) ."' method='post'>
@@ -190,6 +211,20 @@ class TeamDataTable extends DataTable
                                         </div>
                                     </div>
                                 </div>
+                                <div class='row'>
+                                <div class='col-md-12 fv-row'>
+                                    <div class='d-flex flex-column mb-7 fv-row'>
+                                        <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                            <span>Team</span>
+                                        </label>
+                                        <select class='form-select form-select-solid @error('id_team') is-invalid @enderror' required data-control='select2' name='id_team' data-placeholder='Select an option' data-hide-search='true'>
+                                            ".
+                                            $editModal_teamSelect
+                                            ."
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                                 <div class='row'>
                                     <div class='col-md-12 fv-row'>
                                         <div class='d-flex flex-column mb-7 fv-row'>
@@ -302,9 +337,13 @@ class TeamDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addIndexColumn()
             ->addColumn('action',function ($data){
                 return $this->getActionColumn($data);
                 })
+            ->editColumn('team.name_team', function($data) {
+                return is_null($data->id_team) ? 'Belum Masuk Team' : $data->team->name_team;
+            })
             ->setRowId('id');
     }
 
@@ -316,10 +355,16 @@ class TeamDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model->newQuery()
-                     ->with(['branch','roles'])
-                     ->where('approved', '=', 1)
-                     ->where('id_branch', '=', Auth::user()->id_branch);
+        if (Auth::user()->roles->role == 'Super Admin') {
+            return $model->newQuery()
+                     ->with(['branch','roles','team'])
+                     ->where('approved', '=', 1);
+        } else {
+            return $model->newQuery()
+            ->with(['branch','roles','team'])
+            ->where('approved', '=', 1)
+            ->where('id_branch', '=', Auth::user()->id_branch);
+        }
     }
 
     /**
@@ -350,16 +395,27 @@ class TeamDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            Column::make('name'),
-            Column::make(['title' => 'Branch',
-                           'data' => 'branch.province_name',
-                           'name' => 'branch.province_name',
+            Column::make(['title' => 'No',
+                           'data' => 'DT_RowIndex',
+                           'name' => 'DT_RowIndex',
+                           'orderable' => 'false',
+                           'searchable' => 'false',
                         ]),
-            Column::make('email'),
-            Column::make(['title' => 'Role',
+            Column::make(['title' => 'Team',
+                           'data' => 'team.name_team',
+                           'name' => 'team.name_team',
+                        ]),
+            Column::make(['title' => 'Position',
                            'data' => 'roles.role',
                            'name' => 'roles.role',
-                        ]),
+                        ]),            
+            Column::make(['title' => 'ID',
+                            'data' => 'id_user',
+                            'name' => 'id_user',
+                         ]),            
+            Column::make('phone_number'),
+            Column::make('email'),
+           
             Column::make('action')
         ];
     }

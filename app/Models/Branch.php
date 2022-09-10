@@ -17,4 +17,14 @@ class Branch extends Model
     {
         return $this->hasMany(RegisterSurvey::class,'id_branch','id_branch');
     }
+
+    public function Team()
+    {
+        return $this->hasMany(Team::class,'id_team','id_team');
+    }
+
+    public function User()
+    {
+        return $this->hasOne(User::class,'id_user','id_user');
+    }
 }

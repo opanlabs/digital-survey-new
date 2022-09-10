@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'id_branch',
+        'id_team',
         'phone_number',
         'photo_url',
         'id_role',
@@ -54,9 +55,14 @@ class User extends Authenticatable
         return $this->hasOne(Roles::class,'id_role','id_role');
     }
 
-    public function branch()
+    public function Team()
     {
-        return $this->hasOne(Branch::class,'id_branch','id_branch');
+        return $this->belongsTo(Team::class,'id_team','id_team');
+    }
+
+    public function Branch()
+    {
+        return $this->belongsTo(Branch::class,'id_branch','id_branch');
     }
 
     public function RegisterSurvey()

@@ -74,6 +74,7 @@ class UsersController extends Controller
             'email' => $request->email,
             'id_role' => $request->id_role,
             'phone_number' => $request->phone_number,
+            'id_team' => $request->id_team,
             'id_branch' => Auth::user()->id_branch,
             'password' => Hash::make($request->get('new-password'))
         ]);
@@ -125,6 +126,7 @@ class UsersController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'id_role' => $request->id_role,
+            'id_team' => $request->id_team,
             'phone_number' => $request->phone_number,
         ]);
 

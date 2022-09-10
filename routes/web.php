@@ -62,10 +62,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::post('/users/create',[UsersController::class,'store'])->name('users.create');
 
     Route::get('/team',[TeamController::class,'index'])->name('team');
-    Route::put('/team/edit/{id}',[TeamController::class,'update'])->name('team.update');
-    Route::put('/team/reset/{id}',[TeamController::class,'resetPassword'])->name('team.reset');
-    Route::put('/team/approve/{id}',[TeamController::class,'approve'])->name('team.approve');
-    Route::post('/team/delete/{id}',[TeamController::class,'destroy'])->name('team.delete');
     Route::post('/team/create',[TeamController::class,'store'])->name('team.create');
 
     Route::get('/branch',[BranchController::class,'index'])->name('branch');
