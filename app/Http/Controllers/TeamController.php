@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Roles;
 use App\Models\Team;
+use App\Models\Branch;
 
 use Illuminate\Http\Request;
 use App\DataTables\TeamDataTable;
@@ -12,7 +13,17 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 
 class TeamController extends Controller
-{
+{   
+
+    public function test_query(Request $request)
+    {
+        $team = [];
+
+        $team = Team::with('branch')->get();
+
+        return response()->json($team);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,13 +33,14 @@ class TeamController extends Controller
     {
         $roles = Roles::whereIn('id_role', ['2','3'])->get();
         $team = Team::all();
+        $branch = Branch::all();
 
         $approval_request = User::where('approved', '=', 0)
                                  ->where('id_branch', Auth::user()->id_branch)   
                                  ->get();
         $count_approval_request = count($approval_request);
 
-        return $dataTable->render('dashboard.team.index',['roles' => $roles , 'approval_request' => $approval_request, 'count_approval_request' => $count_approval_request, 'team' => $team]);
+        return $dataTable->render('dashboard.team.index',['roles' => $roles , 'approval_request' => $approval_request, 'count_approval_request' => $count_approval_request, 'team' => $team, 'branch' => $branch]);
     }
 
 
@@ -65,12 +77,12 @@ class TeamController extends Controller
     {
         $request->validate([
             'name_team' => 'required',
+            'id_branch' => 'required',
         ]);
-
-
 
         $users = Team::create([
             'name_team' => $request->name_team,
+            'id_branch' => $request->id_branch,
         ]);
 
         return redirect()->back()->with('message','Data Successfully Added.');
@@ -107,7 +119,28 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-    
+        $request->validate([
+            'name_team' => 'required',
+            'id_branch' => 'required',
+
+            'province_name' => 'required',
+            'address' => 'required',
+            'id_user' => 'required',
+
+        ]);
+
+        $team = Team::find($id)->update([
+            'name_team' => $request->name_team,
+            'id_branch' => $request->id_branch,
+        ]);
+
+        $branch = Branch::find($request->id_branch)->update([
+            'province_name' => $request->province_name,
+            'address' => $request->address,
+            'id_user' => $request->id_user,
+        ]);
+
+        return redirect()->back()->with('message','Data Successfully Saved.');
     }
 
     /**
@@ -118,8 +151,8 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
+        Team::destroy($id);
 
-        return redirect()->back()->with('message','User Deleted.');
+        return redirect()->back()->with('message','Team Deleted.');
     }
 }

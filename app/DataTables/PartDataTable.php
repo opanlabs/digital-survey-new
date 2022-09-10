@@ -134,12 +134,12 @@ class PartDataTable extends DataTable
                         <div class='flex-equal me-5'>
                             <table class='table table-flush fw-bold gy-2'>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Part Nama</td>
-                                    <td class='text-gray-800'>".$data->part_nama."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Part Nama</td>
+                                    <td class='py-2 text-gray-800'>".$data->part_nama."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Type Part</td>
-                                    <td class='text-gray-800'>".$data->typepart->type_nama."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Type Part</td>
+                                    <td class='py-2 text-gray-800'>".$data->typepart->type_nama."</td>
                                 </tr>
                             </table>
                         </div>

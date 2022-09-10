@@ -269,24 +269,24 @@ class TeamDataTable extends DataTable
                         <div class='flex-equal me-5'>
                             <table class='table table-flush fw-bold gy-2'>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Name</td>
-                                    <td class='text-gray-800'>".$data->name."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Name</td>
+                                    <td class='py-2 text-gray-800'>".$data->name."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Position</td>
-                                    <td class='text-gray-800'>".$data->roles->role."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Position</td>
+                                    <td class='py-2 text-gray-800'>".$data->roles->role."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>ID</td>
-                                    <td class='text-gray-800'>".$data->id_user."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>ID</td>
+                                    <td class='py-2 text-gray-800'>".$data->id_user."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Phone Number</td>
-                                    <td class='text-gray-800'>".$data->phone_number."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Phone Number</td>
+                                    <td class='py-2 text-gray-800'>".$data->phone_number."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Email</td>
-                                    <td class='text-gray-800'>".$data->email."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Email</td>
+                                    <td class='py-2 text-gray-800'>".$data->email."</td>
                                 </tr>
                             </table>
                         </div>

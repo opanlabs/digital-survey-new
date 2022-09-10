@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('branch', function (Blueprint $table) {
-            $table->foreignId('id_team')
+        Schema::table('team', function (Blueprint $table) {
+            $table->foreignId('id_branch')
                     ->constrained()
-                    ->references('id_team')
-                    ->on('team')
+                    ->references('id_branch')
+                    ->on('branch')
                     ->onUpdate('cascade')
                     ->onDelete('no action');
         });
@@ -30,9 +30,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('branch', function (Blueprint $table) {
-            $table->dropForeign('users_id_team_foreign');
-            $table->dropColumn('id_team');
+        Schema::table('team', function (Blueprint $table) {
+            $table->dropForeign('branch_id_branch_foreign');
+            $table->dropColumn('id_branch');
         });
     }
 };

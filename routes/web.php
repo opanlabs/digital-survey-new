@@ -56,6 +56,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::get('/register-claim/export_excel/{id}', [RegisterClaimController::class, 'export_excel']);
     Route::get('/register-claim/export_pdf/{id}', [RegisterClaimController::class, 'export_pdf']);
 
+    // users
     Route::get('/users',[UsersController::class,'index'])->name('users');
     Route::put('/users/edit/{id}',[UsersController::class,'update'])->name('users.update');
     Route::put('/users/reset/{id}',[UsersController::class,'resetPassword'])->name('users.reset');
@@ -63,10 +64,17 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::post('/users/delete/{id}',[UsersController::class,'destroy'])->name('users.delete');
     Route::post('/users/create',[UsersController::class,'store'])->name('users.create');
 
+    // team
     Route::get('/team',[TeamController::class,'index'])->name('team');
     Route::post('/team/create',[TeamController::class,'store'])->name('team.create');
+    Route::put('/team/edit/{id}',[TeamController::class,'update'])->name('team.update');
+    Route::post('/team/delete/{id}',[TeamController::class,'destroy'])->name('team.delete');
 
+    // branch
     Route::get('/branch',[BranchController::class,'index'])->name('branch');
+    Route::post('/branch/create',[BranchController::class,'store'])->name('branch.create');
+    Route::put('/branch/edit/{id}',[BranchController::class,'update'])->name('branch.update');
+    Route::post('/branch/delete/{id}',[BranchController::class,'destroy'])->name('branch.delete');
 
     // part
     Route::get('/part',[PartController::class,'index'])->name('part');
@@ -91,21 +99,25 @@ Route::group(['middleware' => ['auth']], function () {
 
 Auth::routes();
 
-//untuk select2 autocomplete branch,role,vehcile
+// untuk select2 autocomplete branch,role,vehcile
 Route::get('/branch/query/autocomplete',[BranchController::class,'autocomplete'])->name('branch.autocomplete');
 Route::get('/role/query/autocomplete',[BranchController::class,'autocompleteRole'])->name('role.autocompleteRole');
 Route::get('/vehicle/query/autocomplete',[VehicleController::class,'autocomplete'])->name('vehicle.autocomplete');
 Route::get('/meetSchedule/query',[RegisterSurveyController::class,'meetSchedule'])->name('meetSchedule.json');
 
+// Route::get('/test_query',[TeamController::class,'test_query'])->name('test_query');
+
+// untuk filter register date
 Route::get('/filterRegisterDate/query',[RegisterSurveyController::class,'filterRegisterDate'])->name('filterRegisterDate.datatable');
 
+// untuk tampilan register and forgot password success
 Route::get('/password/success',[ResetPasswordController::class,'success'])->name('reset.success');
 Route::get('/register/success',[RegisterController::class,'success'])->name('register.success');
 
-//webhook untuk autodeploy
+// webhook untuk autodeploy
 Route::get('/deploy',[AutoDeployController::class,'deploy'])->name('deploy');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//github webhook untuk trigger deployment
+// github webhook untuk trigger deployment
 Route::githubWebhooks('deploy-webhook');

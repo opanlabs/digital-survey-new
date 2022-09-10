@@ -25,9 +25,9 @@ class Team extends Authenticatable
 
     protected $primaryKey = 'id_team';
 
-    public function Users()
+    public function User()
     {
-        return $this->hasMany(Users::class,'id_team','id_team');
+        return $this->hasMany(User::class,'id_team','id_team');
     }
 
     public function Branch()
