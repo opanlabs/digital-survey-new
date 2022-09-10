@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('id_team')
                     ->constrained()
+                    ->nullable()
                     ->unsigned()
                     ->references('id_team')
                     ->on('team')

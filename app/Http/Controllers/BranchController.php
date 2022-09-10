@@ -38,7 +38,7 @@ class BranchController extends Controller
      */
     public function index(BranchDataTable $dataTable)
     {
-        $user_admin = User::where('id_role', 2)->get();
+        $user_admin = User::where('id_role', '=', 2)->get();
         $team = Team::all();
         $branch = Branch::all();
 
