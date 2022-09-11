@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\DataTables\VehicleDataTable;
 
+
+use App\Models\Vehicle;
+
 class VehicleController extends Controller
 {
     public function autocomplete(Request $request)
@@ -46,7 +49,15 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+        ]);
+
+        $nama = Vehicle::create([
+            'nama' => $request->nama
+        ]);
+
+        return redirect()->back()->with('message','Vehicle brands Successfully Added.');
     }
 
     /**
@@ -80,9 +91,17 @@ class VehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        // dd($request);
+        $request->validate([
+            'nama' => 'required',
+        ]);
 
+        $nama = Vehicle::find($id)->update([
+            'nama' => $request->nama,
+        ]);
+
+        return redirect()->back()->with('message','Vehicle brands Successfully Saved.');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -91,6 +110,8 @@ class VehicleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Vehicle::destroy($id);
+
+        return redirect()->back()->with('message','Vehicle brands Deleted.');
     }
 }

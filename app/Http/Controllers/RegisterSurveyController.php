@@ -155,6 +155,7 @@ class RegisterSurveyController extends Controller
                 'phone_number' => 'required',
                 'id_vehicle' => 'required',
                 'plat_no' => 'required',
+                'type' => 'required',
             ]);
             // dd($request);
 
@@ -169,6 +170,7 @@ class RegisterSurveyController extends Controller
                 'register_no' => substr(str_shuffle(MD5(microtime())), 0, 10),
                 'id_customer' => $cus->id_customer,
                 'id_vehicle' => $request->id_vehicle,
+                'type' => $request->type,
                 'year' => $request->year,
                 'plat_no' => $request->plat_no,
                 'id_user' => Auth::user()->id_user,
@@ -216,6 +218,7 @@ class RegisterSurveyController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // return $request->type;
         $request->validate([
             'email' => 'unique:customer,email,'.$request->email.',email',
             'year' => 'required',
@@ -223,7 +226,7 @@ class RegisterSurveyController extends Controller
             'phone_number' => 'required',
             'id_vehicle' => 'required',
             'plat_no' => 'required',
-            'id_branch' => 'required',
+            'type' => 'required',
         ]);
         
         $cus = Customer::find($request->id_customer)->update([
@@ -235,6 +238,7 @@ class RegisterSurveyController extends Controller
         RegisterSurvey::find($id)->update([
             'id_customer' => $request->id_customer,
             'id_vehicle' => $request->id_vehicle,
+            'type' => $request->type,
             'year' => $request->year,
             'plat_no' => $request->plat_no,
             'id_branch' => Auth::user()->id_branch,
