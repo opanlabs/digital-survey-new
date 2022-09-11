@@ -8,7 +8,7 @@
             </h3>
             <div class="card-toolbar">
                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                    <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-static="true" data-kt-menu-permanent="true" data-kt-menu-toggle="true">
+                    <button type="button" class="btn btn-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-static="true" data-kt-menu-permanent="true" data-kt-menu-toggle="true">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
                         <span class="svg-icon svg-icon-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -32,7 +32,7 @@
                             <div class="mb-10">
                                 <label class="form-label fs-6 fw-bold">Vehcile Brand:</label>
                                 <select id="vehicle_brand" class="form-select form-select-solid @error('id_vehicle') is-invalid @enderror" required data-control="select2" name="id_vehicle" data-placeholder="Select an option" data-hide-search="true">
-                                    <option></option>
+                                    <option>All</option>
                                     @foreach($vehicle as $br)
                                         <option value="{{$br->id_vehicle}}">{{ $br->nama }}</option>
                                     @endforeach
