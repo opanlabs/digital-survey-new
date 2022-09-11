@@ -46,7 +46,7 @@
                             <div class='row'>
                                 <div class='col-md-6 fv-row'>
                                     <div class='d-flex flex-column mb-7 fv-row'>
-                                        <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                        <label class='d-flex fs-6 fw-bold form-label mb-2'>
                                             <span>Name Team</span>
                                         </label>
                                         <input type='text' class='form-control form-control-solid @error('team_name') is-invalid @enderror' required placeholder='Name Team' name='name_team'/>
@@ -54,7 +54,7 @@
                                 </div>
                                 <div class='col-md-6 fv-row'>
                                     <div class='d-flex flex-column mb-7 fv-row'>
-                                        <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                        <label class='d-flex fs-6 fw-bold form-label mb-2'>
                                             <span>Branch Name</span>
                                         </label>
                                         <select class='form-select form-select-solid @error('id_branch') is-invalid @enderror' required data-control='select2' name='id_branch' data-placeholder='Select an option' data-hide-search='true'>
@@ -104,7 +104,7 @@
                             <div class='row'>
                                 <div class='col-md-6 fv-row'>
                                     <div class='d-flex flex-column mb-7 fv-row'>
-                                        <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                        <label class='d-flex fs-6 fw-bold form-label mb-2'>
                                             <span>Area</span>
                                         </label>
                                         <input type='text' class='form-control form-control-solid @error('province_name') is-invalid @enderror' required placeholder='Area' name='province_name' />
@@ -112,7 +112,7 @@
                                 </div>
                                 <div class='col-md-6 fv-row'>
                                     <div class='d-flex flex-column mb-7 fv-row'>
-                                        <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                        <label class='d-flex fs-6 fw-bold form-label mb-2'>
                                             <span>Head</span>
                                         </label>
                                         <select class='form-select form-select-solid @error('id_user') is-invalid @enderror' required data-control='select2' name='id_user' data-placeholder='Select an option' data-hide-search='true'>
@@ -129,7 +129,7 @@
                             <div class='row'>
                                 <div class='col-md-12 fv-row'>
                                     <div class='d-flex flex-column mb-7 fv-row'>
-                                        <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                        <label class='d-flex fs-6 fw-bold form-label mb-2'>
                                             <span>Address</span>
                                         </label>
                                         <input type='text' class='form-control form-control-solid @error('email') is-invalid @enderror' required placeholder='' name='address' />
