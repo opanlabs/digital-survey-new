@@ -380,7 +380,12 @@ class RegisterSurveyDataTable extends DataTable
      */
     public function query(RegisterSurvey $model): QueryBuilder
     {   
-        $id_vehicle = $this->request->get('id_vehicle');
+        if ($this->request->get('id_vehicle') == 'all') {
+            $id_vehicle = null;
+        } else {
+            $id_vehicle = $this->request->get('id_vehicle');
+        }
+
         $startdateSurvey = $this->request->get('startdateSurvey');
         $enddateSurvey = $this->request->get('enddateSurvey');
         $startdateRegister = $this->request->get('startdateRegister');

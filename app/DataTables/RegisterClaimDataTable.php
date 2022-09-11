@@ -415,9 +415,13 @@ class RegisterClaimDataTable extends DataTable
      */
     public function query(RegisterClaim $model): QueryBuilder
     {
-        // return $model->newQuery()->where('id_branch', Auth::user()->id_branch)->with(['vehicle','customer','user','branch','register_survey']);
 
-        $id_vehicle = $this->request->get('id_vehicle');
+        if ($this->request->get('id_vehicle') == 'all') {
+            $id_vehicle = null;
+        } else {
+            $id_vehicle = $this->request->get('id_vehicle');
+        }
+
         $startdateSurvey = $this->request->get('startdateSurvey');
         $enddateSurvey = $this->request->get('enddateSurvey');
         $startdateRegister = $this->request->get('startdateRegister');

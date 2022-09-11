@@ -32,7 +32,7 @@
                             <div class="mb-10">
                                 <label class="form-label fs-6 fw-bold">Vehcile Brand:</label>
                                 <select id="vehicle_brand" class="form-select form-select-solid @error('id_vehicle') is-invalid @enderror" required data-control="select2" name="id_vehicle" data-placeholder="Select an option" data-hide-search="true">
-                                    <option>All</option>
+                                    <option value="all">All</option>
                                     @foreach($vehicle as $br)
                                         <option value="{{$br->id_vehicle}}">{{ $br->nama }}</option>
                                     @endforeach
