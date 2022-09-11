@@ -133,3 +133,7 @@ a:hover,
 th,td {
     min-width: 125px;
 }
+
+label span{
+    min-width: 50%;
+}

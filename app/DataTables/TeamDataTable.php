@@ -145,7 +145,6 @@ class TeamDataTable extends DataTable
                     $editModal_teamSelect .= "<option value='". $teams->id_team ."'". $team_isSelected .">". $teams->name_team ."</option>";
                 } else {
                     $editModal_teamSelect .= "
-                    <option></option>
                     <option value='". $teams->id_team ."'>". $teams->name_team ."</option>
                     ";
                 }
@@ -218,6 +217,7 @@ class TeamDataTable extends DataTable
                                             <span>Team</span>
                                         </label>
                                         <select class='form-select form-select-solid @error('id_team') is-invalid @enderror' required data-control='select2' name='id_team' data-placeholder='Select an option' data-hide-search='true'>
+                                            <option></option>
                                             ".
                                             $editModal_teamSelect
                                             ."
