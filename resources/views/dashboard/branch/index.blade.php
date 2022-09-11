@@ -47,7 +47,7 @@
                                 <div class='col-md-6 fv-row'>
                                     <div class='d-flex flex-column mb-7 fv-row'>
                                         <label class='d-flex fs-6 fw-bold form-label mb-2'>
-                                            <span>Name Team</span>
+                                            <span style='width:100%'>Name Team</span>
                                         </label>
                                         <input type='text' class='form-control form-control-solid @error('team_name') is-invalid @enderror' required placeholder='Name Team' name='name_team'/>
                                     </div>
@@ -55,7 +55,7 @@
                                 <div class='col-md-6 fv-row'>
                                     <div class='d-flex flex-column mb-7 fv-row'>
                                         <label class='d-flex fs-6 fw-bold form-label mb-2'>
-                                            <span>Branch Name</span>
+                                            <span style='width:100%'>Branch Name</span>
                                         </label>
                                         <select class='form-select form-select-solid @error('id_branch') is-invalid @enderror' required data-control='select2' name='id_branch' data-placeholder='Select an option' data-hide-search='true'>
                                             @foreach ($branch as $branch)
