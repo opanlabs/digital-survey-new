@@ -153,7 +153,7 @@ class UsersDataTable extends DataTable
                                     <div class='col-md-6 fv-row'>
                                         <div class='d-flex flex-column mb-7 fv-row'>
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                                <span>Name</span>
+                                                <span style='width:100%'>Name</span>
                                             </label>
                                             <input type='text' class='form-control form-control-solid @error('customer_name') is-invalid @enderror' required placeholder='' name='name' value='".$data->name."' />
                                         </div>
@@ -161,7 +161,7 @@ class UsersDataTable extends DataTable
                                     <div class='col-md-6 fv-row'>
                                         <div class='d-flex flex-column mb-7 fv-row'>
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                                <span>Position</span>
+                                                <span style='width:100%'>Position</span>
                                             </label>
                                             <select class='form-select form-select-solid @error('id_role') is-invalid @enderror' required data-control='select2' name='id_role' data-placeholder='Select an option' data-hide-search='true'>
                                            ".
@@ -175,7 +175,7 @@ class UsersDataTable extends DataTable
                                     <div class='col-md-6 fv-row'>
                                         <div class='d-flex flex-column mb-7 fv-row'>
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                                <span>Id User</span>
+                                                <span style='width:100%'>Id User</span>
                                             </label>
                                             <input type='email' class='form-control form-control-solid @error('id_user') is-invalid @enderror' required placeholder='' name='email' value='".$data->id_user."' disabled read-only/>
                                         </div>
@@ -183,7 +183,7 @@ class UsersDataTable extends DataTable
                                     <div class='col-md-6 fv-row'>
                                         <div class='d-flex flex-column mb-7 fv-row'>
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                                <span>Phone Number</span>
+                                                <span style='width:100%'>Phone Number</span>
                                             </label>
                                             <input type='text' class='form-control form-control-solid @error('phone_number') is-invalid @enderror' required placeholder='' name='phone_number' value='".$data->phone_number."' />
                                         </div>
@@ -193,7 +193,7 @@ class UsersDataTable extends DataTable
                                     <div class='col-md-12 fv-row'>
                                         <div class='d-flex flex-column mb-7 fv-row'>
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                                <span>Email Address</span>
+                                                <span style='width:100%'>Email Address</span>
                                             </label>
                                             <input type='email' class='form-control form-control-solid @error('email') is-invalid @enderror' required placeholder='' name='email' value='".$data->email."' required/>
                                         </div>

@@ -87,7 +87,7 @@ class BranchDataTable extends DataTable
                                 <div class='col-md-6 fv-row'>
                                     <div class='d-flex flex-column mb-7 fv-row'>
                                         <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                            <span>Area</span>
+                                            <span style='width:100%'>Area</span>
                                         </label>
                                         <input type='text' class='form-control form-control-solid @error('province_name') is-invalid @enderror' required placeholder='Area' name='province_name' value='". $data->branch->province_name ."'/>
                                     </div>
@@ -95,7 +95,7 @@ class BranchDataTable extends DataTable
                                 <div class='col-md-6 fv-row'>
                                     <div class='d-flex flex-column mb-7 fv-row'>
                                         <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                            <span>Head</span>
+                                            <span style='width:100%'>Head</span>
                                         </label>
                                         <select class='form-select form-select-solid @error('id_user') is-invalid @enderror' required data-control='select2' name='id_user' data-placeholder='Select an option' data-hide-search='true'>
                                             ".
@@ -109,7 +109,7 @@ class BranchDataTable extends DataTable
                                 <div class='col-md-12 fv-row'>
                                     <div class='d-flex flex-column mb-7 fv-row'>
                                         <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                            <span>Team</span>
+                                            <span style='width:100%'>Team</span>
                                         </label>
                                         <input type='text' class='form-control form-control-solid @error('team_name') is-invalid @enderror' required placeholder='' name='name_team' value='". $data->name_team ."'/>
                                     </div>
@@ -119,7 +119,7 @@ class BranchDataTable extends DataTable
                                 <div class='col-md-12 fv-row'>
                                     <div class='d-flex flex-column mb-7 fv-row'>
                                         <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                            <span>Address</span>
+                                            <span style='width:100%'>Address</span>
                                         </label>
                                         <input type='text' class='form-control form-control-solid @error('address') is-invalid @enderror' required placeholder='' name='address' value='". $data->branch->address ."'/>
                                     </div>

@@ -35,7 +35,7 @@
     </div>
 
      <!-- begin:modal add user -->
-     <div class='modal fade' id='add_modal' tabindex='-1' aria-hidden='true'>
+    <div class='modal fade' id='add_modal' tabindex='-1' aria-hidden='true'>
         <form action='{{ route('users.create') }}' method='post'>
             @csrf
             <div class='modal-dialog modal-dialog-centered mw-650px'>
@@ -59,7 +59,7 @@
                                         <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
                                             <span>Name</span>
                                         </label>
-                                        <input type='text' class='form-control form-control-solid @error('customer_name') is-invalid @enderror' required placeholder='' name='name' />
+                                        <input type='text' class='form-control form-control-solid @error('customer_name') is-invalid @enderror' required placeholder='Name' name='name' />
                                     </div>
                                 </div>
                                 
@@ -85,7 +85,7 @@
                                         <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
                                             <span>Phone Number</span>
                                         </label>
-                                        <input type='text' class='form-control form-control-solid @error('phone_number') is-invalid @enderror' required placeholder='' name='phone_number' />
+                                        <input type='text' class='form-control form-control-solid @error('phone_number') is-invalid @enderror' required placeholder='Phone Number' name='phone_number' />
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                                         <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
                                             <span>Email Address</span>
                                         </label>
-                                        <input type='email' class='form-control form-control-solid @error('email') is-invalid @enderror' required placeholder='' name='email' />
+                                        <input type='email' class='form-control form-control-solid @error('email') is-invalid @enderror' required placeholder='Email' name='email' />
                                     </div>
                                 </div>
                             </div>
