@@ -661,7 +661,7 @@
                         $('#location').html(data.details.branch.province_name);
                         $('#register_date').html(data.details.created_at);
                         $('#vehicle_brand_report').html(data.details.vehicle.nama);
-                        $('#vehicle_type_report').html(data.details.vehicle.vehicle_type);
+                        $('#vehicle_type_report').html(data.details.type);
                         $('#year_reporting_survey').html(data.details.year);
                         $('#plat_no').html(data.details.plat_no);
 
@@ -715,7 +715,7 @@
                 $('#location_view').html(data.details.branch.province_name);
                 $('#register_date_view').html(data.details.created_at);
                 $('#vehicle_brand_report_view').html(data.details.vehicle.nama);
-                $('#vehicle_type_report_view').html(data.details.vehicle.vehicle_type);
+                $('#vehicle_type_report_view').html(data.details.type);
                 $('#year_reporting_survey_view').html(data.details.year);
                 $('#plat_no_view').html(data.details.plat_no);
                 $('#status_view').html(stats);

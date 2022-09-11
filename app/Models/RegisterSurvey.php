@@ -26,6 +26,7 @@ class RegisterSurvey extends Model
         'isStandardVehicle',
         'photoVehicle',
         'link_report_zoom',
+        'type'
     ];
 
     public function user()

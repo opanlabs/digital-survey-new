@@ -25,7 +25,7 @@
             <td>{{ $data->branch->province_name }}</td>
             <td>{{ $data->created_at }}</td>
             <td>{{ $data->vehicle->nama }}</td>
-            <td>{{ $data->vehicle->vehicle_type }}</td>
+            <td>{{ $data->type }}</td>
             <td>{{ $data->year }}</td>
             <td>{{ $data->plat_no }}</td>
             <td>{{ $data->status }}</td>

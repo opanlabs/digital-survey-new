@@ -44,7 +44,7 @@
         </p>
         <p>
             <span style="font-family: 'book antiqua', palatino, serif;"><span style="font-size: 10pt;">
-                <strong>Vehicle Type</strong>&nbsp; </span>:&nbsp; {{ $data->vehicle->vehicle_type }}
+                <strong>Vehicle Type</strong>&nbsp; </span>:&nbsp; {{ $data->type }}
             </span>
         </p>
         <p>

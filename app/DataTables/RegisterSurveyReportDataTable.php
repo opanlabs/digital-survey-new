@@ -124,7 +124,7 @@ class RegisterSurveyReportDataTable extends DataTable
                                 </tr>
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px'>Vehicle Type</td>
-                                    <td class='text-gray-800'>".$data->vehicle->vehicle_type."</td>
+                                    <td class='text-gray-800'>".$data->type."</td>
                                 </tr>
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px'>Year</td>
@@ -234,7 +234,7 @@ class RegisterSurveyReportDataTable extends DataTable
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
                                                 <span>Vehicle Type</span>
                                             </label>
-                                            <input type='text' class='form-control form-control-solid @error('type') is-invalid @enderror' required placeholder='' name='type' value='".$data->vehicle->vehicle_type."' />
+                                            <input type='text' class='form-control form-control-solid @error('type') is-invalid @enderror' required placeholder='' name='type' value='".$data->type."' />
                                         </div>
                                     </div>
                                     <div class='col-md-6 fv-row'>
