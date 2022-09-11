@@ -31,7 +31,7 @@ class TeamController extends Controller
      */
     public function index(TeamDataTable $dataTable)
     {
-        $roles = Roles::whereIn('id_role', ['2','3'])->get();
+        $roles = Roles::whereIn('id_role', ['3','4'])->get();
         $team = Team::all();
         $branch = Branch::all();
 

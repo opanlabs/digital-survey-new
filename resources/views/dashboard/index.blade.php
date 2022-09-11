@@ -17,7 +17,7 @@
                         <div class="d-flex flex-column justify-content-between">
                              <!--begin::Heading-->
                              <div class="fs-4 fw-bold text-gray-400 mb-7 ">All Register</div>
-                            <div class="fs-1 fw-bolder">29 User</div>
+                            <div class="fs-1 fw-bolder">{{ $registerSurvey->count() }} User</div>
                             <!--end::Heading-->
                         </div>
                         <!--end::Labels-->
@@ -49,8 +49,8 @@
                         <!--begin::Labels-->
                         <div class="d-flex flex-column justify-content-between">
                              <!--begin::Heading-->
-                             <div class="fs-4 fw-bold text-gray-400 mb-7 ">All Polish</div>
-                            <div class="fs-1 fw-bolder">229 Polish</div>
+                             <div class="fs-4 fw-bold text-gray-400 mb-7 ">All {{ Auth::user()->branch->province_name }} Policies</div>
+                            <div class="fs-1 fw-bolder">{{ $total_register_claim_perbranch }} Policies</div>
                             <!--end::Heading-->
                         </div>
                         <!--end::Labels-->
@@ -60,7 +60,7 @@
                         </div>
                         <!--end::Chart-->
                     </div>
-                    <div class="text-muted fs-7 fw-bold">Polish</div>
+                    <div class="text-muted fs-7 fw-bold">Policies</div>
                 </div>
                 <!--end::Wrapper-->
             </div>

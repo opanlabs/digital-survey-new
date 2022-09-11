@@ -9,7 +9,9 @@ use App\Models\Branch;
 use App\Models\Vehicle;
 use App\Models\TypePart;
 use App\Models\RegisterSurvey;
+use App\Models\RegisterClaim;
 use App\Models\Part;
+use Auth;
 
 use App\DataTables\RegisterClaimDashboardDataTable;
 
@@ -28,6 +30,7 @@ class DashboardController extends Controller
         $vehicle = Vehicle::all();
         $allCategories = TypePart::get();
         $registerSurvey = RegisterSurvey::all();
+        $total_register_claim_perbranch = RegisterClaim::where('id_branch', Auth::user()->id_branch)->get()->count();
 
         foreach ($allCategories as $rootCategory) {
             $rootCategory->children = Part::where('id_typepart' , $rootCategory->id_typepart)->get();
@@ -46,7 +49,8 @@ class DashboardController extends Controller
                 'branch' => $branch , 
                 'vehicle' => $vehicle , 
                 'part' => $allCategories ,
-                'registerSurvey' => $registerSurvey 
+                'registerSurvey' => $registerSurvey ,
+                'total_register_claim_perbranch' => $total_register_claim_perbranch 
             ]);
     }
 

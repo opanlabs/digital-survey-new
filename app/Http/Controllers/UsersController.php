@@ -76,7 +76,8 @@ class UsersController extends Controller
             'phone_number' => $request->phone_number,
             'id_team' => $request->id_team,
             'id_branch' => Auth::user()->id_branch,
-            'password' => Hash::make($request->get('new-password'))
+            'password' => Hash::make($request->get('new-password')),
+            'approved' => 1
         ]);
 
         return redirect()->back()->with('message','Data Successfully Added.');

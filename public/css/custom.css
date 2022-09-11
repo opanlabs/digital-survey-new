@@ -137,3 +137,11 @@ th,td {
 label span{
     min-width: 100%;
 }
+
+.apexcharts-tooltip.apexcharts-theme-dark{
+    color:#000 !important;
+}
+
+.apexcharts-canvas foreignObject{
+    height: 150px !important;
+}
