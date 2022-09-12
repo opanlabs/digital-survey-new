@@ -30,6 +30,7 @@ class DashboardController extends Controller
         $vehicle = Vehicle::all();
         $allCategories = TypePart::get();
         $registerSurvey = RegisterSurvey::all();
+        $total_polis_perbranch = RegisterClaim::select('no_polis')->where('id_branch', Auth::user()->id_branch)->distinct()->get()->count();
         $total_register_claim_perbranch = RegisterClaim::where('id_branch', Auth::user()->id_branch)->get()->count();
 
         foreach ($allCategories as $rootCategory) {
@@ -50,7 +51,8 @@ class DashboardController extends Controller
                 'vehicle' => $vehicle , 
                 'part' => $allCategories ,
                 'registerSurvey' => $registerSurvey ,
-                'total_register_claim_perbranch' => $total_register_claim_perbranch 
+                'total_register_claim_perbranch' => $total_register_claim_perbranch ,
+                'total_polis_perbranch' => $total_polis_perbranch ,
             ]);
     }
 

@@ -25,8 +25,8 @@ class RegisterChart
         return $this->chart->pieChart()
             ->setTitle('')
             ->setSubtitle('')
-            ->setColors(['#fff6eb', '#F4A238', '#ffc700'])
-            ->addData([$total_register, $done_register, $pending_register])
-            ->setLabels(['All Register', 'Done Register', 'Pending Register']);
+            ->setColors(['#fff6eb', '#ffc700', '#F4A238'])
+            ->addData([$total_register, $pending_register, $done_register])
+            ->setLabels(['All Register', 'Pending Register', 'Done Register']);
     }
 }

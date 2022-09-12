@@ -4,9 +4,9 @@
 <!--begin::Row-->
 <div class="row gy-5 g-xl-8">
      <!--begin::Col-->
-     <div class="col-lg-6 col-xxl-4">
+     <div class="col-xl-6 ">
         <!--begin::Card-->										
-        <div class="card mb-5 h-lg-100">
+        <div class="card mb-2 " style="height:200px">
             <!--begin::Card body-->
             <div class="card-body card-p-chart">
                
@@ -17,12 +17,12 @@
                         <div class="d-flex flex-column justify-content-between">
                              <!--begin::Heading-->
                              <div class="fs-4 fw-bold text-gray-400 mb-7 ">All Register</div>
-                            <div class="fs-1 fw-bolder">{{ $registerSurvey->count() }} User</div>
+                            <div class="fs-3 fw-bolder">{{ $registerSurvey->count() }} User</div>
                             <!--end::Heading-->
                         </div>
                         <!--end::Labels-->
                         <!--begin::Chart-->
-                        <div class="d-flex flex-center">
+                        <div class="d-flex flex-center w-75" style="min-width: 250px;">
                             {!! $RegisterChart->container() !!}
                         </div>
                         <!--end::Chart-->
@@ -37,9 +37,9 @@
     </div>
     <!--end::Col-->
      <!--begin::Col-->
-     <div class="col-lg-6 col-xxl-4">
+     <div class="col-xl-6 ">
         <!--begin::Card-->										
-        <div class="card mb-5 h-lg-100">
+        <div class="card mb-2 " style="height:200px">
             <!--begin::Card body-->
             <div class="card-body card-p-chart">
                
@@ -50,12 +50,12 @@
                         <div class="d-flex flex-column justify-content-between">
                              <!--begin::Heading-->
                              <div class="fs-4 fw-bold text-gray-400 mb-7 ">All {{ Auth::user()->branch->province_name }} Policies</div>
-                            <div class="fs-1 fw-bolder">{{ $total_register_claim_perbranch }} Policies</div>
+                            <div class="fs-3 fw-bolder">{{ $total_polis_perbranch }} Policies</div>
                             <!--end::Heading-->
                         </div>
                         <!--end::Labels-->
                         <!--begin::Chart-->
-                        <div class="d-flex flex-center">
+                        <div class="d-flex flex-center w-75" style="min-width: 250px;">
                             {!! $PolishChart->container() !!}
                         </div>
                         <!--end::Chart-->
@@ -70,9 +70,9 @@
     </div>
     <!--end::Col-->
      <!--begin::Col-->
-     <div class="col-lg-6 col-xxl-4">
+     <div class="col-xl-6 ">
         <!--begin::Card-->										
-        <div class="card mb-5 h-lg-100">
+        <div class="card mb-2 " style="height:200px">
             <!--begin::Card body-->
             <div class="card-body card-p-chart">
                
@@ -83,12 +83,12 @@
                         <div class="d-flex flex-column justify-content-between">
                              <!--begin::Heading-->
                              <div class="fs-4 fw-bold text-gray-400 mb-7 ">All Claim</div>
-                            <div class="fs-1 fw-bolder">133 Claim</div>
+                            <div class="fs-3 fw-bolder">{{ $total_register_claim_perbranch }} Claim</div>
                             <!--end::Heading-->
                         </div>
                         <!--end::Labels-->
                         <!--begin::Chart-->
-                        <div class="d-flex flex-center">
+                        <div class="d-flex flex-center w-75" style="min-width: 250px;">
                             {!! $ClaimChart->container() !!}
                         </div>
                         <!--end::Chart-->

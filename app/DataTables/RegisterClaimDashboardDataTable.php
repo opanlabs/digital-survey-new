@@ -56,8 +56,8 @@ class RegisterClaimDashboardDataTable extends DataTable
 
         if ($data->status === 'SCHEDULE') {
             $linkZoom = "
-            <td class='text-muted min-w-125px w-200px'>Link Zoom Meeting</td>
-            <td class='text-gray-800'>                                
+            <td class='py-2 text-muted min-w-125px w-200px'>Link Zoom Meeting</td>
+            <td class='py-2 text-gray-800'>                                
                 <div class='input-group mb-5'>
                     <span class='input-group-text' id='basic-addon1'>Link</span>
                     <input type='text' value='".$data->link_zoom."' class='form-control' placeholder='Link Zoom Meeting' aria-label='Link Zoom Meeting' aria-describedby='basic-addon1'/>
@@ -114,56 +114,56 @@ class RegisterClaimDashboardDataTable extends DataTable
                         <div class='flex-equal me-5'>
                             <table class='table table-flush fw-bold gy-2'>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>No Polis</td>
-                                    <td class='text-gray-800'>".$data->no_polis."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>No Polis</td>
+                                    <td class='py-2 text-gray-800'>".$data->no_polis."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>No Register</td>
-                                    <td class='text-gray-800'>".$data->register_survey->register_no."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>No Register</td>
+                                    <td class='py-2 text-gray-800'>".$data->register_survey->register_no."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Costumer Name</td>
-                                    <td class='text-gray-800'>".$data->customer->customer_name."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Costumer Name</td>
+                                    <td class='py-2 text-gray-800'>".$data->customer->customer_name."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Phone Number</td>
-                                    <td class='text-gray-800'>".$data->customer->phone_number."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Phone Number</td>
+                                    <td class='py-2 text-gray-800'>".$data->customer->phone_number."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Email</td>
-                                    <td class='text-gray-800'>".$data->customer->email."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Email</td>
+                                    <td class='py-2 text-gray-800'>".$data->customer->email."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Vehicle Brand</td>
-                                    <td class='text-gray-800'>".$data->vehicle->nama."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Vehicle Brand</td>
+                                    <td class='py-2 text-gray-800'>".$data->vehicle->nama."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Vehicle Type</td>
-                                    <td class='text-gray-800'>".$data->type."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Vehicle Type</td>
+                                    <td class='py-2 text-gray-800'>".$data->type."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Year</td>
-                                    <td class='text-gray-800'>".$data->year."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Year</td>
+                                    <td class='py-2 text-gray-800'>".$data->year."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Plat No</td>
-                                    <td class='text-gray-800'>".$data->plat_no."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Plat No</td>
+                                    <td class='py-2 text-gray-800'>".$data->plat_no."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Surveyor Name</td>
-                                    <td class='text-gray-800'>".$data->user->name."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Surveyor Name</td>
+                                    <td class='py-2 text-gray-800'>".$data->user->name."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Branch</td>
-                                    <td class='text-gray-800'>".$data->branch->province_name."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Branch</td>
+                                    <td class='py-2 text-gray-800'>".$data->branch->province_name."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Register Date</td>
-                                    <td class='text-gray-800'>".$data->created_at."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Register Date</td>
+                                    <td class='py-2 text-gray-800'>".$data->created_at."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Status</td>
-                                    <td class='text-gray-800'>".$statusLabel."</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Status</td>
+                                    <td class='py-2 text-gray-800'>".$statusLabel."</td>
                                 </tr>
                                 <tr>
                                 ".
