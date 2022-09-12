@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Charts\RegisterChart;
 use App\Charts\PolishChart;
 use App\Charts\ClaimChart;
+use App\Charts\RiskChart;
 
 use App\Models\Branch;
 use App\Models\Vehicle;
@@ -24,12 +25,12 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(RegisterChart $RegisterChart,PolishChart $PolishChart,ClaimChart $ClaimChart,RegisterClaimDashboardDataTable $dataTable )
+    public function index(RegisterChart $RegisterChart,PolishChart $PolishChart,ClaimChart $ClaimChart,RiskChart $RiskChart ,RegisterClaimDashboardDataTable $dataTable )
     {   
         $branch = Branch::all();
         $vehicle = Vehicle::all();
         $allCategories = TypePart::get();
-        $registerSurvey = RegisterSurvey::all();
+        $registerSurvey = RegisterSurvey::where('id_branch', Auth::user()->id_branch)->get();
         $total_polis_perbranch = RegisterClaim::select('no_polis')->where('id_branch', Auth::user()->id_branch)->distinct()->get()->count();
         $total_register_claim_perbranch = RegisterClaim::where('id_branch', Auth::user()->id_branch)->get()->count();
 
@@ -47,6 +48,7 @@ class DashboardController extends Controller
                 'RegisterChart' => $RegisterChart->build(),
                 'PolishChart' => $PolishChart->build(),
                 'ClaimChart' => $ClaimChart->build(),
+                'RiskChart' => $RiskChart->build(),
                 'branch' => $branch , 
                 'vehicle' => $vehicle , 
                 'part' => $allCategories ,

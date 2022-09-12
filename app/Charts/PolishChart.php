@@ -26,6 +26,6 @@ class PolishChart
                 ->setSubtitle('')
                 ->setColors(['#fff6eb', '#F4A238'])
                 ->addData([$all_policies, $done_policies])
-                ->setLabels(['All Policies', 'Policies Done']);
+                ->setLabels(['All Policies', 'Done']);
     }
 }

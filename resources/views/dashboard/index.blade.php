@@ -6,7 +6,7 @@
      <!--begin::Col-->
      <div class="col-xl-6 ">
         <!--begin::Card-->										
-        <div class="card mb-2 " style="height:200px">
+        <div class="card mb-2 " style="height:225px">
             <!--begin::Card body-->
             <div class="card-body card-p-chart">
                
@@ -39,7 +39,7 @@
      <!--begin::Col-->
      <div class="col-xl-6 ">
         <!--begin::Card-->										
-        <div class="card mb-2 " style="height:200px">
+        <div class="card mb-2 " style="height:225px">
             <!--begin::Card body-->
             <div class="card-body card-p-chart">
                
@@ -72,7 +72,40 @@
      <!--begin::Col-->
      <div class="col-xl-6 ">
         <!--begin::Card-->										
-        <div class="card mb-2 " style="height:200px">
+        <div class="card mb-2 " style="height:225px">
+            <!--begin::Card body-->
+            <div class="card-body card-p-chart">
+               
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column">
+                    <div class="d-flex justify-content-between ">
+                        <!--begin::Labels-->
+                        <div class="d-flex flex-column justify-content-between">
+                             <!--begin::Heading-->
+                             <div class="fs-4 fw-bold text-gray-400 mb-7 ">All Register Risk</div>
+                            <div class="fs-3 fw-bolder">{{ $registerSurvey->count() }} Risk</div>
+                            <!--end::Heading-->
+                        </div>
+                        <!--end::Labels-->
+                        <!--begin::Chart-->
+                        <div class="d-flex flex-center w-75" style="min-width: 250px;">
+                            {!! $RiskChart->container() !!}
+                        </div>
+                        <!--end::Chart-->
+                    </div>
+                    <div class="text-muted fs-7 fw-bold">Risk</div>
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Card-->
+    </div>
+    <!--end::Col-->
+    <!--begin::Col-->
+    <div class="col-xl-6 ">
+        <!--begin::Card-->										
+        <div class="card mb-2 " style="height:225px">
             <!--begin::Card body-->
             <div class="card-body card-p-chart">
                
@@ -672,10 +705,12 @@
 <script src="{{ $RegisterChart->cdn() }}"></script>
 <script src="{{ $PolishChart->cdn() }}"></script>
 <script src="{{ $ClaimChart->cdn() }}"></script>
+<script src="{{ $RiskChart->cdn() }}"></script>
 
 {{ $RegisterChart->script() }}
 {{ $PolishChart->script() }}
 {{ $ClaimChart->script() }}
+{{ $RiskChart->script() }}
 
 
 @push('scripts')

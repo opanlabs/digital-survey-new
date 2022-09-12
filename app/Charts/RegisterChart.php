@@ -27,6 +27,6 @@ class RegisterChart
             ->setSubtitle('')
             ->setColors(['#fff6eb', '#ffc700', '#F4A238'])
             ->addData([$total_register, $pending_register, $done_register])
-            ->setLabels(['All Register', 'Pending Register', 'Done Register']);
+            ->setLabels(['All Register', 'Pending', 'Done']);
     }
 }
