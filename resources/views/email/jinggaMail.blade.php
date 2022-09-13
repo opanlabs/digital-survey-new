@@ -106,7 +106,7 @@
                                   <a
                                     href="mailto:help@xpedius.com"
                                     style="color: #57BAF7"
-                                    >admin@jingga-teknologi.com</a
+                                    >admin@jtechsurvey.com</a
                                   >
                                 </td>
                               </tr>

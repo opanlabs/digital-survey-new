@@ -65,7 +65,6 @@
                                 <i class="bi bi-x fs-2"></i>
                             </span>
                             <!--end::Cancel-->
-                            
                         </div>
                         <div class="d-flex flex-column">
                             <h1 class="fw-bolder d-flex text-capitalize">Hi!, {{ Auth::user()->name }}</h1>
