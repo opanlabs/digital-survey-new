@@ -7,6 +7,11 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+
+    protected $commands = [
+        Commands\NotifCron::class,
+    ];
+
     /**
      * Define the application's command schedule.
      *
@@ -15,7 +20,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        //jalankan cron notification schedule setiap hari pukul 06:00
+        $schedule->command('notif:cron')
+                 ->dailyAt('06:00');
     }
 
     /**

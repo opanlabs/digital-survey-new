@@ -33,12 +33,15 @@
                         padding-bottom: 20px;
                       "
                     >
-                      <p>Hi {{$mailData['email'] }},</p>
+                      <p>Hi {{$mailData['name'] }},</p>
                       <p>
-                        Sebelumnya terimakasih sudah menggunakan layanan kami.
+                        Terimakasih sudah menggunakan layanan kami.
                       </p>
                       <p>
-                        Berikut link survey zoom meet .
+                        Jadwal survey online anda akan dimulai <strong>Besok Pukul {{$mailData['hours'] }}</strong>
+                      </p>
+                      <p>
+                        Silakan klik link dibawah untuk memulai zoom meeting.
                       </p>
                     </td>
                   </tr>
@@ -61,7 +64,7 @@
                               font-weight: bold;
                             "
                           >
-                          <a style="text-decoration: none; color:#fff" href="{{$mailData['link']}}">Klik Disini</a>
+                          <a style="text-decoration: none ;color:#fff" href="{{$mailData['link']}}">Klik Disini</a>
                           </td>
                         </tr>
                       </table>
@@ -106,7 +109,7 @@
                                   <a
                                     href="mailto:help@xpedius.com"
                                     style="color: #57BAF7"
-                                    >admin@jingga-teknologi.com</a
+                                    >admin@admin@jtechsurvey.com</a
                                   >
                                 </td>
                               </tr>

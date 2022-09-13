@@ -28,7 +28,22 @@ use \MacsiDigital\Zoom\Facades\Zoom;
 use PDF;
 
 class RegisterSurveyController extends Controller
-{
+{   
+
+    public function test_query()
+    {
+        // $meetingTomorrow = RegisterSurvey::whereDate('survey_date', '=', Carbon::tomorrow())->get();
+
+        // foreach ($meetingTomorrow as $data) {
+        //     $mailData = [
+        //         'name' => $data->customer->customer_name,
+        //         'link' => $data->link_zoom,
+        //         'hours' => Carbon::parse($data->survey_date)->format('H:i')
+        //     ];
+        //     Notification::route('mail',$data->customer->email)->notify(new ScheduleNotification($mailData));
+        //     echo('email sended to '.$data->customer->customer_name.PHP_EOL);
+        // }
+    }
 
     public function export_excel($id)
 	{   

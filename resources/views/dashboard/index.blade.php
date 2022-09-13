@@ -3,8 +3,8 @@
 @section('content')
 <!--begin::Row-->
 <div class="row gy-5 g-xl-8">
-     <!--begin::Col-->
-     <div class="col-xl-6 ">
+    <!--begin::Col-->
+    <div class="col-xl-6 ">
         <!--begin::Card-->										
         <div class="card mb-2 " style="height:225px">
             <!--begin::Card body-->
@@ -38,8 +38,8 @@
         <!--end::Card-->
     </div>
     <!--end::Col-->
-     <!--begin::Col-->
-     <div class="col-xl-6 ">
+    <!--begin::Col-->
+    <div class="col-xl-6 ">
         <!--begin::Card-->										
         <div class="card mb-2 " style="height:225px">
             <!--begin::Card body-->
@@ -73,8 +73,8 @@
         <!--end::Card-->
     </div>
     <!--end::Col-->
-     <!--begin::Col-->
-     <div class="col-xl-6 ">
+    <!--begin::Col-->
+    <div class="col-xl-6 ">
         <!--begin::Card-->										
         <div class="card mb-2 " style="height:225px">
             <!--begin::Card body-->

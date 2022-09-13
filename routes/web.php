@@ -109,7 +109,7 @@ Route::get('/role/query/autocomplete',[BranchController::class,'autocompleteRole
 Route::get('/vehicle/query/autocomplete',[VehicleController::class,'autocomplete'])->name('vehicle.autocomplete');
 Route::get('/meetSchedule/query',[RegisterSurveyController::class,'meetSchedule'])->name('meetSchedule.json');
 
-// Route::get('/test_query',[TeamController::class,'test_query'])->name('test_query');
+Route::get('/test_query',[RegisterSurveyController::class,'test_query'])->name('test_query');
 
 // untuk filter register date
 Route::get('/filterRegisterDate/query',[RegisterSurveyController::class,'filterRegisterDate'])->name('filterRegisterDate.datatable');
