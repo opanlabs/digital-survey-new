@@ -22,7 +22,7 @@ class Kernel extends ConsoleKernel
     {
         //jalankan cron notification schedule setiap hari pukul 06:00
         $schedule->command('notif:cron')
-                 ->dailyAt('06:55');
+                 ->dailyAt('06:58');
     }
 
     /**
