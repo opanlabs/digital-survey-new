@@ -22,8 +22,10 @@
                         </div>
                         <!--end::Labels-->
                         <!--begin::Chart-->
-                        <div class="d-flex flex-center w-75" style="min-width: 250px;">
-                            {!! $RegisterChart->container() !!}
+                        <div class="d-flex flex-center w-75 chart" style="min-width: 250px;">
+                            <div class="w-100" style="max-width:305px">
+                                {!! $RegisterChart->container() !!}
+                            </div>
                         </div>
                         <!--end::Chart-->
                     </div>
@@ -56,7 +58,9 @@
                         <!--end::Labels-->
                         <!--begin::Chart-->
                         <div class="d-flex flex-center w-75" style="min-width: 250px;">
-                            {!! $PolishChart->container() !!}
+                            <div class="w-100" style="max-width:305px">
+                                {!! $PolishChart->container() !!}
+                            </div>
                         </div>
                         <!--end::Chart-->
                     </div>
@@ -89,7 +93,9 @@
                         <!--end::Labels-->
                         <!--begin::Chart-->
                         <div class="d-flex flex-center w-75" style="min-width: 250px;">
-                            {!! $RiskChart->container() !!}
+                            <div class="w-100" style="max-width:305px">
+                                {!! $RiskChart->container() !!}
+                            </div>
                         </div>
                         <!--end::Chart-->
                     </div>
@@ -122,7 +128,9 @@
                         <!--end::Labels-->
                         <!--begin::Chart-->
                         <div class="d-flex flex-center w-75" style="min-width: 250px;">
-                            {!! $ClaimChart->container() !!}
+                            <div class="w-100" style="max-width:305px">
+                                {!! $ClaimChart->container() !!}
+                            </div>
                         </div>
                         <!--end::Chart-->
                     </div>
