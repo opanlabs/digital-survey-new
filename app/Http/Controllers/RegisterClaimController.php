@@ -274,6 +274,20 @@ class RegisterClaimController extends Controller
         return redirect()->back()->with('message','Added Schedule.');
     }
 
+    public function ajaxUploadVideo(Request $request)
+    {   
+        $registerSurvey = RegisterClaim::find($request->id);
+
+        $link_report_zoom = '';
+        $file_name = $request['videoUpload']->getClientOriginalName();
+        $request['videoUpload']->storeAs('public/video','link-claim-report-'.$file_name);
+        $link_report_zoom = \Storage::url('public/video/'.'link-claim-report-'.$file_name);    
+
+        $registerSurvey->update([
+            'link_report_zoom' =>  $link_report_zoom
+        ]);
+    }
+
     public function reportSchedule(Request $request){
         $request->validate([
             'videoUpload' => 'required',
@@ -296,20 +310,18 @@ class RegisterClaimController extends Controller
             }
         }
         $id = $request->id;
-
         $registerSurvey = RegisterClaim::find($id);
 
-        $link_report_zoom = '';
-        $file_name = $request['videoUpload']->getClientOriginalName();
-        $request['videoUpload']->storeAs('public/video','link-claim-report-'.$file_name);
-        $link_report_zoom = \Storage::url('public/video/'.'link-claim-report-'.$file_name);     
+        // $link_report_zoom = '';
+        // $file_name = $request['videoUpload']->getClientOriginalName();
+        // $request['videoUpload']->storeAs('public/video','link-claim-report-'.$file_name);
+        // $link_report_zoom = \Storage::url('public/video/'.'link-claim-report-'.$file_name);     
 
         $registerSurvey->update([
             'descriptionVehicle' =>  $request->description,
             'isStandardVehicle' =>  $request->isStandard,
             'photoVehicle' =>  $temp,
             'status' =>  'DONE',
-            'link_report_zoom' =>  $link_report_zoom
         ]);
 
         return redirect()->back()->with('message','Report Schedule Success.');

@@ -256,10 +256,10 @@
         </div>
         <!-- modal schedule report -->
         <div class="modal fade reportSurvey" id="kt_report" tabindex="-1" aria-hidden="true">
-            <form action='{{ route('register-claim.report')}}' method="post"  enctype="multipart/form-data">
+            <form action='{{ route('register-claim.report')}}' method="post"  enctype="multipart/form-data" id="reportForm">
                 @csrf
                 @method('post')
-                <input type="hidden" name="id">
+                <input type="hidden" name="id" id="id_survey">
                 <div class="modal-dialog modal-dialog-centered mw-1000px">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -404,7 +404,7 @@
                                                 <tr>
                                                     <td class="text-muted min-w-125px w-125px">Upload Video Report</td>
                                                     <td class="text-gray-800">
-                                                        <input type="file" name="videoUpload" accept=".mp4, .mkv , .mov , .avi" required>
+                                                        <input id="videoUpload" type="file" name="videoUpload" accept=".mp4, .mkv , .mov , .avi" required>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -413,8 +413,14 @@
                                 </div>
                         </div>
                         <div class="modal-footer">
-                            <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Cancel</button>
-                            <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">Save
+                            <button id="cancelBtn" data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light spinner me-3">Cancel</button>
+                            <button type="submit" class="btn btn-primary me-10" id="save_report">
+                                <span class="indicator-label">
+                                    Save
+                                </span>
+                                <span class="indicator-progress">
+                                    Uploading ... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span> 
                             </button>
                         </div>
                         
@@ -586,6 +592,46 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
     {{$dataTable->scripts()}}
     <script>
+        // loader saat upload video
+        var saveButton = document.querySelector("#save_report");
+        var cancelButton = document.querySelector("#cancelBtn");
+        var videoUpload = document.querySelector("#videoUpload");
+        var reportForm = document.querySelector("#reportForm");
+
+        videoUpload.addEventListener("change", function() {
+            $("#kt_report").modal({"backdrop": "static"});
+            saveButton.setAttribute("data-kt-indicator", "on");
+            saveButton.setAttribute("disabled", true);
+            cancelButton.setAttribute("disabled", true);
+
+            let fileVideo = $('#videoUpload')[0].files;
+            let id_survey = $('#id_survey').val();
+            console.log(id_survey)
+            var fd = new FormData();
+
+            fd.append('videoUpload',fileVideo[0]);
+            fd.append('_token',"{{ csrf_token() }}");  
+            fd.append('id',id_survey);
+
+            $.ajax({
+            url: "{{ route('register-claim.ajaxUploadVideo')}}",
+            type:"POST",
+            data:fd,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function(response){
+                    console.log(response);
+                }
+            });
+
+            setTimeout(function() {
+                saveButton.removeAttribute("data-kt-indicator");
+                saveButton.removeAttribute("disabled");
+                cancelButton.removeAttribute("disabled");
+            }, 5000);
+        });
+
         //date range filter by survey date
         $("#daterangeSurvey").flatpickr({
             dateFormat: "Y-m-d",

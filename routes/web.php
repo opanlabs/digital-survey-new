@@ -39,6 +39,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::put('/register-survey/edit/{id}',[RegisterSurveyController::class,'update'])->name('register-survey.update');
     Route::post('/register-survey/schedule',[RegisterSurveyController::class,'updateSchedule'])->name('register-survey.schedule');
     Route::post('/register-survey/report',[RegisterSurveyController::class,'reportSchedule'])->name('register-survey.report');
+    Route::post('/register-survey/ajax',[RegisterSurveyController::class,'ajaxUploadVideo'])->name('register-survey.ajaxUploadVideo');
     Route::post('/register-survey/delete',[RegisterSurveyController::class,'deleteSurvey'])->name('register-survey.deleteSurvey');
     Route::post('/register-survey/detail',[RegisterSurveyController::class, 'detailSurvey'])->name('register-survey.details');
     Route::get('/register-survey/export_excel/{id}', [RegisterSurveyController::class, 'export_excel']);
@@ -51,6 +52,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::put('/register-claim/edit/{id}',[RegisterClaimController::class,'update'])->name('register-claim.update');
     Route::post('/register-claim/schedule',[RegisterClaimController::class,'updateSchedule'])->name('register-claim.schedule');
     Route::post('/register-claim/report',[RegisterClaimController::class,'reportSchedule'])->name('register-claim.report');
+    Route::post('/register-claim/ajax',[RegisterClaimController::class,'ajaxUploadVideo'])->name('register-claim.ajaxUploadVideo');
     Route::post('/register-claim/delete',[RegisterClaimController::class,'deleteClaim'])->name('register-claim.deleteClaim');
     Route::post('/register-claim/detail',[RegisterClaimController::class, 'detailClaim'])->name('register-claim.details');
     Route::get('/register-claim/export_excel/{id}', [RegisterClaimController::class, 'export_excel']);

@@ -235,10 +235,10 @@
         </div>
         <!-- modal schedule report -->
         <div class="modal fade reportSurvey" id="kt_report" tabindex="-1" aria-hidden="true">
-            <form action='{{ route('register-survey.report')}}' method="post"  enctype="multipart/form-data">
+            <form action='{{ route('register-survey.report')}}' method="post"  enctype="multipart/form-data" id="reportForm">
                 @csrf
                 @method('post')
-                <input type="hidden" name="id">
+                <input type="hidden" name="id" id="id_survey">
                 <div class="modal-dialog modal-dialog-centered mw-1000px">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -389,7 +389,7 @@
                         </div>
                         <div class="modal-footer">
                             <div class="spinner spinner-primary mr-15"></div>
-                            <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light spinner me-3">Cancel</button>
+                            <button id="cancelBtn" data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light spinner me-3">Cancel</button>
                             <button type="submit" class="btn btn-primary me-10" id="save_report">
                                 <span class="indicator-label">
                                     Save
@@ -566,15 +566,41 @@
     <script>
         // loader saat upload video
         var saveButton = document.querySelector("#save_report");
+        var cancelButton = document.querySelector("#cancelBtn");
         var videoUpload = document.querySelector("#videoUpload");
+        var reportForm = document.querySelector("#reportForm");
 
         videoUpload.addEventListener("change", function() {
+            $("#kt_report").modal({"backdrop": "static"});
             saveButton.setAttribute("data-kt-indicator", "on");
             saveButton.setAttribute("disabled", true);
+            cancelButton.setAttribute("disabled", true);
+
+            let fileVideo = $('#videoUpload')[0].files;
+            let id_survey = $('#id_survey').val();
+
+            var fd = new FormData();
+
+            fd.append('videoUpload',fileVideo[0]);
+            fd.append('_token',"{{ csrf_token() }}");  
+            fd.append('id',id_survey);
+
+            $.ajax({
+            url: "{{ route('register-survey.ajaxUploadVideo')}}",
+            type:"POST",
+            data:fd,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function(response){
+                    console.log(response);
+                }
+            });
 
             setTimeout(function() {
                 saveButton.removeAttribute("data-kt-indicator");
                 saveButton.removeAttribute("disabled");
+                cancelButton.removeAttribute("disabled");
             }, 5000);
         });
 
