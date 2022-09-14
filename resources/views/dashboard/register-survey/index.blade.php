@@ -379,7 +379,7 @@
                                                 <tr>
                                                     <td class="text-muted min-w-125px w-125px">Upload Video Report</td>
                                                     <td class="text-gray-800">
-                                                        <input type="file" name="videoUpload" accept=".mp4, .mkv , .mov , .avi" required>
+                                                        <input id="videoUpload" type="file" name="videoUpload" accept=".mp4, .mkv , .mov , .avi" required>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -388,8 +388,15 @@
                                 </div>
                         </div>
                         <div class="modal-footer">
-                            <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Cancel</button>
-                            <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">Save
+                            <div class="spinner spinner-primary mr-15"></div>
+                            <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light spinner me-3">Cancel</button>
+                            <button type="submit" class="btn btn-primary me-10" id="save_report">
+                                <span class="indicator-label">
+                                    Save
+                                </span>
+                                <span class="indicator-progress">
+                                    Uploading ... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
                             </button>
                         </div>
                         
@@ -557,6 +564,20 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
     {{$dataTable->scripts()}}
     <script>
+        // loader saat upload video
+        var saveButton = document.querySelector("#save_report");
+        var videoUpload = document.querySelector("#videoUpload");
+
+        videoUpload.addEventListener("change", function() {
+            saveButton.setAttribute("data-kt-indicator", "on");
+            saveButton.setAttribute("disabled", true);
+
+            setTimeout(function() {
+                saveButton.removeAttribute("data-kt-indicator");
+                saveButton.removeAttribute("disabled");
+            }, 5000);
+        });
+
         //date range filter by survey date
         $("#daterangeSurvey").flatpickr({
             dateFormat: "Y-m-d",
