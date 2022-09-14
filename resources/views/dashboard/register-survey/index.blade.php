@@ -233,6 +233,32 @@
                     </div>
             </form>
         </div>
+        <!-- modal send email -->
+        <div class="modal fade sendEmail" id="kt_modal_sendemail" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeLg" aria-hidden="true">
+            <form action='{{ route('register-survey.send-email') }}' method="post" id="form-update" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="id">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="flex-column">
+                                    <div class="modal-header border-0 text-center mt-5 justify-content-center">
+                                        <i class="bi bi-envelope-plus fs-5x text-primary"></i>
+                                    </div>						
+                                    <h4 class="modal-title w-100 text-center">Are you sure?</h4>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <p>Do you really want to send email these records ?
+                                </div>
+                                <div class="modal-footer justify-content-center">
+                                    <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light btn-sm">Cancel</button>
+                                    <button type="submit" class="btn btn-primary btn-sm">Send Email</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+        </div>
         <!-- modal schedule report -->
         <div class="modal fade reportSurvey" id="kt_report" tabindex="-1" aria-hidden="true">
             <form action='{{ route('register-survey.report')}}' method="post"  enctype="multipart/form-data" id="reportForm">
@@ -694,6 +720,11 @@
         $(document).on('click','#kt_delete_mod', function(){
             var id = $(this).data('id');
             $('.deleteSurvey').find('input[name="id"]').val(id);
+        });
+
+        $(document).on('click','#kt_sendemail_mod', function(){
+            var id = $(this).data('id');
+            $('.sendEmail').find('input[name="id"]').val(id);
         });
 
         $(document).on('click','#kt_report_mod', function(){

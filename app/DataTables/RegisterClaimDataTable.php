@@ -308,6 +308,17 @@ class RegisterClaimDataTable extends DataTable
         $schedule = "";
         $surveyReport = "";
         $viewSurvey = "";
+        $sendEmail = "";
+        
+        if ($editUrl->status === 'SCHEDULE') {
+        $sendEmail = "<div class='menu-item menu-state-bg px-3'>
+                        <a href='#' class='menu-link px-3 text-danger' data-bs-toggle='modal' data-bs-target='#kt_modal_sendemail' id='kt_sendemail_mod' data-id='{$editUrl->id_register_claim}'>
+                            <span class='menu-icon'><i class='bi bi-envelope-plus'></i></span>
+                            <span class='menu-title'>Resend Email</span>
+                        </a>
+                    </div>";
+        }
+
         if ($editUrl->status === 'OPEN') {
            $schedule = "<div class='menu-item menu-state-bg px-3'>
                             <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_schedule' id='kt_schedule_mod' data-id='{$editUrl->id_register_claim}'>
@@ -361,7 +372,7 @@ class RegisterClaimDataTable extends DataTable
             </div>
         ". 
         $schedule
-        . $surveyReport ."
+        . $surveyReport .$sendEmail."
             <div class='menu-item menu-state-bg px-3'>
                 <a href='#' class='menu-link px-3 text-danger' data-bs-toggle='modal' data-bs-target='#kt_modal_delete' id='kt_delete_mod' data-id='{$editUrl->id_register_claim}'>
                     <span class='menu-icon'><i class='bi bi-trash'></i></span>

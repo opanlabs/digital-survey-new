@@ -201,6 +201,18 @@ class RegisterSurveyController extends Controller
             ]);
         return redirect()->back()->with('message','Data Successfully Added.');
     }
+    public function send_email(Request $request){
+        $data = RegisterSurvey::where('id_register_survey', $request->id)->with(['vehicle','customer','branch'])->first();
+
+        $mailData = [
+            'email' => $data->customer->email,
+            'link' => $data->link_zoom
+        ];
+
+        Mail::to($data->customer->email)->send(new JinggaMail($mailData));
+
+        return redirect()->back()->with('message','Data Successfully Resend Email to '. $data->customer->email );
+    }
 
     /**
      * Display the specified resource.
