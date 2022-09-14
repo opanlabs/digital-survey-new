@@ -21,8 +21,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         //jalankan cron notification schedule setiap hari pukul 06:00
-        $schedule->command('notif:cron')
-                 ->dailyAt('06:58');
+        $schedule->command('notif:cron');
     }
 
     /**
