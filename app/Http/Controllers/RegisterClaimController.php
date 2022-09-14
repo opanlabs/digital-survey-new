@@ -170,6 +170,18 @@ class RegisterClaimController extends Controller
         return redirect()->back()->with('message','Data Successfully Added.');
     }
 
+    public function send_email(Request $request){
+        $data = RegisterClaim::where('id_register_claim', $request->id)->with(['customer'])->first();
+        $mailData = [
+            'email' => $data->customer->email,
+            'link' => $data->link_zoom
+        ];
+
+        Mail::to($data->customer->email)->send(new JinggaMail($mailData));
+
+        return redirect()->back()->with('message','Data Successfully Resend Email to '. $data->customer->email );
+    }
+
     /**
      * Display the specified resource.
      *
