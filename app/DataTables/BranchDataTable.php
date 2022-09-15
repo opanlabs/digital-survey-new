@@ -52,7 +52,9 @@ class BranchDataTable extends DataTable
         //edit modal
         $editModal_userSelect = "";
         foreach ($user as $user) {
-            if ($user->id_user == $data->branch->user->id_user) {
+            is_null($data->branch->id_user) ? $branch_id_user = 0 : $branch_id_user = $data->branch->user->id_user;
+
+            if ($user->id_user == $branch_id_user) {
                 $user_isSelected = 'selected="selected"';
             }else{
                 $user_isSelected = '';
@@ -98,6 +100,7 @@ class BranchDataTable extends DataTable
                                             <span style='width:100%'>Head</span>
                                         </label>
                                         <select class='form-select form-select-solid @error('id_user') is-invalid @enderror' required data-control='select2' name='id_user' data-placeholder='Select an option' data-hide-search='true'>
+                                        <option></option>
                                             ".
                                             $editModal_userSelect
                                             ."
@@ -139,6 +142,7 @@ class BranchDataTable extends DataTable
         </div>
         ";
 
+        $phone_number_head_branch = is_null($data->branch->id_user) ? 'Belum Ada Head Branch' : $data->branch->user->phone_number; 
         $viewModal = "
         <div class='modal fade' id='view_modal".$data->id_team."' tabindex='-1' aria-hidden='true'>
             <div class='modal-dialog modal-dialog-centered mw-650px'>
@@ -172,10 +176,12 @@ class BranchDataTable extends DataTable
                                 </tr>
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px py-1'>Head</td>
-                                    <td class='text-gray-800 py-2'>".$data->branch->user->phone_number."</td>
+                                    <td class='text-gray-800 py-2'>".
+                                    $phone_number_head_branch
+                                    ."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px py-1'>Email</td>
+                                    <td class='text-muted min-w-125px w-200px py-1'>Address</td>
                                     <td class='text-gray-800 py-2'>".$data->branch->address."</td>
                                 </tr>
                             </table>
@@ -232,6 +238,9 @@ class BranchDataTable extends DataTable
             ->addColumn('action',function ($data){
                 return $this->getActionColumn($data);
                 })
+            ->editColumn('branch.user.name', function($data) {
+                return is_null($data->branch->id_user) ? 'Belum Ada Head Branch ' : $data->branch->user->name;
+            })
             ->addIndexColumn();
     }
 
