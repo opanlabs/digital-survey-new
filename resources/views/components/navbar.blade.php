@@ -84,7 +84,7 @@
                         <span class="menu-arrow"></span>
                     </span>
                     <div class="menu-sub menu-sub-accordion {{ Route::is('register-risk-survey') || Route::is('register-claim') ? 'menu-active-bg' : 'menu-active-bg' }}">
-                        @if (Auth::user()->id_role === 2 || Auth::user()->id_role === 1 || Auth::user()->id_role === 4)
+                        @if (Auth::user()->id_role == 2 || Auth::user()->id_role == 1 || Auth::user()->id_role == 4)
                             <div class="menu-item">
                                 <a class="menu-link {{ Route::is('register-risk-survey') ? 'active' : '' }}" href="{{ url('dashboard/register-survey') }}">
                                     <span class="menu-bullet">
@@ -94,7 +94,7 @@
                                 </a>
                             </div>
                         @endif
-                        @if (Auth::user()->id_role === 2 || Auth::user()->id_role === 1 || Auth::user()->id_role === 3)
+                        @if (Auth::user()->id_role == 2 || Auth::user()->id_role == 1 || Auth::user()->id_role == 3)
                             <div class="menu-item">
                                 <a class="menu-link {{ Route::is('register-claim') ? 'active' : '' }}" href="{{ url('dashboard/register-claim') }}">
                                     <span class="menu-bullet">
@@ -123,7 +123,7 @@
                         <span class="menu-arrow"></span>
                     </span>
                     <div class="menu-sub menu-sub-accordion {{ Route::is('register-risk-survey.report-list') || Route::is('register-claim.report-list') ? 'menu-active-bg' : 'menu-active-bg' }}">
-                        @if (Auth::user()->id_role === 2 || Auth::user()->id_role === 1 || Auth::user()->id_role === 4)
+                        @if (Auth::user()->id_role == 2 || Auth::user()->id_role == 1 || Auth::user()->id_role == 4)
                             <div class="menu-item">
                                 <a class="menu-link {{ Route::is('register-risk-survey.report-list') ? 'active' : '' }}" href="{{ url('dashboard/register-survey/list-report') }}">
                                     <span class="menu-bullet">
@@ -133,7 +133,7 @@
                                 </a>
                             </div>
                         @endif
-                        @if (Auth::user()->id_role === 2 || Auth::user()->id_role === 1 || Auth::user()->id_role === 3)
+                        @if (Auth::user()->id_role == 2 || Auth::user()->id_role == 1 || Auth::user()->id_role == 3)
                             <div class="menu-item">
                                 <a class="menu-link {{ Route::is('register-claim.report-list') ? 'active' : '' }}" href="{{ url('dashboard/register-claim/list-report') }}">
                                     <span class="menu-bullet">
@@ -146,7 +146,7 @@
                     </div>
                 </div>
                 <!-- control setting -->
-                @if (Auth::user()->id_role === 1)
+                @if (Auth::user()->id_role == 1)
                 <div data-kt-menu-trigger="click" class="menu-item here {{ Route::is('users') || Route::is('branch') || Route::is('vehicle') || Route::is('typepart') || Route::is('part') || Route::is('team') ? 'show' : '' }} menu-accordion" >
                     <span class="menu-link">
                         <span class="menu-icon">
