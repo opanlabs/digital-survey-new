@@ -317,7 +317,6 @@ class RegisterSurveyController extends Controller
 
     public function ajaxUploadVideo(Request $request)
     {       
-        // dd($request);
         $registerSurvey = RegisterSurvey::find($request->id);
 
         $link_report_zoom = '';
@@ -353,12 +352,7 @@ class RegisterSurveyController extends Controller
         }
         $id = $request->id;
 
-        $registerSurvey = RegisterSurvey::find($id);
-
-        // $link_report_zoom = '';
-        // $file_name = $request['videoUpload']->getClientOriginalName();
-        // $request['videoUpload']->storeAs('public/video','link-survey-report-'.$file_name);
-        // $link_report_zoom = \Storage::url('public/video/'.'link-survey-report-'.$file_name);     
+        $registerSurvey = RegisterSurvey::find($id);   
 
         $registerSurvey->update([
             'descriptionVehicle' =>  $request->description,

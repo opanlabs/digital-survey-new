@@ -646,16 +646,16 @@
             contentType: false,
             processData: false,
             dataType: 'json',
-            success: function(response){
-                    console.log(response);
+            success: function(){
+                    successUpload();
                 }
             });
 
-            setTimeout(function() {
+            function successUpload() {
                 saveButton.removeAttribute("data-kt-indicator");
                 saveButton.removeAttribute("disabled");
                 cancelButton.removeAttribute("disabled");
-            }, 5000);
+            };
         });
 
         //date range filter by survey date
