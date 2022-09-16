@@ -304,7 +304,9 @@
                 $('#link_report_schedule_view').html(link_report_schedule_view);
                 $('#link_report_schedule_excel_view').html(link_report_schedule_excel_view);
                 $('#link_report_schedule_pdf_view').html(link_report_schedule_pdf_view);
-                $('#link_bukti_meeting_view').attr("src",data.details.link_bukti_meeting);
+                if(data.details.link_bukti_meeting){
+                    $('#link_bukti_meeting_view').attr("src",data.details.link_bukti_meeting);
+                }
 
             },'json');
         });
