@@ -34,7 +34,8 @@ class RegisterClaim extends Authenticatable
         'isStandardVehicle',
         'photoVehicle',
         'link_report_zoom',
-        'type'
+        'type',
+        'link_bukti_meeting'
     ];
 
     protected $primaryKey = 'id_register_claim';
