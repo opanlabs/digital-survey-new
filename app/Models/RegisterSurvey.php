@@ -26,7 +26,8 @@ class RegisterSurvey extends Model
         'isStandardVehicle',
         'photoVehicle',
         'link_report_zoom',
-        'type'
+        'type',
+        'link_bukti_meeting'
     ];
 
     public function user()

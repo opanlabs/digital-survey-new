@@ -355,6 +355,11 @@ class RegisterSurveyController extends Controller
                 $temp[$i]['url'] = '';
             }
         }
+    
+        $file_name_bukti = $request['link_bukti_meeting']->getClientOriginalName();
+        $request['link_bukti_meeting']->storeAs('public/image','link-bukti-meeting-'.$file_name_bukti);
+        $link_bukti_meeting = \Storage::url('public/image/'.'link-bukti-meeting-'.$file_name_bukti);   
+
         $id = $request->id;
 
         $registerSurvey = RegisterSurvey::find($id);   
@@ -364,6 +369,7 @@ class RegisterSurveyController extends Controller
             'isStandardVehicle' =>  $request->isStandard,
             'photoVehicle' =>  $temp,
             'status' =>  'DONE',
+            'link_bukti_meeting' => $link_bukti_meeting
         ]);
 
         return redirect()->back()->with('message','Report Schedule Success.');

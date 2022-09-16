@@ -60,14 +60,6 @@
                                                         <td class="text-gray-800" id="plat_no_view"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-muted min-w-125px w-125px">Link Report Video</td>
-                                                        <td class="text-gray-800" id="link_report_schedule_view"></td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div class="flex-equal">
-                                                <table class="table table-flush fw-bold gy-2">
-                                                    <tr>
                                                         <td class="text-muted min-w-125px w-125px">Surveyor</td>
                                                         <td class="text-gray-800" id="surveyor_view"></td>
                                                     </tr>
@@ -88,6 +80,14 @@
                                                         <td class="text-gray-800" id="status_view"></td>
                                                     </tr>
                                                     <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Link Report Video</td>
+                                                        <td class="text-gray-800" id="link_report_schedule_view"></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="flex-equal">
+                                                <table class="table table-flush fw-bold gy-2">
+                                                    <tr>
                                                         <td class="text-muted min-w-125px w-125px">Link Report Excel</td>
                                                         <td class="text-gray-800" id="link_report_schedule_excel_view"></td>
                                                     </tr>
@@ -95,6 +95,10 @@
                                                         <td class="text-muted min-w-125px w-125px">Link Report PDF</td>
                                                         <td class="text-gray-800" id="link_report_schedule_pdf_view"></td>
                                                     </tr>
+                                                    <div>
+                                                        <p class="text-muted min-w-125px w-125px">Bukti Meeting :</p>
+                                                        <img id="link_bukti_meeting_view" src="{{ asset('/media/png/avatar-default.png') }}" alt="profile Pic" height="350" width="350">
+                                                    </div>
                                                 </table>
                                             </div>
                                         </div>
@@ -305,6 +309,9 @@
                 $('#link_report_schedule_view').html(link_report_schedule_view);
                 $('#link_report_schedule_excel_view').html(link_report_schedule_excel_view);
                 $('#link_report_schedule_pdf_view').html(link_report_schedule_pdf_view);
+                if(data.details.link_bukti_meeting){
+                    $('#link_bukti_meeting_view').attr("src",data.details.link_bukti_meeting);
+                }
 
             },'json');
         });
