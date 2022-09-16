@@ -15,6 +15,7 @@ use App\Models\TypePart;
 use Auth;
 use Mail;
 use App\Mail\JinggaMail;
+use Validator;
 
 use Datatables;
 use Redirect,Response,DB,Config;
@@ -317,6 +318,10 @@ class RegisterSurveyController extends Controller
 
     public function ajaxUploadVideo(Request $request)
     {       
+        $validator =  Validator::make($request->all(),[
+            'videoUpload' => 'required | max:200048',
+        ]);
+
         $registerSurvey = RegisterSurvey::find($request->id);
 
         $link_report_zoom = '';
@@ -327,13 +332,13 @@ class RegisterSurveyController extends Controller
         $registerSurvey->update([
             'link_report_zoom' =>  $link_report_zoom
         ]); 
+
+        if ($validator->fails())  {
+            return \Response::json(array("errors" => $validator->getMessageBag()->toArray()), 422);
+        }
     }
 
     public function reportSchedule(Request $request){
-        $request->validate([
-            'videoUpload' => 'required',
-        ]);
-
         $obj = $request->photo;
         $temp = [];
         foreach($obj as $item){
