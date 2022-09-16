@@ -668,7 +668,7 @@
                 prosesAngka++;
                 prosesBar.css('width', prosesAngka + '%');
                 prosesBar.attr('aria-valuenow', prosesAngka);
-            }, 70);
+            }, 120);
             
             function successUpload() {
                 clearInterval(loading);
