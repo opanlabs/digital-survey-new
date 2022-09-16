@@ -635,6 +635,7 @@
             var prosesAngka = 0;
             prosesBar.css('width', '0%');
             prosesBar.attr('aria-valuenow', 0);
+            
 
             $.ajax({
             timeout: 60000*5, //set timout 5 menit
@@ -650,9 +651,9 @@
 
             error: function (request, status, err) {
                 if (status == "timeout") {
-                    alert("Upload Timeout, Silakan Coba Lagi");
+                    toastr.error('Upload Timeout, Silakan Coba Lagi');
                 } else {
-                    alert("gagal upload video, silakan coba lagi");
+                    toastr.error('Gagal Upload Video, Silakan Coba Lagi');
                 }
                 saveButton.removeAttribute("data-kt-indicator");
                 saveButton.removeAttribute("disabled");
