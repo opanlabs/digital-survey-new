@@ -136,7 +136,7 @@ class TeamDataTable extends DataTable
         
         $editModal_teamSelect = "";
             foreach ($team as $teams) {
-                if ($data->id_team) {
+                if (!is_null($data->id_team)) {
                     if ($teams->id_team == $data->team->id_team) {
                         $team_isSelected = 'selected="selected"';
                     }else{
