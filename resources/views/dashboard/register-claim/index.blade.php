@@ -431,6 +431,11 @@
                                                     <td class="text-muted min-w-125px w-125px">Upload Video Report</td>
                                                     <td class="text-gray-800">
                                                         <input id="videoUpload" type="file" name="videoUpload" accept=".mp4, .mkv , .mov , .avi" required>
+                                                        <br>
+                                                        <span class="form-text text-muted">Max file size is 200MB.</span>
+                                                        <div class="progress mt-2">
+                                                            <div id="uploadProgress" class="progress-bar" role="progressbar" style="width: 0%; max-width:60%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="60"></div>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -632,29 +637,75 @@
 
             let fileVideo = $('#videoUpload')[0].files;
             let id_survey = $('#id_survey').val();
-            console.log(id_survey)
+
             var fd = new FormData();
 
             fd.append('videoUpload',fileVideo[0]);
             fd.append('_token',"{{ csrf_token() }}");  
             fd.append('id',id_survey);
 
+            // function clearFileInput(id) 
+            // { 
+            //     var oldInput = document.getElementById(id); 
+
+            //     var newInput = document.createElement("input"); 
+
+            //     newInput.type = "file"; 
+            //     newInput.id = oldInput.id; 
+            //     newInput.name = oldInput.name; 
+            //     // TODO: copy any other relevant attributes 
+
+            //     oldInput.parentNode.replaceChild(newInput, oldInput); 
+            // }
+
+            var prosesBar = $('#uploadProgress');
+            var prosesAngka = 0;
+            prosesBar.css('width', '0%');
+            prosesBar.attr('aria-valuenow', 0);
+            
+
             $.ajax({
+            timeout: 60000*5, //set timout 5 menit
             url: "{{ route('register-claim.ajaxUploadVideo')}}",
             type:"POST",
             data:fd,
             contentType: false,
             processData: false,
-            dataType: 'json',
-            success: function(){
+            success: function(data){
                     successUpload();
-                }
-            });
+                    console.log(data);
+                },
 
-            function successUpload() {
+            error: function (request, status, err) {
+                if (status == "timeout") {
+                    toastr.error('Upload Timeout, Silakan Coba Lagi');
+                } else {
+                    toastr.error('Gagal Upload Video, Silakan Coba Lagi');
+                }
                 saveButton.removeAttribute("data-kt-indicator");
                 saveButton.removeAttribute("disabled");
                 cancelButton.removeAttribute("disabled");
+                clearInterval(loading);
+                prosesBar.css('width', '0%');
+                prosesBar.attr('aria-valuenow', 0);
+                }
+            });
+
+            loading = setInterval(function(){
+                prosesAngka++;
+                prosesBar.css('width', prosesAngka + '%');
+                prosesBar.attr('aria-valuenow', prosesAngka);
+            }, 120);
+            
+            function successUpload() {
+                clearInterval(loading);
+                saveButton.removeAttribute("data-kt-indicator");
+                saveButton.removeAttribute("disabled");
+                cancelButton.removeAttribute("disabled");
+                prosesBar.css('width', '100%');
+                prosesBar.css('max-width', '100%');
+                prosesBar.attr('aria-valuenow', 100);
+                prosesBar.attr('aria-valuemax', 100);
             };
         });
 
