@@ -431,8 +431,8 @@
                                 <span class="indicator-label">
                                     Save
                                 </span>
-                                <span class="indicator-progress">
-                                    Uploading ... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                <span class="indicator-progress" id="text-progress">
+                                    %status% <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>
                             </button>
                         </div>
@@ -604,15 +604,25 @@
     <script>
         // loader saat upload video
         var saveButton = document.querySelector("#save_report");
+        var textProgress = document.querySelector("#text-progress")
         var cancelButton = document.querySelector("#cancelBtn");
         var videoUpload = document.querySelector("#videoUpload");
         var reportForm = document.querySelector("#reportForm");
+
+        reportForm.addEventListener("submit", function(){
+            textProgress.innerHTML = textProgress.innerHTML.replace("Uploading","Saving");
+            saveButton.setAttribute("data-kt-indicator", "on");
+            saveButton.setAttribute("disabled", true);
+            cancelButton.setAttribute("disabled", true);
+            console.log('saving...')
+        });
 
         videoUpload.addEventListener("change", function() {
             $("#kt_report").modal({"backdrop": "static"});
             saveButton.setAttribute("data-kt-indicator", "on");
             saveButton.setAttribute("disabled", true);
             cancelButton.setAttribute("disabled", true);
+            textProgress.innerHTML = textProgress.innerHTML.replace("%status%","Uploading ...");
 
             let fileVideo = $('#videoUpload')[0].files;
             let id_survey = $('#id_survey').val();
