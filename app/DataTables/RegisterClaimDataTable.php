@@ -150,7 +150,7 @@ class RegisterClaimDataTable extends DataTable
                                 </tr>
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px'>Branch</td>
-                                    <td class='text-gray-800'>".is_null($data->branch) ?  '' : $data->branch->province_name."</td>
+                                    <td class='text-gray-800'>".$data->branch->province_name."</td>
                                 </tr>
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px'>Register Date</td>
