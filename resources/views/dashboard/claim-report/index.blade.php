@@ -97,7 +97,7 @@
                                                     </tr>
                                                     <div>
                                                         <p class="text-muted min-w-125px w-125px">Bukti Meeting :</p>
-                                                        <img id="link_bukti_meeting_view" src="{{ asset('/media/png/avatar-default.png') }}" alt="profile Pic" height="350" width="350">
+                                                        <img id="link_bukti_meeting_view" src="{{ asset('/media/png/avatar-default.png') }}" height="250" width="250">
                                                     </div>
                                                 </table>
                                             </div>
