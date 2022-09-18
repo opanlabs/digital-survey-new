@@ -403,7 +403,8 @@ class RegisterClaimReportDataTable extends DataTable
      */
     public function query(RegisterClaim $model): QueryBuilder
     {
-        return $model->newQuery()->where([['id_branch', Auth::user()->id_branch],['status', 'DONE']])->with(['vehicle','customer','user','branch','register_survey']);
+        return Auth::user()->id_role === 1 ? $model->newQuery()->where([['status', 'DONE']])->with(['vehicle','customer','user','branch','register_survey']) : 
+        $model->newQuery()->where([['id_branch', Auth::user()->id_branch],['status', 'DONE']])->with(['vehicle','customer','user','branch','register_survey']);
     }
 
     /**

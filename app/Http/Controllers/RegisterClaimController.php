@@ -52,7 +52,12 @@ class RegisterClaimController extends Controller
         $branch = Branch::all();
         $vehicle = Vehicle::all();
         $allCategories = TypePart::get();
-        $registerSurvey = RegisterSurvey::all();
+        $registerSurvey = Auth::user()->id_role === 1 ? RegisterSurvey::where([
+            ['status', 'DONE'],
+        ])->get() : RegisterSurvey::where([
+            ['id_branch', Auth::user()->id_branch],
+            ['status', 'DONE'],
+        ])->get();
 
         foreach ($allCategories as $rootCategory) {
             $rootCategory->children = Part::where('id_typepart' , $rootCategory->id_typepart)->get();
@@ -71,7 +76,10 @@ class RegisterClaimController extends Controller
         $branch = Branch::all();
         $vehicle = Vehicle::all();
         $allCategories = TypePart::get();
-        $registerSurvey = RegisterSurvey::all();
+        $registerSurvey = RegisterSurvey::where([
+            ['id_branch', Auth::user()->id_branch],
+            ['status', 'DONE'],
+        ])->get();
 
         foreach ($allCategories as $rootCategory) {
             $rootCategory->children = Part::where('id_typepart' , $rootCategory->id_typepart)->get();

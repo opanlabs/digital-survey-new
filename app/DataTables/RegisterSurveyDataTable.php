@@ -403,7 +403,21 @@ class RegisterSurveyDataTable extends DataTable
         $startdateRegister = $this->request->get('startdateRegister');
         $enddateRegister = $this->request->get('enddateRegister');
 
-        return $model
+        return Auth::user()->id_role === 1  ? $model
+            ->with(['vehicle','customer','branch'])
+            ->when($id_vehicle or $startdateSurvey or $startdateRegister, function ($query) use($id_vehicle, $startdateSurvey, $enddateSurvey, $startdateRegister, $enddateRegister) {
+                return $query
+                            ->when($id_vehicle, function ($query) use ($id_vehicle){
+                                return  $query->Where('id_vehicle', $id_vehicle);
+                            })
+                            ->when($startdateSurvey, function ($query) use ($startdateSurvey,$enddateSurvey){
+                                return  $query->WhereBetween('survey_date', [$startdateSurvey,$enddateSurvey]);
+                            })
+                            ->when($startdateRegister, function ($query) use ($startdateRegister,$enddateRegister){
+                                return  $query->WhereBetween('created_at', [$startdateRegister,$enddateRegister]);
+                            });     
+            }) : 
+            $model
             ->with(['vehicle','customer','branch'])
             ->when($id_vehicle or $startdateSurvey or $startdateRegister, function ($query) use($id_vehicle, $startdateSurvey, $enddateSurvey, $startdateRegister, $enddateRegister) {
                 return $query
@@ -418,9 +432,6 @@ class RegisterSurveyDataTable extends DataTable
                             });     
             })
             ->where('id_branch', Auth::user()->id_branch);
-
-            
-
         // return $model->newQuery('where', )->where('id_branch', Auth::user()->id_branch)->with(['vehicle','customer','branch']);
     }
 
