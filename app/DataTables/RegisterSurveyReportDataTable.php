@@ -364,7 +364,8 @@ class RegisterSurveyReportDataTable extends DataTable
     public function query(RegisterSurvey $model): QueryBuilder
     {
 
-        return $model->newQuery('where', )->where([['id_branch', Auth::user()->id_branch],['status', 'DONE']])->with(['vehicle','customer','branch']);
+        return Auth::user()->id_role === 1 ? $model->newQuery('where', )->where([['status', 'DONE']])->with(['vehicle','customer','branch']) : 
+        $model->newQuery('where', )->where([['id_branch', Auth::user()->id_branch],['status', 'DONE']])->with(['vehicle','customer','branch']);
     }
 
     /**

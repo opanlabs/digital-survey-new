@@ -29,8 +29,12 @@ class RegisterClaimDataTable extends DataTable
     protected function getActionColumn($data): string
     {   
         $vehicle = Vehicle::all();
-        $branch = Branch::all();
-        $register_survey = RegisterSurvey::all();
+        $register_survey = Auth::user()->id_role === 1 ? RegisterSurvey::where([
+            ['status', 'DONE'],
+        ])->get() : RegisterSurvey::where([
+            ['id_branch', Auth::user()->id_branch],
+            ['status', 'DONE'],
+        ])->get();
 
         $editUrl = $data;
 
@@ -67,7 +71,6 @@ class RegisterClaimDataTable extends DataTable
         }
 
         //edit modal
-        $viewModal_branchSelect = "";
         $viewModal_vehicleSelect = "";
         $viewModal_registerNoSelect = "";
         foreach ($register_survey as $survey) {
@@ -77,14 +80,6 @@ class RegisterClaimDataTable extends DataTable
                 $survey_isSelected = '';
             }
             $viewModal_registerNoSelect .= "<option value='". $survey->id_register_survey ."'".$survey_isSelected.">$survey->register_no</option>";
-        };
-        foreach ($branch as $branch) {
-            if ($branch->id_branch == $data->branch->id_branch) {
-                $branch_isSelected = 'selected="selected"';
-            }else{
-                $branch_isSelected = '';
-            }
-            $viewModal_branchSelect .= "<option value='". $branch->id_branch ."'".$branch_isSelected.">$branch->province_name</option>";
         };
         foreach ($vehicle as $vehicle) {
             if ($vehicle->id_vehicle == $data->vehicle->id_vehicle) {
@@ -155,7 +150,7 @@ class RegisterClaimDataTable extends DataTable
                                 </tr>
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px'>Branch</td>
-                                    <td class='text-gray-800'>".$data->branch->province_name."</td>
+                                    <td class='text-gray-800'>".is_null($data->branch) ?  '' : $data->branch->province_name."</td>
                                 </tr>
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px'>Register Date</td>
@@ -416,6 +411,9 @@ class RegisterClaimDataTable extends DataTable
             })
             ->editColumn('register_survey.register_no', function($data) {
                 return is_null($data->register_survey->register_no) ? 'Belum Register No ' : $data->register_survey->register_no;
+            })
+            ->editColumn('branch.province_name', function($data) {
+                return is_null($data->branch) ? '-' : $data->branch->province_name;
             })
             ->addIndexColumn()
             ->rawColumns(['status','action','link_zoom','created_at'])

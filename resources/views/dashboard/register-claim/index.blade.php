@@ -841,7 +841,7 @@
                         $('#customer_name').html(data.details.customer.customer_name);
                         $('#surveyor').html(data.details.surveyor);
                         $('#survey_date').html(data.details.survey_date);
-                        $('#location').html(data.details.branch.province_name);
+                        $('#location').html(data.details.branch.province_name ? data.details.branch.province_name : '-');
                         $('#register_date').html(data.details.created_at);
                         $('#vehicle_brand_report').html(data.details.vehicle.nama);
                         $('#vehicle_type_report').html(data.details.type);
