@@ -174,7 +174,10 @@
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span>Plat No</span>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid @error('plat_no') is-invalid @enderror" required placeholder="" name="plat_no" value="" />
+                                            <input type="text" class="form-control form-control-solid @error('plat_no') is-invalid @enderror" required placeholder="" name="plat_no" value="" id='kt_inputmask_7' />
+                                            <div class='form-text'>Plat Number format:
+                                                <code>D-1234-ABS</code>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -629,6 +632,12 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
     {{$dataTable->scripts()}}
     <script>
+        $(document).ready(function(){
+            Inputmask({
+                "mask": "A-9999-AA"
+            }).mask("#kt_inputmask_7");
+        });
+
         // loader saat upload video
         var saveButton = document.querySelector("#save_report");
         var cancelButton = document.querySelector("#cancelBtn");
