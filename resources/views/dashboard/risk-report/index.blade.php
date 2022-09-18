@@ -92,8 +92,8 @@
                                                         <td class="text-gray-800" id="link_report_schedule_view"></td>
                                                     </tr>
                                                     <div>
-                                                        <p class="text-muted min-w-125px w-125px">Bukti Meeting :</p>
-                                                        <img id="link_bukti_meeting_view" src="{{ asset('/media/png/avatar-default.png') }}" height="250" width="250">
+                                                        <p class="text-muted min-w-125px w-125px">Screenshot :</p>
+                                                        <img id="link_bukti_meeting_view" src="{{ asset('/media/png/loading.gif') }}" height="250" width="250">
                                                     </div>
                                                 </table>
                                             </div>
@@ -306,6 +306,8 @@
                 $('#link_report_schedule_pdf_view').html(link_report_schedule_pdf_view);
                 if(data.details.link_bukti_meeting){
                     $('#link_bukti_meeting_view').attr("src",data.details.link_bukti_meeting);
+                }else{
+                    $('#link_bukti_meeting_view').attr("src", `${APP_URL}/media/png/no-image.png`);
                 }
 
             },'json');

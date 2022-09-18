@@ -403,7 +403,7 @@
                                         <div class="flex-equal mt-10">
                                             <table class="table table-flush fw-bold gy-1">
                                                 <tr>
-                                                    <td class="text-muted min-w-125px w-125px">Link Bukti Meeting ( Gambar ) </td>
+                                                    <td class="text-muted min-w-125px w-125px">Screenshot ( Gambar ) </td>
                                                     <td class="text-gray-800">
                                                         <input type="file" name="link_bukti_meeting" accept=".jpg, .jpeg , .png" required>
                                                     </td>
