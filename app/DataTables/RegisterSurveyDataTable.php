@@ -379,6 +379,7 @@ class RegisterSurveyDataTable extends DataTable
             ->addColumn('created_at',function ($data){
                 return $data->created_at->format('Y-m-d d:m');
             })
+            ->addIndexColumn()
             ->rawColumns(['status','action','link_zoom','created_at'])
             ->setRowId('id_register_survey');
     }
@@ -456,9 +457,11 @@ class RegisterSurveyDataTable extends DataTable
     {
         return [
             Column::make(['title' => 'No',
-                'data' => 'id_register_survey',
-                'name' => 'id_register_survey',
-             ]),
+                'data' => 'DT_RowIndex',
+                'name' => 'DT_RowIndex',
+                'orderable' => 'false',
+                'searchable' => 'false',
+            ]),
             Column::make('register_no'),
             Column::make(['title' => 'Name',
                 'data' => 'customer.customer_name',

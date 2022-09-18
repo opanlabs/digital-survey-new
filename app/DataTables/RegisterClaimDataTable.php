@@ -414,6 +414,10 @@ class RegisterClaimDataTable extends DataTable
             ->addColumn('created_at',function ($data){
                 return $data->created_at->format('Y-m-d d:m');
             })
+            ->editColumn('register_survey.register_no', function($data) {
+                return is_null($data->register_survey->register_no) ? 'Belum Register No ' : $data->register_survey->register_no;
+            })
+            ->addIndexColumn()
             ->rawColumns(['status','action','link_zoom','created_at'])
             ->setRowId('id_register_claim');
     }
@@ -490,8 +494,10 @@ class RegisterClaimDataTable extends DataTable
     {
         return [
             Column::make(['title' => 'No',
-                'data' => 'id_register_claim',
-                'name' => 'id_register_claim',
+                'data' => 'DT_RowIndex',
+                'name' => 'DT_RowIndex',
+                'orderable' => 'false',
+                'searchable' => 'false',
             ]),
             Column::make(['title' => 'No Polis',
                 'data' => 'no_polis',
