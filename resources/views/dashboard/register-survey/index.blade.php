@@ -608,6 +608,7 @@
         var cancelButton = document.querySelector("#cancelBtn");
         var videoUpload = document.querySelector("#videoUpload");
         var reportForm = document.querySelector("#reportForm");
+        var prosesBar = $('#uploadProgress');
 
         reportForm.addEventListener("submit", function(){
             textProgress.innerHTML = textProgress.innerHTML.replace("Uploading","Saving");
@@ -615,6 +616,15 @@
             saveButton.setAttribute("disabled", true);
             cancelButton.setAttribute("disabled", true);
             console.log('saving...')
+        });
+        
+        function progressBarReset(){
+            prosesBar.css('width', '0%');
+            prosesBar.attr('aria-valuenow', 0);
+        }
+
+        $('#kt_report').on('hidden.bs.modal', function () {
+            progressBarReset();
         });
 
         videoUpload.addEventListener("change", function() {
@@ -646,11 +656,8 @@
 
             //     oldInput.parentNode.replaceChild(newInput, oldInput); 
             // }
-
-            var prosesBar = $('#uploadProgress');
             var prosesAngka = 0;
-            prosesBar.css('width', '0%');
-            prosesBar.attr('aria-valuenow', 0);
+            progressBarReset();
             
 
             $.ajax({
