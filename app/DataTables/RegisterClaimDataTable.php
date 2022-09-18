@@ -282,7 +282,10 @@ class RegisterClaimDataTable extends DataTable
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
                                                 <span>Plat No</span>
                                             </label>
-                                            <input type='text' class='form-control form-control-solid @error('plat_no') is-invalid @enderror' required placeholder='' name='plat_no' value='".$data->plat_no."' />
+                                            <input type='text' class='form-control form-control-solid @error('plat_no') is-invalid @enderror' required placeholder='' name='plat_no' value='".$data->plat_no."' id='kt_inputmask_7' />
+                                            <div class='form-text'>Plat Number format:
+                                                <code>D-1234-ABS</code>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -376,7 +379,16 @@ class RegisterClaimDataTable extends DataTable
             </div>
         </div>
         <!--end::Menu-->
-        ". $viewModal . $editModal;
+        ". $viewModal . $editModal . 
+        '
+        <script>
+            $(document).ready(function(){
+                Inputmask({
+                    "mask": "A-9999-AA"
+                }).mask("#kt_inputmask_7");
+            });
+        </script>
+        ';
     }
     
     public function dataTable(QueryBuilder $query): EloquentDataTable
