@@ -27,7 +27,9 @@ class RegisterSurvey extends Model
         'photoVehicle',
         'link_report_zoom',
         'type',
-        'link_bukti_meeting'
+        'link_bukti_meeting',
+        'colour',
+        'id_transmission'
     ];
 
     public function user()
@@ -48,5 +50,10 @@ class RegisterSurvey extends Model
     public function branch()
     {
         return $this->belongsTo(Branch::class,'id_branch','id_branch');
+    }
+
+    public function transmission()
+    {   
+        return $this->belongsTo(Transmission::class,'id_transmission','id_transmission');
     }
 }

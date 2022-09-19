@@ -58,14 +58,6 @@
                                 <span class="menu-title">Policies & Claim</span>
                             </a>
                         </div>
-                        <div class="menu-item">
-                            <a class="menu-link {{ Route::is('profile') ? 'active' : '' }}" href="{{ url('dashboard/profile') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Profile</span>
-                            </a>
-                        </div>
                     </div>
                 </div>
                 <!-- register survey -->
@@ -201,7 +193,7 @@
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
-                                        <span class="menu-title">Vehicle Brand</span>
+                                        <span class="menu-title">Manufaktur</span>
                                     </a>
                                 </div>
                                 <div class="menu-item">

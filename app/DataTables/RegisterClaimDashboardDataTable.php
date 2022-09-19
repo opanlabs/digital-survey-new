@@ -134,7 +134,7 @@ class RegisterClaimDashboardDataTable extends DataTable
                                     <td class='py-2 text-gray-800'>".$data->customer->email."</td>
                                 </tr>
                                 <tr>
-                                    <td class='py-2 text-muted min-w-125px w-200px'>Vehicle Brand</td>
+                                    <td class='py-2 text-muted min-w-125px w-200px'>Manufaktur</td>
                                     <td class='py-2 text-gray-800'>".$data->vehicle->nama."</td>
                                 </tr>
                                 <tr>
@@ -253,7 +253,7 @@ class RegisterClaimDashboardDataTable extends DataTable
                                     <div class='col-md-6 fv-row'>
                                         <div class='d-flex flex-column mb-7 fv-row'>
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                                <span>Vehicle Brands</span>
+                                                <span>Manufaktur</span>
                                             </label>
                                             <select class='form-select form-select-solid @error('id_vehicle') is-invalid @enderror' required data-control='select2' name='id_vehicle' data-placeholder='Select an option' data-hide-search='true'>
                                             ".
@@ -427,8 +427,8 @@ class RegisterClaimDashboardDataTable extends DataTable
      */
     public function query(RegisterClaim $model): QueryBuilder
     {
-        return Auth::user()->id_role === 1 ? $model->newQuery()->with(['vehicle','customer','user','branch','register_survey']) : 
-        $model->newQuery()->where('id_branch', Auth::user()->id_branch)->with(['vehicle','customer','user','branch','register_survey']);
+        return Auth::user()->id_role === 1 ? $model->newQuery()->with(['vehicle','customer','user','branch','register_survey','transmission']) : 
+        $model->newQuery()->where('id_branch', Auth::user()->id_branch)->with(['vehicle','customer','user','branch','register_survey','transmission']);
         
     }
 

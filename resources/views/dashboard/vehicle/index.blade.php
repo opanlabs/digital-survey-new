@@ -5,11 +5,11 @@
         
         <div class="card-header">
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label fw-bolder fs-3 mb-1">List Vehicle Brands</span>
+                <span class="card-label fw-bolder fs-3 mb-1">List Manufaktur</span>
             </h3>
 
             <div class="card-toolbar">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#add_modal" class="btn btn-primary">Add Vehicle Brands</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#add_modal" class="btn btn-primary">Add Manufaktur</a>
             </div>
         </div>
         <div class="card-body">
@@ -49,7 +49,7 @@
                     </div>
                     <div class='modal-footer'>
                         <button data-bs-dismiss='modal' type='reset' id='kt_modal_new_card_cancel' class='btn btn-light me-3'>Cancel</button>
-                        <button type='submit' id='kt_modal_new_card_submit' class='btn btn-primary'>Add Vehicle Brands
+                        <button type='submit' id='kt_modal_new_card_submit' class='btn btn-primary'>Add Manufaktur
                         </button>
                     </div>
                     

@@ -15,6 +15,7 @@ use Yajra\DataTables\Services\DataTable;
 
 use App\Models\Vehicle;
 use App\Models\Branch;
+use App\Models\Transmission;
 use Auth;
 
 class RegisterClaimDataTable extends DataTable
@@ -29,6 +30,7 @@ class RegisterClaimDataTable extends DataTable
     protected function getActionColumn($data): string
     {   
         $vehicle = Vehicle::all();
+        $transmission = Transmission::all();
         $register_survey = Auth::user()->id_role === 1 ? RegisterSurvey::where([
             ['status', 'DONE'],
         ])->get() : RegisterSurvey::where([
@@ -73,6 +75,7 @@ class RegisterClaimDataTable extends DataTable
         //edit modal
         $viewModal_vehicleSelect = "";
         $viewModal_registerNoSelect = "";
+        $viewModal_transmissionSelect = "";
         foreach ($register_survey as $survey) {
             if ($survey->id_register_survey == $data->register_survey->id_register_survey) {
                 $survey_isSelected = 'selected="selected"';
@@ -88,6 +91,14 @@ class RegisterClaimDataTable extends DataTable
                 $vehicle_isSelected = '';
             }
             $viewModal_vehicleSelect .= "<option value='". $vehicle->id_vehicle ."'". $vehicle_isSelected ."> $vehicle->nama </option>";
+        };
+        foreach ($transmission as $trans) {
+            if ($trans->id_transmission == $data->transmission->id_transmission) {
+                $trans_isSelected = 'selected="selected"';
+            }else{
+                $trans_isSelected = '';
+            }
+            $viewModal_transmissionSelect .= "<option value='". $trans->id_transmission ."'". $trans_isSelected ."> $trans->transmission_name </option>";
         };
         $viewModal = "
         <div class='modal fade' id='view_modal".$data->id_register_claim."' tabindex='-1' aria-hidden='true'>
@@ -129,7 +140,7 @@ class RegisterClaimDataTable extends DataTable
                                     <td class='text-gray-800'>".$data->customer->email."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Vehicle Brand</td>
+                                    <td class='text-muted min-w-125px w-200px'>Manufaktur</td>
                                     <td class='text-gray-800'>".$data->vehicle->nama."</td>
                                 </tr>
                                 <tr>
@@ -155,6 +166,14 @@ class RegisterClaimDataTable extends DataTable
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px'>Register Date</td>
                                     <td class='text-gray-800'>".$data->created_at."</td>
+                                </tr>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>Colour</td>
+                                    <td class='text-gray-800'>".$data->colour."</td>
+                                </tr>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>Transmission AT/MT</td>
+                                    <td class='text-gray-800'>".$data->transmission->transmission_name."</td>
                                 </tr>
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px'>Status</td>
@@ -248,7 +267,7 @@ class RegisterClaimDataTable extends DataTable
                                     <div class='col-md-6 fv-row'>
                                         <div class='d-flex flex-column mb-7 fv-row'>
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                                <span>Vehicle Brands</span>
+                                                <span>Manufaktur</span>
                                             </label>
                                             <select class='form-select form-select-solid @error('id_vehicle') is-invalid @enderror' required data-control='select2' name='id_vehicle' data-placeholder='Select an option' data-hide-search='true'>
                                             ".
@@ -273,6 +292,28 @@ class RegisterClaimDataTable extends DataTable
                                                 <span>Year Vehicle</span>
                                             </label>
                                             <input type='number' class='form-control form-control-solid @error('year') is-invalid @enderror' required placeholder='' name='year' value='".$data->year."' />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='col-md-6 fv-row'>
+                                        <div class='d-flex flex-column mb-7 fv-row'>
+                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                <span>Colour</span>
+                                            </label>
+                                            <input type='text' class='form-control form-control-solid @error('colour') is-invalid @enderror' required placeholder='' name='colour' value='".$data->colour."' />
+                                        </div>
+                                    </div>
+                                    <div class='col-md-6 fv-row'>
+                                        <div class='d-flex flex-column mb-7 fv-row'>
+                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                <span>Transmission AT/MT</span>
+                                            </label>
+                                            <select class='form-select form-select-solid @error('id_transmission') is-invalid @enderror' required data-control='select2' name='id_transmission' data-placeholder='Select an option' data-hide-search='true'>
+                                            ".
+                                            $viewModal_transmissionSelect
+                                            ."
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -384,7 +425,7 @@ class RegisterClaimDataTable extends DataTable
         <script>
             $(document).ready(function(){
                 Inputmask({
-                    "mask": "A-9999-AA"
+                    "mask": "A-9999-AAA"
                 }).mask("#kt_inputmask_7");
             });
         </script>
@@ -452,8 +493,23 @@ class RegisterClaimDataTable extends DataTable
         $startdateRegister = $this->request->get('startdateRegister');
         $enddateRegister = $this->request->get('enddateRegister');
 
-        return $model
-        ->with(['vehicle','customer','user','branch','register_survey'])
+        return Auth::user()->id_role === 1 ? $model
+        ->with(['vehicle','customer','user','branch','register_survey','transmission'])
+        ->when($id_vehicle or $startdateSurvey or $startdateRegister, function ($query) use($id_vehicle, $startdateSurvey, $enddateSurvey, $startdateRegister, $enddateRegister) {
+            return $query
+                        ->when($id_vehicle, function ($query) use ($id_vehicle){
+                            return  $query->Where('id_vehicle', $id_vehicle);
+                        })
+                        ->when($startdateSurvey, function ($query) use ($startdateSurvey,$enddateSurvey){
+                            return  $query->WhereBetween('survey_date', [$startdateSurvey,$enddateSurvey]);
+                        })
+                        ->when($startdateRegister, function ($query) use ($startdateRegister,$enddateRegister){
+                            return  $query->WhereBetween('created_at', [$startdateRegister,$enddateRegister]);
+                        });     
+        })
+        : 
+        $model
+        ->with(['vehicle','customer','user','branch','register_survey','transmission'])
         ->when($id_vehicle or $startdateSurvey or $startdateRegister, function ($query) use($id_vehicle, $startdateSurvey, $enddateSurvey, $startdateRegister, $enddateRegister) {
             return $query
                         ->when($id_vehicle, function ($query) use ($id_vehicle){

@@ -39,7 +39,7 @@
         </p>
         <p>
             <span style="font-family: 'book antiqua', palatino, serif;"><span style="font-size: 10pt;">
-                <strong>Vehicle Brand</strong>&nbsp; </span>:&nbsp; {{ $data->vehicle->nama }}
+                <strong>Manufaktur</strong>&nbsp; </span>:&nbsp; {{ $data->vehicle->nama }}
             </span>
         </p>
         <p>

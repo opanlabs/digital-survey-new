@@ -40,7 +40,7 @@
                                                         <td class="text-gray-800" id="customer_name_view"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-muted min-w-125px w-125px">Vehicle Brand</td>
+                                                        <td class="text-muted min-w-125px w-125px">Manufaktur</td>
                                                         <td class="text-gray-800" id="vehicle_brand_report_view"></td>
                                                     </tr>
                                                     <tr>
@@ -83,6 +83,14 @@
                                             </div>
                                             <div class="flex-equal">
                                                 <table class="table table-flush fw-bold gy-2">
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Colour</td>
+                                                        <td class="text-gray-800" id="colour_view"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Transmission AT/MT</td>
+                                                        <td class="text-gray-800" id="transmission_view"></td>
+                                                    </tr>
                                                     <tr>
                                                         <td class="text-muted min-w-125px w-125px">Link Report PDF</td>
                                                         <td class="text-gray-800" id="link_report_schedule_pdf_view"></td>
@@ -304,6 +312,8 @@
                 $('#link_report_schedule_view').html(link_report_schedule_view);
                 $('#link_report_schedule_excel_view').html(link_report_schedule_excel_view);
                 $('#link_report_schedule_pdf_view').html(link_report_schedule_pdf_view);
+                $('#colour_view').html(data.details.colour);
+                $('#transmission_view').html(data.details.transmission.transmission_name);
                 if(data.details.link_bukti_meeting){
                     $('#link_bukti_meeting_view').attr("src",data.details.link_bukti_meeting);
                 }else{
