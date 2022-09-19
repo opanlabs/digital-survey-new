@@ -12,6 +12,7 @@ use App\Models\Customer;
 use App\Models\User;
 use App\Models\Part;
 use App\Models\TypePart;
+use App\Models\Transmission;
 use Auth;
 use Mail;
 use App\Mail\JinggaMail;
@@ -48,13 +49,12 @@ class RegisterSurveyController extends Controller
 
     public function export_excel($id)
 	{   
-        $query = RegisterSurvey::where('id_register_survey',$id)->with(['vehicle','customer','branch'])->get();
-
+        $query = RegisterSurvey::where('id_register_survey',$id)->with(['vehicle','customer','branch','transmission'])->get();
 		return Excel::download(new RegisterSurveyExport($query), 'RegisterSurveyExport_'. $query[0]->register_no .'_.xlsx');
 	}
 
     public function export_pdf($id){
-        $query = RegisterSurvey::where('id_register_survey',$id)->with(['vehicle','customer','branch'])->get();
+        $query = RegisterSurvey::where('id_register_survey',$id)->with(['vehicle','customer','branch','transmission'])->get();
         $pdf = PDF::loadView('exports.survey_export_pdf', compact('query'));
         return $pdf->download('RegisterSurveyExport_'.$query[0]->register_no.'_.pdf');
     }
@@ -69,6 +69,7 @@ class RegisterSurveyController extends Controller
         $branch = Branch::all();
         $vehicle = Vehicle::all();
         $allCategories = TypePart::get();
+        $transmission = Transmission::all();
 
         foreach ($allCategories as $rootCategory) {
             $rootCategory->children = Part::where('id_typepart' , $rootCategory->id_typepart)->get();
@@ -79,7 +80,7 @@ class RegisterSurveyController extends Controller
             }
         }
         
-        return $dataTable->render('dashboard.register-survey.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories]);
+        return $dataTable->render('dashboard.register-survey.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories , 'transmission' => $transmission ]);
     }
 
     public function report(RegisterSurveyReportDataTable $dataTable)
@@ -87,6 +88,7 @@ class RegisterSurveyController extends Controller
         $branch = Branch::all();
         $vehicle = Vehicle::all();
         $allCategories = TypePart::get();
+        $transmission = Transmission::all();
 
         foreach ($allCategories as $rootCategory) {
             $rootCategory->children = Part::where('id_typepart' , $rootCategory->id_typepart)->get();
@@ -97,7 +99,7 @@ class RegisterSurveyController extends Controller
             }
         }
         
-        return $dataTable->render('dashboard.risk-report.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories]);
+        return $dataTable->render('dashboard.risk-report.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories , 'transmission' => $transmission]);
     }
     
     //dipakai untuk return json nama,jadwal,link zoom meeting
@@ -150,7 +152,7 @@ class RegisterSurveyController extends Controller
 
     public function detailSurvey(Request $request){
         $id = $request->id;
-        $list = RegisterSurvey::with('customer','vehicle','branch')->find($id);
+        $list = RegisterSurvey::with('customer','vehicle','branch','transmission')->find($id);
         return response()->json(['details'=>$list]);
     }
 
@@ -172,6 +174,8 @@ class RegisterSurveyController extends Controller
                 'id_vehicle' => 'required',
                 'plat_no' => 'required',
                 'type' => 'required',
+                'id_transmission' => 'required',
+                'colour' => 'required'
             ]);
             // dd($request);
 
@@ -199,11 +203,13 @@ class RegisterSurveyController extends Controller
                 'link_report_zoom' => '',
                 'status' => 'OPEN',
                 'id_branch' => Auth::user()->id_branch,
+                'id_transmission' => $request->id_transmission,
+                'colour' => $request->colour
             ]);
         return redirect()->back()->with('message','Data Successfully Added.');
     }
     public function send_email(Request $request){
-        $data = RegisterSurvey::where('id_register_survey', $request->id)->with(['vehicle','customer','branch'])->first();
+        $data = RegisterSurvey::where('id_register_survey', $request->id)->with(['vehicle','customer','branch','transmission'])->first();
 
         $mailData = [
             'email' => $data->customer->email,
@@ -255,6 +261,8 @@ class RegisterSurveyController extends Controller
             'id_vehicle' => 'required',
             'plat_no' => 'required',
             'type' => 'required',
+            'id_transmission' => 'required',
+            'colour' => 'required'
         ]);
         
         $cus = Customer::find($request->id_customer)->update([
@@ -270,6 +278,8 @@ class RegisterSurveyController extends Controller
             'year' => $request->year,
             'plat_no' => $request->plat_no,
             'id_branch' => Auth::user()->id_branch,
+            'id_transmission' => $request->id_transmission,
+            'colour' => $request->colour
         ]);
         
         return redirect()->back()->with('message','Data Successfully Updated.');

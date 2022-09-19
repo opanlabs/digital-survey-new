@@ -70,7 +70,7 @@ class VehicleDataTable extends DataTable
                                     <div class='col-md-6 fv-row'>
                                         <div class='d-flex flex-column mb-7 fv-row'>
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                                <span>Vehicle Brands nama</span>
+                                                <span>Manufaktur nama</span>
                                             </label>
                                             <input type='text' class='form-control form-control-solid @error('nama') is-invalid @enderror' required placeholder='' name='nama' value='".$data->nama."' />
                                         </div>

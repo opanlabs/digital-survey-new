@@ -34,12 +34,22 @@
         </p>
         <p>
             <span style="font-family: 'book antiqua', palatino, serif;"><span style="font-size: 10pt;">
-                <strong>Vehicle Brand</strong>&nbsp; </span>:&nbsp; {{ $data->vehicle->nama }}
+                <strong>Manufaktur</strong>&nbsp; </span>:&nbsp; {{ $data->vehicle->nama }}
             </span>
         </p>
         <p>
             <span style="font-family: 'book antiqua', palatino, serif;"><span style="font-size: 10pt;">
                 <strong>Vehicle Type</strong>&nbsp; </span>:&nbsp; {{ $data->type }}
+            </span>
+        </p>
+        <p>
+            <span style="font-family: 'book antiqua', palatino, serif;"><span style="font-size: 10pt;">
+                <strong>Colour</strong>&nbsp; </span>:&nbsp; {{ $data->colour }}
+            </span>
+        </p>
+        <p>
+            <span style="font-family: 'book antiqua', palatino, serif;"><span style="font-size: 10pt;">
+                <strong>Transmission AT/MT</strong>&nbsp; </span>:&nbsp; {{ $data->transmission->transmission_name }}
             </span>
         </p>
         <p>

@@ -35,7 +35,9 @@ class RegisterClaim extends Authenticatable
         'photoVehicle',
         'link_report_zoom',
         'type',
-        'link_bukti_meeting'
+        'link_bukti_meeting',
+        'colour',
+        'id_transmission'
     ];
 
     protected $primaryKey = 'id_register_claim';
@@ -64,5 +66,10 @@ class RegisterClaim extends Authenticatable
     public function branch()
     {
         return $this->belongsTo(Branch::class,'id_branch','id_branch');
+    }
+    
+    public function transmission()
+    {   
+        return $this->belongsTo(Transmission::class,'id_transmission','id_transmission');
     }
 }

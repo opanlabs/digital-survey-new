@@ -13,6 +13,7 @@ use App\Models\Customer;
 use App\Models\User;
 use App\Models\Part;
 use App\Models\TypePart;
+use App\Models\Transmission;
 use Auth;
 use Mail;
 use App\Mail\JinggaMail;
@@ -52,6 +53,8 @@ class RegisterClaimController extends Controller
         $branch = Branch::all();
         $vehicle = Vehicle::all();
         $allCategories = TypePart::get();
+        $transmission = Transmission::all();
+
         $registerSurvey = Auth::user()->id_role === 1 ? RegisterSurvey::where([
             ['status', 'DONE'],
         ])->get() : RegisterSurvey::where([
@@ -68,7 +71,7 @@ class RegisterClaimController extends Controller
             }
         }
         
-        return $dataTable->render('dashboard.register-claim.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories ,'registerSurvey' => $registerSurvey ]);
+        return $dataTable->render('dashboard.register-claim.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories ,'registerSurvey' => $registerSurvey , 'transmission' => $transmission ]);
     }
 
     public function report(RegisterClaimReportDataTable $dataTable)
@@ -76,6 +79,8 @@ class RegisterClaimController extends Controller
         $branch = Branch::all();
         $vehicle = Vehicle::all();
         $allCategories = TypePart::get();
+        $transmission = Transmission::all();
+
         $registerSurvey = RegisterSurvey::where([
             ['id_branch', Auth::user()->id_branch],
             ['status', 'DONE'],
@@ -90,7 +95,7 @@ class RegisterClaimController extends Controller
             }
         }
         
-        return $dataTable->render('dashboard.claim-report.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories ,'registerSurvey' => $registerSurvey ]);
+        return $dataTable->render('dashboard.claim-report.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories ,'registerSurvey' => $registerSurvey , 'transmission' => $transmission]);
     }
     
     //dipakai untuk return json nama,jadwal,link zoom meeting
@@ -124,7 +129,7 @@ class RegisterClaimController extends Controller
 
     public function detailClaim(Request $request){
         $id = $request->id;
-        $list = RegisterClaim::with('customer','vehicle','branch','register_survey')->find($id);
+        $list = RegisterClaim::with('customer','vehicle','branch','register_survey','transmission')->find($id);
         return response()->json(['details'=>$list]);
     }
 
@@ -146,7 +151,9 @@ class RegisterClaimController extends Controller
                 'phone_number' => 'required',
                 'id_vehicle' => 'required',
                 'type' => 'required',
-                'plat_no' => 'required'
+                'plat_no' => 'required',
+                'id_transmission' => 'required',
+                'colour' => 'required'
             ]);
 
             $cus = Customer::create([
@@ -175,6 +182,8 @@ class RegisterClaimController extends Controller
                 'link_report_zoom' => '',
                 'status' => 'OPEN',
                 'id_branch' => Auth::user()->id_branch,
+                'id_transmission' => $request->id_transmission,
+                'colour' => $request->colour
             ]);
         return redirect()->back()->with('message','Data Successfully Added.');
     }
@@ -232,6 +241,8 @@ class RegisterClaimController extends Controller
             'id_vehicle' => 'required',
             'type' => 'required',
             'plat_no' => 'required',
+            'id_transmission' => 'required',
+            'colour' => 'required'
         ]);
         
         $cus = Customer::find($request->id_customer)->update([
@@ -249,6 +260,8 @@ class RegisterClaimController extends Controller
             'year' => $request->year,
             'plat_no' => $request->plat_no,
             'id_branch' => Auth::user()->id_branch,
+            'id_transmission' => $request->id_transmission,
+            'colour' => $request->colour
         ]);
         
         return redirect()->back()->with('message','Data Successfully Updated.');

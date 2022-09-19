@@ -255,7 +255,7 @@
                             <div class="col-md-6 fv-row">
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                        <span>Vehicle Brands</span>
+                                        <span>Manufaktur</span>
                                     </label>
                                     <select class="form-select form-select-solid @error('id_vehicle') is-invalid @enderror" required data-control="select2" name="id_vehicle" data-placeholder="Select an option" data-hide-search="true">
                                         <option></option>
@@ -421,7 +421,7 @@
                                                 <td class="text-gray-800" id="customer_name"></td>
                                             </tr>
                                             <tr>
-                                                <td class="text-muted min-w-125px w-125px">Vehicle Brand</td>
+                                                <td class="text-muted min-w-125px w-125px">Manufaktur</td>
                                                 <td class="text-gray-800" id="vehicle_brand_report"></td>
                                             </tr>
                                             <tr>
@@ -510,7 +510,7 @@
                                                                     <input type="hidden" value="{{ $sub->id_part }}" name="description[{{$sub->id_part}}][id_part]" />
                                                                 </td>
                                                                 <td>
-                                                                    <input class="photo" type="file" name="photo[{{$sub->id_part}}][value]" accept=".jpg, .jpeg">
+                                                                    <input class="photo" type="file" name="photo[{{$sub->id_part}}][value]" accept=".jpg, .jpeg , .png">
                                                                     <input type="hidden" value="{{ $sub->id_part }}" name="photo[{{$sub->id_part}}][id_part]" />
                                                                 </td>
                                                             </tr>
@@ -585,7 +585,7 @@
                                                 <td class="text-gray-800" id="customer_name_view"></td>
                                             </tr>
                                             <tr>
-                                                <td class="text-muted min-w-125px w-125px">Vehicle Brand</td>
+                                                <td class="text-muted min-w-125px w-125px">Manufaktur</td>
                                                 <td class="text-gray-800" id="vehicle_brand_report_view"></td>
                                             </tr>
                                             <tr>

@@ -55,7 +55,7 @@
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow profile-icon" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar" style="position: absolute !important;left: 9rem !important; top: 1rem !important;">
                                 <i class="bi bi-pencil-fill fs-7"></i>
                                 <!--begin::Inputs-->
-                                <input class="photo" type="file" name="photo" accept=".jpg, .jpeg">
+                                <input class="photo" type="file" name="photo" accept=".jpg, .jpeg , .png">
                                 <input class="photo" type="hidden" name="photo_remove">
                                 <!--end::Inputs-->
                             </label>

@@ -57,7 +57,7 @@ class VehicleController extends Controller
             'nama' => $request->nama
         ]);
 
-        return redirect()->back()->with('message','Vehicle brands Successfully Added.');
+        return redirect()->back()->with('message','Manufaktur Successfully Added.');
     }
 
     /**
@@ -100,7 +100,7 @@ class VehicleController extends Controller
             'nama' => $request->nama,
         ]);
 
-        return redirect()->back()->with('message','Vehicle brands Successfully Saved.');
+        return redirect()->back()->with('message','Manufaktur Successfully Saved.');
     }
     /**
      * Remove the specified resource from storage.
@@ -112,6 +112,6 @@ class VehicleController extends Controller
     {
         Vehicle::destroy($id);
 
-        return redirect()->back()->with('message','Vehicle brands Deleted.');
+        return redirect()->back()->with('message','Manufaktur Deleted.');
     }
 }

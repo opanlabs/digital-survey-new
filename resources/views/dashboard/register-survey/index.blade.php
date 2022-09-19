@@ -117,7 +117,7 @@
                                     <div class="col-md-6 fv-row">
                                         <div class="d-flex flex-column mb-7 fv-row">
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                                <span>Vehicle Brands</span>
+                                                <span>Manufaktur</span>
                                             </label>
                                             <select class="form-select form-select-solid @error('id_vehicle') is-invalid @enderror" required data-control="select2" name="id_vehicle" data-placeholder="Select an option" data-hide-search="true">
                                                 <option></option>
@@ -143,6 +143,29 @@
                                                 <span>Year Vehicle</span>
                                             </label>
                                             <input type="number" class="form-control form-control-solid @error('year') is-invalid @enderror" required placeholder="" name="year" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 fv-row">
+                                        <div class="d-flex flex-column mb-7 fv-row">
+                                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                                <span>Transmission AT/MT</span>
+                                            </label>
+                                            <select class="form-select form-select-solid @error('id_transmission') is-invalid @enderror" required data-control="select2" name="id_transmission" data-placeholder="Select an option" data-hide-search="true">
+                                                <option></option>
+                                                @foreach($transmission as $br)
+                                                    <option value="{{$br->id_transmission}}">{{ $br->transmission_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 fv-row">
+                                        <div class="d-flex flex-column mb-7 fv-row">
+                                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                                <span>Colour</span>
+                                            </label>
+                                            <input type="text" class="form-control form-control-solid @error('colour') is-invalid @enderror" required placeholder="" name="colour" value="" />
                                         </div>
                                     </div>
                                 </div>
@@ -295,7 +318,7 @@
                                                         <td class="text-gray-800" id="customer_name"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-muted min-w-125px w-125px">Vehicle Brand</td>
+                                                        <td class="text-muted min-w-125px w-125px">Manufaktur</td>
                                                         <td class="text-gray-800" id="vehicle_brand_report"></td>
                                                     </tr>
                                                     <tr>
@@ -329,6 +352,14 @@
                                                     <tr>
                                                         <td class="text-muted min-w-125px w-125px">Register Date</td>
                                                         <td class="text-gray-800" id="register_date">08/10/2022</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Colour</td>
+                                                        <td class="text-gray-800" id="colour"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Transmission AT/MT</td>
+                                                        <td class="text-gray-800" id="transmission"></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -473,7 +504,7 @@
                                                         <td class="text-gray-800" id="customer_name_view"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-muted min-w-125px w-125px">Vehicle Brand</td>
+                                                        <td class="text-muted min-w-125px w-125px">Manufaktur</td>
                                                         <td class="text-gray-800" id="vehicle_brand_report_view"></td>
                                                     </tr>
                                                     <tr>
@@ -511,6 +542,14 @@
                                                     <tr>
                                                         <td class="text-muted min-w-125px w-125px">Register Date</td>
                                                         <td class="text-gray-800" id="register_date_view"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Colour</td>
+                                                        <td class="text-gray-800" id="colour_view"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted min-w-125px w-125px">Transmission AT/MT</td>
+                                                        <td class="text-gray-800" id="transmission_view"></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-muted min-w-125px w-125px">Status</td>
@@ -607,7 +646,7 @@
 
         $(document).ready(function(){
             Inputmask({
-                "mask": "A-9999-AA"
+                "mask": "A-9999-AAA"
             }).mask("#kt_inputmask_7");
         });
 
@@ -826,6 +865,8 @@
                         $('#vehicle_type_report').html(data.details.type);
                         $('#year_reporting_survey').html(data.details.year);
                         $('#plat_no').html(data.details.plat_no);
+                        $('#colour').html(data.details.colour);
+                        $('#transmission').html(data.details.transmission.transmission_name);
 
             },'json');
         });
@@ -882,6 +923,8 @@
                 $('#plat_no_view').html(data.details.plat_no);
                 $('#status_view').html(stats);
                 $('#link_report_schedule_view').val(url);
+                $('#colour_view').html(data.details.colour);
+                $('#transmission_view').html(data.details.transmission.transmission_name);
 
             },'json');
         });

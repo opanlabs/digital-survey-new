@@ -14,6 +14,7 @@ use Yajra\DataTables\Services\DataTable;
 
 use App\Models\Vehicle;
 use App\Models\Branch;
+use App\Models\Transmission;
 use Auth;
 
 class RegisterSurveyDataTable extends DataTable
@@ -29,6 +30,7 @@ class RegisterSurveyDataTable extends DataTable
     {   
         $vehicle = Vehicle::all();
         $branch = Branch::all();
+        $transmission = Transmission::all();
 
         $editUrl = $data;
 
@@ -67,6 +69,7 @@ class RegisterSurveyDataTable extends DataTable
         //edit modal
         $viewModal_branchSelect = "";
         $viewModal_vehicleSelect = "";
+        $viewModal_transmissionSelect = "";
         foreach ($branch as $branch) {
             if ($branch->id_branch == $data->branch->id_branch) {
                 $branch_isSelected = 'selected="selected"';
@@ -82,6 +85,14 @@ class RegisterSurveyDataTable extends DataTable
                 $vehicle_isSelected = '';
             }
             $viewModal_vehicleSelect .= "<option value='". $vehicle->id_vehicle ."'". $vehicle_isSelected ."> $vehicle->nama </option>";
+        };
+        foreach ($transmission as $trans) {
+            if ($trans->id_transmission == $data->transmission->id_transmission) {
+                $trans_isSelected = 'selected="selected"';
+            }else{
+                $trans_isSelected = '';
+            }
+            $viewModal_transmissionSelect .= "<option value='". $trans->id_transmission ."'". $trans_isSelected ."> $trans->transmission_name </option>";
         };
         $viewModal = "
         <div class='modal fade' id='view_modal".$data->id_register_survey."' tabindex='-1' aria-hidden='true'>
@@ -119,7 +130,7 @@ class RegisterSurveyDataTable extends DataTable
                                     <td class='text-gray-800'>".$data->customer->email."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Vehicle Brand</td>
+                                    <td class='text-muted min-w-125px w-200px'>Manufaktur</td>
                                     <td class='text-gray-800'>".$data->vehicle->nama."</td>
                                 </tr>
                                 <tr>
@@ -145,6 +156,14 @@ class RegisterSurveyDataTable extends DataTable
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px'>Register Date</td>
                                     <td class='text-gray-800'>".$data->created_at."</td>
+                                </tr>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>Colour</td>
+                                    <td class='text-gray-800'>".$data->colour."</td>
+                                </tr>
+                                <tr>
+                                    <td class='text-muted min-w-125px w-200px'>Transmission AT/MT</td>
+                                    <td class='text-gray-800'>".$data->transmission->transmission_name."</td>
                                 </tr>
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px'>Status</td>
@@ -218,7 +237,7 @@ class RegisterSurveyDataTable extends DataTable
                                     <div class='col-md-6 fv-row'>
                                         <div class='d-flex flex-column mb-7 fv-row'>
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                                <span>Vehicle Brands</span>
+                                                <span>Manufaktur</span>
                                             </label>
                                             <select class='form-select form-select-solid @error('id_vehicle') is-invalid @enderror' required data-control='select2' name='id_vehicle' data-placeholder='Select an option' data-hide-search='true'>
                                             ".
@@ -243,6 +262,28 @@ class RegisterSurveyDataTable extends DataTable
                                                 <span>Year Vehicle</span>
                                             </label>
                                             <input type='number' class='form-control form-control-solid @error('year') is-invalid @enderror' required placeholder='' name='year' value='".$data->year."' />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='col-md-6 fv-row'>
+                                        <div class='d-flex flex-column mb-7 fv-row'>
+                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                <span>Colour</span>
+                                            </label>
+                                            <input type='text' class='form-control form-control-solid @error('colour') is-invalid @enderror' required placeholder='' name='colour' value='".$data->colour."' />
+                                        </div>
+                                    </div>
+                                    <div class='col-md-6 fv-row'>
+                                        <div class='d-flex flex-column mb-7 fv-row'>
+                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                <span>Transmission AT/MT</span>
+                                            </label>
+                                            <select class='form-select form-select-solid @error('id_transmission') is-invalid @enderror' required data-control='select2' name='id_transmission' data-placeholder='Select an option' data-hide-search='true'>
+                                            ".
+                                            $viewModal_transmissionSelect
+                                            ."
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -354,7 +395,7 @@ class RegisterSurveyDataTable extends DataTable
         <script>
             $(document).ready(function(){
                 Inputmask({
-                    "mask": "A-9999-AA"
+                    "mask": "A-9999-AAA"
                 }).mask("#kt_inputmask_7");
             });
         </script>
@@ -416,7 +457,7 @@ class RegisterSurveyDataTable extends DataTable
         $enddateRegister = $this->request->get('enddateRegister');
 
         return Auth::user()->id_role === 1  ? $model
-            ->with(['vehicle','customer','branch'])
+            ->with(['vehicle','customer','branch','transmission'])
             ->when($id_vehicle or $startdateSurvey or $startdateRegister, function ($query) use($id_vehicle, $startdateSurvey, $enddateSurvey, $startdateRegister, $enddateRegister) {
                 return $query
                             ->when($id_vehicle, function ($query) use ($id_vehicle){
@@ -430,7 +471,7 @@ class RegisterSurveyDataTable extends DataTable
                             });     
             }) : 
             $model
-            ->with(['vehicle','customer','branch'])
+            ->with(['vehicle','customer','branch','transmission'])
             ->when($id_vehicle or $startdateSurvey or $startdateRegister, function ($query) use($id_vehicle, $startdateSurvey, $enddateSurvey, $startdateRegister, $enddateRegister) {
                 return $query
                             ->when($id_vehicle, function ($query) use ($id_vehicle){

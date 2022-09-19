@@ -134,7 +134,7 @@ class RegisterClaimReportDataTable extends DataTable
                                     <td class='text-gray-800'>".$data->customer->email."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Vehicle Brand</td>
+                                    <td class='text-muted min-w-125px w-200px'>Manufaktur</td>
                                     <td class='text-gray-800'>".$data->vehicle->nama."</td>
                                 </tr>
                                 <tr>
@@ -253,7 +253,7 @@ class RegisterClaimReportDataTable extends DataTable
                                     <div class='col-md-6 fv-row'>
                                         <div class='d-flex flex-column mb-7 fv-row'>
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                                <span>Vehicle Brands</span>
+                                                <span>Manufaktur</span>
                                             </label>
                                             <select class='form-select form-select-solid @error('id_vehicle') is-invalid @enderror' required data-control='select2' name='id_vehicle' data-placeholder='Select an option' data-hide-search='true'>
                                             ".
