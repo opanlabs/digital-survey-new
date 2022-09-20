@@ -318,8 +318,8 @@ class RegisterClaimController extends Controller
 
         $link_report_zoom = '';
         $file_name = $request['videoUpload']->getClientOriginalName();
-        $request['videoUpload']->storeAs('public/video','link-claim-report-'.$file_name);
-        $link_report_zoom = \Storage::url('public/video/'.'link-claim-report-'.$file_name);    
+        $request['videoUpload']->storeAs('video','link-claim-report-'.$file_name);
+        $link_report_zoom = \Storage::url('video/'.'link-claim-report-'.$file_name);    
 
         $registerSurvey->update([
             'link_report_zoom' =>  $link_report_zoom
@@ -341,24 +341,24 @@ class RegisterClaimController extends Controller
             $temp[$i]['url'] = '';
             if(isset($temp[$i]['value'])){
                 $file_name = $temp[$i]['value']->getClientOriginalName();
-                $temp[$i]['value']->storeAs('public/images','register-claim-'.$file_name);
-                $temp[$i]['url'] = \Storage::url('public/images/'.'register-claim-'.$file_name);       
+                $temp[$i]['value']->storeAs('images','register-claim-'.$file_name);
+                $temp[$i]['url'] = \Storage::url('images/'.'register-claim-'.$file_name);       
             }else{
                 $temp[$i]['url'] = '';
             }
         }
 
         $file_name_bukti = $request['link_bukti_meeting']->getClientOriginalName();
-        $request['link_bukti_meeting']->storeAs('public/image','link-bukti-meeting-'.$file_name_bukti);
-        $link_bukti_meeting = \Storage::url('public/image/'.'link-bukti-meeting-'.$file_name_bukti);   
+        $request['link_bukti_meeting']->storeAs('image','link-bukti-meeting-'.$file_name_bukti);
+        $link_bukti_meeting = \Storage::url('image/'.'link-bukti-meeting-'.$file_name_bukti);   
 
         $id = $request->id;
         $registerSurvey = RegisterClaim::find($id);
 
         // $link_report_zoom = '';
         // $file_name = $request['videoUpload']->getClientOriginalName();
-        // $request['videoUpload']->storeAs('public/video','link-claim-report-'.$file_name);
-        // $link_report_zoom = \Storage::url('public/video/'.'link-claim-report-'.$file_name);     
+        // $request['videoUpload']->storeAs('video','link-claim-report-'.$file_name);
+        // $link_report_zoom = \Storage::url('video/'.'link-claim-report-'.$file_name);     
 
         $registerSurvey->update([
             'descriptionVehicle' =>  $request->description,
