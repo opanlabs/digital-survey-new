@@ -1,6 +1,25 @@
 <html>
+    <head>
+        <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+    </head>    
     <body>
-        <h1>Realtime survey report</h1>
+        <h1>Realtime Survey Report</h1>
         @foreach($query as $key => $data)
         <p>
             <span style="font-family: 'book antiqua', palatino, serif;"><span style="font-size: 10pt;">
@@ -49,7 +68,7 @@
         </p>
         <p>
             <span style="font-family: 'book antiqua', palatino, serif;"><span style="font-size: 10pt;">
-                <strong>Transmission AT/MT</strong>&nbsp; </span>:&nbsp; {{ $data->transmission->transmission_name }}
+                <strong>Transmission</strong>&nbsp; </span>:&nbsp; {{ $data->transmission->transmission_name }}
             </span>
         </p>
         <p>
@@ -73,6 +92,31 @@
             </span>
         </p>
         @endforeach
-        
+
+        @foreach($allCategories as $key => $data)
+        <h2>{{ $data->type_nama }}</h2>
+
+        <table>
+          <tr>
+            <th>NO</th>
+            <th>PART</th>
+            <th>NON STANDARD</th>
+            <th>DESCRIPTION</th>
+            <th>PHOTO</th>
+          </tr>
+
+            @foreach($data->children as $koy => $field)
+                <tr>
+                    <td>{{ $field->id_part }}</td>
+                    <td>{{ $field->part_nama }}</td>
+                    <td>{{ $field->isStandard ? 'Standard' :  'Non Standard' }}</td>
+                    <td>{{ $field->description }}</td>
+                    <td>
+                        <img  src="{{ $field->photoURL }}" height="150" width="150">
+                    </td>
+                </tr>
+            @endforeach  
+        </table>
+        @endforeach  
     </body>
 </html>

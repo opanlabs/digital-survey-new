@@ -92,7 +92,7 @@
                                                         <td class="text-gray-800" id="colour_view"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-muted min-w-125px w-125px">Transmission AT/MT</td>
+                                                        <td class="text-muted min-w-125px w-125px">Transmission</td>
                                                         <td class="text-gray-800" id="transmission_view"></td>
                                                     </tr>
                                                     <tr>
