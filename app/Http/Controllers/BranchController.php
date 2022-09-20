@@ -24,6 +24,7 @@ class BranchController extends Controller
 
     public function autocompleteRole(Request $request)
     {
+        
         $role = [];
         $search = $request->input('q');
         $role = Roles::select("id_role", "role")
