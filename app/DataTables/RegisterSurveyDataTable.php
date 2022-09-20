@@ -162,7 +162,7 @@ class RegisterSurveyDataTable extends DataTable
                                     <td class='text-gray-800'>".$data->colour."</td>
                                 </tr>
                                 <tr>
-                                    <td class='text-muted min-w-125px w-200px'>Transmission AT/MT</td>
+                                    <td class='text-muted min-w-125px w-200px'>Transmission</td>
                                     <td class='text-gray-800'>".$data->transmission->transmission_name."</td>
                                 </tr>
                                 <tr>
@@ -277,7 +277,7 @@ class RegisterSurveyDataTable extends DataTable
                                     <div class='col-md-6 fv-row'>
                                         <div class='d-flex flex-column mb-7 fv-row'>
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                                <span>Transmission AT/MT</span>
+                                                <span>Transmission</span>
                                             </label>
                                             <select class='form-select form-select-solid @error('id_transmission') is-invalid @enderror' required data-control='select2' name='id_transmission' data-placeholder='Select an option' data-hide-search='true'>
                                             ".

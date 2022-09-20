@@ -9,7 +9,7 @@
         <th><b>Tanggal Dibuat</b></th>
         <th><b>Manufaktur</b></th>
         <th><b>Colour</b></th>
-        <th><b>Transmission AT/MT</b></th>
+        <th><b>Transmission</b></th>
         <th><b>Vehicle Type</b></th>
         <th><b>Year</b></th>
         <th><b>Plat No</b></th>

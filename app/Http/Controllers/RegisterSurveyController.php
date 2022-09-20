@@ -55,7 +55,58 @@ class RegisterSurveyController extends Controller
 
     public function export_pdf($id){
         $query = RegisterSurvey::where('id_register_survey',$id)->with(['vehicle','customer','branch','transmission'])->get();
-        $pdf = PDF::loadView('exports.survey_export_pdf', compact('query'));
+        $regist = $query[0];
+        $allCategories = TypePart::get();
+
+        foreach ($allCategories as $rootCategory) {
+            $rootCategory->children = Part::where('id_typepart' , $rootCategory->id_typepart)->get();
+
+            foreach ($rootCategory->children as $data) {
+                // desc veh
+                $arrVehicle = json_decode($regist->descriptionVehicle, true);
+                $tempVeh = [];
+                for ($x = 1; $x < count($arrVehicle) + 1; $x++)
+                {
+                    $tempVeh[] = $arrVehicle[$x];
+                }
+
+                for ($a = 0; $a < count($tempVeh); $a++)
+                {
+                    if ($tempVeh[$a]['id_part'] == $data->id_part) {
+                        $data->description = $tempVeh[$a]['value'] ?? '';
+                    }
+                }
+
+                // standard veh 
+
+                $arrStandard = json_decode($regist->isStandardVehicle, true);
+                $tempStandard = [];
+                for ($b = 1; $b < count($arrStandard) + 1; $b++)
+                {
+                    $tempStandard[] = $arrStandard[$b];
+                }
+
+                for ($c = 0; $c < count($tempStandard); $c++)
+                {
+                    if ($tempStandard[$c]['id_part'] == $data->id_part) {
+                        $data->isStandard = $tempStandard[$c]['value'] ?? false;
+                    }
+                }
+                
+                // photo veh
+
+                $arrPhoto = json_decode($regist->photoVehicle, true);
+
+                for ($d = 0; $d < count($arrPhoto); $d++)
+                {
+                    if ($arrPhoto[$d]['id_part'] == $data->id_part) {
+                        $data->photoURL = $arrPhoto[$d]['url'] ?? false;
+                    }
+                }
+            }
+        }
+
+        $pdf = PDF::loadView('exports.survey_export_pdf', compact('query' , 'allCategories'));
         return $pdf->download('RegisterSurveyExport_'.$query[0]->register_no.'_.pdf');
     }
 

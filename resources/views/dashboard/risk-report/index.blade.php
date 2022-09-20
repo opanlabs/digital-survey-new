@@ -15,7 +15,7 @@
                 <div class="modal-dialog modal-dialog-centered mw-1000px">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h2>Realtime survey report</h2>
+                            <h2>Realtime Survey Report</h2>
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -88,7 +88,7 @@
                                                         <td class="text-gray-800" id="colour_view"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-muted min-w-125px w-125px">Transmission AT/MT</td>
+                                                        <td class="text-muted min-w-125px w-125px">Transmission</td>
                                                         <td class="text-gray-800" id="transmission_view"></td>
                                                     </tr>
                                                     <tr>
