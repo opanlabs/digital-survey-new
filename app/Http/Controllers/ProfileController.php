@@ -123,8 +123,8 @@ class ProfileController extends Controller
               }
               
 
-            $storeFile = $request->file('photo')->storeAs('file/images','photo-profile-'.$request->id.'.'.$extension);
-            $urlFile = \Storage::url('file/images/'.'photo-profile-'.$request->id.'.'.$extension);            
+            $storeFile = $request->file('photo')->storeAs('file','pp-'.$request->id.'.'.$extension);
+            $urlFile = \Storage::url('file/'.'pp-'.$request->id.'.'.$extension);            
             $users = User::find($request->id_user)->update([
                 'photo_url' =>  $urlFile,
             ]);
@@ -132,7 +132,7 @@ class ProfileController extends Controller
 
         //hapus photo profile
         if (!empty($request->photo_remove)) {
-            \Storage::delete('file/images/'.basename(Auth::user()->photo_url));
+            \Storage::delete('file/'.basename(Auth::user()->photo_url));
             $users = User::find($request->id_user)->update([
             'photo_url' =>  null,
             ]);
