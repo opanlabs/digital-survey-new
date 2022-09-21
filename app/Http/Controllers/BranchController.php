@@ -29,6 +29,7 @@ class BranchController extends Controller
         $search = $request->input('q');
         $role = Roles::select("id_role", "role")
                 ->where('role', 'not like', "Super Admin")
+                ->where('role', 'not like', "Admin")
                 ->get();
         return response()->json($role);
     }
