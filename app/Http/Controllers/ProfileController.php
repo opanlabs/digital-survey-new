@@ -123,8 +123,8 @@ class ProfileController extends Controller
               }
               
 
-            $storeFile = $request->file('photo')->storeAs('file','pp-'.$request->id.'.'.$extension);
-            $urlFile = \Storage::url('file/'.'pp-'.$request->id.'.'.$extension);            
+            $storeFile = $request->file('photo')->storeAs('file','pp_'.$request->id.'.'.$extension);
+            $urlFile = \Storage::url('file/'.'pp_'.$request->id.'.'.$extension);            
             $users = User::find($request->id_user)->update([
                 'photo_url' =>  $urlFile,
             ]);
