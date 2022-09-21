@@ -387,8 +387,8 @@ class RegisterSurveyController extends Controller
 
         $link_report_zoom = '';
         $file_name = $request['videoUpload']->getClientOriginalName();
-        $request['videoUpload']->storeAs('file/video','link-survey-report-'.$file_name);
-        $link_report_zoom = \Storage::url('file/video/'.'link-survey-report-'.$file_name);    
+        $request['videoUpload']->storeAs('file','link_survey_report_'.$file_name);
+        $link_report_zoom = \Storage::url('file/'.'link_survey_report_'.$file_name);    
 
         $registerSurvey->update([
             'link_report_zoom' =>  $link_report_zoom
@@ -410,16 +410,16 @@ class RegisterSurveyController extends Controller
             $temp[$i]['url'] = '';
             if(isset($temp[$i]['value'])){
                 $file_name = $temp[$i]['value']->getClientOriginalName();
-                $temp[$i]['value']->storeAs('file/images','register-survey-'.$file_name);
-                $temp[$i]['url'] = \Storage::url('file/images/'.'register-survey-'.$file_name);       
+                $temp[$i]['value']->storeAs('file','register_survey_'.$file_name);
+                $temp[$i]['url'] = \Storage::url('file/'.'register_survey_'.$file_name);       
             }else{
                 $temp[$i]['url'] = '';
             }
         }
     
         $file_name_bukti = $request['link_bukti_meeting']->getClientOriginalName();
-        $request['link_bukti_meeting']->storeAs('file/image','link-bukti-meeting-'.$file_name_bukti);
-        $link_bukti_meeting = \Storage::url('file/image/'.'link-bukti-meeting-'.$file_name_bukti);   
+        $request['link_bukti_meeting']->storeAs('file','link_bukti_meeting_'.$file_name_bukti);
+        $link_bukti_meeting = \Storage::url('file/'.'link_bukti_meeting_'.$file_name_bukti);   
 
         $id = $request->id;
 
