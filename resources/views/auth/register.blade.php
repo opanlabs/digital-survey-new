@@ -113,7 +113,7 @@
                         <label class="form-label fs-6 fw-bolder text-dark">Email</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input class="form-control form-control-lg @error('email') is-invalid @enderror" type="text" name="email" autocomplete="off" placeholder="Phone Number/Email" value="{{ old('email') }}" required autocomplete="email" autofocus/>
+                        <input class="form-control form-control-lg @error('email') is-invalid @enderror" type="text" name="email" autocomplete="off" placeholder="Email" value="{{ old('email') }}" required autocomplete="email" autofocus/>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
