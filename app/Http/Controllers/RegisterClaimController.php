@@ -249,7 +249,7 @@ class RegisterClaimController extends Controller
 
         Mail::to($data->customer->email)->send(new JinggaMail($mailData));
 
-        return redirect()->back()->with('message','Data Successfully Resend Email to '. $data->customer->email );
+        return redirect()->back()->with('message','Data Successfully Reschedule to '. $data->customer->email );
     }
 
     /**
