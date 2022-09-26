@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Providers;
+use Auth;
+use Blade;
 
 use Schema;
 
@@ -25,6 +27,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        // custome direction not super admin
+        Blade::if('notsuperadmin', function () {
+            return auth()->check() && auth()->user()->roles->role != 'Super Admin';
+        });
+
+        // custome direction admin
+        Blade::if('admin', function () {
+            return auth()->check() && auth()->user()->roles->role == 'Super Admin' or auth()->user()->roles->role == 'Admin';
+        });
+
         if(config('app.env') === 'testing') {
             \URL::forceScheme('https');
         }

@@ -60,7 +60,9 @@
                         </div>
                         <!--end::Content-->
                     </div>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card" class="btn btn-primary">Add Register Risk Survey</a>
+                    @notsuperadmin
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card" class="btn btn-primary">Add Register Risk Survey</a>
+                    @endnotsuperadmin
                 </div>
             </div>
         </div>
