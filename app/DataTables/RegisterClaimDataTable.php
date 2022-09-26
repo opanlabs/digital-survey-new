@@ -353,7 +353,7 @@ class RegisterClaimDataTable extends DataTable
         $sendEmail = "<div class='menu-item menu-state-bg px-3'>
                         <a href='#' class='menu-link px-3 text-danger' data-bs-toggle='modal' data-bs-target='#kt_modal_sendemail' id='kt_sendemail_mod' data-id='{$editUrl->id_register_claim}'>
                             <span class='menu-icon'><i class='bi bi-envelope-plus'></i></span>
-                            <span class='menu-title'>Resend Email</span>
+                            <span class='menu-title'>Reschedule</span>
                         </a>
                     </div>";
         }
