@@ -241,15 +241,43 @@ class RegisterClaimController extends Controller
     }
 
     public function send_email(Request $request){
-        $data = RegisterClaim::where('id_register_claim', $request->id)->with(['customer'])->first();
+        $id = $request->id;
+
+        $registerSurvey = RegisterClaim::find($id);
+        $user = User::find(Auth::user()->id_user);
+        $customer = Customer::find($registerSurvey->id_customer);
+
+        $meetings = Zoom::user()->find($user->email)->meetings()->create([
+            'topic' => 'Claim Kendaraan Customer ' . $customer->customer_name,
+            'duration' => 15, // In minutes, optional
+            'start_time' => new Carbon($request->survey_date),
+            'timezone' => 'Asia/Jakarta',
+        ]);
+
+        $meetings->settings()->make([
+            'join_before_host' => false,
+            'enforce_login' => false,
+            'waiting_room' => false,
+          ]);
+      
+        Zoom::user()->find($user->email)->meetings()->save($meetings);
+
         $mailData = [
-            'email' => $data->customer->email,
-            'link' => $data->link_zoom
+            'email' => $customer->customer_name,
+            'link' => $meetings->join_url
         ];
 
-        Mail::to($data->customer->email)->send(new JinggaMail($mailData));
+        Mail::to($customer->email)->send(new JinggaMail($mailData));
+      
+        $registerSurvey->update([
+            'survey_date' =>  $request->survey_date,
+            'status' =>  'SCHEDULE',
+            'link_zoom' => $meetings->join_url,
+            'id_user' => Auth::user()->id_user,
+            'surveyor' => $user->name,
+        ]);
 
-        return redirect()->back()->with('message','Data Successfully Reschedule to '. $data->customer->email );
+        return redirect()->back()->with('message','Data Successfully Reschedule to '. $customer->email );
     }
 
     /**
