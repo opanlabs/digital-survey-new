@@ -353,7 +353,7 @@ class RegisterClaimDataTable extends DataTable
 
         if ($editUrl->status === 'OPEN' || $editUrl->status === 'SCHEDULE') {
            $editSurvey = "
-           <div class='menu-item menu-state-bg px-3'>
+           <div class='menu-item menu-state-bg px-1'>
                 <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#edit_modal".$data->id_register_claim."'>
                     <span class='menu-icon'><i class='bi bi-pencil-square'></i></span>
                     <span class='menu-title'>Edit</span>
@@ -364,7 +364,7 @@ class RegisterClaimDataTable extends DataTable
 
         if ($editUrl->status === 'OPEN' || $editUrl->status === 'SCHEDULE') {
            $deleteSurvey = "
-           <div class='menu-item menu-state-bg px-3'>
+           <div class='menu-item menu-state-bg px-1'>
                 <a href='#' class='menu-link px-3 text-danger' data-bs-toggle='modal' data-bs-target='#kt_modal_delete' id='kt_delete_mod' data-id='{$editUrl->id_register_claim}'>
                     <span class='menu-icon'><i class='bi bi-trash'></i></span>
                     <span class='menu-title'>Delete</span>
@@ -374,16 +374,16 @@ class RegisterClaimDataTable extends DataTable
         }
         
         if ($editUrl->status === 'SCHEDULE') {
-        $sendEmail = "<div class='menu-item menu-state-bg px-3'>
+        $sendEmail = "<div class='menu-item menu-state-bg px-1'>
                         <a href='#' class='menu-link px-3 text-danger' data-bs-toggle='modal' data-bs-target='#kt_modal_sendemail' id='kt_sendemail_mod' data-id='{$editUrl->id_register_claim}'>
                             <span class='menu-icon'><i class='bi bi-envelope-plus'></i></span>
-                            <span class='menu-title'>Reschedule</span>
+                            <span class='menu-title'>ReSchedule</span>
                         </a>
                     </div>";
         }
 
         if ($editUrl->status === 'OPEN') {
-           $schedule = "<div class='menu-item menu-state-bg px-3'>
+           $schedule = "<div class='menu-item menu-state-bg px-1'>
                             <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_schedule' id='kt_schedule_mod' data-id='{$editUrl->id_register_claim}'>
                                 <span class='menu-icon'><i class='bi bi-calendar2-plus'></i></span>
                                 <span class='menu-title'>Schedule</span>
@@ -392,7 +392,7 @@ class RegisterClaimDataTable extends DataTable
         }
 
         if ($editUrl->status === 'SCHEDULE') {
-            $surveyReport = "<div class='menu-item menu-state-bg px-3'>
+            $surveyReport = "<div class='menu-item menu-state-bg px-1'>
                              <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_report' id='kt_report_mod' data-id='{$editUrl->id_register_claim}'>
                                  <span class='menu-icon'><i class='bi bi-calendar2-plus'></i></span>
                                  <span class='menu-title'>Report Schedule</span>
@@ -402,7 +402,7 @@ class RegisterClaimDataTable extends DataTable
 
          if ($editUrl->status === 'OPEN' || $editUrl->status === 'SCHEDULE') {
             $viewSurvey = "
-            <div class='menu-item menu-state-bg px-3'>
+            <div class='menu-item menu-state-bg px-1'>
             <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#view_modal".$data->id_register_claim."'>
                 <span class='menu-icon'><i class='bi bi-eye'></i></span>
                 <span class='menu-title'>View</span>
@@ -411,7 +411,7 @@ class RegisterClaimDataTable extends DataTable
             ";
          }else{
             $viewSurvey = "
-            <div class='menu-item menu-state-bg px-3'>
+            <div class='menu-item menu-state-bg px-1'>
             <a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_report_view' id='kt_report_view_mod' data-id='{$editUrl->id_register_claim}'>
                 <span class='menu-icon'><i class='bi bi-eye'></i></span>
                 <span class='menu-title'>View</span>
