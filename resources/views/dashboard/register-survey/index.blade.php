@@ -265,25 +265,38 @@
             <form action='{{ route('register-survey.send-email') }}' method="post" id="form-update" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="id">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="flex-column">
-                                    <div class="modal-header border-0 text-center mt-5 justify-content-center">
-                                        <i class="bi bi-envelope-plus fs-5x text-primary"></i>
-                                    </div>						
-                                    <h4 class="modal-title w-100 text-center">Are you sure?</h4>
-                                </div>
-                                <div class="modal-body text-center">
-                                    <p>Do you really want to send email these records ?
-                                </div>
-                                <div class="modal-footer justify-content-center">
-                                    <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light btn-sm">Cancel</button>
-                                    <button type="submit" class="btn btn-primary btn-sm">Send Email</button>
-                                </div>
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create Reschedule Risk Survey</h5>
+                            <!--begin::Close-->
+                            <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                <span class="svg-icon svg-icon-2x"></span>
                             </div>
+                            <!--end::Close-->
+                        </div>
+                        <div class="modal-body">
+                                <div class="d-flex flex-column mb-7 fv-row">
+                                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                        <span>Select date</span>
+                                    </label>
+                                    <input class="form-control form-control-solid @error('survey_date') is-invalid @enderror" required name="survey_date" placeholder="Pick date" id="kt_datepicker_11"/>
+                                    @error('survey_date')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                        </div>
+            
+                        <div class="modal-footer">
+                            <button data-bs-dismiss="modal" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Cancel</button>
+                            <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+                                Create
+                            </button>
                         </div>
                     </div>
+                </div>
             </form>
         </div>
         <!-- modal schedule report -->
@@ -828,6 +841,16 @@
         }
 
         $("#kt_datepicker_10").flatpickr({
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            disable: [
+                {
+                    from: "0001-01-01",
+                    to: formatDate(yesterday)
+                },
+            ]
+        });
+        $("#kt_datepicker_11").flatpickr({
             enableTime: true,
             dateFormat: "Y-m-d H:i",
             disable: [
