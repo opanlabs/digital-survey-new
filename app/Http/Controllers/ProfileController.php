@@ -135,7 +135,6 @@ class ProfileController extends Controller
 
         //hapus photo profile
         if (!empty($request->photo_remove)) {
-            dd(basename(Auth::user()->photo_url));
             \Storage::delete('file/'.basename(Auth::user()->photo_url));
             $users = User::find($request->id_user)->update([
             'photo_url' =>  null,
