@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -118,13 +119,15 @@ class ProfileController extends Controller
             
             $file_name = $request->file('photo')->getClientOriginalName();
             $extension = pathinfo($file_name, PATHINFO_EXTENSION);
+
             if(Auth::user()->photo_url){
                 \Storage::delete(Auth::user()->photo_url);
               }
+            
+            $rand_string = Str::random(5);
               
-
-            $storeFile = $request->file('photo')->storeAs('file','pp_'.$request->id.'.'.$extension);
-            $urlFile = \Storage::url('file/'.'pp_'.$request->id.'.'.$extension);            
+            $storeFile = $request->file('photo')->storeAs('file','pp_'.$request->id. '_' .$rand_string .'.'.$extension);
+            $urlFile = \Storage::url($storeFile);            
             $users = User::find($request->id_user)->update([
                 'photo_url' =>  $urlFile,
             ]);
@@ -132,6 +135,7 @@ class ProfileController extends Controller
 
         //hapus photo profile
         if (!empty($request->photo_remove)) {
+            dd(basename(Auth::user()->photo_url));
             \Storage::delete('file/'.basename(Auth::user()->photo_url));
             $users = User::find($request->id_user)->update([
             'photo_url' =>  null,
