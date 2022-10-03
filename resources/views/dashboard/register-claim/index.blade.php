@@ -650,7 +650,7 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="image-input image-input-outline me-6" data-kt-image-input="true">
-                                                                            <div id="photo_view_{{$sub->id_part}}" class="image-input-wrapper w-125px h-125px" style="background-image: url({{ asset('/media/png/avatar-default.png') }})"></div>
+                                                                            <div id="photo_view_{{$sub->id_part}}" class="image-input-wrapper w-125px h-125px" style="background-image: url({{ asset('/media/png/no-image-pdf.png') }})"></div>
                                                                             </div>
                                                                         </td>
                                                                     </tr>
@@ -953,7 +953,7 @@
 
                 for (let index2 = 0; index2 < objPhoto.length; index2++) {
                     const element = objPhoto[index2];
-                    $(`#photo_view_${element.id_part}`).css("background-image", `url(${element.url ? element.url : '/media/png/avatar-default.png'})`);
+                    $(`#photo_view_${element.id_part}`).css("background-image", `url(${element.url ? element.url : '/media/png/no-image-pdf.png'})`);
                 }
 
                 var stats = '';
