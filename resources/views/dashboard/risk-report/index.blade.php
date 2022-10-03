@@ -275,11 +275,12 @@
                 }
                 
                 let objPhoto = JSON.parse(data.details.photoVehicle);
+                let base_url = window.location.origin;
                 // var resultPhoto = Object.keys(photoVehicle).map((key) => photoVehicle[key]);
 
                 for (let index2 = 0; index2 < objPhoto.length; index2++) {
                     const element = objPhoto[index2];
-                    $(`#photo_view_${element.id_part}`).css("background-image", `url(${element.url ? element.url : '/media/png/no-image-pdf.png'})`);
+                    $(`#photo_view_${element.id_part}`).html(`<img id="photo_view_${element.id_part}" src="${element.url ? element.url : base_url + '/media/png/no-image-pdf.png'}" height="125" width="125">`);
                 }
 
                 var stats = '';
