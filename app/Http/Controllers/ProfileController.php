@@ -120,8 +120,9 @@ class ProfileController extends Controller
             $file_name = $request->file('photo')->getClientOriginalName();
             $extension = pathinfo($file_name, PATHINFO_EXTENSION);
 
+            //hapus foto profile sebelumnya
             if(Auth::user()->photo_url){
-                \Storage::delete(Auth::user()->photo_url);
+                \Storage::delete('file/'.basename(Auth::user()->photo_url));
               }
             
             $rand_string = Str::random(5);
