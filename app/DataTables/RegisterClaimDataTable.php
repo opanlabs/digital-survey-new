@@ -519,7 +519,7 @@ class RegisterClaimDataTable extends DataTable
                         ->when($startdateRegister, function ($query) use ($startdateRegister,$enddateRegister){
                             return  $query->WhereBetween('created_at', [$startdateRegister,$enddateRegister]);
                         });     
-        })
+        })->orderBy('created_at', 'desc') 
         : 
         $model
         ->with(['vehicle','customer','user','branch','register_survey','transmission'])
@@ -535,7 +535,8 @@ class RegisterClaimDataTable extends DataTable
                             return  $query->WhereBetween('created_at', [$startdateRegister,$enddateRegister]);
                         });     
         })
-        ->where('id_branch', Auth::user()->id_branch);
+        ->where('id_branch', Auth::user()->id_branch)
+        ->orderBy('created_at', 'desc');  
     }
 
     /**
