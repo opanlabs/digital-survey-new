@@ -275,7 +275,13 @@
                 for (let index1 = 0; index1 < resultCheckbox.length; index1++) {
                     const element = resultCheckbox[index1];
                     if (element.value === 'true') {
-                        $(`#checkbox_view_${element.id_part}`).prop('checked', true);   
+                        $(`#checkbox_view_${element.id_part}`).replaceWith(function(){
+                            return '<span>Standard</span>'
+                        })  
+                    } else {
+                        $(`#checkbox_view_${element.id_part}`).replaceWith(function(){
+                            return '<span>Non Standard</span>'
+                        })  
                     }
                 }
                 

@@ -196,7 +196,7 @@ class RegisterClaimController extends Controller
     {
             $request->validate([
                 'no_polis' => 'required',
-                'id_register_survey' => 'required',
+                
                 'email' => 'unique:customer,email,'.$request->email.',email',
                 'year' => 'required',
                 'customer_name' => 'required',
@@ -313,7 +313,6 @@ class RegisterClaimController extends Controller
     {
         $request->validate([
             'no_polis' => 'required',
-            'id_register_survey' => 'required',
             'email' => 'unique:customer,email,'.$request->email.',email',
             'year' => 'required',
             'customer_name' => 'required',

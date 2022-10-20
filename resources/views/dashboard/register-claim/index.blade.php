@@ -102,7 +102,7 @@
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span>Register Number</span>
                                             </label>
-                                            <select class="form-select form-select-solid @error('id_register_survey') is-invalid @enderror" required data-control="select2" name="id_register_survey" data-placeholder="Select an option" data-hide-search="true">
+                                            <select class="form-select form-select-solid @error('id_register_survey') is-invalid @enderror" data-control="select2" name="id_register_survey" data-placeholder="Select an option" data-hide-search="true">
                                                 <option></option>
                                                 @foreach($registerSurvey as $br)
                                                     <option value="{{$br->id_register_survey}}">{{ $br->register_no }}</option>
@@ -944,7 +944,13 @@
                 for (let index1 = 0; index1 < resultCheckbox.length; index1++) {
                     const element = resultCheckbox[index1];
                     if (element.value === 'true') {
-                        $(`#checkbox_view_${element.id_part}`).prop('checked', true);   
+                        $(`#checkbox_view_${element.id_part}`).replaceWith(function(){
+                            return '<span>Standard</span>'
+                        })  
+                    } else {
+                        $(`#checkbox_view_${element.id_part}`).replaceWith(function(){
+                            return '<span>Non Standard</span>'
+                        })  
                     }
                 }
                 
