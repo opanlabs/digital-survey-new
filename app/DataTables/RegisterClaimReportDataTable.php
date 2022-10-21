@@ -30,7 +30,7 @@ class RegisterClaimReportDataTable extends DataTable
     {   
         $vehicle = Vehicle::all();
         $branch = Branch::all();
-        $register_survey = RegisterSurvey::all();
+        // $register_survey = RegisterSurvey::all();
 
         $editUrl = $data;
 
@@ -70,14 +70,14 @@ class RegisterClaimReportDataTable extends DataTable
         $viewModal_branchSelect = "";
         $viewModal_vehicleSelect = "";
         $viewModal_registerNoSelect = "";
-        foreach ($register_survey as $survey) {
-            if ($survey->id_register_survey == $data->register_survey->id_register_survey) {
-                $survey_isSelected = 'selected="selected"';
-            }else{
-                $survey_isSelected = '';
-            }
-            $viewModal_registerNoSelect .= "<option value='". $survey->id_register_survey ."'".$survey_isSelected.">$survey->register_no</option>";
-        };
+        // foreach ($register_survey as $survey) {
+        //     if ($survey->id_register_survey == $data->register_survey->id_register_survey) {
+        //         $survey_isSelected = 'selected="selected"';
+        //     }else{
+        //         $survey_isSelected = '';
+        //     }
+        //     $viewModal_registerNoSelect .= "<option value='". $survey->id_register_survey ."'".$survey_isSelected.">$survey->register_no</option>";
+        // };
         foreach ($branch as $branch) {
             if ($branch->id_branch == $data->branch->id_branch) {
                 $branch_isSelected = 'selected="selected"';
@@ -119,7 +119,7 @@ class RegisterClaimReportDataTable extends DataTable
                                 </tr>
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px'>No Register</td>
-                                    <td class='text-gray-800'>".$data->register_survey->register_no."</td>
+                                    <td class='text-gray-800'>".$data->register_number."</td>
                                 </tr>
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px'>Costumer Name</td>
@@ -205,23 +205,19 @@ class RegisterClaimReportDataTable extends DataTable
                             <form id='kt_modal_new_card_form' class='form' action='#'>
                                 <div class='row'>
                                 <div class='col-md-6 fv-row'>
-                                    <div class='d-flex flex-column mb-7 fv-row'>
-                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                                <span>No Polis</span>
-                                            </label>
-                                            <input type='text' class='form-control form-control-solid @error('no_polis') is-invalid @enderror' required placeholder='' name='no_polis' value='".$data->no_polis."' />
+                                        <div class='d-flex flex-column mb-7 fv-row'>
+                                                <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                    <span>No Polis</span>
+                                                </label>
+                                                <input type='text' class='form-control form-control-solid @error('no_polis') is-invalid @enderror' required placeholder='' name='no_polis' value='".$data->no_polis."' />
                                         </div>
                                     </div>
                                     <div class='col-md-6 fv-row'>
                                         <div class='d-flex flex-column mb-7 fv-row'>
-                                            <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                                <span>No Register</span>
-                                            </label>
-                                            <select class='form-select form-select-solid @error('id_register_survey') is-invalid @enderror' required data-control='select2' name='id_register_survey' data-placeholder='Select an option' data-hide-search='true'>
-                                            ".
-                                            $viewModal_registerNoSelect
-                                            ."
-                                            </select>
+                                                <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
+                                                    <span>No Register</span>
+                                                </label>
+                                                <input type='text' class='form-control form-control-solid @error('register_number') is-invalid @enderror' required placeholder='' name='register_number' value='".$data->register_number."' />
                                         </div>
                                     </div>
                                     <div class='col-md-6 fv-row'>
@@ -387,9 +383,9 @@ class RegisterClaimReportDataTable extends DataTable
             ->addColumn('created_at',function ($data){
                 return $data->created_at->format('Y-m-d d:m');
             })
-            ->editColumn('register_survey.register_no', function($data) {
-                return is_null($data->register_survey->register_no) ? 'Belum Register No ' : $data->register_survey->register_no;
-            })
+            // ->editColumn('register_survey.register_no', function($data) {
+            //     return is_null($data->register_survey->register_no) ? 'Belum Register No ' : $data->register_survey->register_no;
+            // })
             ->addIndexColumn()
             ->rawColumns(['status','action','link_zoom','created_at'])
             ->setRowId('id_register_claim');
@@ -403,8 +399,8 @@ class RegisterClaimReportDataTable extends DataTable
      */
     public function query(RegisterClaim $model): QueryBuilder
     {
-        return Auth::user()->id_role === 1 ? $model->newQuery()->where([['status', 'DONE']])->with(['vehicle','customer','user','branch','register_survey']) : 
-        $model->newQuery()->where([['id_branch', Auth::user()->id_branch],['status', 'DONE']])->with(['vehicle','customer','user','branch','register_survey']);
+        return Auth::user()->id_role === 1 ? $model->newQuery()->where([['status', 'DONE']])->with(['vehicle','customer','user','branch']) : 
+        $model->newQuery()->where([['id_branch', Auth::user()->id_branch],['status', 'DONE']])->with(['vehicle','customer','user','branch']);
     }
 
     /**
@@ -452,8 +448,8 @@ class RegisterClaimReportDataTable extends DataTable
                 'name' => 'no_polis',
             ]),
             Column::make(['title' => 'Register No',
-                'data' => 'register_survey.register_no',
-                'name' => 'register_survey.register_no',
+                'data' => 'register_number',
+                'name' => 'register_number',
             ]),
             Column::make(['title' => 'Name',
                 'data' => 'customer.customer_name',

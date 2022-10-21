@@ -19,7 +19,8 @@ class RegisterClaim extends Authenticatable
      */
     protected $fillable = [
         'no_polis',
-        'id_register_survey',
+        // 'id_register_survey',
+        'register_number',
         'id_customer',
         'id_vehicle',
         'year',
@@ -43,10 +44,10 @@ class RegisterClaim extends Authenticatable
     protected $primaryKey = 'id_register_claim';
     protected $table = 'register_claim';
 
-    public function register_survey()
-    {   
-        return $this->belongsTo(RegisterSurvey::class,'id_register_survey','id_register_survey');
-    }
+    // public function register_survey()
+    // {   
+    //     return $this->belongsTo(RegisterSurvey::class,'id_register_survey','id_register_survey');
+    // }
 
     public function user()
     {   

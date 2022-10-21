@@ -8,7 +8,7 @@ use App\DataTables\RegisterClaimReportDataTable;
 use App\Models\Branch;
 use App\Models\Vehicle;
 use App\Models\RegisterClaim;
-use App\Models\RegisterSurvey;
+// use App\Models\RegisterSurvey;
 use App\Models\Customer;
 use App\Models\User;
 use App\Models\Part;
@@ -32,13 +32,13 @@ class RegisterClaimController extends Controller
 
 	public function export_excel($id)
 	{   
-        $query = RegisterClaim::where('id_register_claim',$id)->with(['vehicle','customer','user','branch','register_survey'])->get();
+        $query = RegisterClaim::where('id_register_claim',$id)->with(['vehicle','customer','user','branch'])->get();
 
-		return Excel::download(new RegisterClaimExport($query), 'RegisterClaimExport_'. $query[0]->register_survey->register_no .'_.xlsx');
+		return Excel::download(new RegisterClaimExport($query), 'RegisterClaimExport_'. $query[0]->id_register_claim .'_.xlsx');
 	}
 
     public function export_pdf($id){
-        $query = RegisterClaim::where('id_register_claim',$id)->with(['vehicle','customer','user','branch','register_survey'])->get();
+        $query = RegisterClaim::where('id_register_claim',$id)->with(['vehicle','customer','user','branch'])->get();
         $regist = $query[0];
         $allCategories = TypePart::get();
 
@@ -92,7 +92,7 @@ class RegisterClaimController extends Controller
 
 
         $pdf = PDF::loadView('exports.claim_export_pdf', compact('query','allCategories'));
-        return $pdf->download('RegisterClaimExport_'.$query[0]->register_survey->register_no.'_.pdf');
+        return $pdf->download('RegisterClaimExport_'.$query[0]->id_register_claim.'_.pdf');
     }
 
     /**
@@ -107,12 +107,12 @@ class RegisterClaimController extends Controller
         $allCategories = TypePart::get();
         $transmission = Transmission::all();
 
-        $registerSurvey = Auth::user()->id_role === 1 ? RegisterSurvey::where([
-            ['status', 'DONE'],
-        ])->get() : RegisterSurvey::where([
-            ['id_branch', Auth::user()->id_branch],
-            ['status', 'DONE'],
-        ])->get();
+        // $registerSurvey = Auth::user()->id_role === 1 ? RegisterSurvey::where([
+        //     ['status', 'DONE'],
+        // ])->get() : RegisterSurvey::where([
+        //     ['id_branch', Auth::user()->id_branch],
+        //     ['status', 'DONE'],
+        // ])->get();
 
         foreach ($allCategories as $rootCategory) {
             $rootCategory->children = Part::where('id_typepart' , $rootCategory->id_typepart)->get();
@@ -123,7 +123,9 @@ class RegisterClaimController extends Controller
             }
         }
         
-        return $dataTable->render('dashboard.register-claim.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories ,'registerSurvey' => $registerSurvey , 'transmission' => $transmission ]);
+        return $dataTable->render('dashboard.register-claim.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories ,
+        // 'registerSurvey' => $registerSurvey , 
+        'transmission' => $transmission ]);
     }
 
     public function report(RegisterClaimReportDataTable $dataTable)
@@ -133,10 +135,10 @@ class RegisterClaimController extends Controller
         $allCategories = TypePart::get();
         $transmission = Transmission::all();
 
-        $registerSurvey = RegisterSurvey::where([
-            ['id_branch', Auth::user()->id_branch],
-            ['status', 'DONE'],
-        ])->get();
+        // $registerSurvey = RegisterSurvey::where([
+        //     ['id_branch', Auth::user()->id_branch],
+        //     ['status', 'DONE'],
+        // ])->get();
 
         foreach ($allCategories as $rootCategory) {
             $rootCategory->children = Part::where('id_typepart' , $rootCategory->id_typepart)->get();
@@ -147,7 +149,9 @@ class RegisterClaimController extends Controller
             }
         }
         
-        return $dataTable->render('dashboard.claim-report.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories ,'registerSurvey' => $registerSurvey , 'transmission' => $transmission]);
+        return $dataTable->render('dashboard.claim-report.index',['branch' => $branch , 'vehicle' => $vehicle , 'part' => $allCategories ,
+        // 'registerSurvey' => $registerSurvey , 
+        'transmission' => $transmission]);
     }
     
     //dipakai untuk return json nama,jadwal,link zoom meeting
@@ -181,7 +185,7 @@ class RegisterClaimController extends Controller
 
     public function detailClaim(Request $request){
         $id = $request->id;
-        $list = RegisterClaim::with('customer','vehicle','branch','register_survey','transmission')->find($id);
+        $list = RegisterClaim::with('customer','vehicle','branch','transmission')->find($id);
         return response()->json(['details'=>$list]);
     }
 
@@ -196,7 +200,6 @@ class RegisterClaimController extends Controller
     {
             $request->validate([
                 'no_polis' => 'required',
-                
                 'email' => 'unique:customer,email,'.$request->email.',email',
                 'year' => 'required',
                 'customer_name' => 'required',
@@ -217,7 +220,8 @@ class RegisterClaimController extends Controller
 
             RegisterClaim::create([
                 'no_polis' => $request->no_polis,
-                'id_register_survey' => $request->id_register_survey,
+                // 'id_register_survey' => $request->id_register_survey,
+                'register_number' => $request->register_number,
                 'register_no' => substr(str_shuffle(MD5(microtime())), 0, 10),
                 'id_customer' => $cus->id_customer,
                 'id_vehicle' => $request->id_vehicle,
@@ -332,7 +336,8 @@ class RegisterClaimController extends Controller
 
         RegisterClaim::find($id)->update([
             'no_polis' => $request->no_polis,
-            'id_register_survey' => $request->id_register_survey,
+            // 'id_register_survey' => $request->id_register_survey,
+            'register_number' => $request->register_number,
             'id_customer' => $request->id_customer,
             'id_vehicle' => $request->id_vehicle,
             'type' => $request->type,

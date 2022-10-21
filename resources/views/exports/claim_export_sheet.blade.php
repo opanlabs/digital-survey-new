@@ -22,7 +22,7 @@
     @foreach($query as $key => $data)
         <tr>
             <td>{{ $data->no_polis }}</td>
-            <td>{{ $data->register_survey->register_no }}</td>
+            <td>{{ $data->register_number }}</td>
             <td>{{ $data->customer->customer_name }}</td>
             <td>{{ $data->surveyor }}</td>
             <td>{{ $data->survey_date }}</td>
