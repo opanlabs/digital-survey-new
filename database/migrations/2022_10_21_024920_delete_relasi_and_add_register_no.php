@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('register_claim', function($table) {
-            $table->dropColumn('id_register_claim');
+            $table->dropColumn('id_register_survey');
             $table->string('register_number')->nullable();
         });
     }
@@ -27,7 +27,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('register_claim', function($table) {
-            $table->dropColumn('id_register_claim');
+            $table->dropColumn('id_register_survey');
             $table->string('register_number')->nullable();
         });
     }
