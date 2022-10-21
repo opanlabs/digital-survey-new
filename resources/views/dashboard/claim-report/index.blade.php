@@ -242,7 +242,7 @@
             $.post('<?= route("register-claim.details") ?>',{id:id}, function(data){
                         //  console.log(data.details.register_no);
                         $('#no_polis').html(data.details.no_polis);
-                        $('#no_register').html(data.details.register_survey.register_no);
+                        $('#no_register').html(data.details.register_number);
                         $('#customer_name').html(data.details.customer.customer_name);
                         $('#surveyor').html(data.details.surveyor);
                         $('#survey_date').html(data.details.survey_date);
@@ -310,7 +310,7 @@
                 var link_report_schedule_pdf_view = `<a href="${APP_URL}/dashboard/register-claim/export_pdf/${data.details.id_register_claim}" target="_blank" class="btn btn-outline btn-outline-dark btn-active-light-dark btn-sm">Download PDF</a>`;
                 
                 $('#no_polis_view').html(data.details.no_polis);
-                $('#no_register_view').html(data.details.register_survey.register_no);
+                $('#no_register_view').html(data.details.register_number);
                 $('#customer_name_view').html(data.details.customer.customer_name);
                 $('#surveyor_view').html(data.details.surveyor);
                 $('#survey_date_view').html(data.details.survey_date);

@@ -31,12 +31,12 @@ class RegisterClaimDataTable extends DataTable
     {   
         $vehicle = Vehicle::all();
         $transmission = Transmission::all();
-        $register_survey = Auth::user()->id_role === 1 ? RegisterSurvey::where([
-            ['status', 'DONE'],
-        ])->get() : RegisterSurvey::where([
-            ['id_branch', Auth::user()->id_branch],
-            ['status', 'DONE'],
-        ])->get();
+        // $register_survey = Auth::user()->id_role === 1 ? RegisterSurvey::where([
+        //     ['status', 'DONE'],
+        // ])->get() : RegisterSurvey::where([
+        //     ['id_branch', Auth::user()->id_branch],
+        //     ['status', 'DONE'],
+        // ])->get();
 
         $editUrl = $data;
 
@@ -76,14 +76,14 @@ class RegisterClaimDataTable extends DataTable
         $viewModal_vehicleSelect = "";
         $viewModal_registerNoSelect = "";
         $viewModal_transmissionSelect = "";
-        foreach ($register_survey as $survey) {
-            if ($survey->id_register_survey == $data->register_survey->id_register_survey) {
-                $survey_isSelected = 'selected="selected"';
-            }else{
-                $survey_isSelected = '';
-            }
-            $viewModal_registerNoSelect .= "<option value='". $survey->id_register_survey ."'".$survey_isSelected.">$survey->register_no</option>";
-        };
+        // foreach ($register_survey as $survey) {
+        //     if ($survey->id_register_survey == $data->register_survey->id_register_survey) {
+        //         $survey_isSelected = 'selected="selected"';
+        //     }else{
+        //         $survey_isSelected = '';
+        //     }
+        //     $viewModal_registerNoSelect .= "<option value='". $survey->id_register_survey ."'".$survey_isSelected.">$survey->register_no</option>";
+        // };
         foreach ($vehicle as $vehicle) {
             if ($vehicle->id_vehicle == $data->vehicle->id_vehicle) {
                 $vehicle_isSelected = 'selected="selected"';
@@ -125,7 +125,7 @@ class RegisterClaimDataTable extends DataTable
                                 </tr>
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px'>No Register</td>
-                                    <td class='text-gray-800'>".$data->register_survey->register_no."</td>
+                                    <td class='text-gray-800'>".$data->register_number."</td>
                                 </tr>
                                 <tr>
                                     <td class='text-muted min-w-125px w-200px'>Costumer Name</td>
@@ -231,11 +231,7 @@ class RegisterClaimDataTable extends DataTable
                                             <label class='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
                                                 <span>No Register</span>
                                             </label>
-                                            <select class='form-select form-select-solid @error('id_register_survey') is-invalid @enderror' required data-control='select2' name='id_register_survey' data-placeholder='Select an option' data-hide-search='true'>
-                                            ".
-                                            $viewModal_registerNoSelect
-                                            ."
-                                            </select>
+                                            <input type='text' class='form-control form-control-solid @error('register_number') is-invalid @enderror' required placeholder='' name='register_number' value='".$data->register_number."' />
                                         </div>
                                     </div>
                                     <div class='col-md-6 fv-row'>
@@ -475,9 +471,9 @@ class RegisterClaimDataTable extends DataTable
             ->addColumn('created_at',function ($data){
                 return $data->created_at->format('Y-m-d d:m');
             })
-            ->editColumn('register_survey.register_no', function($data) {
-                return is_null($data->register_survey->register_no) ? 'Belum Register No ' : $data->register_survey->register_no;
-            })
+            // ->editColumn('register_survey.register_no', function($data) {
+            //     return is_null($data->register_survey->register_no) ? 'Belum Register No ' : $data->register_survey->register_no;
+            // })
             ->editColumn('branch.province_name', function($data) {
                 return is_null($data->branch) ? '-' : $data->branch->province_name;
             })
@@ -507,7 +503,7 @@ class RegisterClaimDataTable extends DataTable
         $enddateRegister = $this->request->get('enddateRegister');
 
         return Auth::user()->id_role === 1 ? $model
-        ->with(['vehicle','customer','user','branch','register_survey','transmission'])
+        ->with(['vehicle','customer','user','branch','transmission'])
         ->when($id_vehicle or $startdateSurvey or $startdateRegister, function ($query) use($id_vehicle, $startdateSurvey, $enddateSurvey, $startdateRegister, $enddateRegister) {
             return $query
                         ->when($id_vehicle, function ($query) use ($id_vehicle){
@@ -522,7 +518,7 @@ class RegisterClaimDataTable extends DataTable
         })->orderBy('created_at', 'desc') 
         : 
         $model
-        ->with(['vehicle','customer','user','branch','register_survey','transmission'])
+        ->with(['vehicle','customer','user','branch','transmission'])
         ->when($id_vehicle or $startdateSurvey or $startdateRegister, function ($query) use($id_vehicle, $startdateSurvey, $enddateSurvey, $startdateRegister, $enddateRegister) {
             return $query
                         ->when($id_vehicle, function ($query) use ($id_vehicle){
@@ -584,8 +580,8 @@ class RegisterClaimDataTable extends DataTable
                 'name' => 'no_polis',
             ]),
             Column::make(['title' => 'Register No',
-                'data' => 'register_survey.register_no',
-                'name' => 'register_survey.register_no',
+                'data' => 'register_number',
+                'name' => 'register_number',
             ]),
             Column::make(['title' => 'Name',
                 'data' => 'customer.customer_name',

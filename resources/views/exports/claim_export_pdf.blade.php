@@ -28,7 +28,7 @@
         </p>
         <p>
             <span style="font-family: 'book antiqua', palatino, serif;"><span style="font-size: 10pt;">
-                <strong>No Register</strong>&nbsp; </span>:&nbsp; {{ $data->register_survey->register_no }}
+                <strong>No Register</strong>&nbsp; </span>:&nbsp; {{ $data->register_number }}
             </span>
         </p>
         <p>

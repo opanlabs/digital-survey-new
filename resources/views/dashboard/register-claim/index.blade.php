@@ -102,13 +102,19 @@
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span>Register Number</span>
                                             </label>
+                                            <input type="text" class="form-control form-control-solid @error('register_number') is-invalid @enderror" placeholder="" name="register_number" value="" />
+                                        </div>
+                                        {{-- <div class="d-flex flex-column mb-7 fv-row">
+                                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                                <span>Register Number</span>
+                                            </label>
                                             <select class="form-select form-select-solid @error('id_register_survey') is-invalid @enderror" data-control="select2" name="id_register_survey" data-placeholder="Select an option" data-hide-search="true">
                                                 <option></option>
                                                 @foreach($registerSurvey as $br)
                                                     <option value="{{$br->id_register_survey}}">{{ $br->register_no }}</option>
                                                 @endforeach
                                             </select>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="row">
@@ -909,7 +915,7 @@
             $.post('<?= route("register-claim.details") ?>',{id:id}, function(data){
                         //  console.log(data.details.register_no);
                         $('#no_polis').html(data.details.no_polis);
-                        $('#no_register').html(data.details.register_survey.register_no);
+                        $('#no_register').html(data.details.register_number);
                         $('#customer_name').html(data.details.customer.customer_name);
                         $('#surveyor').html(data.details.surveyor);
                         $('#survey_date').html(data.details.survey_date);
@@ -974,7 +980,7 @@
                 
                 var url = `${data.details.link_report_zoom}`
                 $('#no_polis_view').html(data.details.no_polis);
-                $('#no_register_view').html(data.details.register_survey.register_no);
+                $('#no_register_view').html(data.details.register_number);
                 $('#customer_name_view').html(data.details.customer.customer_name);
                 $('#surveyor_view').html(data.details.surveyor);
                 $('#survey_date_view').html(data.details.survey_date);
