@@ -30,7 +30,7 @@
                         <div class="px-7 py-5" data-kt-user-table-filter="form">
                             <!--begin::Input group-->
                             <div class="mb-10">
-                                <label class="form-label fs-6 fw-bold">Vehcile Brand:</label>
+                                <label class="form-label fs-6 fw-bold">Vehicle Brand:</label>
                                 <select id="vehicle_brand" class="form-select form-select-solid @error('id_vehicle') is-invalid @enderror" required data-control="select2" name="id_vehicle" data-placeholder="Select an option" data-hide-search="true">
                                     <option>All</option>
                                     @foreach($vehicle as $br)
