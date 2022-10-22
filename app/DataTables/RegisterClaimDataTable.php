@@ -490,13 +490,19 @@ class RegisterClaimDataTable extends DataTable
      */
     public function query(RegisterClaim $model): QueryBuilder
     {
-
-        if ($this->request->get('id_vehicle') == 'all') {
+        
+        if ($this->request->get('id_vehicle') === 'All') {
             $id_vehicle = null;
         } else {
-            $id_vehicle = $this->request->get('id_vehicle');
+            $id_vehicle = (int)$this->request->get('id_vehicle');
         }
 
+        if ($this->request->get('id_branch') === 'All') {
+            $id_branch = null;
+        } else {
+            $id_branch = (int)$this->request->get('id_branch');
+        }
+    
         $startdateSurvey = $this->request->get('startdateSurvey');
         $enddateSurvey = $this->request->get('enddateSurvey');
         $startdateRegister = $this->request->get('startdateRegister');
@@ -504,11 +510,21 @@ class RegisterClaimDataTable extends DataTable
 
         return Auth::user()->id_role === 1 ? $model
         ->with(['vehicle','customer','user','branch','transmission'])
-        ->when($id_vehicle or $startdateSurvey or $startdateRegister, function ($query) use($id_vehicle, $startdateSurvey, $enddateSurvey, $startdateRegister, $enddateRegister) {
+        ->when($id_vehicle or $id_branch or $startdateSurvey or $startdateRegister, function ($query) use($id_vehicle ,$id_branch , $startdateSurvey, $enddateSurvey, $startdateRegister, $enddateRegister) {
+            if ($id_vehicle !== null) {
+                $query
+                ->when($id_vehicle, function ($query) use ($id_vehicle){
+                    return  $query->Where('id_vehicle', $id_vehicle);
+                });
+            }
+            if ($id_branch !== null) {
+                $query
+                ->when($id_branch, function ($query) use ($id_branch){
+                    return  $query->Where('id_branch', $id_branch);
+                });
+            }
+
             return $query
-                        ->when($id_vehicle, function ($query) use ($id_vehicle){
-                            return  $query->Where('id_vehicle', $id_vehicle);
-                        })
                         ->when($startdateSurvey, function ($query) use ($startdateSurvey,$enddateSurvey){
                             return  $query->WhereBetween('survey_date', [$startdateSurvey,$enddateSurvey]);
                         })
@@ -519,11 +535,15 @@ class RegisterClaimDataTable extends DataTable
         : 
         $model
         ->with(['vehicle','customer','user','branch','transmission'])
-        ->when($id_vehicle or $startdateSurvey or $startdateRegister, function ($query) use($id_vehicle, $startdateSurvey, $enddateSurvey, $startdateRegister, $enddateRegister) {
+        ->when($id_vehicle or $startdateSurvey or $startdateRegister, function ($query) use($id_vehicle , $startdateSurvey, $enddateSurvey, $startdateRegister, $enddateRegister) {
+            if ($id_vehicle !== null) {
+                $query
+                ->when($id_vehicle, function ($query) use ($id_vehicle){
+                    return  $query->Where('id_vehicle', $id_vehicle);
+                });
+            }
+            
             return $query
-                        ->when($id_vehicle, function ($query) use ($id_vehicle){
-                            return  $query->Where('id_vehicle', $id_vehicle);
-                        })
                         ->when($startdateSurvey, function ($query) use ($startdateSurvey,$enddateSurvey){
                             return  $query->WhereBetween('survey_date', [$startdateSurvey,$enddateSurvey]);
                         })

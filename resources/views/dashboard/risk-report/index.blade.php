@@ -31,12 +31,23 @@
                             <div class="mb-10">
                                 <label class="form-label fs-6 fw-bold">Vehicle Brand:</label>
                                 <select id="vehicle_brand" class="form-select form-select-solid @error('id_vehicle') is-invalid @enderror" required data-control="select2" name="id_vehicle" data-placeholder="Select an option" data-hide-search="true">
-                                    <option value="all">All</option>
+                                    <option >All</option>
                                     @foreach($vehicle as $br)
                                         <option value="{{$br->id_vehicle}}">{{ $br->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
+                            @superadmin
+                            <div class="mb-10">
+                                <label class="form-label fs-6 fw-bold">Branch:</label>
+                                <select id="branch_filter" class="form-select form-select-solid @error('id_branch') is-invalid @enderror" required data-control="select2" name="id_branch" data-placeholder="Select an option" data-hide-search="true">
+                                    <option >All</option>
+                                    @foreach($branch as $br)
+                                        <option value="{{$br->id_branch}}">{{ $br->province_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @endsuperadmin
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="mb-10">
@@ -245,6 +256,59 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
     {{$dataTable->scripts()}}
     <script>
+        //date range filter by survey date
+        $("#daterangeSurvey").flatpickr({
+            dateFormat: "Y-m-d",
+            mode: "range",
+            onChange: () => {
+                document.getElementById('daterangeRegister').value = '';
+            },
+        });
+
+        //date range filter by register date
+        $("#daterangeRegister").flatpickr({
+            dateFormat: "Y-m-d",
+            mode: "range",
+            onChange: () => {
+                document.getElementById('daterangeSurvey').value = '';
+            },
+        });
+
+        //filtering datatable
+        $(document).ready(function () {
+
+            let table = $('#RegisterSurvey-table')
+            $('#apply_filter').on('click', function () {
+                let dtSurvey = $("#daterangeSurvey").val()
+                daterangeSurvey = dtSurvey.split(' to ')
+
+                let dtRegister = $("#daterangeRegister").val()
+                daterangeRegister= dtRegister.split(' to ')
+
+                let id_vehicle = $('#vehicle_brand').val()
+                
+                let id_branch = $('#branch_filter').val()
+
+                tableFilter(id_vehicle, id_branch , daterangeSurvey, daterangeRegister )
+                table.DataTable().ajax.reload()
+                
+            })
+            $('#reset_table').on('click', function () {
+                tableFilter('','','')
+                table.DataTable().ajax.reload()
+            })
+            function tableFilter(id_vehicle, id_branch , daterangeSurvey, daterangeRegister) {
+                table.on('preXhr.dt', function ( e, settings, data ) {
+                    data.id_vehicle = id_vehicle;
+                    data.id_branch = id_branch;
+                    data.startdateSurvey = daterangeSurvey[0];
+                    data.enddateSurvey = daterangeSurvey[1];
+                    data.startdateRegister = daterangeRegister[0];
+                    data.enddateRegister = daterangeRegister[1];
+                })
+            }
+        })
+
         const yesterday = new Date();
         yesterday.setDate(yesterday.getDate() - 1);
 
