@@ -53,6 +53,67 @@ class RegisterSurveyController extends Controller
 		return Excel::download(new RegisterSurveyExport($query), 'RegisterSurveyExport_'. $query[0]->register_no .'_.xlsx');
 	}
 
+    public function export_excel_survey_summary_report(Request $request){
+        $id_vehicle = null;
+        $id_branch = null;
+        if ($request->id_vehicle) {
+            $id_vehicle = (int)$request->id_vehicle;
+        }
+        if ($request->id_branch) {
+            $id_branch = (int)$request->id_branch;
+        }
+
+        $query = RegisterSurvey::query();
+        if ($id_vehicle !== null) {
+            $query
+            ->when($id_vehicle, function ($query) use ($id_vehicle){
+                return  $query->Where('id_vehicle', $id_vehicle);
+            });
+        }
+        if ($id_branch !== null) {
+            $query
+            ->when($id_branch, function ($query) use ($id_branch){
+                return  $query->Where('id_branch', $id_branch);
+            });
+        }
+        $data = $query
+        ->with(['vehicle','customer','user','branch'])
+        ->where('status', 'DONE')
+        ->get();
+
+        return Excel::download(new RegisterSurveyExport($data), 'RegisterSurveyReportExport_'.date('d F Y').'_.xlsx');
+    }
+
+    public function export_excel_survey_summary(Request $request){
+        $id_vehicle = null;
+        $id_branch = null;
+        if ($request->id_vehicle) {
+            $id_vehicle = (int)$request->id_vehicle;
+        }
+        if ($request->id_branch) {
+            $id_branch = (int)$request->id_branch;
+        }
+
+        $query = RegisterSurvey::query();
+        if ($id_vehicle !== null) {
+            $query
+            ->when($id_vehicle, function ($query) use ($id_vehicle){
+                return  $query->Where('id_vehicle', $id_vehicle);
+            });
+        }
+        if ($id_branch !== null) {
+            $query
+            ->when($id_branch, function ($query) use ($id_branch){
+                return  $query->Where('id_branch', $id_branch);
+            });
+        }
+        $data = $query
+        ->with(['vehicle','customer','user','branch'])
+        ->get();
+
+        return Excel::download(new RegisterSurveyExport($data), 'RegisterSurveyExport_'.date('d F Y').'_.xlsx');
+    }
+
     public function export_pdf($id){
         $query = RegisterSurvey::where('id_register_survey',$id)->with(['vehicle','customer','branch','transmission'])->get();
         $regist = $query[0];

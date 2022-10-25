@@ -7,7 +7,19 @@
                 <span class="card-label fw-bolder text-dark">List Report Register Claim</span>
             </h3>
             <div class="card-toolbar">
-                <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">            
+                    <form action='{{ route('register-claim.export_excel_claim_summary_report')}}' method="post"  enctype="multipart/form-data">
+                        @csrf
+                        @method('post')
+                        @if (Auth::user()->id_role == 1)
+                            <input id="branch_ids" type="hidden" name="id_branch" value="">
+                            <input id="vehicle_ids" type="hidden" name="id_vehicle" value="">
+                        @else
+                            <input id="branch_ids" type="hidden" name="id_branch" value="{{Auth::user()->id_branch}}">
+                            <input id="vehicle_ids" type="hidden" name="id_vehicle" value="">
+                        @endif
+                        <button class="btn btn-primary fw-bold px-6" style="margin-right : 10px;">Download</button>
+                    </form>
                     <button type="button" class="btn btn-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-static="true" data-kt-menu-permanent="true" data-kt-menu-toggle="true">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
                         <span class="svg-icon svg-icon-2">
@@ -294,6 +306,8 @@
                 let id_vehicle = $('#vehicle_brand').val()
                 
                 let id_branch = $('#branch_filter').val()
+                $(`#branch_ids`).val(id_branch);
+                $(`#vehicle_ids`).val(id_vehicle);
 
                 tableFilter(id_vehicle, id_branch , daterangeSurvey, daterangeRegister )
                 table.DataTable().ajax.reload()
@@ -301,6 +315,8 @@
             })
             $('#reset_table').on('click', function () {
                 tableFilter('','','')
+                $(`#branch_ids`).val('');
+                $(`#vehicle_ids`).val('');
                 table.DataTable().ajax.reload()
             })
             function tableFilter(id_vehicle, id_branch , daterangeSurvey, daterangeRegister) {

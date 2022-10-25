@@ -22,6 +22,9 @@ use Validator;
 use App\Exports\RegisterClaimExport;
 use Maatwebsite\Excel\Facades\Excel;
 
+
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+
 use Carbon\Carbon;
 use \MacsiDigital\Zoom\Facades\Zoom;
 
@@ -36,6 +39,67 @@ class RegisterClaimController extends Controller
 
 		return Excel::download(new RegisterClaimExport($query), 'RegisterClaimExport_'. $query[0]->id_register_claim .'_.xlsx');
 	}
+
+    public function export_excel_claim_summary_report(Request $request){
+        $id_vehicle = null;
+        $id_branch = null;
+        if ($request->id_vehicle) {
+            $id_vehicle = (int)$request->id_vehicle;
+        }
+        if ($request->id_branch) {
+            $id_branch = (int)$request->id_branch;
+        }
+
+        $query = RegisterClaim::query();
+        if ($id_vehicle !== null) {
+            $query
+            ->when($id_vehicle, function ($query) use ($id_vehicle){
+                return  $query->Where('id_vehicle', $id_vehicle);
+            });
+        }
+        if ($id_branch !== null) {
+            $query
+            ->when($id_branch, function ($query) use ($id_branch){
+                return  $query->Where('id_branch', $id_branch);
+            });
+        }
+        $data = $query
+        ->with(['vehicle','customer','user','branch'])
+        ->where('status', 'DONE')
+        ->get();
+
+        return Excel::download(new RegisterClaimExport($data), 'RegisterClaimReportExport_'.date('d F Y').'_.xlsx');
+    }
+
+    public function export_excel_claim_summary(Request $request){
+        $id_vehicle = null;
+        $id_branch = null;
+        if ($request->id_vehicle) {
+            $id_vehicle = (int)$request->id_vehicle;
+        }
+        if ($request->id_branch) {
+            $id_branch = (int)$request->id_branch;
+        }
+
+        $query = RegisterClaim::query();
+        if ($id_vehicle !== null) {
+            $query
+            ->when($id_vehicle, function ($query) use ($id_vehicle){
+                return  $query->Where('id_vehicle', $id_vehicle);
+            });
+        }
+        if ($id_branch !== null) {
+            $query
+            ->when($id_branch, function ($query) use ($id_branch){
+                return  $query->Where('id_branch', $id_branch);
+            });
+        }
+        $data = $query
+        ->with(['vehicle','customer','user','branch'])
+        ->get();
+
+        return Excel::download(new RegisterClaimExport($data), 'RegisterClaimExport_'.date('d F Y').'_.xlsx');
+    }
 
     public function export_pdf($id){
         $query = RegisterClaim::where('id_register_claim',$id)->with(['vehicle','customer','user','branch'])->get();
