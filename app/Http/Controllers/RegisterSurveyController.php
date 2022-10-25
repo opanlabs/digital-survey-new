@@ -78,11 +78,11 @@ class RegisterSurveyController extends Controller
         }
 
         $data = Auth::user()->id_role === 1 ? $query
-        ->with(['vehicle','customer','user','branch'])
+        ->with(['vehicle','customer','branch','transmission'])
         ->where('status', 'DONE')
         ->get() : 
         $query
-        ->with(['vehicle','customer','user','branch'])
+        ->with(['vehicle','customer','branch','transmission'])
         ->where([['status', 'DONE'],['id_branch', Auth::user()->id_branch]])
         ->get();
 
@@ -114,10 +114,10 @@ class RegisterSurveyController extends Controller
         }
 
         $data = Auth::user()->id_role === 1 ? $query
-        ->with(['vehicle','customer','user','branch'])
+        ->with(['vehicle','customer','branch','transmission'])
         ->get() : 
         $query
-        ->with(['vehicle','customer','user','branch'])
+        ->with(['vehicle','customer','branch','transmission'])
         ->where('id_branch', Auth::user()->id_branch)
         ->get();
 
