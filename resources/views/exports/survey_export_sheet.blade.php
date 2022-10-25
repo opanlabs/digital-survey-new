@@ -1,26 +1,32 @@
+<style>
+td {
+  text-align: center;
+  vertical-align: middle;
+}
+</style>
 <table>
     <thead>
     <tr>
-        <th><b>No Register</b></th>
-        <th><b>Costumer Name</b></th>
-        <th><b>Surveyor</b></th>
-        <th><b>Survey Date</b></th>
-        <th><b>Branch</b></th>
-        <th><b>Tanggal Dibuat</b></th>
-        <th><b>Manufaktur</b></th>
-        <th><b>Colour</b></th>
-        <th><b>Transmission</b></th>
-        <th><b>Vehicle Type</b></th>
-        <th><b>Year</b></th>
-        <th><b>Plat No</b></th>
-        <th><b>Status</b></th>
-        <th><b>Link Report Zoom</b></th>
+        <th style="text-align: center;vertical-align: middle;"><b>No Register</b></th>
+        <th style="text-align: center;vertical-align: middle;"><b>Costumer Name</b></th>
+        <th style="text-align: center;vertical-align: middle;"><b>Surveyor</b></th>
+        <th style="text-align: center;vertical-align: middle;"><b>Survey Date</b></th>
+        <th style="text-align: center;vertical-align: middle;"><b>Branch</b></th>
+        <th style="text-align: center;vertical-align: middle;"><b>Tanggal Dibuat</b></th>
+        <th style="text-align: center;vertical-align: middle;"><b>Manufaktur</b></th>
+        <th style="text-align: center;vertical-align: middle;"><b>Colour</b></th>
+        <th style="text-align: center;vertical-align: middle;"><b>Transmission</b></th>
+        <th style="text-align: center;vertical-align: middle;"><b>Vehicle Type</b></th>
+        <th style="text-align: center;vertical-align: middle;"><b>Year</b></th>
+        <th style="text-align: center;vertical-align: middle;"><b>Plat No</b></th>
+        <th style="text-align: center;vertical-align: middle;"><b>Status</b></th>
+        <th style="text-align: center;vertical-align: middle;"><b>Link Report Zoom</b></th>
     </tr>
     </thead>
     <tbody>
     @foreach($query as $key => $data)
         <tr>
-            <td>{{ $data->register_no }}</td>
+            <td style="text-align: left;">{{ $data->register_no }}</td>
             <td>{{ $data->customer->customer_name }}</td>
             <td>{{ $data->surveyor }}</td>
             <td>{{ $data->survey_date }}</td>
