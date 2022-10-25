@@ -44,6 +44,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::post('/register-survey/delete',[RegisterSurveyController::class,'deleteSurvey'])->name('register-survey.deleteSurvey');
     Route::post('/register-survey/detail',[RegisterSurveyController::class, 'detailSurvey'])->name('register-survey.details');
     Route::get('/register-survey/export_excel/{id}', [RegisterSurveyController::class, 'export_excel']);
+    Route::post('/register-survey/export_excel/report', [RegisterSurveyController::class, 'export_excel_survey_summary_report'])->name('register-survey.export_excel_survey_summary_report');
+    Route::post('/register-survey/export_excel', [RegisterSurveyController::class, 'export_excel_survey_summary'])->name('register-survey.export_excel_survey_summary');
     Route::get('/register-survey/export_pdf/{id}', [RegisterSurveyController::class, 'export_pdf']);
 
     // register claim
@@ -58,6 +60,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::post('/register-claim/delete',[RegisterClaimController::class,'deleteClaim'])->name('register-claim.deleteClaim');
     Route::post('/register-claim/detail',[RegisterClaimController::class, 'detailClaim'])->name('register-claim.details');
     Route::get('/register-claim/export_excel/{id}', [RegisterClaimController::class, 'export_excel']);
+    Route::post('/register-claim/export_excel/report', [RegisterClaimController::class, 'export_excel_claim_summary_report'])->name('register-claim.export_excel_claim_summary_report');
+    Route::post('/register-claim/export_excel', [RegisterClaimController::class, 'export_excel_claim_summary'])->name('register-claim.export_excel_claim_summary');
     Route::get('/register-claim/export_pdf/{id}', [RegisterClaimController::class, 'export_pdf']);
 
     // users
