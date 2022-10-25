@@ -63,9 +63,14 @@ class RegisterClaimController extends Controller
                 return  $query->Where('id_branch', $id_branch);
             });
         }
-        $data = $query
+        
+        $data = Auth::user()->id_role === 1 ? $query
         ->with(['vehicle','customer','user','branch'])
         ->where('status', 'DONE')
+        ->get() : 
+        $query
+        ->with(['vehicle','customer','user','branch'])
+        ->where([['status', 'DONE'],['id_branch', Auth::user()->id_branch]])
         ->get();
 
         return Excel::download(new RegisterClaimExport($data), 'RegisterClaimReportExport_'.date('d F Y').'_.xlsx');
@@ -94,8 +99,13 @@ class RegisterClaimController extends Controller
                 return  $query->Where('id_branch', $id_branch);
             });
         }
-        $data = $query
+
+        $data = Auth::user()->id_role === 1 ? $query
         ->with(['vehicle','customer','user','branch'])
+        ->get() : 
+        $query
+        ->with(['vehicle','customer','user','branch'])
+        ->where('id_branch', Auth::user()->id_branch)
         ->get();
 
         return Excel::download(new RegisterClaimExport($data), 'RegisterClaimExport_'.date('d F Y').'_.xlsx');
