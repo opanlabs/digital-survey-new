@@ -76,9 +76,14 @@ class RegisterSurveyController extends Controller
                 return  $query->Where('id_branch', $id_branch);
             });
         }
-        $data = $query
-        ->with(['vehicle','customer','user','branch'])
+
+        $data = Auth::user()->id_role === 1 ? $query
+        ->with(['vehicle','customer','branch','transmission'])
         ->where('status', 'DONE')
+        ->get() : 
+        $query
+        ->with(['vehicle','customer','branch','transmission'])
+        ->where([['status', 'DONE'],['id_branch', Auth::user()->id_branch]])
         ->get();
 
         return Excel::download(new RegisterSurveyExport($data), 'RegisterSurveyReportExport_'.date('d F Y').'_.xlsx');
@@ -107,8 +112,13 @@ class RegisterSurveyController extends Controller
                 return  $query->Where('id_branch', $id_branch);
             });
         }
-        $data = $query
-        ->with(['vehicle','customer','user','branch'])
+
+        $data = Auth::user()->id_role === 1 ? $query
+        ->with(['vehicle','customer','branch','transmission'])
+        ->get() : 
+        $query
+        ->with(['vehicle','customer','branch','transmission'])
+        ->where('id_branch', Auth::user()->id_branch)
         ->get();
 
         return Excel::download(new RegisterSurveyExport($data), 'RegisterSurveyExport_'.date('d F Y').'_.xlsx');
